@@ -5,12 +5,12 @@ import (
 	"testing"
 
 	"github.com/cometbft/cometbft/types"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
-	vaulttypes "github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	vaulttypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
 	"github.com/stretchr/testify/require"
 )
 

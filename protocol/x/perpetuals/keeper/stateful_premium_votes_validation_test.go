@@ -3,10 +3,10 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
-	keepertest "github.com/dydxprotocol/v4-chain/protocol/testutil/keeper"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
+	keepertest "github.com/danielvindax/vd-chain/protocol/testutil/keeper"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	"github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
 	"github.com/stretchr/testify/require"
 )
 

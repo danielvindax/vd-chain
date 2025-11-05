@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/indexer"
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
+	"github.com/danielvindax/vd-chain/protocol/indexer"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
 	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"

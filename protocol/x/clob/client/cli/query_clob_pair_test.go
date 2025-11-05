@@ -14,15 +14,15 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/network"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/nullify"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/client/cli"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	perpetualstypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/testutil/network"
+	"github.com/danielvindax/vd-chain/protocol/testutil/nullify"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/client/cli"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	perpetualstypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 )
 
 // Prevent strconv unused error

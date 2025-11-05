@@ -3,11 +3,11 @@ package types_test
 import (
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/sample"
-	assettypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/sending/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/testutil/sample"
+	assettypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
+	"github.com/danielvindax/vd-chain/protocol/x/sending/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 	"github.com/stretchr/testify/require"
 )
 

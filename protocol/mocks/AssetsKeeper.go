@@ -5,7 +5,7 @@ package mocks
 import (
 	big "math/big"
 
-	assetstypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
+	assetstypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
 
 	mock "github.com/stretchr/testify/mock"
 

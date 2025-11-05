@@ -4,12 +4,12 @@ import (
 	"testing"
 	"time"
 
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	clobtestutils "github.com/dydxprotocol/v4-chain/protocol/testutil/clob"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	testtx "github.com/dydxprotocol/v4-chain/protocol/testutil/tx"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	sendingtypes "github.com/dydxprotocol/v4-chain/protocol/x/sending/types"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	clobtestutils "github.com/danielvindax/vd-chain/protocol/testutil/clob"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	testtx "github.com/danielvindax/vd-chain/protocol/testutil/tx"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	sendingtypes "github.com/danielvindax/vd-chain/protocol/x/sending/types"
 	"github.com/stretchr/testify/require"
 )
 

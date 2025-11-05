@@ -4,12 +4,12 @@ import (
 	"testing"
 
 	storetypes "cosmossdk.io/store/types"
-	indexerevents "github.com/dydxprotocol/v4-chain/protocol/indexer/events"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/indexer_manager"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/msgsender"
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/sdk"
+	indexerevents "github.com/danielvindax/vd-chain/protocol/indexer/events"
+	"github.com/danielvindax/vd-chain/protocol/indexer/indexer_manager"
+	"github.com/danielvindax/vd-chain/protocol/indexer/msgsender"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/testutil/sdk"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

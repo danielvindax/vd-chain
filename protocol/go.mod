@@ -1,4 +1,4 @@
-module github.com/dydxprotocol/v4-chain/protocol
+module github.com/danielvindax/vd-chain/protocol
 
 go 1.23.1
 

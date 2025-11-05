@@ -4,8 +4,8 @@ import (
 	"math"
 	"math/big"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	asstypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	asstypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
 )
 
 const (

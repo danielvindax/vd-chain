@@ -5,15 +5,15 @@ import (
 	"math"
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/encoding"
-	keepertest "github.com/dydxprotocol/v4-chain/protocol/testutil/keeper"
-	bridgetypes "github.com/dydxprotocol/v4-chain/protocol/x/bridge/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/delaymsg/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/delaymsg/types"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/testutil/encoding"
+	keepertest "github.com/danielvindax/vd-chain/protocol/testutil/keeper"
+	bridgetypes "github.com/danielvindax/vd-chain/protocol/x/bridge/types"
+	"github.com/danielvindax/vd-chain/protocol/x/delaymsg/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/delaymsg/types"
 	"github.com/stretchr/testify/require"
 )
 

@@ -6,7 +6,7 @@ import (
 	gov "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
 	govbeta "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
 	icacontrollertypes "github.com/cosmos/ibc-go/v8/modules/apps/27-interchain-accounts/controller/types"
-	vaulttypes "github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	vaulttypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
 )
 
 var (

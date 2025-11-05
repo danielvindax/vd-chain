@@ -7,7 +7,7 @@ import (
 	fmt "fmt"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	proto "github.com/cosmos/gogoproto/proto"
-	github_com_dydxprotocol_v4_chain_protocol_dtypes "github.com/dydxprotocol/v4-chain/protocol/dtypes"
+	github_com_dydxprotocol_v4_chain_protocol_dtypes "github.com/danielvindax/vd-chain/protocol/dtypes"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -84,7 +84,7 @@ func (m *StakingTier) GetLevels() []*StakingLevel {
 // discount
 type StakingLevel struct {
 	// Minimum native tokens to stake (in base unit)
-	MinStakedBaseTokens github_com_dydxprotocol_v4_chain_protocol_dtypes.SerializableInt `protobuf:"bytes,1,opt,name=min_staked_base_tokens,json=minStakedBaseTokens,proto3,customtype=github.com/dydxprotocol/v4-chain/protocol/dtypes.SerializableInt" json:"min_staked_base_tokens"`
+	MinStakedBaseTokens github_com_dydxprotocol_v4_chain_protocol_dtypes.SerializableInt `protobuf:"bytes,1,opt,name=min_staked_base_tokens,json=minStakedBaseTokens,proto3,customtype=github.com/danielvindax/vd-chain/protocol/dtypes.SerializableInt" json:"min_staked_base_tokens"`
 	// Fee discount in ppm (e.g. 1_000_000 is 100% discount)
 	FeeDiscountPpm uint32 `protobuf:"varint,2,opt,name=fee_discount_ppm,json=feeDiscountPpm,proto3" json:"fee_discount_ppm,omitempty"`
 }

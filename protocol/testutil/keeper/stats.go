@@ -2,16 +2,16 @@ package keeper
 
 import (
 	dbm "github.com/cosmos/cosmos-db"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
-	delaymsgtypes "github.com/dydxprotocol/v4-chain/protocol/x/delaymsg/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
+	delaymsgtypes "github.com/danielvindax/vd-chain/protocol/x/delaymsg/types"
 
 	storetypes "cosmossdk.io/store/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
-	epochskeeper "github.com/dydxprotocol/v4-chain/protocol/x/epochs/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/stats/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/stats/types"
+	epochskeeper "github.com/danielvindax/vd-chain/protocol/x/epochs/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/stats/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/stats/types"
 )
 
 func createStatsKeeper(

@@ -10,10 +10,10 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/authenticator"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/testutils"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/authenticator"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/testutils"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/types"
 )
 
 // TODO: add explicit unit tests for Get and Set funcs

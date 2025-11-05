@@ -7,9 +7,9 @@ import (
 	sdkmath "cosmossdk.io/math"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	libeth "github.com/dydxprotocol/v4-chain/protocol/lib/eth"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	bridgetypes "github.com/dydxprotocol/v4-chain/protocol/x/bridge/types"
+	libeth "github.com/danielvindax/vd-chain/protocol/lib/eth"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	bridgetypes "github.com/danielvindax/vd-chain/protocol/x/bridge/types"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	ethcoretypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/require"

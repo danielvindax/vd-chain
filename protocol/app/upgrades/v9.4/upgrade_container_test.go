@@ -6,10 +6,10 @@ import (
 	"testing"
 
 	"github.com/cosmos/gogoproto/proto"
-	v_9_4 "github.com/dydxprotocol/v4-chain/protocol/app/upgrades/v9.4"
-	"github.com/dydxprotocol/v4-chain/protocol/testing/containertest"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	affiliatetypes "github.com/dydxprotocol/v4-chain/protocol/x/affiliates/types"
+	v_9_4 "github.com/danielvindax/vd-chain/protocol/app/upgrades/v9.4"
+	"github.com/danielvindax/vd-chain/protocol/testing/containertest"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	affiliatetypes "github.com/danielvindax/vd-chain/protocol/x/affiliates/types"
 	"github.com/stretchr/testify/require"
 )
 

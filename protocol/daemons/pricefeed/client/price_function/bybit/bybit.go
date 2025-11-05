@@ -5,8 +5,8 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/price_function"
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/types"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/price_function"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/types"
 )
 
 // BybitResponseBody defines the overall Bybit response.

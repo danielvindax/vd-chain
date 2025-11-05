@@ -7,17 +7,17 @@ import (
 
 	"github.com/cometbft/cometbft/types"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/daemons/pricefeed/exchange_config"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/encoding"
-	testutil "github.com/dydxprotocol/v4-chain/protocol/testutil/util"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	feetiertypes "github.com/dydxprotocol/v4-chain/protocol/x/feetiers/types"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	prices "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/testutil/daemons/pricefeed/exchange_config"
+	"github.com/danielvindax/vd-chain/protocol/testutil/encoding"
+	testutil "github.com/danielvindax/vd-chain/protocol/testutil/util"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	feetiertypes "github.com/danielvindax/vd-chain/protocol/x/feetiers/types"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	prices "github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 	"github.com/stretchr/testify/require"
 )
 

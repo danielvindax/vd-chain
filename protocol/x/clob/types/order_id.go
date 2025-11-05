@@ -6,7 +6,7 @@ import (
 
 	errorsmod "cosmossdk.io/errors"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib/metrics"
+	"github.com/danielvindax/vd-chain/protocol/lib/metrics"
 )
 
 const (

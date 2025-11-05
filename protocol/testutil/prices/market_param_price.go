@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 )
 
 type MarketParamPriceModifierOption func(cp *pricestypes.MarketParamPrice)

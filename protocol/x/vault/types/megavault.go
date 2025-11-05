@@ -2,7 +2,7 @@ package types
 
 import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 )
 
 var (

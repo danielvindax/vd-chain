@@ -3,15 +3,15 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	"github.com/danielvindax/vd-chain/protocol/lib"
 
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
 
 	"github.com/cometbft/cometbft/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/vault/keeper"
-	vaulttypes "github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	"github.com/danielvindax/vd-chain/protocol/x/vault/keeper"
+	vaulttypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
 	"github.com/stretchr/testify/require"
 )
 

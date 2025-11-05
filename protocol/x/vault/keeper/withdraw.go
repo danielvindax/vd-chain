@@ -5,15 +5,15 @@ import (
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/log"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/vault"
-	assetstypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
-	sendingtypes "github.com/dydxprotocol/v4-chain/protocol/x/sending/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib/log"
+	"github.com/danielvindax/vd-chain/protocol/lib/vault"
+	assetstypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	sendingtypes "github.com/danielvindax/vd-chain/protocol/x/sending/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/x/vault/types"
 )
 
 // GetVaultWithdrawalSlippage returns the slippage that should be incurred from the specified

@@ -3,11 +3,11 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/x/revshare/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/revshare/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/x/revshare/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/revshare/types"
 	"github.com/stretchr/testify/require"
 )
 

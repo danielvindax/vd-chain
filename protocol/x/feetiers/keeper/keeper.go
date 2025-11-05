@@ -9,9 +9,9 @@ import (
 	storetypes "cosmossdk.io/store/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/x/feetiers/types"
-	revsharetypes "github.com/dydxprotocol/v4-chain/protocol/x/revshare/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/x/feetiers/types"
+	revsharetypes "github.com/danielvindax/vd-chain/protocol/x/revshare/types"
 )
 
 type (

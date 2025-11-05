@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/types"
 
 	errorsmod "cosmossdk.io/errors"
 

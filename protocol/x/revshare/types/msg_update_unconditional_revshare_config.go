@@ -3,7 +3,7 @@ package types
 import (
 	errorsmod "cosmossdk.io/errors"
 	"github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib"
 )
 
 var _ types.Msg = &MsgUpdateUnconditionalRevShareConfig{}

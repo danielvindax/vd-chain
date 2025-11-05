@@ -3,9 +3,9 @@ package util
 import (
 	"math/big"
 
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	assettypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	assettypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 )
 
 func CreateUsdcAssetPositions(

@@ -10,9 +10,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/authenticator"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/authenticator"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/types"
 )
 
 type Keeper struct {

@@ -6,14 +6,14 @@ import (
 	"time"
 
 	"cosmossdk.io/log"
-	appflags "github.com/dydxprotocol/v4-chain/protocol/app/flags"
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/bridge/api"
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/bridge/client/types"
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/bridge/client/types/constants"
-	daemonflags "github.com/dydxprotocol/v4-chain/protocol/daemons/flags"
-	daemontypes "github.com/dydxprotocol/v4-chain/protocol/daemons/types"
-	libtime "github.com/dydxprotocol/v4-chain/protocol/lib/time"
-	bridgetypes "github.com/dydxprotocol/v4-chain/protocol/x/bridge/types"
+	appflags "github.com/danielvindax/vd-chain/protocol/app/flags"
+	"github.com/danielvindax/vd-chain/protocol/daemons/bridge/api"
+	"github.com/danielvindax/vd-chain/protocol/daemons/bridge/client/types"
+	"github.com/danielvindax/vd-chain/protocol/daemons/bridge/client/types/constants"
+	daemonflags "github.com/danielvindax/vd-chain/protocol/daemons/flags"
+	daemontypes "github.com/danielvindax/vd-chain/protocol/daemons/types"
+	libtime "github.com/danielvindax/vd-chain/protocol/lib/time"
+	bridgetypes "github.com/danielvindax/vd-chain/protocol/x/bridge/types"
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 

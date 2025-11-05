@@ -7,12 +7,12 @@ import (
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	bank "github.com/cosmos/cosmos-sdk/x/bank/types"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/authenticator"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/authenticator"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/lib"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/types"
 
 	"github.com/stretchr/testify/suite"
 )

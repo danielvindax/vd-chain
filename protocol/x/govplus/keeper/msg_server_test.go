@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/x/govplus/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/govplus/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/x/govplus/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/govplus/types"
 	"github.com/stretchr/testify/require"
 )
 

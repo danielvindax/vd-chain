@@ -7,15 +7,15 @@ import (
 	"github.com/cometbft/cometbft/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/dydxprotocol/v4-chain/protocol/indexer"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/msgsender"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/off_chain_updates"
-	ocutypes "github.com/dydxprotocol/v4-chain/protocol/indexer/off_chain_updates/types"
-	indexersharedtypes "github.com/dydxprotocol/v4-chain/protocol/indexer/shared/types"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/indexer"
+	"github.com/danielvindax/vd-chain/protocol/indexer/msgsender"
+	"github.com/danielvindax/vd-chain/protocol/indexer/off_chain_updates"
+	ocutypes "github.com/danielvindax/vd-chain/protocol/indexer/off_chain_updates/types"
+	indexersharedtypes "github.com/danielvindax/vd-chain/protocol/indexer/shared/types"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 )
 
 // These tests are the same as the e2e tests for single order cancellations.

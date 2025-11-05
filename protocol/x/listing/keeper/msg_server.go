@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/dydxprotocol/v4-chain/protocol/x/listing/types"
+	"github.com/danielvindax/vd-chain/protocol/x/listing/types"
 )
 
 type msgServer struct {

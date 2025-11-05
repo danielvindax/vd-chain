@@ -7,16 +7,16 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
 
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	affiliateskeeper "github.com/dydxprotocol/v4-chain/protocol/x/affiliates/keeper"
-	affiliatetypes "github.com/dydxprotocol/v4-chain/protocol/x/affiliates/types"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/revshare/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/revshare/types"
-	statsKeeper "github.com/dydxprotocol/v4-chain/protocol/x/stats/keeper"
-	statstypes "github.com/dydxprotocol/v4-chain/protocol/x/stats/types"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	affiliateskeeper "github.com/danielvindax/vd-chain/protocol/x/affiliates/keeper"
+	affiliatetypes "github.com/danielvindax/vd-chain/protocol/x/affiliates/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	"github.com/danielvindax/vd-chain/protocol/x/revshare/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/revshare/types"
+	statsKeeper "github.com/danielvindax/vd-chain/protocol/x/stats/keeper"
+	statstypes "github.com/danielvindax/vd-chain/protocol/x/stats/types"
 	"github.com/stretchr/testify/require"
 )
 

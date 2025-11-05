@@ -6,16 +6,16 @@ import (
 	dbm "github.com/cosmos/cosmos-db"
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	affiliateskeeper "github.com/dydxprotocol/v4-chain/protocol/x/affiliates/keeper"
-	feetierskeeper "github.com/dydxprotocol/v4-chain/protocol/x/feetiers/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/revshare/types"
-	statskeeper "github.com/dydxprotocol/v4-chain/protocol/x/stats/keeper"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	affiliateskeeper "github.com/danielvindax/vd-chain/protocol/x/affiliates/keeper"
+	feetierskeeper "github.com/danielvindax/vd-chain/protocol/x/feetiers/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/revshare/types"
+	statskeeper "github.com/danielvindax/vd-chain/protocol/x/stats/keeper"
 
 	storetypes "cosmossdk.io/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
-	keeper "github.com/dydxprotocol/v4-chain/protocol/x/revshare/keeper"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
+	keeper "github.com/danielvindax/vd-chain/protocol/x/revshare/keeper"
 )
 
 func RevShareKeepers(t testing.TB) (

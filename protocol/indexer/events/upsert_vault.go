@@ -1,8 +1,8 @@
 package events
 
 import (
-	v1 "github.com/dydxprotocol/v4-chain/protocol/indexer/protocol/v1"
-	"github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	v1 "github.com/danielvindax/vd-chain/protocol/indexer/protocol/v1"
+	"github.com/danielvindax/vd-chain/protocol/x/vault/types"
 )
 
 // NewUpsertVaultEvent creates a UpsertVaultEventV1

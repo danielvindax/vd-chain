@@ -1,8 +1,8 @@
 package metrics
 
 import (
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/metrics"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/types"
+	"github.com/danielvindax/vd-chain/protocol/lib/metrics"
 	gometrics "github.com/hashicorp/go-metrics"
 )
 

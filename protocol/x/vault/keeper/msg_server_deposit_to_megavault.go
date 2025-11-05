@@ -3,8 +3,8 @@ package keeper
 import (
 	"context"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/x/vault/types"
 )
 
 // DepositToMegavault deposits from a subaccount to megavault.

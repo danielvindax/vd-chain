@@ -4,8 +4,8 @@ import (
 	math "math"
 	"testing"
 
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	"github.com/danielvindax/vd-chain/protocol/x/vault/types"
 	"github.com/stretchr/testify/require"
 )
 

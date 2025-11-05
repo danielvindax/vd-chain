@@ -6,15 +6,15 @@ import (
 	"time"
 
 	errorsmod "cosmossdk.io/errors"
-	errorlib "github.com/dydxprotocol/v4-chain/protocol/lib/error"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/log"
+	errorlib "github.com/danielvindax/vd-chain/protocol/lib/error"
+	"github.com/danielvindax/vd-chain/protocol/lib/log"
 
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	pricefeedmetrics "github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/metrics"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/metrics"
-	"github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	pricefeedmetrics "github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/metrics"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib/metrics"
+	"github.com/danielvindax/vd-chain/protocol/x/prices/types"
 	gometrics "github.com/hashicorp/go-metrics"
 )
 

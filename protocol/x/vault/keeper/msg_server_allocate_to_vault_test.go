@@ -11,12 +11,12 @@ import (
 	sdktypes "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	assetstypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
-	vaulttypes "github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	assetstypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
+	vaulttypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
 )
 
 func TestMsgAllocateToVault(t *testing.T) {

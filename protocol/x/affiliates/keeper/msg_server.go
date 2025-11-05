@@ -5,7 +5,7 @@ import (
 	"errors"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/affiliates/types"
+	"github.com/danielvindax/vd-chain/protocol/x/affiliates/types"
 )
 
 type msgServer struct {

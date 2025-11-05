@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/types"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/daemons/pricefeed/exchange_config"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/types"
+	"github.com/danielvindax/vd-chain/protocol/testutil/daemons/pricefeed/exchange_config"
 	"github.com/stretchr/testify/require"
 )
 
