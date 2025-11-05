@@ -11,9 +11,9 @@ import (
 
 	slinkytypes "github.com/dydxprotocol/slinky/pkg/types"
 
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/slinky/client"
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
-	"github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	"github.com/danielvindax/vd-chain/protocol/daemons/slinky/client"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
+	"github.com/danielvindax/vd-chain/protocol/x/prices/types"
 )
 
 func TestMarketPairFetcher(t *testing.T) {

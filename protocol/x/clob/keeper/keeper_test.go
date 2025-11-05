@@ -3,10 +3,10 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	keepertest "github.com/dydxprotocol/v4-chain/protocol/testutil/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/memclob"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	keepertest "github.com/danielvindax/vd-chain/protocol/testutil/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/memclob"
 	"github.com/stretchr/testify/require"
 )
 

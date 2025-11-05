@@ -1,7 +1,7 @@
 package prices
 
 import (
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/types"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/types"
 	"github.com/shopspring/decimal"
 	"math/big"
 )

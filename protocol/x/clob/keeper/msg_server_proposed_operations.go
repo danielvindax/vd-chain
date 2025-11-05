@@ -4,10 +4,10 @@ import (
 	"context"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/log"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/metrics"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib/log"
+	"github.com/danielvindax/vd-chain/protocol/lib/metrics"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/types"
 )
 
 func (k msgServer) ProposedOperations(

@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"cosmossdk.io/core/appmodule"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib"
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/spf13/cobra"
@@ -18,9 +18,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	"github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/client/cli"
-	"github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
+	"github.com/danielvindax/vd-chain/protocol/x/perpetuals/client/cli"
+	"github.com/danielvindax/vd-chain/protocol/x/perpetuals/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
 )
 
 var (

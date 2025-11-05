@@ -2,8 +2,8 @@ package affiliates
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/log"
-	"github.com/dydxprotocol/v4-chain/protocol/x/affiliates/keeper"
+	"github.com/danielvindax/vd-chain/protocol/lib/log"
+	"github.com/danielvindax/vd-chain/protocol/x/affiliates/keeper"
 )
 
 func EndBlocker(

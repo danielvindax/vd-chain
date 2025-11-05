@@ -10,7 +10,7 @@ import (
 	"strconv"
 
 	"github.com/cosmos/gogoproto/proto"
-	events "github.com/dydxprotocol/v4-chain/protocol/indexer/events"
+	events "github.com/danielvindax/vd-chain/protocol/indexer/events"
 )
 
 // Structs to match the JSON structure

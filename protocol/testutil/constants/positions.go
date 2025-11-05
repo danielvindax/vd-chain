@@ -4,7 +4,7 @@ import (
 	"math"
 	"math/big"
 
-	testutil "github.com/dydxprotocol/v4-chain/protocol/testutil/util"
+	testutil "github.com/danielvindax/vd-chain/protocol/testutil/util"
 )
 
 var (

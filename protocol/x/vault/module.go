@@ -17,10 +17,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/x/vault/client/cli"
-	"github.com/dydxprotocol/v4-chain/protocol/x/vault/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/x/vault/client/cli"
+	"github.com/danielvindax/vd-chain/protocol/x/vault/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/vault/types"
 )
 
 var (

@@ -9,11 +9,11 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/x/feetiers/types"
-	stattypes "github.com/dydxprotocol/v4-chain/protocol/x/stats/types"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/x/feetiers/types"
+	stattypes "github.com/danielvindax/vd-chain/protocol/x/stats/types"
 )
 
 func TestParams(t *testing.T) {

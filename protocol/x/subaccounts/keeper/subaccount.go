@@ -7,8 +7,8 @@ import (
 	"math/rand"
 	"time"
 
-	streamingtypes "github.com/dydxprotocol/v4-chain/protocol/streaming/types"
-	assettypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
+	streamingtypes "github.com/danielvindax/vd-chain/protocol/streaming/types"
+	assettypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
 
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
@@ -19,15 +19,15 @@ import (
 	errorsmod "cosmossdk.io/errors"
 	"cosmossdk.io/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	indexerevents "github.com/dydxprotocol/v4-chain/protocol/indexer/events"
-	indexer_manager "github.com/dydxprotocol/v4-chain/protocol/indexer/indexer_manager"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/margin"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/metrics"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	salib "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	indexerevents "github.com/danielvindax/vd-chain/protocol/indexer/events"
+	indexer_manager "github.com/danielvindax/vd-chain/protocol/indexer/indexer_manager"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib/margin"
+	"github.com/danielvindax/vd-chain/protocol/lib/metrics"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	salib "github.com/danielvindax/vd-chain/protocol/x/subaccounts/lib"
+	"github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 	gometrics "github.com/hashicorp/go-metrics"
 )
 

@@ -3,8 +3,8 @@
 <h1 align="center">dYdX Chain Protocol</h1>
 
 <div align="center">
-  <a href="https://github.com/dydxprotocol/v4-chain/actions/workflows/protocol-test.yml?query=branch%3Amain" style="text-decoration:none;">
-    <img src="https://github.com/dydxprotocol/v4-chain/actions/workflows/protocol-test.yml/badge.svg?branch=main" />
+  <a href="https://github.com/danielvindax/vd-chain/actions/workflows/protocol-test.yml?query=branch%3Amain" style="text-decoration:none;">
+    <img src="https://github.com/danielvindax/vd-chain/actions/workflows/protocol-test.yml/badge.svg?branch=main" />
   </a>
 </div>
 
@@ -76,7 +76,7 @@ We currently lint the following YAML files in the [`Lint` CI job](https://github
 
 #### Protos
 
-Protos can be found in `../proto/` [here](https://github.com/dydxprotocol/v4-chain/tree/main/proto).
+Protos can be found in `../proto/` [here](https://github.com/danielvindax/vd-chain/tree/main/proto).
 
 #### Genesis
 

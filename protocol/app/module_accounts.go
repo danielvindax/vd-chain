@@ -9,13 +9,13 @@ import (
 	ibctransfertypes "github.com/cosmos/ibc-go/v8/modules/apps/transfer/types"
 
 	marketmapmoduletypes "github.com/dydxprotocol/slinky/x/marketmap/types"
-	"github.com/dydxprotocol/v4-chain/protocol/app/config"
-	bridgemoduletypes "github.com/dydxprotocol/v4-chain/protocol/x/bridge/types"
-	perpetualsmoduletypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	rewardsmoduletypes "github.com/dydxprotocol/v4-chain/protocol/x/rewards/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
-	vaultmoduletypes "github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
-	vestmoduletypes "github.com/dydxprotocol/v4-chain/protocol/x/vest/types"
+	"github.com/danielvindax/vd-chain/protocol/app/config"
+	bridgemoduletypes "github.com/danielvindax/vd-chain/protocol/x/bridge/types"
+	perpetualsmoduletypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	rewardsmoduletypes "github.com/danielvindax/vd-chain/protocol/x/rewards/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
+	vaultmoduletypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
+	vestmoduletypes "github.com/danielvindax/vd-chain/protocol/x/vest/types"
 
 	"golang.org/x/exp/maps"
 )

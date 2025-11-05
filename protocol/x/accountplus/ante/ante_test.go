@@ -17,15 +17,15 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	testtx "github.com/dydxprotocol/v4-chain/protocol/testutil/tx"
+	testtx "github.com/danielvindax/vd-chain/protocol/testutil/tx"
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/dydxprotocol/v4-chain/protocol/app"
-	"github.com/dydxprotocol/v4-chain/protocol/app/config"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/ante"
+	"github.com/danielvindax/vd-chain/protocol/app"
+	"github.com/danielvindax/vd-chain/protocol/app/config"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/ante"
 )
 
 type AuthenticatorAnteSuite struct {

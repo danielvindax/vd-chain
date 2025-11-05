@@ -5,11 +5,11 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	clobtestutils "github.com/dydxprotocol/v4-chain/protocol/testutil/clob"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	testtx "github.com/dydxprotocol/v4-chain/protocol/testutil/tx"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	clobtestutils "github.com/danielvindax/vd-chain/protocol/testutil/clob"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	testtx "github.com/danielvindax/vd-chain/protocol/testutil/tx"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 	"github.com/stretchr/testify/require"
 )
 

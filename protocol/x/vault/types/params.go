@@ -4,8 +4,8 @@ import (
 	"math"
 	"math/big"
 
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	"github.com/danielvindax/vd-chain/protocol/lib"
 )
 
 // DefaultQuotingParams returns a default set of `x/vault` parameters.

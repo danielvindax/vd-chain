@@ -1,9 +1,9 @@
 package events
 
 import (
-	v1 "github.com/dydxprotocol/v4-chain/protocol/indexer/protocol/v1"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
+	v1 "github.com/danielvindax/vd-chain/protocol/indexer/protocol/v1"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
 )
 
 // NewPerpetualMarketCreateEvent creates a PerpetualMarketCreateEvent

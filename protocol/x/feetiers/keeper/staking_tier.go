@@ -6,7 +6,7 @@ import (
 
 	"cosmossdk.io/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/feetiers/types"
+	"github.com/danielvindax/vd-chain/protocol/x/feetiers/types"
 )
 
 // validateStakingTiers validates that:

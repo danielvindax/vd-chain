@@ -8,15 +8,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/daemons/pricefeed/exchange_config"
+	"github.com/danielvindax/vd-chain/protocol/testutil/daemons/pricefeed/exchange_config"
 
-	pf_constants "github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/price_function"
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/types"
-	pft "github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/types"
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/daemons/pricefeed"
+	pf_constants "github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/constants"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/price_function"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/types"
+	pft "github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/types"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/testutil/daemons/pricefeed"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

@@ -4,9 +4,9 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/x/prices/types"
 )
 
 // isAboveRequiredMinPriceChange returns true if the new price meets the required min price change

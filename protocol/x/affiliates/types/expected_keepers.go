@@ -4,7 +4,7 @@ import (
 	"math/big"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	stattypes "github.com/dydxprotocol/v4-chain/protocol/x/stats/types"
+	stattypes "github.com/danielvindax/vd-chain/protocol/x/stats/types"
 )
 
 type StatsKeeper interface {

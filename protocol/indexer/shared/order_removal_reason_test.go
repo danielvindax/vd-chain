@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/shared"
-	sharedtypes "github.com/dydxprotocol/v4-chain/protocol/indexer/shared/types"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
+	"github.com/danielvindax/vd-chain/protocol/indexer/shared"
+	sharedtypes "github.com/danielvindax/vd-chain/protocol/indexer/shared/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
 	"github.com/stretchr/testify/require"
 )
 

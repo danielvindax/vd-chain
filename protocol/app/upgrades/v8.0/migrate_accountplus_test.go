@@ -4,12 +4,12 @@ import (
 	"testing"
 
 	"github.com/cometbft/cometbft/types"
-	v_8_0 "github.com/dydxprotocol/v4-chain/protocol/app/upgrades/v8.0"
+	v_8_0 "github.com/danielvindax/vd-chain/protocol/app/upgrades/v8.0"
 
 	"cosmossdk.io/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	accountplustypes "github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	accountplustypes "github.com/danielvindax/vd-chain/protocol/x/accountplus/types"
 	"github.com/stretchr/testify/suite"
 )
 

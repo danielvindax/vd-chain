@@ -5,11 +5,11 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	bridgetypes "github.com/dydxprotocol/v4-chain/protocol/x/bridge/types"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	bridgetypes "github.com/danielvindax/vd-chain/protocol/x/bridge/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 )
 
 var (

@@ -18,12 +18,12 @@ import (
 	icahosttypes "github.com/cosmos/ibc-go/v8/modules/apps/27-interchain-accounts/host/types"
 	icatypes "github.com/cosmos/ibc-go/v8/modules/apps/27-interchain-accounts/types"
 	ibctransfertypes "github.com/cosmos/ibc-go/v8/modules/apps/transfer/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	bridgemoduletypes "github.com/dydxprotocol/v4-chain/protocol/x/bridge/types"
-	perpetualsmoduletypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	rewardsmoduletypes "github.com/dydxprotocol/v4-chain/protocol/x/rewards/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
-	vestmoduletypes "github.com/dydxprotocol/v4-chain/protocol/x/vest/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	bridgemoduletypes "github.com/danielvindax/vd-chain/protocol/x/bridge/types"
+	perpetualsmoduletypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	rewardsmoduletypes "github.com/danielvindax/vd-chain/protocol/x/rewards/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
+	vestmoduletypes "github.com/danielvindax/vd-chain/protocol/x/vest/types"
 )
 
 var (

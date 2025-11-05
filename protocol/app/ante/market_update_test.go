@@ -18,15 +18,15 @@ import (
 	mmtypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/dydxprotocol/v4-chain/protocol/app/ante"
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	slinkylib "github.com/dydxprotocol/v4-chain/protocol/lib/slinky"
-	testante "github.com/dydxprotocol/v4-chain/protocol/testutil/ante"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	assets "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
-	perpetualtypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	prices_types "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	"github.com/danielvindax/vd-chain/protocol/app/ante"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	slinkylib "github.com/danielvindax/vd-chain/protocol/lib/slinky"
+	testante "github.com/danielvindax/vd-chain/protocol/testutil/ante"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	assets "github.com/danielvindax/vd-chain/protocol/x/assets/types"
+	perpetualtypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	prices_types "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 )
 
 func TestIsMarketUpdateTx(t *testing.T) {

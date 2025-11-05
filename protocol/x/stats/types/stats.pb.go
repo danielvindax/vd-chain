@@ -9,7 +9,7 @@ import (
 	proto "github.com/cosmos/gogoproto/proto"
 	_ "github.com/cosmos/gogoproto/types"
 	github_com_cosmos_gogoproto_types "github.com/cosmos/gogoproto/types"
-	github_com_dydxprotocol_v4_chain_protocol_dtypes "github.com/dydxprotocol/v4-chain/protocol/dtypes"
+	github_com_dydxprotocol_v4_chain_protocol_dtypes "github.com/danielvindax/vd-chain/protocol/dtypes"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -428,7 +428,7 @@ func (m *UserStats) GetAffiliate_30DReferredVolumeQuoteQuantums() uint64 {
 // CachedStakedBaseTokens stores the last calculated total staked base tokens
 type CachedStakedBaseTokens struct {
 	// Last calculated total staked base tokens by the delegator.
-	StakedBaseTokens github_com_dydxprotocol_v4_chain_protocol_dtypes.SerializableInt `protobuf:"bytes,1,opt,name=staked_base_tokens,json=stakedBaseTokens,proto3,customtype=github.com/dydxprotocol/v4-chain/protocol/dtypes.SerializableInt" json:"staked_base_tokens"`
+	StakedBaseTokens github_com_dydxprotocol_v4_chain_protocol_dtypes.SerializableInt `protobuf:"bytes,1,opt,name=staked_base_tokens,json=stakedBaseTokens,proto3,customtype=github.com/danielvindax/vd-chain/protocol/dtypes.SerializableInt" json:"staked_base_tokens"`
 	// Block time at which the calculation is cached (in Unix Epoch seconds)
 	// Rounded down to nearest second.
 	CachedAt int64 `protobuf:"varint,2,opt,name=cached_at,json=cachedAt,proto3" json:"cached_at,omitempty"`

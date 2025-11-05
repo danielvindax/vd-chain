@@ -7,12 +7,12 @@ import (
 
 	"cosmossdk.io/math"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	epochstypes "github.com/dydxprotocol/v4-chain/protocol/x/epochs/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/stats/types"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	epochstypes "github.com/danielvindax/vd-chain/protocol/x/epochs/types"
+	"github.com/danielvindax/vd-chain/protocol/x/stats/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

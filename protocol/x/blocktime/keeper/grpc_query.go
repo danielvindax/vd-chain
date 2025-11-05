@@ -3,8 +3,8 @@ package keeper
 import (
 	"context"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/x/blocktime/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/x/blocktime/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

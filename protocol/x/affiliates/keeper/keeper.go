@@ -10,10 +10,10 @@ import (
 	storetypes "cosmossdk.io/store/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	indexerevents "github.com/dydxprotocol/v4-chain/protocol/indexer/events"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/indexer_manager"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/x/affiliates/types"
+	indexerevents "github.com/danielvindax/vd-chain/protocol/indexer/events"
+	"github.com/danielvindax/vd-chain/protocol/indexer/indexer_manager"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/x/affiliates/types"
 )
 
 type (

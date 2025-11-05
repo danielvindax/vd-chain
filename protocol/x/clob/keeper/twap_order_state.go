@@ -7,12 +7,12 @@ import (
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	indexerevents "github.com/dydxprotocol/v4-chain/protocol/indexer/events"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/indexer_manager"
-	indexershared "github.com/dydxprotocol/v4-chain/protocol/indexer/shared/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/abci"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
+	indexerevents "github.com/danielvindax/vd-chain/protocol/indexer/events"
+	"github.com/danielvindax/vd-chain/protocol/indexer/indexer_manager"
+	indexershared "github.com/danielvindax/vd-chain/protocol/indexer/shared/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib/abci"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/types"
 )
 
 // TWAP_SUBORDER_GOOD_TIL_BLOCK_TIME_OFFSET is the offset in seconds added to the

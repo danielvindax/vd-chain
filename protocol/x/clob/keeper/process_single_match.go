@@ -9,14 +9,14 @@ import (
 	errorsmod "cosmossdk.io/errors"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/log"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/metrics"
-	affiliatetypes "github.com/dydxprotocol/v4-chain/protocol/x/affiliates/types"
-	assettypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	revsharetypes "github.com/dydxprotocol/v4-chain/protocol/x/revshare/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib/log"
+	"github.com/danielvindax/vd-chain/protocol/lib/metrics"
+	affiliatetypes "github.com/danielvindax/vd-chain/protocol/x/affiliates/types"
+	assettypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	revsharetypes "github.com/danielvindax/vd-chain/protocol/x/revshare/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 	gometrics "github.com/hashicorp/go-metrics"
 )
 

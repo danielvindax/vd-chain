@@ -15,7 +15,7 @@ import (
 	"testing"
 	"time"
 
-	listingtypes "github.com/dydxprotocol/v4-chain/protocol/x/listing/types"
+	listingtypes "github.com/danielvindax/vd-chain/protocol/x/listing/types"
 
 	"cosmossdk.io/log"
 	"cosmossdk.io/store/rootmulti"
@@ -43,32 +43,32 @@ import (
 	govtypesv1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
 	sdkproto "github.com/cosmos/gogoproto/proto"
 	marketmapmoduletypes "github.com/dydxprotocol/slinky/x/marketmap/types"
-	"github.com/dydxprotocol/v4-chain/protocol/app"
-	appconstants "github.com/dydxprotocol/v4-chain/protocol/app/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/cmd/dydxprotocold/cmd"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/appoptions"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	testlog "github.com/dydxprotocol/v4-chain/protocol/testutil/logger"
-	aptypes "github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types"
-	assettypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
-	blocktimetypes "github.com/dydxprotocol/v4-chain/protocol/x/blocktime/types"
-	bridgetypes "github.com/dydxprotocol/v4-chain/protocol/x/bridge/types"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	delaymsgtypes "github.com/dydxprotocol/v4-chain/protocol/x/delaymsg/types"
-	epochstypes "github.com/dydxprotocol/v4-chain/protocol/x/epochs/types"
-	feetiertypes "github.com/dydxprotocol/v4-chain/protocol/x/feetiers/types"
-	govplus "github.com/dydxprotocol/v4-chain/protocol/x/govplus/types"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
-	ratelimittypes "github.com/dydxprotocol/v4-chain/protocol/x/ratelimit/types"
-	revsharetypes "github.com/dydxprotocol/v4-chain/protocol/x/revshare/types"
-	rewardstypes "github.com/dydxprotocol/v4-chain/protocol/x/rewards/types"
-	sendingtypes "github.com/dydxprotocol/v4-chain/protocol/x/sending/types"
-	stattypes "github.com/dydxprotocol/v4-chain/protocol/x/stats/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
-	vaulttypes "github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
-	vesttypes "github.com/dydxprotocol/v4-chain/protocol/x/vest/types"
+	"github.com/danielvindax/vd-chain/protocol/app"
+	appconstants "github.com/danielvindax/vd-chain/protocol/app/constants"
+	"github.com/danielvindax/vd-chain/protocol/cmd/dydxprotocold/cmd"
+	"github.com/danielvindax/vd-chain/protocol/indexer"
+	"github.com/danielvindax/vd-chain/protocol/testutil/appoptions"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	testlog "github.com/danielvindax/vd-chain/protocol/testutil/logger"
+	aptypes "github.com/danielvindax/vd-chain/protocol/x/accountplus/types"
+	assettypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
+	blocktimetypes "github.com/danielvindax/vd-chain/protocol/x/blocktime/types"
+	bridgetypes "github.com/danielvindax/vd-chain/protocol/x/bridge/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	delaymsgtypes "github.com/danielvindax/vd-chain/protocol/x/delaymsg/types"
+	epochstypes "github.com/danielvindax/vd-chain/protocol/x/epochs/types"
+	feetiertypes "github.com/danielvindax/vd-chain/protocol/x/feetiers/types"
+	govplus "github.com/danielvindax/vd-chain/protocol/x/govplus/types"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	ratelimittypes "github.com/danielvindax/vd-chain/protocol/x/ratelimit/types"
+	revsharetypes "github.com/danielvindax/vd-chain/protocol/x/revshare/types"
+	rewardstypes "github.com/danielvindax/vd-chain/protocol/x/rewards/types"
+	sendingtypes "github.com/danielvindax/vd-chain/protocol/x/sending/types"
+	stattypes "github.com/danielvindax/vd-chain/protocol/x/stats/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
+	vaulttypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
+	vesttypes "github.com/danielvindax/vd-chain/protocol/x/vest/types"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/exp/slices"
 )
@@ -173,7 +173,7 @@ func DefaultTestApp(customFlags map[string]interface{}, baseAppOptions ...func(*
 
 // DefaultGenesis returns a genesis doc using configuration from the local net with a genesis time
 // equivalent to unix epoch + 1 nanosecond. We specifically use non-zero because stateful orders
-// validate that block time is non-zero (https://github.com/dydxprotocol/v4-chain/protocol/blob/
+// validate that block time is non-zero (https://github.com/danielvindax/vd-chain/protocol/blob/
 // 84a046554ab1b4725475500d94a0b3179fdd18c2/x/clob/keeper/stateful_order_state.go#L237).
 func DefaultGenesis() (genesis types.GenesisDoc) {
 	// NOTE: Tendermint uses a custom JSON decoder for GenesisDoc
@@ -1247,7 +1247,7 @@ func launchValidatorInDir(
 	parentCtx, cancelFn := context.WithCancel(context.Background())
 
 	appCaptor := make(chan *app.App, 1)
-	// Set up the root command using https://github.com/dydxprotocol/v4-chain/blob/
+	// Set up the root command using https://github.com/danielvindax/vd-chain/blob/
 	// 1fa21ed5d848ed7cc6a98053838cadb68422079f/protocol/cmd/dydxprotocold/main.go#L12 as a basis.
 	option := cmd.GetOptionWithCustomStartCmd()
 	rootCmd := cmd.NewRootCmdWithInterceptors(

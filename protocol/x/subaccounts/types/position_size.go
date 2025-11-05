@@ -3,7 +3,7 @@ package types
 import (
 	"math/big"
 
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
 )
 
 // PositionSize is an interface for expressing the size of a position

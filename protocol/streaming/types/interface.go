@@ -2,9 +2,9 @@ package types
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 )
 
 type FullNodeStreamingManager interface {

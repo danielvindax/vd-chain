@@ -3,17 +3,17 @@ package clob_test
 import (
 	"testing"
 
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 
 	abcitypes "github.com/cometbft/cometbft/abci/types"
 	sdktypes "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/cometbft/cometbft/types"
 
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	testtx "github.com/dydxprotocol/v4-chain/protocol/testutil/tx"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	testtx "github.com/danielvindax/vd-chain/protocol/testutil/tx"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
 	"github.com/stretchr/testify/require"
 )
 

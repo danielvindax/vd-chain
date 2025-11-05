@@ -4,11 +4,11 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/msgsender"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/off_chain_updates"
-	ocutypes "github.com/dydxprotocol/v4-chain/protocol/indexer/off_chain_updates/types"
-	indexershared "github.com/dydxprotocol/v4-chain/protocol/indexer/shared/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
+	"github.com/danielvindax/vd-chain/protocol/indexer/msgsender"
+	"github.com/danielvindax/vd-chain/protocol/indexer/off_chain_updates"
+	ocutypes "github.com/danielvindax/vd-chain/protocol/indexer/off_chain_updates/types"
+	indexershared "github.com/danielvindax/vd-chain/protocol/indexer/shared/types"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/types"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/typ.v4/slices"
 )

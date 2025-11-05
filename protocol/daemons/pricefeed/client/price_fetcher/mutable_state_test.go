@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	"cosmossdk.io/log"
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/types"
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/types"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
 	"github.com/stretchr/testify/require"
 )
 

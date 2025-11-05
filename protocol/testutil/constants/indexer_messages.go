@@ -4,9 +4,9 @@ import (
 	"fmt"
 
 	"github.com/cometbft/cometbft/crypto/tmhash"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/msgsender"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
+	"github.com/danielvindax/vd-chain/protocol/indexer/msgsender"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
 )
 
 // Used to construct the constants below.

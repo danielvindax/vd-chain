@@ -7,8 +7,8 @@ import (
 	errorsmod "cosmossdk.io/errors"
 
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/x/vault/types"
 )
 
 // UnlockShares unlocks an owner's shares.

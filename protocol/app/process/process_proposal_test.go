@@ -7,12 +7,12 @@ import (
 
 	abci "github.com/cometbft/cometbft/abci/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/app/process"
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	keepertest "github.com/dydxprotocol/v4-chain/protocol/testutil/keeper"
-	testmsgs "github.com/dydxprotocol/v4-chain/protocol/testutil/msgs"
-	bridgetypes "github.com/dydxprotocol/v4-chain/protocol/x/bridge/types"
+	"github.com/danielvindax/vd-chain/protocol/app/process"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	keepertest "github.com/danielvindax/vd-chain/protocol/testutil/keeper"
+	testmsgs "github.com/danielvindax/vd-chain/protocol/testutil/msgs"
+	bridgetypes "github.com/danielvindax/vd-chain/protocol/x/bridge/types"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

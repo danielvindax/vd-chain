@@ -5,33 +5,33 @@ import (
 	"math/big"
 	"testing"
 
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	testutil "github.com/dydxprotocol/v4-chain/protocol/testutil/util"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	testutil "github.com/danielvindax/vd-chain/protocol/testutil/util"
 
-	vaulttypes "github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	vaulttypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
 
-	asstypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
+	asstypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
 
 	oracletypes "github.com/dydxprotocol/slinky/pkg/types"
 	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	"github.com/dydxprotocol/slinky/x/marketmap/types/tickermetadata"
-	perpetualtypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
+	perpetualtypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
 
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 
 	comettypes "github.com/cometbft/cometbft/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/listing/types"
+	"github.com/danielvindax/vd-chain/protocol/x/listing/types"
 
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
-	keepertest "github.com/dydxprotocol/v4-chain/protocol/testutil/keeper"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
+	keepertest "github.com/danielvindax/vd-chain/protocol/testutil/keeper"
 	"github.com/stretchr/testify/require"
 )
 

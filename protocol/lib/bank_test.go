@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib"
 	"github.com/stretchr/testify/require"
 )
 

@@ -11,10 +11,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/dydxprotocol/slinky/abci/ve"
-	"github.com/dydxprotocol/v4-chain/protocol/app/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/app/prepare/prices"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/metrics"
-	pricetypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	"github.com/danielvindax/vd-chain/protocol/app/constants"
+	"github.com/danielvindax/vd-chain/protocol/app/prepare/prices"
+	"github.com/danielvindax/vd-chain/protocol/lib/metrics"
+	pricetypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 )
 
 var (

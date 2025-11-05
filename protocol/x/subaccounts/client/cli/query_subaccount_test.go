@@ -15,11 +15,11 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/network"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/nullify"
-	testutil "github.com/dydxprotocol/v4-chain/protocol/testutil/util"
-	"github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/client/cli"
-	"github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/testutil/network"
+	"github.com/danielvindax/vd-chain/protocol/testutil/nullify"
+	testutil "github.com/danielvindax/vd-chain/protocol/testutil/util"
+	"github.com/danielvindax/vd-chain/protocol/x/subaccounts/client/cli"
+	"github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 )
 
 // Prevent strconv unused error

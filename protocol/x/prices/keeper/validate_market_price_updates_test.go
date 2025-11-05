@@ -5,12 +5,12 @@ import (
 
 	errorsmod "cosmossdk.io/errors"
 
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/api"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	keepertest "github.com/dydxprotocol/v4-chain/protocol/testutil/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/prices/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/api"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	keepertest "github.com/danielvindax/vd-chain/protocol/testutil/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/prices/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/prices/types"
 	"github.com/stretchr/testify/require"
 )
 

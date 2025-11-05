@@ -10,7 +10,7 @@ import (
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	grpc1 "github.com/cosmos/gogoproto/grpc"
 	proto "github.com/cosmos/gogoproto/proto"
-	github_com_dydxprotocol_v4_chain_protocol_dtypes "github.com/dydxprotocol/v4-chain/protocol/dtypes"
+	github_com_dydxprotocol_v4_chain_protocol_dtypes "github.com/danielvindax/vd-chain/protocol/dtypes"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -532,7 +532,7 @@ type QueryUserStakingTierResponse struct {
 	// The user's current fee tier name
 	FeeTierName string `protobuf:"bytes,1,opt,name=fee_tier_name,json=feeTierName,proto3" json:"fee_tier_name,omitempty"`
 	// Amount of tokens staked by the user (in base units)
-	StakedBaseTokens github_com_dydxprotocol_v4_chain_protocol_dtypes.SerializableInt `protobuf:"bytes,2,opt,name=staked_base_tokens,json=stakedBaseTokens,proto3,customtype=github.com/dydxprotocol/v4-chain/protocol/dtypes.SerializableInt" json:"staked_base_tokens"`
+	StakedBaseTokens github_com_dydxprotocol_v4_chain_protocol_dtypes.SerializableInt `protobuf:"bytes,2,opt,name=staked_base_tokens,json=stakedBaseTokens,proto3,customtype=github.com/danielvindax/vd-chain/protocol/dtypes.SerializableInt" json:"staked_base_tokens"`
 	// The discount percentage in ppm that user qualifies for
 	DiscountPpm uint32 `protobuf:"varint,3,opt,name=discount_ppm,json=discountPpm,proto3" json:"discount_ppm,omitempty"`
 }

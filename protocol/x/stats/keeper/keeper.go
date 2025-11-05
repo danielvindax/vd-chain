@@ -13,10 +13,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/metrics"
-	"github.com/dydxprotocol/v4-chain/protocol/x/stats/types"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib/metrics"
+	"github.com/danielvindax/vd-chain/protocol/x/stats/types"
 )
 
 type (

@@ -4,9 +4,9 @@ import (
 	"math/big"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	affiliatetypes "github.com/dydxprotocol/v4-chain/protocol/x/affiliates/types"
-	revsharetypes "github.com/dydxprotocol/v4-chain/protocol/x/revshare/types"
-	statstypes "github.com/dydxprotocol/v4-chain/protocol/x/stats/types"
+	affiliatetypes "github.com/danielvindax/vd-chain/protocol/x/affiliates/types"
+	revsharetypes "github.com/danielvindax/vd-chain/protocol/x/revshare/types"
+	statstypes "github.com/danielvindax/vd-chain/protocol/x/stats/types"
 )
 
 // StatsKeeper defines the expected stats keeper

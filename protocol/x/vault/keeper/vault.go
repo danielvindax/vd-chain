@@ -4,20 +4,20 @@ import (
 	"fmt"
 	"math/big"
 
-	sendingtypes "github.com/dydxprotocol/v4-chain/protocol/x/sending/types"
+	sendingtypes "github.com/danielvindax/vd-chain/protocol/x/sending/types"
 
-	assetstypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
+	assetstypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
 
 	errorsmod "cosmossdk.io/errors"
 	"cosmossdk.io/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/log"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib/log"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/x/vault/types"
 )
 
 // GetMegavaultEquity returns the equity of the megavault (in quote quantums), which consists of

@@ -3,8 +3,8 @@ package events_test
 import (
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/events"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/indexer/events"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
 	"github.com/stretchr/testify/require"
 )
 

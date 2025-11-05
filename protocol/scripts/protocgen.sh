@@ -17,7 +17,7 @@ cd ..
 
 # move proto files to the right places
 find . -name "*.pb.go" -o -name "*.pb.gw.go" -type f -not -path "./proto/*" -delete
-cp -r proto/.gen/github.com/dydxprotocol/v4-chain/protocol/* ./protocol/
+cp -r proto/.gen/github.com/danielvindax/vd-chain/protocol/* ./protocol/
 rm -rf proto/.gen/github.com/
 
 cd protocol && go mod tidy

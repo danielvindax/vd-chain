@@ -11,8 +11,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 )
 
 func CmdUpdateLeverage() *cobra.Command {

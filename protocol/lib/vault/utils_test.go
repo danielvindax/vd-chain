@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib/vault"
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	"github.com/danielvindax/vd-chain/protocol/lib/vault"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	"github.com/danielvindax/vd-chain/protocol/x/vault/types"
 )
 
 func TestSkewAntiderivativePpm(t *testing.T) {

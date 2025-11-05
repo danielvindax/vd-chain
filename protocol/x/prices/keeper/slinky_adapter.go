@@ -10,8 +10,8 @@ import (
 	slinkytypes "github.com/dydxprotocol/slinky/pkg/types"
 	oracletypes "github.com/dydxprotocol/slinky/x/oracle/types"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib/slinky"
-	"github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	"github.com/danielvindax/vd-chain/protocol/lib/slinky"
+	"github.com/danielvindax/vd-chain/protocol/x/prices/types"
 )
 
 /*

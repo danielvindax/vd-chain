@@ -3,9 +3,9 @@ package types_test
 import (
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/x/prices/client/testutil"
+	"github.com/danielvindax/vd-chain/protocol/x/prices/client/testutil"
 
-	types "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	types "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 	"github.com/stretchr/testify/require"
 )
 

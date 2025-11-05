@@ -9,15 +9,15 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	indexerevents "github.com/dydxprotocol/v4-chain/protocol/indexer/events"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/indexer_manager"
-	indexershared "github.com/dydxprotocol/v4-chain/protocol/indexer/shared"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/log"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/metrics"
-	affiliatetypes "github.com/dydxprotocol/v4-chain/protocol/x/affiliates/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	indexerevents "github.com/danielvindax/vd-chain/protocol/indexer/events"
+	"github.com/danielvindax/vd-chain/protocol/indexer/indexer_manager"
+	indexershared "github.com/danielvindax/vd-chain/protocol/indexer/shared"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib/log"
+	"github.com/danielvindax/vd-chain/protocol/lib/metrics"
+	affiliatetypes "github.com/danielvindax/vd-chain/protocol/x/affiliates/types"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 )
 
 // fetchOrdersInvolvedInOpQueue fetches all OrderIds involved in an operations

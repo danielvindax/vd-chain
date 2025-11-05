@@ -4,9 +4,9 @@ import (
 	"math/big"
 	"testing"
 
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	vaulttypes "github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	vaulttypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
 	"github.com/stretchr/testify/require"
 )
 

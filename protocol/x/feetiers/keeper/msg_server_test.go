@@ -5,11 +5,11 @@ import (
 	"time"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib"
 
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/x/feetiers/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/feetiers/types"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/x/feetiers/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/feetiers/types"
 	"github.com/stretchr/testify/require"
 )
 

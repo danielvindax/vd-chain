@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	errorsmod "cosmossdk.io/errors"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib"
 	"github.com/pkg/errors"
 )
 

@@ -5,19 +5,19 @@ import (
 	"fmt"
 	"math/big"
 
-	listingtypes "github.com/dydxprotocol/v4-chain/protocol/x/listing/types"
+	listingtypes "github.com/danielvindax/vd-chain/protocol/x/listing/types"
 
 	upgradetypes "cosmossdk.io/x/upgrade/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/slinky"
-	listingkeeper "github.com/dydxprotocol/v4-chain/protocol/x/listing/keeper"
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
-	vaultkeeper "github.com/dydxprotocol/v4-chain/protocol/x/vault/keeper"
-	vaulttypes "github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib/slinky"
+	listingkeeper "github.com/danielvindax/vd-chain/protocol/x/listing/keeper"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	vaultkeeper "github.com/danielvindax/vd-chain/protocol/x/vault/keeper"
+	vaulttypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
 )
 
 const (

@@ -16,13 +16,13 @@ import (
 	ibcconn "github.com/cosmos/ibc-go/v8/modules/core/03-connection/types"
 	ibccore "github.com/cosmos/ibc-go/v8/modules/core/04-channel/types"
 	marketmapmoduletypes "github.com/dydxprotocol/slinky/x/marketmap/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	accountplus "github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types"
-	affiliates "github.com/dydxprotocol/v4-chain/protocol/x/affiliates/types"
-	clob "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	listing "github.com/dydxprotocol/v4-chain/protocol/x/listing/types"
-	sending "github.com/dydxprotocol/v4-chain/protocol/x/sending/types"
-	vault "github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	accountplus "github.com/danielvindax/vd-chain/protocol/x/accountplus/types"
+	affiliates "github.com/danielvindax/vd-chain/protocol/x/affiliates/types"
+	clob "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	listing "github.com/danielvindax/vd-chain/protocol/x/listing/types"
+	sending "github.com/danielvindax/vd-chain/protocol/x/sending/types"
+	vault "github.com/danielvindax/vd-chain/protocol/x/vault/types"
 )
 
 var (

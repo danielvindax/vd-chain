@@ -7,15 +7,15 @@ import (
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	testtx "github.com/dydxprotocol/v4-chain/protocol/testutil/tx"
+	testtx "github.com/danielvindax/vd-chain/protocol/testutil/tx"
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/dydxprotocol/v4-chain/protocol/app"
-	"github.com/dydxprotocol/v4-chain/protocol/app/config"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/authenticator"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/lib"
+	"github.com/danielvindax/vd-chain/protocol/app"
+	"github.com/danielvindax/vd-chain/protocol/app/config"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/authenticator"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/lib"
 )
 
 type SigVerifyAuthenticationSuite struct {

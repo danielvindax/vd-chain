@@ -6,10 +6,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/keys/secp256k1"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/authenticator"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/authenticator"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/types"
 )
 
 func (s *KeeperTestSuite) TestMsgServer_AddAuthenticator() {
