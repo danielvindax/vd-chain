@@ -1,7 +1,7 @@
 syntax = "proto3";
 package dydxprotocol.indexer.protocol.v1;
 
-option go_package = "github.com/dydxprotocol/v4-chain/protocol/indexer/protocol/v1/types";
+option go_package = "github.com/danielvindax/vd-chain/protocol/indexer/protocol/v1/types";
 
 // Initial copy of protos from dYdX chain application state protos for the
 // vault module for use to send Indexer specific messages. Do not make any

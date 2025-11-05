@@ -3,7 +3,7 @@ package dydxprotocol.feetiers;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/dydxprotocol/v4-chain/protocol/x/feetiers/types";
+option go_package = "github.com/danielvindax/vd-chain/protocol/x/feetiers/types";
 
 // StakingTier defines all staking levels of a fee tier
 message StakingTier {
@@ -21,7 +21,7 @@ message StakingLevel {
   // Minimum native tokens to stake (in base unit)
   bytes min_staked_base_tokens = 1 [
     (gogoproto.customtype) =
-        "github.com/dydxprotocol/v4-chain/protocol/dtypes.SerializableInt",
+        "github.com/danielvindax/vd-chain/protocol/dtypes.SerializableInt",
     (gogoproto.nullable) = false
   ];
 

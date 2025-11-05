@@ -1,7 +1,7 @@
 syntax = "proto3";
 package dydxprotocol.accountplus;
 
-option go_package = "github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types";
+option go_package = "github.com/danielvindax/vd-chain/protocol/x/accountplus/types";
 
 // AccountAuthenticator represents a foundational model for all authenticators.
 // It provides extensibility by allowing concrete types to interpret and

@@ -4,7 +4,7 @@ package dydxprotocol.revshare;
 import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/dydxprotocol/v4-chain/protocol/x/revshare/types";
+option go_package = "github.com/danielvindax/vd-chain/protocol/x/revshare/types";
 
 // MarketMapperRevShareDetails specifies any details associated with the market
 // mapper revenue share

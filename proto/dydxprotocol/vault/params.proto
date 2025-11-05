@@ -5,7 +5,7 @@ import "cosmos_proto/cosmos.proto";
 import "dydxprotocol/vault/vault.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/dydxprotocol/v4-chain/protocol/x/vault/types";
+option go_package = "github.com/danielvindax/vd-chain/protocol/x/vault/types";
 
 // QuotingParams stores vault quoting parameters.
 message QuotingParams {
@@ -36,7 +36,7 @@ message QuotingParams {
   // activate.
   bytes activation_threshold_quote_quantums = 7 [
     (gogoproto.customtype) =
-        "github.com/dydxprotocol/v4-chain/protocol/dtypes.SerializableInt",
+        "github.com/danielvindax/vd-chain/protocol/dtypes.SerializableInt",
     (gogoproto.nullable) = false
   ];
 }
@@ -95,7 +95,7 @@ message Params {
   // activate.
   bytes activation_threshold_quote_quantums = 7 [
     (gogoproto.customtype) =
-        "github.com/dydxprotocol/v4-chain/protocol/dtypes.SerializableInt",
+        "github.com/danielvindax/vd-chain/protocol/dtypes.SerializableInt",
     (gogoproto.nullable) = false
   ];
 }

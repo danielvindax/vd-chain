@@ -8,7 +8,7 @@ import "google/api/annotations.proto";
 import "dydxprotocol/revshare/params.proto";
 import "dydxprotocol/revshare/revshare.proto";
 
-option go_package = "github.com/dydxprotocol/v4-chain/protocol/x/revshare/types";
+option go_package = "github.com/danielvindax/vd-chain/protocol/x/revshare/types";
 
 // Query defines the gRPC querier service.
 service Query {

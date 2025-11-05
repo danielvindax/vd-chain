@@ -6,7 +6,7 @@ import "dydxprotocol/vault/params.proto";
 import "dydxprotocol/vault/share.proto";
 import "dydxprotocol/vault/vault.proto";
 
-option go_package = "github.com/dydxprotocol/v4-chain/protocol/x/vault/types";
+option go_package = "github.com/danielvindax/vd-chain/protocol/x/vault/types";
 
 // GenesisState defines `x/vault`'s genesis state.
 message GenesisState {

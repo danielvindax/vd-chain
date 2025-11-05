@@ -6,7 +6,7 @@ import "dydxprotocol/indexer/protocol/v1/clob.proto";
 import "google/protobuf/timestamp.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/dydxprotocol/v4-chain/protocol/indexer/off_chain_updates/types";
+option go_package = "github.com/danielvindax/vd-chain/protocol/indexer/off_chain_updates/types";
 
 // Do not make any breaking changes to these protos, a new version should be
 // created if a breaking change is needed.
