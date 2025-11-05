@@ -16,7 +16,7 @@ import "dydxprotocol/subaccounts/streaming.proto";
 import "dydxprotocol/subaccounts/subaccount.proto";
 import "dydxprotocol/prices/streaming.proto";
 
-option go_package = "github.com/dydxprotocol/v4-chain/protocol/x/clob/types";
+option go_package = "github.com/danielvindax/vd-chain/protocol/x/clob/types";
 
 // Query defines the gRPC querier service.
 service Query {

@@ -6,7 +6,7 @@ import "dydxprotocol/accountplus/accountplus.proto";
 import "dydxprotocol/accountplus/models.proto";
 import "dydxprotocol/accountplus/params.proto";
 
-option go_package = "github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types";
+option go_package = "github.com/danielvindax/vd-chain/protocol/x/accountplus/types";
 
 // AuthenticatorData represents a genesis exported account with Authenticators.
 // The address is used as the key, and the account authenticators are stored in

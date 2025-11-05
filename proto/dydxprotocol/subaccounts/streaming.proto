@@ -3,7 +3,7 @@ package dydxprotocol.subaccounts;
 
 import "dydxprotocol/subaccounts/subaccount.proto";
 
-option go_package = "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types";
+option go_package = "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types";
 
 // StreamSubaccountUpdate provides information on a subaccount update. Used in
 // the full node GRPC stream.

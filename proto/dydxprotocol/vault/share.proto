@@ -4,14 +4,14 @@ package dydxprotocol.vault;
 import "gogoproto/gogo.proto";
 import "cosmos_proto/cosmos.proto";
 
-option go_package = "github.com/dydxprotocol/v4-chain/protocol/x/vault/types";
+option go_package = "github.com/danielvindax/vd-chain/protocol/x/vault/types";
 
 // NumShares represents the number of shares.
 message NumShares {
   // Number of shares.
   bytes num_shares = 2 [
     (gogoproto.customtype) =
-        "github.com/dydxprotocol/v4-chain/protocol/dtypes.SerializableInt",
+        "github.com/danielvindax/vd-chain/protocol/dtypes.SerializableInt",
     (gogoproto.nullable) = false
   ];
 }

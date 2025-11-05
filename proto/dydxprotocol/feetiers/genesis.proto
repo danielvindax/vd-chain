@@ -5,7 +5,7 @@ import "gogoproto/gogo.proto";
 import "dydxprotocol/feetiers/params.proto";
 import "dydxprotocol/feetiers/staking_tier.proto";
 
-option go_package = "github.com/dydxprotocol/v4-chain/protocol/x/feetiers/types";
+option go_package = "github.com/danielvindax/vd-chain/protocol/x/feetiers/types";
 
 // GenesisState defines the feetiers module's genesis state.
 message GenesisState {
