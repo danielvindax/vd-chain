@@ -39,3 +39,6 @@ proposals/
 .idea/
 *.iml
 __debug_bin
+
+# Env
+.env
