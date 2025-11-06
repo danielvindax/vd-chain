@@ -11,19 +11,19 @@ CHAIN_ID="localdydxprotocol"
 # Define mnemonics for all validators.
 MNEMONICS=(
 	# alice
-	# Consensus Address: dydxvalcons1zf9csp5ygq95cqyxh48w3qkuckmpealrw2ug4d
+	# Consensus Address: vindaxvalcons1zf9csp5ygq95cqyxh48w3qkuckmpealrw2ug4d
 	"merge panther lobster crazy road hollow amused security before critic about cliff exhibit cause coyote talent happy where lion river tobacco option coconut small"
 
 	# bob
-	# Consensus Address: dydxvalcons1s7wykslt83kayxuaktep9fw8qxe5n73ucftkh4
+	# Consensus Address: vindaxvalcons1s7wykslt83kayxuaktep9fw8qxe5n73ucftkh4
 	"color habit donor nurse dinosaur stable wonder process post perfect raven gold census inside worth inquiry mammal panic olive toss shadow strong name drum"
 
 	# carl
-	# Consensus Address: dydxvalcons1vy0nrh7l4rtezrsakaadz4mngwlpdmhy64h0ls
+	# Consensus Address: vindaxvalcons1vy0nrh7l4rtezrsakaadz4mngwlpdmhy64h0ls
 	"school artefact ghost shop exchange slender letter debris dose window alarm hurt whale tiger find found island what engine ketchup globe obtain glory manage"
 
 	# dave
-	# Consensus Address: dydxvalcons1stjspktkshgcsv8sneqk2vs2ws0nw2wr272vtt
+	# Consensus Address: vindaxvalcons1stjspktkshgcsv8sneqk2vs2ws0nw2wr272vtt
 	"switch boring kiss cash lizard coconut romance hurry sniff bus accident zone chest height merit elevator furnace eagle fetch quit toward steak mystery nest"
 )
 
@@ -53,21 +53,21 @@ MONIKERS=(
 
 # Define all test accounts for the chain.
 TEST_ACCOUNTS=(
-	"dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4" # alice
-	"dydx10fx7sy6ywd5senxae9dwytf8jxek3t2gcen2vs" # bob
-	"dydx1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wvmh70" # carl
-	"dydx1wau5mja7j7zdavtfq9lu7ejef05hm6ffenlcsn" # dave
+	"vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642" # alice
+	"vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90" # bob
+	"vindax1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wuzlhs" # carl
+	"vindax1wau5mja7j7zdavtfq9lu7ejef05hm6fferxsev" # dave
 )
 
 FAUCET_ACCOUNTS=(
-	"dydx1nzuttarf5k2j0nug5yzhr6p74t9avehn9hlh8m" # main faucet
+	"vindax10ehz9v9ncpnj8hfwlsxhcg97zv5ag5w3sgac4k" # main faucet
 )
 
 # Addresses of vaults.
 # Can use ../scripts/vault/get_vault.go to generate a vault's address.
 VAULT_ACCOUNTS=(
-	"dydx1c0m5x87llaunl5sgv3q5vd7j5uha26d2q2r2q0" # BTC vault
-	"dydx14rplxdyycc6wxmgl8fggppgq4774l70zt6phkw" # ETH vault
+	"vindax1c0m5x87llaunl5sgv3q5vd7j5uha26d2q66zfs" # BTC vault
+	"vindax14rplxdyycc6wxmgl8fggppgq4774l70zt2cll3" # ETH vault
 )
 # Number of each vault, which for CLOB vaults is the ID of the clob pair it quotes on.
 VAULT_NUMBERS=(
@@ -109,8 +109,8 @@ create_validators() {
 		edit_config "$VAL_CONFIG_DIR"
 		use_slinky "$VAL_CONFIG_DIR"
 
-		# Using "*" as a subscript results in a single arg: "dydx1... dydx1... dydx1..."
-		# Using "@" as a subscript results in separate args: "dydx1..." "dydx1..." "dydx1..."
+		# Using "*" as a subscript results in a single arg: "vindax1... vindax1... vindax1..."
+		# Using "@" as a subscript results in separate args: "vindax1..." "vindax1..." "vindax1..."
 		# Note: `edit_genesis` must be called before `add-genesis-account`.
 		# edit_genesis "$VAL_CONFIG_DIR" "${TEST_ACCOUNTS[*]}" "${FAUCET_ACCOUNTS[*]}" "${VAULT_ACCOUNTS[*]}" "${VAULT_NUMBERS[*]}" "" "" "" ""
 		edit_genesis "$VAL_CONFIG_DIR" "" "${FAUCET_ACCOUNTS[*]}" "${VAULT_ACCOUNTS[*]}" "${VAULT_NUMBERS[*]}" "" "" "" ""

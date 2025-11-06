@@ -51,9 +51,9 @@ echo "Running with SEED_FAUCET_USDC=$SEED_FAUCET_USDC..."
 source "./testing/genesis.sh"
 CHAIN_ID="dydx-testnet-4"
 FAUCET_ACCOUNTS=(
-	"dydx1g2ygh8ufgwwpg5clp2qh3tmcmlewuyt2z6px8k" # main faucet
-	"dydx1fzhzmcvcy7nycvu46j9j4f7f8cnqxn3770q260" # backup #1
-	"dydx1xeu4caf7nwd83h9z49cxtagsglngdldjgtrzfq" # backup #2
+	"vindax1g2ygh8ufgwwpg5clp2qh3tmcmlewuyt2z6px8k" # main faucet
+	"vindax1fzhzmcvcy7nycvu46j9j4f7f8cnqxn3770q260" # backup #1
+	"vindax1xeu4caf7nwd83h9z49cxtagsglngdldjgtrzfq" # backup #2
 )
 TMP_GENTX_DIR="/tmp/gentx"
 TMP_CHAIN_DIR="/tmp/chain"
@@ -85,15 +85,15 @@ RESEARCH_MNEMONICS_SECRET="$(AWS_PROFILE=dydx-v4-research aws secretsmanager get
 # Define mnemonics for internal validators.
 MNEMONICS=(
 	# dydx-1
-	# Consensus Address: dydxvalcons18an8qvxam8zkrmrx7d0gygd7q9uv7cky7jpq5x
+	# Consensus Address: vindaxvalcons18an8qvxam8zkrmrx7d0gygd7q9uv7cky7jpq5x
 	"$(echo $MNEMONICS_SECRET | jq -r '.["dydx-1"]')"
 
 	# dydx-2
-	# Consensus Address: dydxvalcons1z79h40nmd777scs93qjxaeak8m2cl6hpqg2rx9
+	# Consensus Address: vindaxvalcons1z79h40nmd777scs93qjxaeak8m2cl6hpqg2rx9
 	"$(echo $MNEMONICS_SECRET | jq -r '.["dydx-2"]')"
 
 	# dydx-research
-	# Consensus Address: dydxvalcons1a49fhxhy7mn64v220v5wgpyauwzdc4y8rej9xh
+	# Consensus Address: vindaxvalcons1a49fhxhy7mn64v220v5wgpyauwzdc4y8rej9xh
 	"$(echo $RESEARCH_MNEMONICS_SECRET)"
 )
 
@@ -112,9 +112,9 @@ NODE_KEYS=(
 )
 
 VALIDATOR_ACCOUNTS=(
-	"dydx1vvc9vl6z9pu0vt2y79d0ln8zp6qmpmrhrcnnuy" # dydx-1
-	"dydx10lzv79d96l7jh07z76ry6cnn6ftnnl8fdg0afd" # dydx-2
-	"dydx1md63arq56n623g5xpevev94lyepv4pqjjs6y74" # dydx-research
+	"vindax1vvc9vl6z9pu0vt2y79d0ln8zp6qmpmrhrcnnuy" # dydx-1
+	"vindax10lzv79d96l7jh07z76ry6cnn6ftnnl8fdg0afd" # dydx-2
+	"vindax1md63arq56n623g5xpevev94lyepv4pqjjs6y74" # dydx-research
 )
 
 cleanup_tmp_dir() {
@@ -178,8 +178,8 @@ create_pregenesis_file() {
 
 	# Do not pass in test accounts and faucet accounts to `edit_genesis`. This skips
 	# initializing USDC balance in the subacounts.
-	# Using "*" as a subscript results in a single arg: "dydx1... dydx1... dydx1..."
-	# Using "@" as a subscript results in separate args: "dydx1..." "dydx1..." "dydx1..."
+	# Using "*" as a subscript results in a single arg: "vindax1... vindax1... vindax1..."
+	# Using "@" as a subscript results in separate args: "vindax1..." "vindax1..." "vindax1..."
 	# Note: `edit_genesis` must be called before `add-genesis-account`.
 	edit_genesis "$VAL_CONFIG_DIR" "" "" "" "" "$TMP_EXCHANGE_CONFIG_JSON_DIR" "./testing/delaymsg_config" "" ""
 	overwrite_genesis_public_testnet

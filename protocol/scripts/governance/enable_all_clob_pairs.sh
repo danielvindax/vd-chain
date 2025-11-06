@@ -12,7 +12,7 @@
 
 # Constants
 NINE_ZEROS="000000000"
-AUTHORITY="dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky"
+AUTHORITY="vindax1vlthgax23ca9syk7xgaz347xmf4nunefwppm9c"
 
 # Customizable proposal fields
 TITLE="Enable trading on all markets"

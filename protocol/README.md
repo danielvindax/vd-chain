@@ -116,7 +116,7 @@ To run the below commands, you'll want to import the private keys of the test ac
 It's occasionally helpful to send a transaction to the local chain to observe Cosmos behavior through the API such as events. Until `clob` `v0.1` is complete, you can use the default Cosmos `bank` module to transfer assets between two accounts defined at genesis in the `genesis.sh` file.
 
 ```sh
-./build/dydxprotocold tx bank send dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4 dydx10fx7sy6ywd5senxae9dwytf8jxek3t2gcen2vs 100usdc
+./build/dydxprotocold tx bank send vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642 vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90 100usdc
 ```
 
 ### Placing a test order locally
@@ -124,14 +124,14 @@ It's occasionally helpful to send a transaction to the local chain to observe Co
 It's occasionally helpful to send a transaction to the local chain to test order placement and matching. Run the following two commands in succession in order to match an order between two accounts.
 
 ```sh
-./build/dydxprotocold tx clob place-order dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4 0 0 0 1 10 10000 20 --from alice --chain-id localdydxprotocol
-./build/dydxprotocold tx clob place-order dydx10fx7sy6ywd5senxae9dwytf8jxek3t2gcen2vs 0 0 0 2 10 10000 20 --from bob --chain-id localdydxprotocol
+./build/dydxprotocold tx clob place-order vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642 0 0 0 1 10 10000 20 --from alice --chain-id localdydxprotocol
+./build/dydxprotocold tx clob place-order vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90 0 0 0 2 10 10000 20 --from bob --chain-id localdydxprotocol
 ```
 
 Run the following command to cancel an order.
 
 ```sh
-./build/dydxprotocold tx clob cancel-order dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4 10 0 20 --from alice
+./build/dydxprotocold tx clob cancel-order vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642 10 0 20 --from alice
 ```
 
 ### Querying the chain locally

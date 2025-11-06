@@ -10,7 +10,7 @@ import (
 
 var (
 	subaccountId = satypes.SubaccountId{
-		Owner:  "dydx1x2hd82qerp7lc0kf5cs3yekftupkrl620te6u2",
+		Owner:  "vindax1x2hd82qerp7lc0kf5cs3yekftupkrl620te6u2",
 		Number: 0,
 	}
 	orderId0 = OrderId{

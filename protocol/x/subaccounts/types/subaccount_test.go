@@ -34,7 +34,7 @@ func TestSubaccountId_Validate(t *testing.T) {
 		expectedError error
 	}{
 		"validates successfully": {
-			owner:  "dydx1x2hd82qerp7lc0kf5cs3yekftupkrl620te6u2",
+			owner:  "vindax1x2hd82qerp7lc0kf5cs3yekftupkrl620te6u2",
 			number: 0,
 		},
 		"validates successfully with non-zero subaccount": {

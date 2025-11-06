@@ -485,7 +485,7 @@ func TestSetAffiliateWhitelist(t *testing.T) {
 					{
 						Addresses: []string{
 							constants.AliceAccAddress.String(),
-							"dydxvaloper1et2kxktzr6tav65uhrxsyr8gx82xvan6gl78xd",
+							"vindaxvaloper1et2kxktzr6tav65uhrxsyr8gx82xvan6gl78xd",
 						},
 						TakerFeeSharePpm: 500_000, // 50%
 					},

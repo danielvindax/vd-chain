@@ -72,8 +72,8 @@ Reading events from: events.json
 
 --- Event Index: 23, Transaction Index: 0, Subtype: order_fill ---
 Message Type: OrderFillEventV1
-  maker_order:<order_id:<subaccount_id:<owner:"dydx1..." number:1 > client_id:1622718733 clob_pair_id:27 > side:SIDE_BUY quantums:2266000000 subticks:710000000 good_til_block:1044 >
-  order:<order_id:<subaccount_id:<owner:"dydx130f..." number:7 > client_id:507483497 clob_pair_id:27 > side:SIDE_SELL quantums:2271000000 subticks:709000000 good_til_block:1048 >
+  maker_order:<order_id:<subaccount_id:<owner:"vindax1..." number:1 > client_id:1622718733 clob_pair_id:27 > side:SIDE_BUY quantums:2266000000 subticks:710000000 good_til_block:1044 >
+  order:<order_id:<subaccount_id:<owner:"vindax130f..." number:7 > client_id:507483497 clob_pair_id:27 > side:SIDE_SELL quantums:2271000000 subticks:709000000 good_til_block:1048 >
   fill_amount:2261000000
   maker_fee:-779
   taker_fee:3191

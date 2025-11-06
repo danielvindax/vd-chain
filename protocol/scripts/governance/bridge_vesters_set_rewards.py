@@ -57,10 +57,10 @@ VOTING_PERIOD_DAYS = 4
 ########################################################################## 
 ### Script contants - do not change                                    ###
 ########################################################################## 
-GOV_MODULE_ADDRESS="dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky" # Governance module account
-COMMUNITY_VESTER_ADDRESS="dydx1wxje320an3karyc6mjw4zghs300dmrjkwn7xtk"
-REWARDS_VESTER_ADDRESS="dydx1ltyc6y4skclzafvpznpt2qjwmfwgsndp458rmp"
-DELAY_MSG_MODULE_ADDRESS="dydx1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5zx6tr"
+GOV_MODULE_ADDRESS="vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm" # Governance module account
+COMMUNITY_VESTER_ADDRESS="vindax1wxje320an3karyc6mjw4zghs300dmrjkwr8wzf"
+REWARDS_VESTER_ADDRESS="vindax1ltyc6y4skclzafvpznpt2qjwmfwgsndp4y7tj7"
+DELAY_MSG_MODULE_ADDRESS="vindax1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5jljzu"
 DEPOSIT=f"10000{NINE_ZEROS}{NINE_ZEROS}{NATIVE_TOKEN_DENOM}" # 10,000 native tokens
 OUTPUT_FILE='proposal_bridge_vesters_set_rewards.json'
 
