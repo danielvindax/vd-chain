@@ -9,10 +9,11 @@ import (
 	"github.com/cometbft/cometbft/types"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
+	
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	assets "github.com/danielvindax/vd-chain/protocol/x/assets/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	assets "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
 
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
 	"github.com/cosmos/cosmos-sdk/testutil/testdata"
