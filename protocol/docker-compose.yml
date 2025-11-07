@@ -23,6 +23,11 @@ services:
       - "4294967295" # Effectively disable the daemon monitor because bridge daemon is flaky in localnet.
       - --grpc-streaming-enabled
       - "true"
+      # Enable Kafka publishing to indexer Kafka inside Docker network
+      - --indexer-kafka-conn-str
+      - kafka:9092
+      - --indexer-kafka-max-retry
+      - "5"
     environment:
       # See https://docs.datadoghq.com/profiler/enabling/go/ for DD_ specific environment variables
       - DD_ENV=localnet_${USER}
@@ -35,6 +40,9 @@ services:
       - "9090:9090"
       - "9092:9092" # full node streaming
       - "1317:1317"
+    networks:
+      - default
+      - indexer_default
   dydxprotocold1:
     image: local:dydxprotocol
     entrypoint:
@@ -142,3 +150,7 @@ services:
     ports:
       - "8125:8215"
       - "8126:8126"
+
+networks:
+  indexer_default:
+    external: true

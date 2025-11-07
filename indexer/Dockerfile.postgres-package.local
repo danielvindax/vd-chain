@@ -1,5 +1,5 @@
 # Dockerfile to containerize postgres package locally
-FROM dydxprotocol/indexer-node:16-alpine-m1
+FROM dydxprotocol/indexer-node:18-alpine
 ENV NODE_ENV=development
 
 RUN adduser -S dydx
@@ -16,6 +16,7 @@ COPY ./patches ./patches
 
 # Copy package.json from postgres and imported packages being run
 COPY ./packages/base/package.json ./packages/base/
+COPY ./packages/dev/package.json ./packages/dev/
 COPY ./packages/postgres/package.json ./packages/postgres/
 COPY ./packages/v4-protos/package.json ./packages/v4-protos/
 COPY ./packages/v4-proto-parser/package.json ./packages/v4-proto-parser/
@@ -36,6 +37,9 @@ COPY ./packages/postgres/knexfile.js ./packages/postgres
 COPY ./packages/postgres/.env* ./packages/postgres/
 
 RUN chown dydx -R /home/dydx/app
+
+# Ensure pnpm matches lockfileVersion 9
+RUN npm i -g pnpm@10.20.0
 
 USER dydx
 

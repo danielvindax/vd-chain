@@ -226,7 +226,7 @@ export class Index {
     stats.increment(
       `${config.SERVICE_NAME}.on_message`,
       1,
-      config.MESSAGE_FORWARDER_STATSD_SAMPLE_RATE,
+      Number(config.MESSAGE_FORWARDER_STATSD_SAMPLE_RATE),
       {
         instance: instanceId,
       },
@@ -339,7 +339,7 @@ export class Index {
     stats.increment(
       `${config.SERVICE_NAME}.message_received_${parsed.type}`,
       1,
-      config.MESSAGE_FORWARDER_STATSD_SAMPLE_RATE,
+      Number(config.MESSAGE_FORWARDER_STATSD_SAMPLE_RATE),
       {
         instance: instanceId,
       },
