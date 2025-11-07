@@ -3,7 +3,7 @@ services:
   kafka:
     image: blacktop/kafka:2.6
     ports:
-      - 9092:9092
+      - 127.0.0.1:29092:9092
     environment:
       KAFKA_ADVERTISED_HOST_NAME: kafka
       KAFKA_CREATE_TOPICS:
@@ -102,6 +102,12 @@ services:
       - DD_ENV=localnet_${USER}
       - DD_AGENT_HOST=datadog-agent
       - REDIS_URL=redis://redis:6379
+      # In-network Kafka broker
+      - KAFKA_BROKER_URLS=kafka:9092
+      # In-network Postgres (inside Docker use service name and container port)
+      - DB_HOSTNAME=postgres
+      - DB_READONLY_HOSTNAME=postgres
+      - DB_PORT=5432
     labels:
       com.datadoghq.ad.logs: '[{"source": "indexer", "service": "ender"}]'
     depends_on:
@@ -122,11 +128,18 @@ services:
       - DD_ENV=localnet_${USER}
       - DD_AGENT_HOST=datadog-agent
       - REDIS_URL=redis://redis:6379
+      - REDIS_READONLY_URL=redis://redis:6379
       - RATE_LIMIT_REDIS_URL=redis://redis:6379
       - PORT=3002
       - RATE_LIMIT_ENABLED=false
       - INDEXER_LEVEL_GEOBLOCKING_ENABLED=false
-      - COMPLIANCE_DATA_CLIENT=PLACEHOLDER
+      - EXPOSE_SET_COMPLIANCE_ENDPOINT=true
+      - COMPLIANCE_DATA_CLIENT=BLOCKLIST
+      - BLOCKED_ADDRESSES=
+      # In-network Postgres (inside Docker use service name and container port)
+      - DB_HOSTNAME=postgres
+      - DB_READONLY_HOSTNAME=postgres
+      - DB_PORT=5432
     labels:
       com.datadoghq.ad.logs: '[{"source": "indexer", "service": "comlink"}]'
     ports:
@@ -153,7 +166,7 @@ services:
       - DD_PROFILING_ENABLED=true
       - DD_ENV=localnet_${USER}
       - DD_AGENT_HOST=datadog-agent
-      - COMLINK_URL=host.docker.internal:3002
+      - COMLINK_URL=comlink:3002
     labels:
       com.datadoghq.ad.logs: '[{"source": "indexer", "service": "socks"}]'
     depends_on:
@@ -177,6 +190,21 @@ services:
       - DD_PROFILING_ENABLED=true
       - DD_ENV=localnet_${USER}
       - DD_AGENT_HOST=datadog-agent
+      # In-network Redis & Kafka endpoints (do not use host localhost)
+      - REDIS_URL=redis://redis:6379
+      - REDIS_READONLY_URL=redis://redis:6379
+      - KAFKA_BROKER_URLS=kafka:9092
+      # In-network Postgres (inside Docker use service name and container port)
+      - DB_HOSTNAME=postgres
+      - DB_READONLY_HOSTNAME=postgres
+      - DB_PORT=5432
+      # Stub AWS config for local development to satisfy required envs
+      - AWS_ACCOUNT_ID=000000000000
+      - AWS_REGION=local
+      - S3_BUCKET_ARN=arn:aws:s3:::local-indexer
+      - ECS_TASK_ROLE_ARN=arn:aws:iam::000000000000:role/local-indexer-role
+      - KMS_KEY_ARN=arn:aws:kms:local:000000000000:key/local-indexer-key
+      - RDS_INSTANCE_NAME=local-indexer-rds
     labels:
       com.datadoghq.ad.logs: '[{"source": "indexer", "service": "roundtable"}]'
     depends_on:
@@ -197,6 +225,13 @@ services:
       - DD_ENV=localnet_${USER}
       - DD_AGENT_HOST=datadog-agent
       - REDIS_URL=redis://redis:6379
+      - REDIS_READONLY_URL=redis://redis:6379
+      # In-network Kafka broker
+      - KAFKA_BROKER_URLS=kafka:9092
+      # In-network Postgres (inside Docker use service name and container port)
+      - DB_HOSTNAME=postgres
+      - DB_READONLY_HOSTNAME=postgres
+      - DB_PORT=5432
     labels:
       com.datadoghq.ad.logs: '[{"source": "indexer", "service": "vulcan"}]'
     ports:

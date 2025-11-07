@@ -17,3 +17,6 @@ v4-proto-rs/target
 .aider*
 .idea
 .vscode
+protocol/.gitignore
+protocol/docker-compose.yml
+protocol/testing/genesis.sh

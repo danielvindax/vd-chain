@@ -921,6 +921,8 @@ function edit_genesis() {
 
     # Marketmap: MKR-USD
     dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD' -v "{}"
+    # Gate MKR/USD market for local/testing: disable by default (do not remove code)
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker.enabled' -v 'false'
     dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker' -v "{}" 
 
     dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker.currency_pair' -v "{}"

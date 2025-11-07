@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express, { Express } from 'express';
-import requestId from 'express-request-id';
+// import * as requestId from 'express-request-id';
 import responseTime from 'response-time';
 import swaggerUi from 'swagger-ui-express';
 
@@ -11,6 +11,7 @@ import { logErrors } from './error-handler';
 import geoHeadersMiddleware from './geo-headers-middleware';
 import RequestLogger from './request-logger';
 import resBodyCapture from './res-body-capture';
+const requestId = require('express-request-id');
 
 export default function server(
   indexV4?: express.Router,

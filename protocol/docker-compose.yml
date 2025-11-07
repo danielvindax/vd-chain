@@ -23,6 +23,11 @@ services:
       - "4294967295" # Effectively disable the daemon monitor because bridge daemon is flaky in localnet.
       - --grpc-streaming-enabled
       - "true"
+      # Enable Kafka publishing to indexer Kafka inside Docker network
+      - --indexer-kafka-conn-str
+      - kafka:9092
+      - --indexer-kafka-max-retry
+      - "5"
     environment:
       # See https://docs.datadoghq.com/profiler/enabling/go/ for DD_ specific environment variables
       - DD_ENV=localnet_${USER}
@@ -35,7 +40,9 @@ services:
       - "9090:9090"
       - "9092:9092" # full node streaming
       - "1317:1317"
-
+    networks:
+      - default
+      - indexer_default
   dydxprotocold1:
     image: local:dydxprotocol
     entrypoint:
@@ -116,21 +123,15 @@ services:
     volumes:
       - ./localnet/dydxprotocol3:/dydxprotocol/chain/.dave/data
   slinky0:
-    image: ghcr.io/skip-mev/slinky-sidecar:v1.1.0
-    entrypoint: >
-      sh -c "slinky --marketmap-provider dydx_migration_api --oracle-config /etc/slinky/oracle.json --log-std-out-level error"
-    environment:
-      - SLINKY_CONFIG_PROVIDERS_RAYDIUM_API_API_ENDPOINTS_0_URL=${RAYDIUM_URL}
-      - SLINKY_CONFIG_PROVIDERS_UNISWAPV3_API-BASE_API_ENDPOINTS_0_URL=${UNISWAPV3_BASE_URL}
-      - SLINKY_CONFIG_PROVIDERS_UNISWAPV3_API-ETHEREUM_API_ENDPOINTS_0_URL=${UNISWAPV3_ETHEREUM_URL}
-      - SLINKY_CONFIG_PROVIDERS_RAYDIUM_API_API_INTERVAL=${PROVIDER_NODE_QUERY_INTERVAL}
-      - SLINKY_CONFIG_PROVIDERS_UNISWAPV3_API-BASE_API_INTERVAL=${PROVIDER_NODE_QUERY_INTERVAL}
-      - SLINKY_CONFIG_PROVIDERS_UNISWAPV3_API-ETHEREUM_API_INTERVAL=${PROVIDER_NODE_QUERY_INTERVAL}
-    volumes:
-      - ./contrib/slinky:/etc/slinky
+    image: ghcr.io/dydxprotocol/slinky-sidecar:v1.3.3
+    entrypoint: [
+      "slinky",
+      "--market-map-endpoint", "dydxprotocold0:9090",
+    ]
     ports:
       - "8080:8080"
       - "8002:8002" # metrics
+
   prometheus:
     image: prom/prometheus:latest
     volumes:
@@ -149,3 +150,7 @@ services:
     ports:
       - "8125:8215"
       - "8126:8126"
+
+networks:
+  indexer_default:
+    external: true
