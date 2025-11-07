@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# =====================[ Cấu hình ]=====================
+# =====================[ Configuration ]=====================
 BIN="${BIN:-dydxprotocold}"
 KEYRING="${KEYRING:-test}"             # test | file | os
-HOME_DIR="${HOME_DIR:-$HOME/.dydxprotocold}" # đổi nếu khác
+HOME_DIR="${HOME_DIR:-$HOME/.dydxprotocold}" # change if different
 RESET="${RESET:-true}"
 
-# =====================[ Danh sách tài khoản & mnemonic ]=====================
+# =====================[ Account list & mnemonic ]=====================
 NAMES=(
   "alice" "bob" "carl" "dave" "emily"
   "fiona" "greg" "henry" "ian" "jeff"
@@ -26,25 +26,25 @@ MNEMONICS=(
 "fashion charge estate devote jaguar fun swift always road lend scrap panic matter core defense high gas athlete permit crane assume pact fitness matrix"
 )
 
-# =====================[ Chuẩn bị môi trường ]=====================
-command -v "$BIN" >/dev/null 2>&1 || { echo "❌ Không tìm thấy binary: $BIN"; exit 1; }
+# =====================[ Environment setup ]=====================
+command -v "$BIN" >/dev/null 2>&1 || { echo "❌ Binary not found: $BIN"; exit 1; }
 
 if [ "$RESET" = "true" ] && [ -d "$HOME_DIR" ]; then
-  echo "🧹 Xoá dữ liệu keyring test cũ: $HOME_DIR"
+  echo "🧹 Removing old test keyring data: $HOME_DIR"
   rm -rf "$HOME_DIR"
 fi
 
 mkdir -p "$HOME_DIR"
 
-echo "🔑 Đang tạo lại keyring và gen địa chỉ..."
+echo "🔑 Creating keyring and generating addresses..."
 echo
 
-# =====================[ Gen addresses ]=====================
+# =====================[ Generate addresses ]=====================
 for i in "${!NAMES[@]}"; do
   NAME="${NAMES[$i]}"
   MN="${MNEMONICS[$i]}"
 
-  # Import key từ mnemonic
+  # Import key from mnemonic
   printf "%s\n" "$MN" | $BIN keys add "$NAME" --recover \
     --keyring-backend "$KEYRING" \
     --home "$HOME_DIR" >/dev/null
@@ -60,4 +60,4 @@ for i in "${!NAMES[@]}"; do
   echo
 done
 
-echo "✅ Hoàn tất! Toàn bộ địa chỉ đã được gen ra."
+echo "✅ Complete! All addresses have been generated."

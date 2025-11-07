@@ -10,9 +10,9 @@ import (
 )
 
 var (
-	// Tùy chỉnh theo repo của bạn
+	// Customize according to your repo
 	replacements = map[string]string{
-		// bech32 hrp & biến thể
+		// bech32 hrp & variants
 		"dydxvaloperpub": "vindaxvaloperpub",
 		"dydxvalconspub": "vindaxvalconspub",
 		"dydxvaloper":    "vindaxvaloper",
@@ -30,17 +30,17 @@ var (
 		// "github.com/dydxprotocol/v4-chain": "github.com/miexs/vd-chain",
 	}
 
-	// Bỏ qua các thư mục không nên chạm
+	// Skip directories that should not be touched
 	skipDirs = map[string]bool{
 		".git": true, "vendor": true, "node_modules": true, "build": true, "out": true,
 		"_backup": true, "_backup_rebrand": true, ".cache": true, ".idea": true, ".vscode": true,
 		"third_party": true, "thirdparty": true, "proto/google": true,
 	}
 
-	// Bỏ qua chính file tool này (self-exclude)
+	// Skip this tool file itself (self-exclude)
 	skipFiles = map[string]bool{
-		"scripts/rebrand.go": true, // chạy từ repo root
-		"rebrand.go":         true, // phòng trường hợp chạy trong chính thư mục scripts
+		"scripts/rebrand.go": true, // run from repo root
+		"rebrand.go":         true, // in case running in the scripts directory itself
 	}
 )
 

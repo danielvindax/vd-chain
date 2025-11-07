@@ -33,13 +33,13 @@ type modItem struct {
 }
 
 func main() {
-	// Đặt HRP "vindax" (bắt buộc trước khi derive địa chỉ)
+	// Set HRP "vindax" (required before deriving address)
 	appconfig.SetAddressPrefixes()
 
 	fmt.Println("🔹 Module Accounts for vindax chain:")
 
-	// Danh sách đầy đủ các account name để derive địa chỉ module
-	// Lưu ý: Với Cosmos, đa phần dùng ModuleName; riêng một số pool/IF dùng hằng số riêng.
+	// Full list of account names to derive module address
+	// Note: With Cosmos, most use ModuleName; some pools/IF use separate constants.
 	items := []modItem{
 		// Cosmos SDK & Core
 		{Label: "fee_collector", Name: authtypes.FeeCollectorName},
@@ -64,7 +64,7 @@ func main() {
 		{Label: "vault_megavault", Name: vaultmoduletypes.MegavaultAccountName},
 		{Label: "delaymsg", Name: delaymsgtypes.ModuleName},
 
-		// (tùy dự án) Nếu bạn dùng các module này có module account, thêm vào:
+		// (project-specific) If you use these modules with module account, add:
 		// {Label: "clob", Name: "clob"},
 		// {Label: "perpetuals", Name: "perpetuals"},
 		// {Label: "vault", Name: "vault"},
@@ -72,17 +72,17 @@ func main() {
 		// {Label: "stats", Name: "stats"},
 	}
 
-	// In toàn bộ module addresses
+	// Print all module addresses
 	for _, it := range items {
 		addr := authtypes.NewModuleAddress(it.Name)
 		fmt.Printf("%-28s → %s\n", it.Label, addr.String())
 	}
 
-	// Ví dụ in thêm địa chỉ "module vault" và "vault subaccount"
+	// Example: print additional "module vault" and "vault subaccount" addresses
 	vaultModuleAddr := authtypes.NewModuleAddress("vault")
 	fmt.Printf("%-28s → %s\n", "vault(module_name='vault')", vaultModuleAddr.String())
 
-	// Subaccount: thực chất cũng là AccAddress từ module address
+	// Subaccount: actually also AccAddress from module address
 	vaultAcc := sdk.AccAddress(vaultModuleAddr)
 	fmt.Printf("%-28s → %s\n", "vault Acc", vaultAcc.String())
 }

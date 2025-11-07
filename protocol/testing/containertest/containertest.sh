@@ -73,21 +73,21 @@ install_prerequisites() {
 
 log() { printf "[init:%(%F %T)T] %s\n" -1 "$*"; }
 
-# Lấy phần HRP (prefix trước ký tự '1') của một địa chỉ bech32
+# Get HRP part (prefix before '1') of a bech32 address
 addr_hrp() {
   local addr="$1"
   echo "${addr%%1*}"
 }
 
-# Tạo tạm một key để đọc ra địa chỉ -> suy ra HRP mà binary đang dùng
-# Trả về HRP qua stdout
+# Create a temporary key to read address -> infer HRP that binary is using
+# Return HRP via stdout
 detect_binary_hrp() {
   local home_dir="$1"
   local tmpkey="__probe__$$"
-  # Tạo key tạm và xuất JSON để lấy .address
+  # Create temporary key and output JSON to get .address
   local addr
   addr="$(dydxprotocold keys add "$tmpkey" --keyring-backend=test --home "$home_dir" -y --output json 2>/dev/null | jq -r '.address' || true)"
-  # Xóa ngay key tạm (để không bẩn keyring)
+  # Delete temporary key immediately (to avoid dirty keyring)
   dydxprotocold keys delete "$tmpkey" --keyring-backend=test --home "$home_dir" -y >/dev/null 2>&1 || true
 
   if [[ -z "$addr" || "$addr" == "null" ]]; then
@@ -97,7 +97,7 @@ detect_binary_hrp() {
   addr_hrp "$addr"
 }
 
-# In ra thông tin môi trường quan trọng
+# Print important environment information
 log_env() {
   log "Binary: $(command -v dydxprotocold || echo 'not found')"
   log "Version: $(dydxprotocold version 2>/dev/null || echo 'unknown')"
@@ -106,13 +106,13 @@ log_env() {
   log "TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE=${TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE:-<unset>}"
   log "TESTNET_VALIDATOR_SELF_DELEGATE_AMOUNT=${TESTNET_VALIDATOR_SELF_DELEGATE_AMOUNT:-<unset>}"
 
-  # Lấy HRP kỳ vọng từ mảng TEST_ACCOUNTS (phần tử đầu)
+  # Get expected HRP from TEST_ACCOUNTS array (first element)
   local first_acct="${TEST_ACCOUNTS[0]}"
   local expected_hrp="$(addr_hrp "$first_acct")"
   log "Expected HRP from TEST_ACCOUNTS: $expected_hrp"
 }
 
-# Kiểm tra HRP: nếu HRP binary != HRP địa chỉ cấu hình -> cảnh báo rõ ràng
+# Check HRP: if binary HRP != configured address HRP -> clear warning
 preflight_hrp_check() {
   local home_dir="$1"
   local expected_hrp="$2"
@@ -125,22 +125,22 @@ preflight_hrp_check() {
     log "Detected binary HRP: $binary_hrp (home: $home_dir)"
     if [[ "$binary_hrp" != "$expected_hrp" ]]; then
       log "ERROR: HRP mismatch → binary uses '$binary_hrp' but TEST/FAUCET accounts use '$expected_hrp'."
-      log "       This mismatch gây lỗi 'failed to get address from Keybase ... key not found'."
-      log "       Hướng dẫn: rebuild binary với SetBech32Prefix('$(addr_hrp "${NATIVE_TOKEN:-vindax}")'...) hoặc đổi toàn bộ địa chỉ sang HRP '$binary_hrp'."
+      log "       This mismatch causes error 'failed to get address from Keybase ... key not found'."
+      log "       Instructions: rebuild binary with SetBech32Prefix('$(addr_hrp "${NATIVE_TOKEN:-vindax}")'...) or change all addresses to HRP '$binary_hrp'."
       return 2
     fi
   fi
   return 0
 }
 
-# Kiểm tra nhanh parse địa chỉ bằng binary hiện tại (để log dễ hiểu)
+# Quick check parse address with current binary (for easier log understanding)
 probe_parse_address() {
   local addr="$1"
   local tag="$2"
-  # Cố gắng ký 1 tx giả (dry-run không có sẵn), nên chỉ log parse đơn giản bằng regex và so HRP
+  # Try to sign 1 fake tx (dry-run not available), so only log simple parse with regex and compare HRP
   local hrp="$(addr_hrp "$addr")"
   if [[ -z "$hrp" ]]; then
-    log "[$tag] INVALID: '$addr' không có định dạng bech32 hợp lệ (không thấy '1')."
+    log "[$tag] INVALID: '$addr' does not have valid bech32 format (no '1' found)."
     return 1
   fi
   log "[$tag] Address='$addr' | HRP='$hrp'"
@@ -184,11 +184,11 @@ create_validators() {
 		
 		EXPECTED_HRP="$(addr_hrp "${TEST_ACCOUNTS[0]}")"
 		preflight_hrp_check "$VAL_HOME_DIR" "$EXPECTED_HRP" || {
-		log "Abort at moniker='${MONIKERS[$i]}' do HRP mismatch. Vui lòng fix HRP rồi chạy lại."
+		log "Abort at moniker='${MONIKERS[$i]}' due to HRP mismatch. Please fix HRP and run again."
 		exit 1
 		}
 
-		# Log thử parse các địa chỉ sẽ add để dễ debug
+		# Log try parsing addresses to be added for easier debugging
 		for acct in "${TEST_ACCOUNTS[@]}"; do
 		probe_parse_address "$acct" "TEST_ACCOUNT"
 		done

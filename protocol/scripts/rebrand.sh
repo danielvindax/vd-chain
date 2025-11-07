@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # scripts/rebrand.sh
-# Dùng để rebrand toàn bộ repo từ dYdX → Vindax
+# Used to rebrand the entire repo from dYdX → Vindax
 # Usage: ./scripts/rebrand.sh
 
 set -euo pipefail
