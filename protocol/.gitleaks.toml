@@ -16,5 +16,5 @@ regexTarget = "line"
 regexes = [
   '''googleapis''',
   '''cosmos1''',
-  '''dydx1''',
+  '''vindax1''',
 ]

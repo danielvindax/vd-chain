@@ -67,21 +67,21 @@
     "bank": {
       "balances": [
         {
-          "address": "dydx1zlefkpe3g0vvm9a4h0jf9000lmqutlh9jwjnsv",
+          "address": "vindax1zlefkpe3g0vvm9a4h0jf9000lmqutlh9j7tmen",
           "coins": [
             {
               "amount": "1000000000000000000000000000",
-              "denom": "asample"
+              "denom": "adv4tnt"
             }
           ]
         }
       ],
       "denom_metadata": [
         {
-          "base": "asample",
+          "base": "adv4tnt",
           "denom_units": [
             {
-              "denom": "asample"
+              "denom": "adv4tnt"
             },
             {
               "denom": "sample",
@@ -115,7 +115,7 @@
         "next_id": 99
       },
       "event_params": {
-        "denom": "asample",
+        "denom": "adv4tnt",
         "eth_address": "0xsampleaddress",
         "eth_chain_id": 9
       },
@@ -582,7 +582,7 @@
     "crisis": {
       "constant_fee": {
         "amount": "1000000000000000000",
-        "denom": "asample"
+        "denom": "adv4tnt"
       }
     },
     "delaymsg": {
@@ -592,7 +592,7 @@
           "id": 0,
           "msg": {
             "@type": "/dydxprotocol.feetiers.MsgUpdatePerpetualFeeParams",
-            "authority": "dydx1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5zx6tr",
+            "authority": "vindax1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5jljzu",
             "params": {
               "tiers": [
                 {
@@ -831,7 +831,7 @@
         "expedited_min_deposit": [
           {
             "amount": "50000000",
-            "denom": "asample"
+            "denom": "adv4tnt"
           }
         ],
         "expedited_threshold": "0.75000",
@@ -840,7 +840,7 @@
         "min_deposit": [
           {
             "amount": "10000000000000000000000",
-            "denom": "asample"
+            "denom": "adv4tnt"
           }
         ],
         "min_deposit_ratio": "0.010000000000000000",
@@ -3089,9 +3089,9 @@
         }
       },
       "params": {
-        "admin": "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky",
+        "admin": "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm",
         "market_authorities": [
-          "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky"
+          "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm"
         ]
       }
     },
@@ -3991,14 +3991,14 @@
     },
     "revshare": {
       "params": {
-        "address": "dydx17xpfvakm2amg962yls6f84z3kell8c5leqdyt2",
+        "address": "vindax17xpfvakm2amg962yls6f84z3kell8c5les5vz4",
         "revenue_share_ppm": 0,
         "valid_days": 0
       }
     },
     "rewards": {
       "params": {
-        "denom": "asample",
+        "denom": "adv4tnt",
         "denom_exponent": -18,
         "fee_multiplier_ppm": 0,
         "market_id": 1,
@@ -4023,7 +4023,7 @@
       "last_total_power": "0",
       "last_validator_powers": [],
       "params": {
-        "bond_denom": "asample",
+        "bond_denom": "adv4tnt",
         "historical_entries": 10000,
         "max_entries": 7,
         "max_validators": 60,
@@ -4069,11 +4069,11 @@
           "description": "Governance Module Account",
           "name": "Governance"
         },
-        "operator": "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky"
+        "operator": "vindax1vlthgax23ca9syk7xgaz347xmf4nunefwppm9c"
       },
       "owner_shares": [
         {
-          "owner": "dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4",
+          "owner": "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642",
           "shares": {
             "num_shares": "0"
           }
@@ -4087,14 +4087,14 @@
     "vest": {
       "vest_entries": [
         {
-          "denom": "asample",
+          "denom": "adv4tnt",
           "end_time": "2050-01-01T00:00:00Z",
           "start_time": "2001-01-01T00:00:00Z",
           "treasury_account": "community_treasury",
           "vester_account": "community_vester"
         },
         {
-          "denom": "asample",
+          "denom": "adv4tnt",
           "end_time": "2050-01-01T00:00:00Z",
           "start_time": "2001-01-01T00:00:00Z",
           "treasury_account": "rewards_treasury",
@@ -4103,7 +4103,7 @@
       ]
     }
   },
-  "app_version": "9.0.0-47-gd399e2625",
+  "app_version": "6361c69c",
   "chain_id": "dydx-sample-1",
   "consensus": {
     "params": {

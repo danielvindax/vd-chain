@@ -20,11 +20,11 @@ func _ToPtr[V any](v V) *V {
 
 func TestGetOffChainUpdateV1SubaccountId(t *testing.T) {
 	indexerSubaccountId := pv1types.IndexerSubaccountId{
-		Owner:  "dydx1gm0w9nymewm9z4u7wtyw6auru562xkhtftk80p",
+		Owner:  "vindax1gm0w9nymewm9z4u7wtyw6auru562xkhtftk80p",
 		Number: uint32(1337),
 	}
 	subaccountId := satypes.SubaccountId{
-		Owner:  "dydx1gm0w9nymewm9z4u7wtyw6auru562xkhtftk80p",
+		Owner:  "vindax1gm0w9nymewm9z4u7wtyw6auru562xkhtftk80p",
 		Number: uint32(1337),
 	}
 	orderId := pv1types.IndexerOrderId{

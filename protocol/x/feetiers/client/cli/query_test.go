@@ -59,7 +59,7 @@ func TestQueryUserFeeTier(t *testing.T) {
 	out, err := clitestutil.ExecTestCLICmd(
 		ctx,
 		cli.CmdQueryUserFeeTier(),
-		[]string{"dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4"},
+		[]string{"vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642"},
 	)
 
 	require.NoError(t, err)

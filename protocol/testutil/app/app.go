@@ -577,7 +577,6 @@ func (builder TestAppBuilder) Build() *TestApp {
 			}
 		}
 	}
-
 	return &tApp
 }
 
@@ -643,6 +642,27 @@ func (tApp *TestApp) initChainIfNeeded() {
 	}
 
 	tApp.initialized = true
+
+	// Initialize ConsensusParams if it's nil
+	if tApp.genesis.ConsensusParams == nil {
+		tApp.genesis.ConsensusParams = &types.ConsensusParams{
+			Block: types.BlockParams{
+				MaxBytes: 4194304,
+				MaxGas:   -1,
+			},
+			Evidence: types.EvidenceParams{
+				MaxAgeNumBlocks: 100000,
+				MaxAgeDuration:   172800000000000, // 2 days in nanoseconds
+				MaxBytes:        1048576,
+			},
+			Validator: types.ValidatorParams{
+				PubKeyTypes: []string{"ed25519"},
+			},
+			Version: types.VersionParams{
+				App: 0,
+			},
+		}
+	}
 
 	consensusParamsProto := tApp.genesis.ConsensusParams.ToProto()
 	initChainRequest := abcitypes.RequestInitChain{

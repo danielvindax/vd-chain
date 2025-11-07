@@ -216,7 +216,8 @@ test-ci: test-unit-and-integration
 test-all: test-unit test-race test-cover test-integration
 
 test-unit:
-	@VERSION=$(VERSION) go test -mod=readonly -tags='test_ledger_mock $(build_tags)' ./...
+	@mkdir -p $(BUILDDIR)
+	@VERSION=$(VERSION) go test -mod=readonly -tags='test_ledger_mock $(build_tags)' ./... 2>&1 | tee $(BUILDDIR)/test.log
 
 test-race:
 	@VERSION=$(VERSION) go test -mod=readonly -timeout 20m -race -tags='test_ledger_mock $(build_tags)' ./...
@@ -240,7 +241,7 @@ test-container-accept:
 	@SKIP_DISABLED=true VERSION=$(VERSION) go test -mod=readonly -tags='container_test $(build_tags)' ./... -args -accept
 
 test-container-build:
-	$(MAKE) localnet-build
+	# $(MAKE) localnet-build
 	@docker build . -t dydxprotocol-container-test -f testing/containertest/Dockerfile --no-cache
 
 .PHONY: test test-all test-cover test-unit test-race test-container

@@ -29,8 +29,8 @@ var (
 	}
 
 	DefaultMarketMapParams = marketmapmoduletypes.Params{
-		MarketAuthorities: []string{"dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky"},
-		Admin:             "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky",
+		MarketAuthorities: []string{"vindax1vlthgax23ca9syk7xgaz347xmf4nunefwppm9c"},
+		Admin:             "vindax1vlthgax23ca9syk7xgaz347xmf4nunefwppm9c",
 	}
 
 	DefaultMarketMap = marketmapmoduletypes.MarketMap{

@@ -12,7 +12,7 @@ import (
 	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
 )
 
-const GovModuleAddress = "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky"
+const GovModuleAddress = "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm"
 
 var NodeAddresses = []string{
 	constants.AliceAccAddress.String(),

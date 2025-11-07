@@ -126,7 +126,7 @@ func (s *KeeperTestSuite) TestMsgServer_SetActiveState() {
 	s.Require().Error(err)
 	s.Require().Equal(
 		err.Error(),
-		"dydx1jns2dl6u55vy72g7r76l6cse7kmlj4me87xj2j is not recognized as a valid authority "+
+		"vindax1jns2dl6u55vy72g7r76l6cse7kmlj4me8wl6rd is not recognized as a valid authority "+
 			"for setting smart account active state: unauthorized",
 	)
 

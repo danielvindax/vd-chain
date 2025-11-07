@@ -1,0 +1,20 @@
+🔹 Module Accounts for vindax chain:
+fee_collector                → vindax17xpfvakm2amg962yls6f84z3kell8c5les5vz4
+distribution                 → vindax1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8wknsqh
+gov                          → vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm
+staking_bonded_pool          → vindax1fl48vsnmsdzcv85q5d2q4z5ajdha8yu3uj7rsl
+staking_not_bonded_pool      → vindax1tygms3xhhs3yv487phx3dw4a95jn7t7lgjzjxt
+ibc_transfer                 → vindax1yl6hdjhmkf37639730gffanpzndzdpmh8kp97t
+ica_host                     → vindax1vlthgax23ca9syk7xgaz347xmf4nunefwppm9c
+bridge                       → vindax1zlefkpe3g0vvm9a4h0jf9000lmqutlh9j7tmen
+marketmap                    → vindax16j3d86dww8p2rzdlqsv7wle98cxzjxw6gztvtv
+perpetuals_insurance_fund    → vindax1c7ptc87hkd54e3r7zjy92q29xkq7t79w69fh2l
+rewards_treasury             → vindax16wrau2x4tsg033xfrrdpae6kxfn9kyuernd6m7
+rewards_vester               → vindax1ltyc6y4skclzafvpznpt2qjwmfwgsndp4y7tj7
+vest_community_treasury      → vindax15ztc7xy42tn2ukkc0qjthkucw9ac63pgpwk52v
+vest_community_vester        → vindax1wxje320an3karyc6mjw4zghs300dmrjkwr8wzf
+satypes                      → vindax1v88c3xv9xyv3eetdx0tvcmq7ung3dywp5vcx39
+vault_megavault              → vindax18tkxrnrkqc2t0lr3zxr5g6a4hdvqksylxst3uu
+delaymsg                     → vindax1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5jljzu
+vault(module_name='vault')   → vindax1umc2r7a58jy3jmw0e0hctyy0rx45chmuadcgwy
+vault Acc                    → vindax1umc2r7a58jy3jmw0e0hctyy0rx45chmuadcgwy

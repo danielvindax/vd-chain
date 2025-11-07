@@ -12,19 +12,19 @@ CHAIN_ID="localdydxprotocol"
 # Define mnemonics for all validators.
 MNEMONICS=(
 	# alice
-	# Consensus Address: dydxvalcons1zf9csp5ygq95cqyxh48w3qkuckmpealrw2ug4d
+	# Consensus Address: vindaxvalcons1zf9csp5ygq95cqyxh48w3qkuckmpealrw2ug4d
 	"merge panther lobster crazy road hollow amused security before critic about cliff exhibit cause coyote talent happy where lion river tobacco option coconut small"
 
 	# bob
-	# Consensus Address: dydxvalcons1s7wykslt83kayxuaktep9fw8qxe5n73ucftkh4
+	# Consensus Address: vindaxvalcons1s7wykslt83kayxuaktep9fw8qxe5n73ucftkh4
 	"color habit donor nurse dinosaur stable wonder process post perfect raven gold census inside worth inquiry mammal panic olive toss shadow strong name drum"
 
 	# carl
-	# Consensus Address: dydxvalcons1vy0nrh7l4rtezrsakaadz4mngwlpdmhy64h0ls
+	# Consensus Address: vindaxvalcons1vy0nrh7l4rtezrsakaadz4mngwlpdmhy64h0ls
 	"school artefact ghost shop exchange slender letter debris dose window alarm hurt whale tiger find found island what engine ketchup globe obtain glory manage"
 
 	# dave
-	# Consensus Address: dydxvalcons1stjspktkshgcsv8sneqk2vs2ws0nw2wr272vtt
+	# Consensus Address: vindaxvalcons1stjspktkshgcsv8sneqk2vs2ws0nw2wr272vtt
 	"switch boring kiss cash lizard coconut romance hurry sniff bus accident zone chest height merit elevator furnace eagle fetch quit toward steak mystery nest"
 )
 
@@ -54,20 +54,96 @@ MONIKERS=(
 
 # Define all test accounts for the chain.
 TEST_ACCOUNTS=(
-	"dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4" # alice
-	"dydx10fx7sy6ywd5senxae9dwytf8jxek3t2gcen2vs" # bob
-	"dydx1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wvmh70" # carl
-	"dydx1wau5mja7j7zdavtfq9lu7ejef05hm6ffenlcsn" # dave
+	"vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642" # alice
+	"vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90" # bob
+	"vindax1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wuzlhs" # carl
+	"vindax1wau5mja7j7zdavtfq9lu7ejef05hm6fferxsev" # dave
 )
 
 FAUCET_ACCOUNTS=(
-	"dydx1nzuttarf5k2j0nug5yzhr6p74t9avehn9hlh8m" # main faucet
+	"vindax10ehz9v9ncpnj8hfwlsxhcg97zv5ag5w3sgac4k" # main faucet
 )
 
 # Define dependencies for this script.
 # `jq` and `dasel` are used to manipulate json and yaml files respectively.
 install_prerequisites() {
 	apk add curl dasel jq
+}
+
+
+log() { printf "[init:%(%F %T)T] %s\n" -1 "$*"; }
+
+# Get HRP part (prefix before '1') of a bech32 address
+addr_hrp() {
+  local addr="$1"
+  echo "${addr%%1*}"
+}
+
+# Create a temporary key to read address -> infer HRP that binary is using
+# Return HRP via stdout
+detect_binary_hrp() {
+  local home_dir="$1"
+  local tmpkey="__probe__$$"
+  # Create temporary key and output JSON to get .address
+  local addr
+  addr="$(dydxprotocold keys add "$tmpkey" --keyring-backend=test --home "$home_dir" -y --output json 2>/dev/null | jq -r '.address' || true)"
+  # Delete temporary key immediately (to avoid dirty keyring)
+  dydxprotocold keys delete "$tmpkey" --keyring-backend=test --home "$home_dir" -y >/dev/null 2>&1 || true
+
+  if [[ -z "$addr" || "$addr" == "null" ]]; then
+    echo ""
+    return 1
+  fi
+  addr_hrp "$addr"
+}
+
+# Print important environment information
+log_env() {
+  log "Binary: $(command -v dydxprotocold || echo 'not found')"
+  log "Version: $(dydxprotocold version 2>/dev/null || echo 'unknown')"
+  log "CHAIN_ID=$CHAIN_ID"
+  log "USDC_DENOM=${USDC_DENOM:-<unset>}, NATIVE_TOKEN=${NATIVE_TOKEN:-<unset>}"
+  log "TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE=${TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE:-<unset>}"
+  log "TESTNET_VALIDATOR_SELF_DELEGATE_AMOUNT=${TESTNET_VALIDATOR_SELF_DELEGATE_AMOUNT:-<unset>}"
+
+  # Get expected HRP from TEST_ACCOUNTS array (first element)
+  local first_acct="${TEST_ACCOUNTS[0]}"
+  local expected_hrp="$(addr_hrp "$first_acct")"
+  log "Expected HRP from TEST_ACCOUNTS: $expected_hrp"
+}
+
+# Check HRP: if binary HRP != configured address HRP -> clear warning
+preflight_hrp_check() {
+  local home_dir="$1"
+  local expected_hrp="$2"
+
+  local binary_hrp
+  binary_hrp="$(detect_binary_hrp "$home_dir" || true)"
+  if [[ -z "$binary_hrp" ]]; then
+    log "WARN: Unable to detect binary HRP (keygen probe failed)."
+  else
+    log "Detected binary HRP: $binary_hrp (home: $home_dir)"
+    if [[ "$binary_hrp" != "$expected_hrp" ]]; then
+      log "ERROR: HRP mismatch → binary uses '$binary_hrp' but TEST/FAUCET accounts use '$expected_hrp'."
+      log "       This mismatch causes error 'failed to get address from Keybase ... key not found'."
+      log "       Instructions: rebuild binary with SetBech32Prefix('$(addr_hrp "${NATIVE_TOKEN:-vindax}")'...) or change all addresses to HRP '$binary_hrp'."
+      return 2
+    fi
+  fi
+  return 0
+}
+
+# Quick check parse address with current binary (for easier log understanding)
+probe_parse_address() {
+  local addr="$1"
+  local tag="$2"
+  # Try to sign 1 fake tx (dry-run not available), so only log simple parse with regex and compare HRP
+  local hrp="$(addr_hrp "$addr")"
+  if [[ -z "$hrp" ]]; then
+    log "[$tag] INVALID: '$addr' does not have valid bech32 format (no '1' found)."
+    return 1
+  fi
+  log "[$tag] Address='$addr' | HRP='$hrp'"
 }
 
 # Create all validators for the chain including a full-node.
@@ -97,14 +173,28 @@ create_validators() {
 
 		edit_config "$VAL_CONFIG_DIR"
 
-		# Using "*" as a subscript results in a single arg: "dydx1... dydx1... dydx1..."
-		# Using "@" as a subscript results in separate args: "dydx1..." "dydx1..." "dydx1..."
+		# Using "*" as a subscript results in a single arg: "vindax1... vindax1... vindax1..."
+		# Using "@" as a subscript results in separate args: "vindax1..." "vindax1..." "vindax1..."
 		# Note: `edit_genesis` must be called before `add-genesis-account` or `update_genesis_use_test_exchange`.
 		edit_genesis "$VAL_CONFIG_DIR" "${TEST_ACCOUNTS[*]}" "${FAUCET_ACCOUNTS[*]}" "" "" "" "" "" ""
 		# Configure the genesis file to only use the test exchange to compute index prices.
 		update_genesis_use_test_exchange "$VAL_CONFIG_DIR"
 
 		echo "${MNEMONICS[$i]}" | dydxprotocold keys add "${MONIKERS[$i]}" --recover --keyring-backend=test --home "$VAL_HOME_DIR"
+		
+		EXPECTED_HRP="$(addr_hrp "${TEST_ACCOUNTS[0]}")"
+		preflight_hrp_check "$VAL_HOME_DIR" "$EXPECTED_HRP" || {
+		log "Abort at moniker='${MONIKERS[$i]}' due to HRP mismatch. Please fix HRP and run again."
+		exit 1
+		}
+
+		# Log try parsing addresses to be added for easier debugging
+		for acct in "${TEST_ACCOUNTS[@]}"; do
+		probe_parse_address "$acct" "TEST_ACCOUNT"
+		done
+		for acct in "${FAUCET_ACCOUNTS[@]}"; do
+		probe_parse_address "$acct" "FAUCET_ACCOUNT"
+		done
 
 		for acct in "${TEST_ACCOUNTS[@]}"; do
 			dydxprotocold add-genesis-account "$acct" 100000000000000000$USDC_DENOM,$TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE$NATIVE_TOKEN --home "$VAL_HOME_DIR"
@@ -190,7 +280,7 @@ edit_config() {
 	# block time longer for easier troubleshooting.
 	dasel put -t string -f "$CONFIG_FOLDER"/config.toml '.consensus.timeout_commit' -v '5s'
 }
-
+log_env
 install_prerequisites
 setup_cosmovisor
 download_preupgrade_binary

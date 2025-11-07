@@ -627,7 +627,7 @@ func TestSendFromModuleToAccount_InvalidRecipient(t *testing.T) {
 		&types.MsgSendFromModuleToAccount{
 			Authority:        lib.GovModuleAddress.String(),
 			SenderModuleName: "bridge",
-			Recipient:        "dydx1abc", // invalid recipient address
+			Recipient:        "vindax1abc", // invalid recipient address
 			Coin:             sdk.NewCoin("dv4tnt", sdkmath.NewInt(1)),
 		},
 	)
