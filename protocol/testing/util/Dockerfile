@@ -1,5 +1,5 @@
-FROM dydxprotocol-base
+FROM vindax-base
 
-COPY ./testing/util/new-validator.sh /dydxprotocol/new-validator.sh
+COPY ./testing/util/new-validator.sh /vindax/new-validator.sh
 
-ENTRYPOINT ["/dydxprotocol/new-validator.sh"]
+ENTRYPOINT ["/vindax/new-validator.sh"]

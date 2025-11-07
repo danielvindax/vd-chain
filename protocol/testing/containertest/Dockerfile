@@ -1,4 +1,4 @@
-FROM dydxprotocol-base
+FROM vindax-base
 
 COPY ./testing/containertest/dydxprotocold_preupgrade* /bin/
 COPY ./testing/containertest/containertest.sh /dydxprotocol/containertest.sh
@@ -18,4 +18,4 @@ COPY ./testing/containertest/config/pricefeed_exchange_config.toml /dydxprotocol
 COPY ./testing/containertest/config/pricefeed_exchange_config.toml /dydxprotocol/chain/.carl/config/pricefeed_exchange_config.toml
 COPY ./testing/containertest/config/pricefeed_exchange_config.toml /dydxprotocol/chain/.dave/config/pricefeed_exchange_config.toml
 
-ENTRYPOINT ["dydxprotocold"]
+ENTRYPOINT ["vindaxd"]

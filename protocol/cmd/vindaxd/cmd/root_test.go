@@ -11,7 +11,7 @@ import (
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 	"github.com/danielvindax/vd-chain/protocol/app/config"
 	"github.com/danielvindax/vd-chain/protocol/app/constants"
-	"github.com/danielvindax/vd-chain/protocol/cmd/dydxprotocold/cmd"
+	"github.com/danielvindax/vd-chain/protocol/cmd/vindaxd/cmd"
 	"github.com/stretchr/testify/require"
 )
 

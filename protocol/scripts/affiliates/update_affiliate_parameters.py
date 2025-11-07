@@ -31,7 +31,7 @@ PROPOSAL_STATUS_PASSED = 3
 def vote_for(node, chain, proposal_id, person):
     print("voting as " + person)
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "tx",
         "gov",
         "vote",
@@ -71,7 +71,7 @@ def load_yml(file_path) -> Dict[str, Any]:
 
 def get_proposal_id(node, chain):
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "query",
         "gov",
         "proposals",
@@ -119,7 +119,7 @@ def main():
                 tmp_file_path = tmp_file.name
             print("submitting proposal for affiliate parameters update")
             cmd = [
-                "dydxprotocold",
+                "vindaxd",
                 "tx",
                 "gov",
                 "submit-proposal",
@@ -151,7 +151,7 @@ def main():
             time.sleep(120)
             # check if the proposal passed
             cmd = [
-                "dydxprotocold",
+                "vindaxd",
                 "query",
                 "gov",
                 "proposal",

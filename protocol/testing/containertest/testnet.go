@@ -165,7 +165,7 @@ func (t *Testnet) initializeNode(moniker string) (*Node, error) {
 	if t.isPreupgradeGenesis {
 		entrypointCommand = "/dydxprotocol/preupgrade_entrypoint.sh"
 	} else {
-		entrypointCommand = "dydxprotocold"
+		entrypointCommand = "vindaxd"
 	}
 
 	// Generate dynamic persistent peers using the unique ID
@@ -197,7 +197,7 @@ func (t *Testnet) initializeNode(moniker string) (*Node, error) {
 				"https://eth-sepolia.g.alchemy.com/v2/demo",
 			},
 			Env: []string{
-				"DAEMON_NAME=dydxprotocold",
+				"DAEMON_NAME=vindaxd",
 				fmt.Sprintf("DAEMON_HOME=/dydxprotocol/chain/.%s", moniker),
 				fmt.Sprintf("UPGRADE_TO_VERSION=%s", version.CurrentVersion),
 			},

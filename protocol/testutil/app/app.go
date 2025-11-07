@@ -45,7 +45,7 @@ import (
 	marketmapmoduletypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	"github.com/danielvindax/vd-chain/protocol/app"
 	appconstants "github.com/danielvindax/vd-chain/protocol/app/constants"
-	"github.com/danielvindax/vd-chain/protocol/cmd/dydxprotocold/cmd"
+	"github.com/danielvindax/vd-chain/protocol/cmd/vindaxd/cmd"
 	"github.com/danielvindax/vd-chain/protocol/indexer"
 	"github.com/danielvindax/vd-chain/protocol/testutil/appoptions"
 	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
@@ -73,7 +73,7 @@ import (
 	"golang.org/x/exp/slices"
 )
 
-// localdydxprotocol Alice config/priv_validator_key.json.
+// localvindax Alice config/priv_validator_key.json.
 const alicePrivValidatorKeyJson = `{
   "address": "124B880684400B4C0086BD4EE882DCC5B61CF7E3",
   "pub_key": {
@@ -87,7 +87,7 @@ const alicePrivValidatorKeyJson = `{
 }
 `
 
-// localdydxprotocol Alice config/node_key.json.
+// localvindax Alice config/node_key.json.
 const aliceNodeKeyJson = `{
   "priv_key": {
     "type": "tendermint/PrivKeyEd25519",
@@ -1268,7 +1268,7 @@ func launchValidatorInDir(
 
 	appCaptor := make(chan *app.App, 1)
 	// Set up the root command using https://github.com/danielvindax/vd-chain/blob/
-	// 1fa21ed5d848ed7cc6a98053838cadb68422079f/protocol/cmd/dydxprotocold/main.go#L12 as a basis.
+	// 1fa21ed5d848ed7cc6a98053838cadb68422079f/protocol/cmd/vindaxd/main.go#L12 as a basis.
 	option := cmd.GetOptionWithCustomStartCmd()
 	rootCmd := cmd.NewRootCmdWithInterceptors(
 		option,

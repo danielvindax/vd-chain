@@ -1,4 +1,4 @@
-FROM dydxprotocol-base
+FROM vindax-base
 
 COPY ./testing/snapshotting/snapshot.sh /dydxprotocol/snapshot.sh
 

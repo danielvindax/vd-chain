@@ -1,7 +1,6 @@
 export VERSION := $(shell echo $(shell git describe --tags --always --match "protocol/v*") | sed 's/^protocol\/v//')
 BUILDDIR ?= $(CURDIR)/build
 DOCKER := $(shell which docker)
-HTTPS_GIT := https://github.com/dydxprotocol/v4.git
 GO_VERSION := $(shell cat go.mod | grep -E 'go [0-9].[0-9]+' | cut -d ' ' -f 2)
 PROJECT_NAME := $(shell git remote get-url origin | xargs basename -s .git)
 CGO_ENABLED=1
@@ -55,8 +54,8 @@ build_tags_comma_sep := $(subst $(whitespace),$(comma),$(build_tags))
 
 # process linker flags
 
-ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=dydxprotocol \
-		  -X github.com/cosmos/cosmos-sdk/version.AppName=dydxprotocold \
+ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=vindax \
+		  -X github.com/cosmos/cosmos-sdk/version.AppName=vindaxd \
 		  -X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION) \
 		  -X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT) \
 		  -X "github.com/cosmos/cosmos-sdk/version.BuildTags=$(build_tags_comma_sep)"
@@ -103,7 +102,7 @@ include contrib/devtools/Makefile
 all: tools install lint test
 
 install: go.sum
-	go install -mod=readonly $(BUILD_FLAGS) ./cmd/dydxprotocold
+	go install -mod=readonly $(BUILD_FLAGS) ./cmd/vindaxd
 
 aws-push-dev:
 	./scripts/build-push-ecr.sh dev
@@ -134,7 +133,7 @@ build: go.sum
 ifeq ($(OS),Windows_NT)
 	exit 1
 else
-	go build -mod=readonly $(BUILD_FLAGS) -o build/dydxprotocold ./cmd/dydxprotocold
+	go build -mod=readonly $(BUILD_FLAGS) -o build/vindaxd ./cmd/vindaxd
 endif
 
 # TODO(DEC-1743): `build-reproducible` is taken from Osmosis. This currently takes a long time,
@@ -155,7 +154,7 @@ build-reproducible-linux-amd64: go.sum $(BUILDDIR)/
 		-f Dockerfile .
 	$(DOCKER) rm -f dydxv4binary || true
 	$(DOCKER) create -ti --name dydxv4binary dydx:local-linux-amd64
-	$(DOCKER) cp dydxv4binary:/bin/dydxprotocold $(BUILDDIR)/dydxprotocold:linux-amd64
+	$(DOCKER) cp dydxv4binary:/bin/vindaxd $(BUILDDIR)/vindaxd:linux-amd64
 	$(DOCKER) rm -f dydxv4binary
 build-reproducible-linux-arm64: go.sum $(BUILDDIR)/
 	$(DOCKER) buildx create --name dydxv4builder || true
@@ -170,7 +169,7 @@ build-reproducible-linux-arm64: go.sum $(BUILDDIR)/
 		-f Dockerfile .
 	$(DOCKER) rm -f dydxv4binary || true
 	$(DOCKER) create -ti --name dydxv4binary dydx:local-linux-arm64
-	$(DOCKER) cp dydxv4binary:/bin/dydxprotocold $(BUILDDIR)/dydxprotocold:linux-arm64
+	$(DOCKER) cp dydxv4binary:/bin/vindaxd $(BUILDDIR)/vindaxd:linux-arm64
 	$(DOCKER) rm -f dydxv4binary
 # TODO(DEC-1743): Make this also a reproducible build.
 build-darwin-arm64: go.sum
@@ -178,7 +177,7 @@ build-darwin-arm64: go.sum
 draw-deps:
 	@# requires brew install graphviz or apt-get install graphviz
 	go get github.com/RobotsAndPencils/goviz
-	@goviz -i ./cmd/dydxprotocold -d 2 | dot -Tpng -o dependency-graph.png
+	@goviz -i ./cmd/vindaxd -d 2 | dot -Tpng -o dependency-graph.png
 
 ################################################################################
 ### 						Tools & dependencies							 ###
@@ -242,7 +241,7 @@ test-container-accept:
 
 test-container-build:
 	# $(MAKE) localnet-build
-	@docker build . -t dydxprotocol-container-test -f testing/containertest/Dockerfile --no-cache
+	@docker build . -t vindax-container-test -f testing/containertest/Dockerfile --no-cache
 
 .PHONY: test test-all test-cover test-unit test-race test-container
 	\ container-test-build-base container-test-build-local
@@ -336,27 +335,27 @@ proto-download-deps:
 ###############################################################################
 
 localnet-new-validator:
-	@docker run --rm -it $(shell docker build --build-arg VERSION=$(VERSION) --build-arg COMMIT=$(COMMIT) . -t dydxprotocol-base && docker build . -q -f ./testing/util/Dockerfile)
+	@docker run --rm -it $(shell docker build --build-arg VERSION=$(VERSION) --build-arg COMMIT=$(COMMIT) . -t vindax-base && docker build . -q -f ./testing/util/Dockerfile)
 
 localnet-build:
-	docker build --build-arg VERSION=$(VERSION) --build-arg COMMIT=$(COMMIT) . -t dydxprotocol-base --no-cache
+	docker build --build-arg VERSION=$(VERSION) --build-arg COMMIT=$(COMMIT) . -t vindax-base --no-cache
 
 localnet-build-amd64:
-	DOCKER_BUILDKIT=1 docker build --build-arg VERSION=$(VERSION) --build-arg COMMIT=$(COMMIT) -f Dockerfile . -t dydxprotocol-base --no-cache --platform linux/amd64
+	DOCKER_BUILDKIT=1 docker build --build-arg VERSION=$(VERSION) --build-arg COMMIT=$(COMMIT) -f Dockerfile . -t vindax-base --no-cache --platform linux/amd64
 
 reset-chain:
 	rm -rf localnet
 	# Creates the directories which store the chain data for each node.
-	mkdir -p localnet/dydxprotocol0
-	mkdir -p localnet/dydxprotocol1
-	mkdir -p localnet/dydxprotocol2
-	mkdir -p localnet/dydxprotocol3
-	# These files are created as part of `dydxprotocold init`, and are required to initialize the chain,
+	mkdir -p localnet/vindax0
+	mkdir -p localnet/vindax1
+	mkdir -p localnet/vindax2
+	mkdir -p localnet/vindax3
+	# These files are created as part of `vindaxd init`, and are required to initialize the chain,
 	# but mounting the volumes removes them. This is a workaround to create them again.
-	echo '{"height": "0", "round": 0, "step": 0 }' > localnet/dydxprotocol0/priv_validator_state.json
-	echo '{"height": "0", "round": 0, "step": 0 }' > localnet/dydxprotocol1/priv_validator_state.json
-	echo '{"height": "0", "round": 0, "step": 0 }' > localnet/dydxprotocol2/priv_validator_state.json
-	echo '{"height": "0", "round": 0, "step": 0 }' > localnet/dydxprotocol3/priv_validator_state.json
+	echo '{"height": "0", "round": 0, "step": 0 }' > localnet/vindax0/priv_validator_state.json
+	echo '{"height": "0", "round": 0, "step": 0 }' > localnet/vindax1/priv_validator_state.json
+	echo '{"height": "0", "round": 0, "step": 0 }' > localnet/vindax2/priv_validator_state.json
+	echo '{"height": "0", "round": 0, "step": 0 }' > localnet/vindax3/priv_validator_state.json
 
 localnet-init:
 	make reset-chain
@@ -365,17 +364,17 @@ localnet-init:
 
 localnet-compose-up:
 	@echo "Launching localnet at commit ${GIT_COMMIT_HASH}"
-	@docker build . -t local:dydxprotocol -f testing/testnet-local/Dockerfile --no-cache
+	@docker build . -t local:vindax -f testing/testnet-local/Dockerfile --no-cache
 	@docker compose -f docker-compose.yml -f docker-compose.local.yml up --force-recreate $(ARGS)
 
 localnet-compose-upd:
 	@echo "Launching localnet at commit ${GIT_COMMIT_HASH}"
-	@docker build . -t local:dydxprotocol -f testing/testnet-local/Dockerfile --no-cache
+	@docker build . -t local:vindax -f testing/testnet-local/Dockerfile --no-cache
 	@docker compose -f docker-compose.yml -f docker-compose.local.yml up --force-recreate -d $(ARGS)
 
 build-e2etest-image:
 	@echo "Build e2e test image at commit ${GIT_COMMIT_HASH}"
-	@docker build . -t local:e2etest-dydxprotocol -f testing/e2etest-local/Dockerfile --no-cache
+	@docker build . -t local:e2etest-vindax -f testing/e2etest-local/Dockerfile --no-cache
 
 localnet-start: localnet-init localnet-compose-up
 localnet-startd: localnet-init localnet-compose-upd

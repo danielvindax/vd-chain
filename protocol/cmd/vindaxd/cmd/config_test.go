@@ -3,7 +3,7 @@ package cmd_test
 import (
 	"testing"
 
-	"github.com/danielvindax/vd-chain/protocol/cmd/dydxprotocold/cmd"
+	"github.com/danielvindax/vd-chain/protocol/cmd/vindaxd/cmd"
 	"github.com/stretchr/testify/require"
 )
 
