@@ -46,11 +46,11 @@ install_prerequisites
 
 
 # local path to temporary snapshots. snapshots are deleted after uploading to S3.
-SNAP_PATH="/dydxprotocol/chain/.full-node-0/snapshots/dydxprotocol/"
+SNAP_PATH="/vindax/chain/.full-node-0/snapshots/vindax/"
 # logfile containing snapshot timestamps
-LOG_PATH="/dydxprotocol/chain/.full-node-0/snapshots/dydxprotocol/dydxprotocol_log.txt"
+LOG_PATH="/vindax/chain/.full-node-0/snapshots/vindax/vindax_log.txt"
 # data directory to snapshot. this contains the blockchain state.
-DATA_PATH="/dydxprotocol/chain/.full-node-0/data/"
+DATA_PATH="/vindax/chain/.full-node-0/data/"
 RPC_ADDRESS="http://127.0.0.1:26657"
 
 while [ $# -gt 0 ]; do
@@ -68,21 +68,21 @@ done
 mkdir -p $SNAP_PATH
 touch $LOG_PATH
 sleep 10
-CHAIN_ID="dydx-testnet-1"
+CHAIN_ID="vindax-testnet-1"
 
 # Prune snapshots to prevent them from getting too big. We make 3 changes:
 # Prune all app state except last 2 blocks
-sed -i 's/pruning = "default"/pruning = "everything"/' /dydxprotocol/chain/.full-node-0/config/app.toml
+sed -i 's/pruning = "default"/pruning = "everything"/' /vindax/chain/.full-node-0/config/app.toml
 # Tendermint pruning is decided by picking the most restrictive of multiple factors.
 # Make the custom config setting as permissive as possible.
-sed -i 's/min-retain-blocks = 0/min-retain-blocks = 2/' /dydxprotocol/chain/.full-node-0/config/app.toml
+sed -i 's/min-retain-blocks = 0/min-retain-blocks = 2/' /vindax/chain/.full-node-0/config/app.toml
 # Do not index tx_index.db
-sed -i 's/indexer = "kv"/indexer = "null"/' /dydxprotocol/chain/.full-node-0/config/config.toml
+sed -i 's/indexer = "kv"/indexer = "null"/' /vindax/chain/.full-node-0/config/config.toml
 
 # TODO: add metrics around snapshot upload latency/frequency/success rate
 while true; do
   # p2p.seeds taken from --p2p.persistent_peers flag of full node
-  cosmovisor run start --log_level info --home /dydxprotocol/chain/.full-node-0 --p2p.seeds "${p2p_seeds}" --non-validating-full-node=true --dd-agent-host=${dd_agent_host} &
+  cosmovisor run start --log_level info --home /vindax/chain/.full-node-0 --p2p.seeds "${p2p_seeds}" --non-validating-full-node=true --dd-agent-host=${dd_agent_host} &
 
   sleep ${upload_period}
   kill -TERM $(pidof cosmovisor)

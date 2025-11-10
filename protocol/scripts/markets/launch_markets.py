@@ -47,7 +47,7 @@ def vote_for(node, chain, proposal_id, person):
         "--node=" + node,
         "--chain-id=" + chain,
         "--keyring-backend=test",
-        "--fees=5000000000000000adv4tnt",
+        "--fees=5000000000000000avdtn",
         "--yes"
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)
@@ -77,7 +77,7 @@ def make_alice_authority(node, chain):
     with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as tmp_file:
         authority_proposal = {
             "title": "Make alice an authority for launching new markets",
-            "deposit": "10000000000000000000000adv4tnt", 
+            "deposit": "10000000000000000000000avdtn", 
             "summary": "Make alice an authority for launching new markets",
             "messages": [
                 {
@@ -104,7 +104,7 @@ def make_alice_authority(node, chain):
         tmp_file_path,
         "--from=alice",
         "--gas=auto", 
-        "--fees=10000000000000000000000adv4tnt",
+        "--fees=10000000000000000000000avdtn",
         "--node=" + node,
         "--chain-id=" + chain,
         "--keyring-backend=test", 
@@ -239,7 +239,7 @@ def main():
                             "--chain-id=dydxprotocol-testnet", 
                             "--from=alice",
                             "--keyring-backend=test",
-                            "--fees=5000000000000000adv4tnt", 
+                            "--fees=5000000000000000avdtn", 
                             "--yes"
                         ]
                         
@@ -266,7 +266,7 @@ def main():
                             "--node=https://validator.v4staging.dydx.exchange:443",
                             "--chain-id=dydxprotocol-testnet",
                             "--keyring-backend=test",
-                            "--fees=11270250000000000adv4tnt",
+                            "--fees=11270250000000000avdtn",
                             "--gas=auto",
                             "--yes"
                         ]

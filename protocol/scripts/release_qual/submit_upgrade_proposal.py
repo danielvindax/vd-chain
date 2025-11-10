@@ -151,7 +151,7 @@ def main():
             }
         }],
         "metadata": "",
-        "deposit": "20000000adv4tnt",
+        "deposit": "20000000avdtn",
         "title": f"Software Upgrade to {upgrade_name}",
         "summary": f"Upgrade the chain to {upgrade_name}"
     }
@@ -169,7 +169,7 @@ def main():
         "--yes",
         "--broadcast-mode", "sync",
         "--gas", "auto",
-        "--fees", "5000000000000000adv4tnt",
+        "--fees", "5000000000000000avdtn",
         "--keyring-backend", "test"
     ]
 
@@ -204,7 +204,7 @@ def main():
             "--chain-id", chain_id,
             "--yes",
             "--gas", "auto",
-            "--fees", "5000000000000000adv4tnt",
+            "--fees", "5000000000000000avdtn",
             "--keyring-backend", "test"
         ]
         result = run_cmd(cmd, node=node)

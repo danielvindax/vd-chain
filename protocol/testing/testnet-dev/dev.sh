@@ -6,7 +6,7 @@ set -eo pipefail
 source "./genesis.sh"
 
 CHAIN_ID="vindax-testnet"
-
+ 
 # Define mnemonics for all validators.
 MNEMONICS=(
 	# alice

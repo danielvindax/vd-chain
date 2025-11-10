@@ -21,7 +21,7 @@ var (
 		"dydx1":          "vindax1",
 
 		// denom, chain-id, binary
-		// "adv4tnt":        "uVNDX",
+		// "avdtn":        "avdtn",
 		// "dydx-mainnet-1": "vindax-1",
 		// "vindaxd":  "vindaxd",
 		// "dydxd":          "vindaxd",
