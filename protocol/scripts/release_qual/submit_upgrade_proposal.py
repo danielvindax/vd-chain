@@ -124,7 +124,7 @@ def main():
     print("\nProceeding with upgrade proposal...")
 
     # Get current block height
-    result = run_cmd(["dydxprotocold", "status"], node=node)
+    result = run_cmd(["vindaxd", "status"], node=node)
     if result:
         try:
             status = json.loads(result)
@@ -163,7 +163,7 @@ def main():
 
     # Submit proposal
     cmd = [
-        "dydxprotocold", "tx", "gov", "submit-proposal", "proposal.json",
+        "vindaxd", "tx", "gov", "submit-proposal", "proposal.json",
         "--from", "alice",
         "--chain-id", chain_id,
         "--yes",
@@ -186,7 +186,7 @@ def main():
     time.sleep(5)
 
     # Get proposal ID
-    result = run_cmd(["dydxprotocold", "query", "gov", "proposals", "--output", "json"], node=node)
+    result = run_cmd(["vindaxd", "query", "gov", "proposals", "--output", "json"], node=node)
     if not result:
         os.remove("proposal.json")
         sys.exit(1)
@@ -199,7 +199,7 @@ def main():
     print(f"Voting with {len(VALIDATORS)} validators...")
     for voter in VALIDATORS:
         cmd = [
-            "dydxprotocold", "tx", "gov", "vote", str(proposal_id), "yes",
+            "vindaxd", "tx", "gov", "vote", str(proposal_id), "yes",
             "--from", voter,
             "--chain-id", chain_id,
             "--yes",
@@ -227,7 +227,7 @@ def main():
 
     # Check status
     cmd = [
-        "dydxprotocold", "query", "gov", "proposal",
+        "vindaxd", "query", "gov", "proposal",
         str(proposal_id), "--output", "json"
     ]
     result = run_cmd(cmd, node=node)

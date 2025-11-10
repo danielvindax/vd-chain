@@ -2,9 +2,9 @@
 set -euo pipefail
 
 # =====================[ Configuration ]=====================
-BIN="${BIN:-dydxprotocold}"
+BIN="${BIN:-vindaxd}"
 KEYRING="${KEYRING:-test}"             # test | file | os
-HOME_DIR="${HOME_DIR:-$HOME/.dydxprotocold}" # change if different
+HOME_DIR="${HOME_DIR:-$HOME/.vindaxd}" # change if different
 RESET="${RESET:-true}"
 
 # =====================[ Account list & mnemonic ]=====================

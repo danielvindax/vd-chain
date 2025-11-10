@@ -4,7 +4,7 @@ For development and testing purposes, it's useful to be able to deploy the chain
 
 Overall, the steps involve:
 1. Define validator node keys
-2. Build the app binary (i.e. `dydxprotocold`)
+2. Build the app binary (i.e. `vindaxd`)
 3. Set up configuration files (i.e. `genesis.json`, `app.toml`, `app.toml`, and etc.)
 4. Setup the app data and configs (i.e. moving data and configs files into correct directory)
 
@@ -28,10 +28,10 @@ It's necessary to specify the `--home` flag as this is how the container knows w
 
 ```sh
 # dev
-docker build . --progress=plain --no-cache -f ./testing/testnet-dev/Dockerfile -t testnet && docker run testnet start --home /dydxprotocol/chain/.alice
+docker build . --progress=plain --no-cache -f ./testing/testnet-dev/Dockerfile -t testnet && docker run testnet start --home /vindax/chain/.alice
 
 # staging
-docker build . --progress=plain --no-cache -f ./testing/testnet-staging/Dockerfile -t testnet && docker run testnet start --home /dydxprotocol/chain/.alice
+docker build . --progress=plain --no-cache -f ./testing/testnet-staging/Dockerfile -t testnet && docker run testnet start --home /vindax/chain/.alice
 ```
 
 # Building and Pushing the Docker container image to ECR

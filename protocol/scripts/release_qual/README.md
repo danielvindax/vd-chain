@@ -49,7 +49,7 @@ The script automatically votes with these test validators:
 ## Requirements
 
 - Python 3
-- `dydxprotocold` CLI installed and configured
+- `vindaxd` CLI installed and configured
 - Test validator keys in the keyring (using `test` backend)
 - Access to a testnet/staging node
 

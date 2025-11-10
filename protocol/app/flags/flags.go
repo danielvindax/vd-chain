@@ -86,7 +86,7 @@ const (
 
 // AddFlagsToCmd adds flags to app initialization.
 // These flags should be applied to the `start` command of the V4 Cosmos application.
-// E.g. `dydxprotocold start --non-validating-full-node true`.
+// E.g. `vindaxd start --non-validating-full-node true`.
 func AddFlagsToCmd(cmd *cobra.Command) {
 	cmd.Flags().Bool(
 		NonValidatingFullNodeFlag,

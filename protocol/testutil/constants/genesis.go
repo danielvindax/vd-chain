@@ -7,7 +7,7 @@ package constants
 //nolint:all
 const GenesisState = `{
   "app_hash": null,
-  "app_name": "dydxprotocold",
+  "app_name": "vindaxd",
   "app_state": {
     "affiliates": {
       "affiliate_parameters": {

@@ -25,7 +25,7 @@ DEFAULT_SUBACCOUNT_QUOTE_BALANCE_VAULT=1000000000
 MEGAVAULT_MAIN_VAULT_ACCOUNT_ADDR="vindax18tkxrnrkqc2t0lr3zxr5g6a4hdvqksylxst3uu"
 DEFAULT_MEGAVAULT_MAIN_VAULT_QUOTE_BALANCE=0 # 0 USDC
 NATIVE_TOKEN_WHOLE_COIN="dv4tnt"
-COIN_NAME="dYdX V4 Testnet Token"
+COIN_NAME="VdX V4 Testnet Token"
 # Each testnet validator has 1 million whole coins of native token.
 TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE=1000000$EIGHTEEN_ZEROS # 1e24 or 1 million native tokens.
 # Each testnet validator self-delegates 500k whole coins of native token.
@@ -921,8 +921,6 @@ function edit_genesis() {
 
     # Marketmap: MKR-USD
     dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD' -v "{}"
-    # Gate MKR/USD market for local/testing: disable by default (do not remove code)
-    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker.enabled' -v 'false'
     dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker' -v "{}" 
 
     dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker.currency_pair' -v "{}"
@@ -931,7 +929,7 @@ function edit_genesis() {
 
     dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker.decimals' -v '6'
     dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker.min_provider_count' -v '3'
-    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker.enabled' -v 'true'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker.enabled' -v 'false'
 
     dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "MKRUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
     dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "MKR-USD"}'

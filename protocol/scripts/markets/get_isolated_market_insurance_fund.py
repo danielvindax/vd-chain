@@ -9,7 +9,7 @@ Instructions:
 
     `pip3 install requests`
 
-2. Build `dydxprotocold` by running `make build` in the root directory of the protocol repository
+2. Build `vindaxd` by running `make build` in the root directory of the protocol repository
 
     `cd v4-chain/protocol && make clean && make build`
 
@@ -17,7 +17,7 @@ Instructions:
 
     `python3 scripts/markets/get_isolated_market_insurance_fund.py \
         --endpoint=https://dydx-ops-rest.kingnodes.com \
-        --binary_path=/Users/taehoonlee/v4-chain/protocol/build/dydxprotocold`
+        --binary_path=/Users/taehoonlee/v4-chain/protocol/build/vindaxd`
 """
 
 def get_id_to_pair(base_endpoint_url):
@@ -110,15 +110,15 @@ def run_dydxprotocold(command):
 
     except subprocess.CalledProcessError as e:
         # Handle errors during command execution
-        print(f"Error running dydxprotocold \n{e.stderr}")
+        print(f"Error running vindaxd \n{e.stderr}")
 
     except FileNotFoundError:
         # Handle the case where the binary is not found
-        print("Error: dydxprotocold binary not found. Ensure you ran `make build`.")
+        print("Error: vindaxd binary not found. Ensure you ran `make build`.")
 
 def get_insurance_fund_address_for_markets(binary_path, market_ids):
     """
-    This function takes a list of market_ids and runs the `dydxprotocold` binary for each.
+    This function takes a list of market_ids and runs the `vindaxd` binary for each.
     It prints the output and errors, if any.
     """
 
@@ -189,7 +189,7 @@ def print_market_info(market_id_to_address, address_to_balance, id_to_pair):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Get insurance fund balances for all isolated markets.')
     parser.add_argument('--endpoint', required=True, help='The endpoint URL to fetch the markets.')
-    parser.add_argument('--binary_path', required=True, help='The local path to the `dydxprotocold` binary.')
+    parser.add_argument('--binary_path', required=True, help='The local path to the `vindaxd` binary.')
     args = parser.parse_args()
     endpoint = args.endpoint
     binary_path = args.binary_path

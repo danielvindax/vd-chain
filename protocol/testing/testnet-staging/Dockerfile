@@ -1,4 +1,4 @@
-FROM dydxprotocol-base
+FROM vindax-base
 
 COPY ./testing/testnet-staging/staging.sh /dydxprotocol/staging.sh
 COPY ./testing/genesis.sh /dydxprotocol/genesis.sh
@@ -10,5 +10,5 @@ RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 
 RUN /dydxprotocol/staging.sh
 
-ENV DAEMON_NAME=dydxprotocold
+ENV DAEMON_NAME=vindaxd
 ENTRYPOINT ["cosmovisor", "run"]

@@ -16,7 +16,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 	gogogrpc "github.com/cosmos/gogoproto/grpc"
 	"github.com/cosmos/gogoproto/proto"
-	"github.com/danielvindax/vd-chain/protocol/cmd/dydxprotocold/cmd"
+	"github.com/danielvindax/vd-chain/protocol/cmd/vindaxd/cmd"
 	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
 	"github.com/ory/dockertest/v3"
 	"github.com/spf13/pflag"
@@ -116,7 +116,7 @@ func (n *Node) getContextForBroadcastTx(signer string) (*client.Context, *pflag.
 	if err := flags.Set("from", signer); err != nil {
 		return nil, nil, err
 	}
-	if err := flags.Set("chain-id", "localdydxprotocol"); err != nil {
+	if err := flags.Set("chain-id", "localvindax"); err != nil {
 		return nil, nil, err
 	}
 

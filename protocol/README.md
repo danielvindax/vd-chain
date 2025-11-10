@@ -1,6 +1,6 @@
-<p align="center"><img src="https://dydx.exchange/icon.svg?" width="256" /></p>
+<p align="center"><img src="https://s2.coinmarketcap.com/static/img/coins/200x200/4119.png?" width="256" /></p>
 
-<h1 align="center">dYdX Chain Protocol</h1>
+<h1 align="center">Vindax Chain Protocol</h1>
 
 <div align="center">
   <a href="https://github.com/danielvindax/vd-chain/actions/workflows/protocol-test.yml?query=branch%3Amain" style="text-decoration:none;">
@@ -8,9 +8,9 @@
   </a>
 </div>
 
-Sovereign Blockchain built using Cosmos SDK & CometBFT for dYdX Chain.
+Sovereign Blockchain built using Cosmos SDK & CometBFT for Vindax Chain.
 
-TODO(CORE-512): add info/resources around dYdX Chain. [Doc](https://www.notion.so/dydx/V4-36a9f30eee1d478cb88e0c50860fdbee)
+TODO(CORE-512): add info/resources around Vindax Chain. [Doc](https://www.notion.so/danielvindax/V4-36a9f30eee1d478cb88e0c50860fdbee)
 
 ## Get started
 
@@ -38,7 +38,7 @@ You can quickly test your changes to dYdX Chain with just a few commands:
 1. Make any change to the dYdX Chain code that you want to test
 
 2. Once ready to test, run `make localnet-start` (or `make localnet-startd` to run the network headlessly)
-    - This first compiles all your changes to docker image called `dydxprotocol-base` (~90 seconds)
+    - This first compiles all your changes to docker image called `vindax-base` (~90 seconds)
     - You will then be running a local network with your changes!
     - Note, these commands will **reset the chain** to genesis
 
@@ -107,31 +107,33 @@ Another module that can be modified similarly is the subaccounts. We can add ano
 To run the below commands, you'll want to import the private keys of the test accounts specified in [testnet-local/local.sh](https://github.com/dydxprotocol/v4/blob/main/testing/testnet-local/local.sh). Run the following commands and input the corresponding 12-word string from `MNEMONICS`. The resulting address should match those in `TEST_ACCOUNTS`.
 
 ```sh
-./build/dydxprotocold keys add alice --recover
+./build/vindaxd keys add alice --recover
 
-./build/dydxprotocold keys add bob --recover
+./build/vindaxd keys add bob --recover
 ```
 
 ### Send a test transaction locally
 It's occasionally helpful to send a transaction to the local chain to observe Cosmos behavior through the API such as events. Until `clob` `v0.1` is complete, you can use the default Cosmos `bank` module to transfer assets between two accounts defined at genesis in the `genesis.sh` file.
 
 ```sh
-./build/dydxprotocold tx bank send vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642 vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90 100usdc
+./build/vindaxd tx bank send vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642 vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90 100ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5 --from alice --chain-id localvindax
 ```
+
+Note: USDC on localnet uses an IBC denom (see `testing/genesis.sh` `USDC_DENOM`). Amounts are in micro units; to send 1 USDC use `1000000<denom>`.
 
 ### Placing a test order locally
 
 It's occasionally helpful to send a transaction to the local chain to test order placement and matching. Run the following two commands in succession in order to match an order between two accounts.
 
 ```sh
-./build/dydxprotocold tx clob place-order vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642 0 0 0 1 10 10000 20 --from alice --chain-id localdydxprotocol
-./build/dydxprotocold tx clob place-order vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90 0 0 0 2 10 10000 20 --from bob --chain-id localdydxprotocol
+./build/vindaxd tx clob place-order vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642 0 0 0 1 10 10000 20 --from alice --chain-id localvindax
+./build/vindaxd tx clob place-order vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90 0 0 0 2 10 10000 20 --from bob --chain-id localvindax
 ```
 
 Run the following command to cancel an order.
 
 ```sh
-./build/dydxprotocold tx clob cancel-order vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642 10 0 20 --from alice
+./build/vindaxd tx clob cancel-order vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642 10 0 20 --from alice
 ```
 
 ### Querying the chain locally
@@ -139,7 +141,7 @@ Run the following command to cancel an order.
 While running the development server via `make localnet-start`, you can make queries locally using the Tendermint API. All endpoints listed [here](https://docs.tendermint.com/v0.37/rpc/#/Info/block) are supported. For example to get the block at height 2: `curl -X GET "localhost:26657/block?height=2"`.
 
 ### Updating local flags
-When debugging or inspecting behavior of the chain locally, you may wish modify the flags passed to `dydxprotocold`. You can achieve this by modifying your `docker-compose.yml` file locally in the `entrypoint` section to change these passed in flags.
+When debugging or inspecting behavior of the chain locally, you may wish modify the flags passed to `vindaxd`. You can achieve this by modifying your `docker-compose.yml` file locally in the `entrypoint` section to change these passed in flags.
 
 ### Enabled more verbose logging locally
 Refer to the section above and change the `log_level` to `trace`. Note that `trace` can be pretty noisy as it logs every block proposal, message, and committed block to stdout.

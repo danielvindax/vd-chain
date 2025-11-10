@@ -8,7 +8,7 @@
 # 2. Generate proposal JSON file:
 #   % ./scripts/governance/enable_all_clob_pairs.sh /tmp/clob_pairs.json > /tmp/proposal_enable_trading_all_markets.json
 # 3. Submit proposal:
-#   % dydxprotocold tx gov submit-proposal /tmp/proposal_enable_trading_all_markets.json --from alice --gas auto --fees 400000000000000000adv4tnt
+#   % vindaxd tx gov submit-proposal /tmp/proposal_enable_trading_all_markets.json --from alice --gas auto --fees 400000000000000000adv4tnt
 
 # Constants
 NINE_ZEROS="000000000"

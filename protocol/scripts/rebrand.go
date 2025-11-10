@@ -23,11 +23,11 @@ var (
 		// denom, chain-id, binary
 		// "adv4tnt":        "uVNDX",
 		// "dydx-mainnet-1": "vindax-1",
-		// "dydxprotocold":  "vindaxd",
+		// "vindaxd":  "vindaxd",
 		// "dydxd":          "vindaxd",
 
 		// Go module path
-		// "github.com/dydxprotocol/v4-chain": "github.com/miexs/vd-chain",
+		// "github.com/danielvindax/vd-chain": "github.com/miexs/vd-chain",
 	}
 
 	// Skip directories that should not be touched

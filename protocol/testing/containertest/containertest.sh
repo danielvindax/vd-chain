@@ -7,7 +7,7 @@ set -eo pipefail
 source "./genesis.sh"
 source "./version.sh"
 
-CHAIN_ID="localdydxprotocol"
+CHAIN_ID="localvindax"
 
 # Define mnemonics for all validators.
 MNEMONICS=(
@@ -86,9 +86,9 @@ detect_binary_hrp() {
   local tmpkey="__probe__$$"
   # Create temporary key and output JSON to get .address
   local addr
-  addr="$(dydxprotocold keys add "$tmpkey" --keyring-backend=test --home "$home_dir" -y --output json 2>/dev/null | jq -r '.address' || true)"
+  addr="$(vindaxd keys add "$tmpkey" --keyring-backend=test --home "$home_dir" -y --output json 2>/dev/null | jq -r '.address' || true)"
   # Delete temporary key immediately (to avoid dirty keyring)
-  dydxprotocold keys delete "$tmpkey" --keyring-backend=test --home "$home_dir" -y >/dev/null 2>&1 || true
+  vindaxd keys delete "$tmpkey" --keyring-backend=test --home "$home_dir" -y >/dev/null 2>&1 || true
 
   if [[ -z "$addr" || "$addr" == "null" ]]; then
     echo ""
@@ -99,8 +99,8 @@ detect_binary_hrp() {
 
 # Print important environment information
 log_env() {
-  log "Binary: $(command -v dydxprotocold || echo 'not found')"
-  log "Version: $(dydxprotocold version 2>/dev/null || echo 'unknown')"
+  log "Binary: $(command -v vindaxd || echo 'not found')"
+  log "Version: $(vindaxd version 2>/dev/null || echo 'unknown')"
   log "CHAIN_ID=$CHAIN_ID"
   log "USDC_DENOM=${USDC_DENOM:-<unset>}, NATIVE_TOKEN=${NATIVE_TOKEN:-<unset>}"
   log "TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE=${TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE:-<unset>}"
@@ -158,12 +158,12 @@ create_validators() {
 		VAL_CONFIG_DIR="$VAL_HOME_DIR/config"
 
 		# Initialize the chain and validator files.
-		dydxprotocold init "${MONIKERS[$i]}" -o --chain-id=$CHAIN_ID --home "$VAL_HOME_DIR"
+		vindaxd init "${MONIKERS[$i]}" -o --chain-id=$CHAIN_ID --home "$VAL_HOME_DIR"
 
 		# Overwrite the randomly generated `priv_validator_key.json` with a key generated deterministically from the mnemonic.
-		dydxprotocold tendermint gen-priv-key --home "$VAL_HOME_DIR" --mnemonic "${MNEMONICS[$i]}"
+		vindaxd tendermint gen-priv-key --home "$VAL_HOME_DIR" --mnemonic "${MNEMONICS[$i]}"
 
-		# Note: `dydxprotocold init` non-deterministically creates `node_id.json` for each validator.
+		# Note: `vindaxd init` non-deterministically creates `node_id.json` for each validator.
 		# This is inconvenient for persistent peering during testing in Terraform configuration as the `node_id`
 		# would change with every build of this container.
 		#
@@ -180,7 +180,7 @@ create_validators() {
 		# Configure the genesis file to only use the test exchange to compute index prices.
 		update_genesis_use_test_exchange "$VAL_CONFIG_DIR"
 
-		echo "${MNEMONICS[$i]}" | dydxprotocold keys add "${MONIKERS[$i]}" --recover --keyring-backend=test --home "$VAL_HOME_DIR"
+		echo "${MNEMONICS[$i]}" | vindaxd keys add "${MONIKERS[$i]}" --recover --keyring-backend=test --home "$VAL_HOME_DIR"
 		
 		EXPECTED_HRP="$(addr_hrp "${TEST_ACCOUNTS[0]}")"
 		preflight_hrp_check "$VAL_HOME_DIR" "$EXPECTED_HRP" || {
@@ -197,13 +197,13 @@ create_validators() {
 		done
 
 		for acct in "${TEST_ACCOUNTS[@]}"; do
-			dydxprotocold add-genesis-account "$acct" 100000000000000000$USDC_DENOM,$TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE$NATIVE_TOKEN --home "$VAL_HOME_DIR"
+			vindaxd add-genesis-account "$acct" 100000000000000000$USDC_DENOM,$TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE$NATIVE_TOKEN --home "$VAL_HOME_DIR"
 		done
 		for acct in "${FAUCET_ACCOUNTS[@]}"; do
-			dydxprotocold add-genesis-account "$acct" 900000000000000000$USDC_DENOM,$TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE$NATIVE_TOKEN --home "$VAL_HOME_DIR"
+			vindaxd add-genesis-account "$acct" 900000000000000000$USDC_DENOM,$TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE$NATIVE_TOKEN --home "$VAL_HOME_DIR"
 		done
 
-		dydxprotocold gentx "${MONIKERS[$i]}" $TESTNET_VALIDATOR_SELF_DELEGATE_AMOUNT$NATIVE_TOKEN --moniker="${MONIKERS[$i]}" --keyring-backend=test --chain-id=$CHAIN_ID --home "$VAL_HOME_DIR"
+		vindaxd gentx "${MONIKERS[$i]}" $TESTNET_VALIDATOR_SELF_DELEGATE_AMOUNT$NATIVE_TOKEN --moniker="${MONIKERS[$i]}" --keyring-backend=test --chain-id=$CHAIN_ID --home "$VAL_HOME_DIR"
 
 		# Copy the gentx to a shared directory.
 		cp -a "$VAL_CONFIG_DIR/gentx/." /tmp/gentx
@@ -218,7 +218,7 @@ create_validators() {
 	cp -r /tmp/gentx "$FIRST_VAL_CONFIG_DIR"
 
 	# Build the final genesis.json file that all validators and the full-nodes will use.
-	dydxprotocold collect-gentxs --home "$FIRST_VAL_HOME_DIR"
+	vindaxd collect-gentxs --home "$FIRST_VAL_HOME_DIR"
 
 	# Copy this genesis file to each of the other validators
 	for i in "${!MONIKERS[@]}"; do
@@ -237,10 +237,10 @@ create_validators() {
 setup_cosmovisor() {
 	for i in "${!MONIKERS[@]}"; do
 		VAL_HOME_DIR="$HOME/chain/.${MONIKERS[$i]}"
-		export DAEMON_NAME=dydxprotocold
+		export DAEMON_NAME=vindaxd
 		export DAEMON_HOME="$HOME/chain/.${MONIKERS[$i]}"
 
-		cosmovisor init /bin/dydxprotocold
+		cosmovisor init /bin/vindaxd
 	done
 }
 
@@ -259,12 +259,12 @@ download_preupgrade_binary() {
 			exit 1
 			;;
 	esac
-	tar_url="https://github.com/danielvindax/vd-chain/releases/download/protocol%2F$PREUPGRADE_VERSION_FULL_NAME/dydxprotocold-$PREUPGRADE_VERSION_FULL_NAME-linux-$url_arch.tar.gz"
-	tar_path='/tmp/dydxprotocold/dydxprotocold.tar.gz'
-	mkdir -p /tmp/dydxprotocold
+	tar_url="https://github.com/danielvindax/vd-chain/releases/download/protocol%2F$PREUPGRADE_VERSION_FULL_NAME/vindaxd-$PREUPGRADE_VERSION_FULL_NAME-linux-$url_arch.tar.gz"
+	tar_path='/tmp/vindaxd/vindaxd.tar.gz'
+	mkdir -p /tmp/vindaxd
 	curl -vL $tar_url -o $tar_path
-	dydxprotocold_path=$(tar -xvf $tar_path --directory /tmp/dydxprotocold)
-	cp /tmp/dydxprotocold/$dydxprotocold_path /bin/dydxprotocold_preupgrade
+	dydxprotocold_path=$(tar -xvf $tar_path --directory /tmp/vindaxd)
+	cp /tmp/vindaxd/$dydxprotocold_path /bin/dydxprotocold_preupgrade
 }
 
 # TODO(DEC-1894): remove this function once we migrate off of persistent peers.

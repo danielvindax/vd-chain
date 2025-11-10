@@ -22,7 +22,7 @@ PROPOSAL_STATUS_PASSED = 3
 
 def get_proposal_id(node, chain):
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "query",
         "gov",
         "proposals",
@@ -37,7 +37,7 @@ def get_proposal_id(node, chain):
 def vote_for(node, chain, proposal_id, person):
     print("voting as " + person)
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "tx",
         "gov",
         "vote",
@@ -58,7 +58,7 @@ def make_alice_authority(node, chain):
     print("Making alice an authority")
     # Check first to see if alice is already an authority
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "query",
         "marketmap",
         "params",
@@ -97,7 +97,7 @@ def make_alice_authority(node, chain):
         tmp_file_path = tmp_file.name
     print("submitting proposal for alice to be an authority")
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "tx",
         "gov",
         "submit-proposal",
@@ -129,7 +129,7 @@ def make_alice_authority(node, chain):
     time.sleep(120)
     # check if the proposal passed
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "query",
         "gov",
         "proposal",
@@ -170,7 +170,7 @@ def load_yml(file_path) -> Dict[str, Any]:
 def sync_market_map(temp_dir: str, node, chain):
     # Query mainnet market map and testing env market map.
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "query",
         "marketmap",
         "market-map",
@@ -182,7 +182,7 @@ def sync_market_map(temp_dir: str, node, chain):
         subprocess.run(cmd, stdout=f)
         
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "query",
         "marketmap", 
         "market-map",
@@ -230,7 +230,7 @@ def main():
                         # Execute the marketmap create-markets command
                         print(f"Adding {name} to market map")
                         cmd = [
-                            "dydxprotocold",
+                            "vindaxd",
                             "tx",
                             "marketmap",
                             "create-markets",
@@ -256,7 +256,7 @@ def main():
                         print("Launching market: ", market_data['marketmap']['ticker']['currency_pair']['Base'] + '-' + market_data['marketmap']['ticker']['currency_pair']['Quote'])
                         
                         cmd = [
-                            "dydxprotocold",
+                            "vindaxd",
                             "tx", 
                             "listing",
                             "create-market",

@@ -1,4 +1,4 @@
-FROM dydxprotocol-base
+FROM vindax-base
 
 RUN apk add --no-cache bash jq aws-cli
 RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
