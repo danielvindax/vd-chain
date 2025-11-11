@@ -1,0 +1,12 @@
+syntax = "proto3";
+package vindax.revshare;
+
+import "gogoproto/gogo.proto";
+import "vindax/revshare/params.proto";
+
+option go_package = "github.com/danielvindax/vd-chain/protocol/x/revshare/types";
+
+// GenesisState defines `x/revshare`'s genesis state.
+message GenesisState {
+  MarketMapperRevenueShareParams params = 1 [ (gogoproto.nullable) = false ];
+}
