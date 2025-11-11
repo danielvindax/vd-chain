@@ -6,7 +6,7 @@ set -eo pipefail
 
 source "./vars.sh"
 
-CHAIN_ID="vindax-testnet-4"
+CHAIN_ID="vindax-testnet-1"
 
 # Define dependencies for this script.
 # `jq` and `dasel` are used to manipulate json and yaml files respectively.
