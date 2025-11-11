@@ -1,0 +1,7 @@
+syntax = "proto3";
+package vindax.govplus;
+
+option go_package = "github.com/danielvindax/vd-chain/protocol/x/govplus/types";
+
+// GenesisState defines the govplus module's genesis state.
+message GenesisState {}
