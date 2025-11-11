@@ -728,9 +728,11 @@ func TestShortTermOrderReplacements(t *testing.T) {
 						PlaceOrder_Alice_Num0_Id0_Clob0_Buy5_Price10_GTB20,
 					},
 					orderIdsExpectations: map[clobtypes.OrderId]orderIdExpectations{
-						PlaceOrder_Alice_Num0_Id0_Clob0_Buy6_Price10_GTB20.Order.OrderId: {
+						// When GTB is equal, replacement is allowed if new order hash > existing order hash.
+						// Buy5 has a larger hash than Buy6, so Buy5 replaces Buy6.
+						PlaceOrder_Alice_Num0_Id0_Clob0_Buy5_Price10_GTB20.Order.OrderId: {
 							shouldExistOnMemclob: true,
-							expectedOrder:        PlaceOrder_Alice_Num0_Id0_Clob0_Buy6_Price10_GTB20.Order,
+							expectedOrder:        PlaceOrder_Alice_Num0_Id0_Clob0_Buy5_Price10_GTB20.Order,
 						},
 					},
 				},
