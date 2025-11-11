@@ -43,8 +43,8 @@ func TestParseDenomFromRecvPacket(t *testing.T) {
 			)),
 		},
 		// Native source assets
-		//    lib.DefaultBaseDenom sent from dYdX to Noble and then back to dYdX (transfer/channel-0/adv4tnt)
-		//    -> remove prefix and leave as is (adv4tnt)
+		//    lib.DefaultBaseDenom sent from dYdX to Noble and then back to dYdX (transfer/channel-0/avdtn)
+		//    -> remove prefix and leave as is (avdtn)
 		{
 			name:               lib.DefaultBaseDenom,
 			packetDenomTrace:   fmt.Sprintf("%s/%s/%s", transferPort, dydxChannelOnNoble, lib.DefaultBaseDenom),

@@ -28,8 +28,8 @@ if [ $(free -g | grep Mem | awk '{print $2}') -lt 64 ]; then
 fi
 
 VERSION="v4.1.0"
-WORKDIR=$HOME/.dydxprotocol
-CHAIN_ID="dydx-mainnet-1"
+WORKDIR=$HOME/.vindax
+CHAIN_ID="vindax-mainnet-1"
 SEED_NODES=("ade4d8bc8cbe014af6ebdf3cb7b1e9ad36f412c0@seeds.polkachu.com:23856", 
 "65b740ee326c9260c30af1f044e9cda63c73f7c1@seeds.kingnodes.net:23856", 
 "f04a77b92d0d86725cdb2d6b7a7eb0eda8c27089@dydx-mainnet-seed.bwarelabs.com:36656",
@@ -90,28 +90,28 @@ chmod +x vindaxd
 ./vindaxd init --chain-id=$CHAIN_ID $NODE_NAME
 
 # Create cosmovisor directories and move binaries
-mkdir -p $HOME/.dydxprotocol/cosmovisor/genesis/bin
-mkdir -p $HOME/.dydxprotocol/cosmovisor/upgrades
-mv vindaxd $HOME/.dydxprotocol/cosmovisor/genesis/bin/
+mkdir -p $HOME/.vindax/cosmovisor/genesis/bin
+mkdir -p $HOME/.vindax/cosmovisor/upgrades
+mv vindaxd $HOME/.vindax/cosmovisor/genesis/bin/
 
 # Update config
-curl https://dydx-rpc.lavenderfive.com/genesis | python3 -c 'import json,sys;print(json.dumps(json.load(sys.stdin)["result"]["genesis"], indent=2))' > $WORKDIR/config/genesis.json
+curl https://vindax-rpc.lavenderfive.com/genesis | python3 -c 'import json,sys;print(json.dumps(json.load(sys.stdin)["result"]["genesis"], indent=2))' > $WORKDIR/config/genesis.json
 sed -i 's/seeds = ""/seeds = "'"${SEED_NODES[*]}"'"/' $WORKDIR/config/config.toml
 
 # Create Service
 sudo tee /etc/systemd/system/vindaxd.service > /dev/null << EOF
 [Unit]
-Description=dydx node service
+Description=vindax node service
 After=network-online.target
 
 [Service]
 User=$USER
 ExecStart=/$HOME/go/bin/cosmovisor run start --non-validating-full-node=true
-WorkingDirectory=$HOME/.dydxprotocol
+WorkingDirectory=$HOME/.vindax
 Restart=always
 RestartSec=5
 LimitNOFILE=4096
-Environment="DAEMON_HOME=$HOME/.dydxprotocol"
+Environment="DAEMON_HOME=$HOME/.vindax"
 Environment="DAEMON_NAME=vindaxd"
 Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=false"
 Environment="DAEMON_RESTART_AFTER_UPGRADE=true"

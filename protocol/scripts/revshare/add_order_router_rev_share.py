@@ -41,7 +41,7 @@ def vote_for(node, chain, proposal_id, person):
         "--node=" + node,
         "--chain-id=" + chain,
         "--keyring-backend=test",
-        "--fees=5000000000000000adv4tnt",
+        "--fees=5000000000000000avdtn",
         "--yes"
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)
@@ -107,7 +107,7 @@ def main():
                         }
                         }
                     ],
-                    "deposit": "10000000000000000000000adv4tnt",
+                    "deposit": "10000000000000000000000avdtn",
                     "metadata": "",
                     "title": "Add order router rev share for " + args.order_router_addr,
                     "summary": "Add order router rev share for " + args.order_router_addr
@@ -123,7 +123,7 @@ def main():
                 tmp_file_path,
                 "--from=alice",
                 "--gas=auto", 
-                "--fees=10000000000000000000000adv4tnt",
+                "--fees=10000000000000000000000avdtn",
                 "--node=" + args.node,
                 "--chain-id=" + args.chain_id,
                 "--keyring-backend=test", 

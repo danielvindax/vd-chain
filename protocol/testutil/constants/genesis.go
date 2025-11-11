@@ -78,7 +78,7 @@ const GenesisState = `{
           "coins": [
             {
               "amount": "1000000000000000000000000000",
-              "denom": "adv4tnt"
+              "denom": "avdtn"
             }
           ]
         },
@@ -87,17 +87,17 @@ const GenesisState = `{
           "coins": [
             {
               "amount": "2000000000000000000",
-              "denom": "adv4tnt"
+              "denom": "avdtn"
             }
           ]
         }
       ],
       "denom_metadata": [
         {
-          "base": "adv4tnt",
+          "base": "avdtn",
           "denom_units": [
             {
-              "denom": "adv4tnt"
+              "denom": "avdtn"
             },
             {
               "denom": "sample",
@@ -598,7 +598,7 @@ const GenesisState = `{
     "crisis": {
       "constant_fee": {
         "amount": "1000000000000000000",
-        "denom": "adv4tnt"
+        "denom": "avdtn"
       }
     },
     "delaymsg": {
@@ -847,7 +847,7 @@ const GenesisState = `{
         "expedited_min_deposit": [
           {
             "amount": "50000000",
-            "denom": "adv4tnt"
+            "denom": "avdtn"
           }
         ],
         "expedited_threshold": "0.75000",
@@ -856,7 +856,7 @@ const GenesisState = `{
         "min_deposit": [
           {
             "amount": "10000000000000000000000",
-            "denom": "adv4tnt"
+            "denom": "avdtn"
           }
         ],
         "min_deposit_ratio": "0.010000000000000000",
@@ -4014,7 +4014,7 @@ const GenesisState = `{
     },
     "rewards": {
       "params": {
-        "denom": "adv4tnt",
+        "denom": "avdtn",
         "denom_exponent": -18,
         "fee_multiplier_ppm": 0,
         "market_id": 1,
@@ -4050,7 +4050,7 @@ const GenesisState = `{
         }
       ],
       "params": {
-        "bond_denom": "adv4tnt",
+        "bond_denom": "avdtn",
         "historical_entries": 10000,
         "max_entries": 7,
         "max_validators": 60,
@@ -4143,14 +4143,14 @@ const GenesisState = `{
     "vest": {
       "vest_entries": [
         {
-          "denom": "adv4tnt",
+          "denom": "avdtn",
           "end_time": "2050-01-01T00:00:00Z",
           "start_time": "2001-01-01T00:00:00Z",
           "treasury_account": "community_treasury",
           "vester_account": "community_vester"
         },
         {
-          "denom": "adv4tnt",
+          "denom": "avdtn",
           "end_time": "2050-01-01T00:00:00Z",
           "start_time": "2001-01-01T00:00:00Z",
           "treasury_account": "rewards_treasury",
