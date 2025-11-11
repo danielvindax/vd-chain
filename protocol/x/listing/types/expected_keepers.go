@@ -6,11 +6,11 @@ import (
 	vaulttypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
 	perpetualtypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
 	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
+	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 )
 
 type PricesKeeper interface {

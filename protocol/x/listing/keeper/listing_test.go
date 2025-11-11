@@ -20,10 +20,10 @@ import (
 	"github.com/danielvindax/vd-chain/protocol/lib"
 	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
 
+	perpetualtypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
 	oracletypes "github.com/dydxprotocol/slinky/pkg/types"
 	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	"github.com/dydxprotocol/slinky/x/marketmap/types/tickermetadata"
-	perpetualtypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
 
 	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 

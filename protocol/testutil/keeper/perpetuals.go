@@ -11,7 +11,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	marketmapkeeper "github.com/dydxprotocol/slinky/x/marketmap/keeper"
 	pricefeedserver_types "github.com/danielvindax/vd-chain/protocol/daemons/server/types/pricefeed"
 	indexerevents "github.com/danielvindax/vd-chain/protocol/indexer/events"
 	"github.com/danielvindax/vd-chain/protocol/indexer/indexer_manager"
@@ -26,6 +25,7 @@ import (
 	"github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
 	priceskeeper "github.com/danielvindax/vd-chain/protocol/x/prices/keeper"
 	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	marketmapkeeper "github.com/dydxprotocol/slinky/x/marketmap/keeper"
 	"github.com/stretchr/testify/require"
 )
 

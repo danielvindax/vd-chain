@@ -1,10 +1,10 @@
 package marketmap
 
 import (
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 	dydx "github.com/dydxprotocol/slinky/providers/apis/dydx"
 	dydxtypes "github.com/dydxprotocol/slinky/providers/apis/dydx/types"
 	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
-	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 )
 
 // Construct a MarketMap struct from a slice of MarketParams

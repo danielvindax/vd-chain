@@ -6,7 +6,6 @@ import (
 	"github.com/cometbft/cometbft/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	govtypesv1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
-	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	"github.com/danielvindax/vd-chain/protocol/lib"
 	"github.com/danielvindax/vd-chain/protocol/lib/slinky"
 	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
@@ -15,6 +14,7 @@ import (
 	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
 	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
 	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	"github.com/stretchr/testify/require"
 )
 

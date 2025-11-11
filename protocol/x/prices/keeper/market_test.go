@@ -4,14 +4,14 @@ import (
 	"testing"
 
 	errorsmod "cosmossdk.io/errors"
-	marketmapkeeper "github.com/dydxprotocol/slinky/x/marketmap/keeper"
-	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/metrics"
 	"github.com/danielvindax/vd-chain/protocol/lib"
 	"github.com/danielvindax/vd-chain/protocol/lib/slinky"
 	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
 	keepertest "github.com/danielvindax/vd-chain/protocol/testutil/keeper"
 	"github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	marketmapkeeper "github.com/dydxprotocol/slinky/x/marketmap/keeper"
+	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	"github.com/stretchr/testify/require"
 )
 

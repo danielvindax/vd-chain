@@ -7,6 +7,7 @@ import (
 
 	cmtabci "github.com/cometbft/cometbft/abci/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/danielvindax/vd-chain/protocol/app/prepare/prices"
 	"github.com/dydxprotocol/slinky/abci/strategies/aggregator"
 	aggregatormock "github.com/dydxprotocol/slinky/abci/strategies/aggregator/mocks"
 	codecmock "github.com/dydxprotocol/slinky/abci/strategies/codec/mocks"
@@ -14,7 +15,6 @@ import (
 	"github.com/dydxprotocol/slinky/abci/testutils"
 	vetypes "github.com/dydxprotocol/slinky/abci/ve/types"
 	oracletypes "github.com/dydxprotocol/slinky/pkg/types"
-	"github.com/danielvindax/vd-chain/protocol/app/prepare/prices"
 	"github.com/stretchr/testify/suite"
 )
 

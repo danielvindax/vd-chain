@@ -42,7 +42,6 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	govtypesv1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
 	sdkproto "github.com/cosmos/gogoproto/proto"
-	marketmapmoduletypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	"github.com/danielvindax/vd-chain/protocol/app"
 	appconstants "github.com/danielvindax/vd-chain/protocol/app/constants"
 	"github.com/danielvindax/vd-chain/protocol/cmd/vindaxd/cmd"
@@ -69,6 +68,7 @@ import (
 	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 	vaulttypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
 	vesttypes "github.com/danielvindax/vd-chain/protocol/x/vest/types"
+	marketmapmoduletypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/exp/slices"
 )
@@ -652,7 +652,7 @@ func (tApp *TestApp) initChainIfNeeded() {
 			},
 			Evidence: types.EvidenceParams{
 				MaxAgeNumBlocks: 100000,
-				MaxAgeDuration:   172800000000000, // 2 days in nanoseconds
+				MaxAgeDuration:  172800000000000, // 2 days in nanoseconds
 				MaxBytes:        1048576,
 			},
 			Validator: types.ValidatorParams{

@@ -6,16 +6,16 @@ import (
 	"fmt"
 	"os"
 
+	"cosmossdk.io/math"
+	tmed25519 "github.com/cometbft/cometbft/crypto/ed25519"
 	"github.com/cosmos/cosmos-sdk/client"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/crypto/keys/ed25519"
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
-	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
 	xauthsigning "github.com/cosmos/cosmos-sdk/x/auth/signing"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	tmed25519 "github.com/cometbft/cometbft/crypto/ed25519"
 	"github.com/danielvindax/vd-chain/protocol/app"
 	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
 )
@@ -50,7 +50,7 @@ func main() {
 	}
 
 	validatorName := os.Args[1]
-	
+
 	// Parse value (default to 0)
 	valueStr := "0"
 	if len(os.Args) >= 3 {

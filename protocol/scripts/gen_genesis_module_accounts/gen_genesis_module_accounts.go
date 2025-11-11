@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	appconfig "github.com/danielvindax/vd-chain/protocol/app/config"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
+	appconfig "github.com/danielvindax/vd-chain/protocol/app/config"
 
 	// Cosmos SDK modules
 	distrtypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
@@ -13,18 +13,18 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
 	// IBC
-	ibctransfertypes "github.com/cosmos/ibc-go/v8/modules/apps/transfer/types"
 	icatypes "github.com/cosmos/ibc-go/v8/modules/apps/27-interchain-accounts/types"
+	ibctransfertypes "github.com/cosmos/ibc-go/v8/modules/apps/transfer/types"
 
 	// dYdX v4 modules
 	bridgemoduletypes "github.com/danielvindax/vd-chain/protocol/x/bridge/types"
-	marketmapmoduletypes "github.com/dydxprotocol/slinky/x/marketmap/types"
+	delaymsgtypes "github.com/danielvindax/vd-chain/protocol/x/delaymsg/types"
 	perpetualsmoduletypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
 	rewardsmoduletypes "github.com/danielvindax/vd-chain/protocol/x/rewards/types"
 	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
-	vestmoduletypes "github.com/danielvindax/vd-chain/protocol/x/vest/types"
 	vaultmoduletypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
-	delaymsgtypes "github.com/danielvindax/vd-chain/protocol/x/delaymsg/types"
+	vestmoduletypes "github.com/danielvindax/vd-chain/protocol/x/vest/types"
+	marketmapmoduletypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 )
 
 type modItem struct {

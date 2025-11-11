@@ -15,7 +15,6 @@ import (
 	ibcclient "github.com/cosmos/ibc-go/v8/modules/core/02-client/types" //nolint:staticcheck
 	ibcconn "github.com/cosmos/ibc-go/v8/modules/core/03-connection/types"
 	ibccore "github.com/cosmos/ibc-go/v8/modules/core/04-channel/types"
-	marketmapmoduletypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	"github.com/danielvindax/vd-chain/protocol/lib"
 	accountplus "github.com/danielvindax/vd-chain/protocol/x/accountplus/types"
 	affiliates "github.com/danielvindax/vd-chain/protocol/x/affiliates/types"
@@ -23,6 +22,7 @@ import (
 	listing "github.com/danielvindax/vd-chain/protocol/x/listing/types"
 	sending "github.com/danielvindax/vd-chain/protocol/x/sending/types"
 	vault "github.com/danielvindax/vd-chain/protocol/x/vault/types"
+	marketmapmoduletypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 )
 
 var (

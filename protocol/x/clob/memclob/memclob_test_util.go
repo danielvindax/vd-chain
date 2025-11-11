@@ -7,7 +7,6 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	mapset "github.com/deckarep/golang-set/v2"
 	"github.com/danielvindax/vd-chain/protocol/indexer/msgsender"
 	"github.com/danielvindax/vd-chain/protocol/indexer/off_chain_updates"
 	ocutypes "github.com/danielvindax/vd-chain/protocol/indexer/off_chain_updates/types"
@@ -16,6 +15,7 @@ import (
 	testutil_memclob "github.com/danielvindax/vd-chain/protocol/testutil/memclob"
 	"github.com/danielvindax/vd-chain/protocol/x/clob/types"
 	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
+	mapset "github.com/deckarep/golang-set/v2"
 	"github.com/google/go-cmp/cmp"
 	"github.com/stretchr/testify/require"
 )

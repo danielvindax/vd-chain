@@ -1,13 +1,13 @@
 package app
 
 import (
-    "fmt"
+	"fmt"
 
-    v_9_4 "github.com/danielvindax/vd-chain/protocol/app/upgrades/v9.4"
+	v_9_4 "github.com/danielvindax/vd-chain/protocol/app/upgrades/v9.4"
 
-    upgradetypes "cosmossdk.io/x/upgrade/types"
-    sdk "github.com/cosmos/cosmos-sdk/types"
-    upgrades "github.com/danielvindax/vd-chain/protocol/app/upgrades"
+	upgradetypes "cosmossdk.io/x/upgrade/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	upgrades "github.com/danielvindax/vd-chain/protocol/app/upgrades"
 )
 
 var (

@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"testing"
 
-	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	"github.com/danielvindax/vd-chain/protocol/lib/marketmap"
 	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
 	"github.com/danielvindax/vd-chain/protocol/testutil/network"
 	"github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	"github.com/stretchr/testify/require"
 )
 

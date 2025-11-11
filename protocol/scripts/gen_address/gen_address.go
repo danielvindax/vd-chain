@@ -12,6 +12,7 @@ import (
 Generate a valid bech32 address with "vindax" prefix
 
 Usage:
+
 	go run scripts/gen_address/gen_address.go
 */
 func main() {
@@ -32,4 +33,3 @@ func main() {
 	fmt.Println("You can use this address in your test:")
 	fmt.Printf("owner:  %q,\n", bech32Addr)
 }
-

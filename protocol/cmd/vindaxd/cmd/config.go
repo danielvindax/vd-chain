@@ -5,9 +5,9 @@ import (
 
 	tmcfg "github.com/cometbft/cometbft/config"
 	serverconfig "github.com/cosmos/cosmos-sdk/server/config"
-	oracleconfig "github.com/dydxprotocol/slinky/oracle/config"
 	assettypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
 	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	oracleconfig "github.com/dydxprotocol/slinky/oracle/config"
 )
 
 const (

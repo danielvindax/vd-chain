@@ -5,10 +5,6 @@ import (
 	"fmt"
 
 	upgradetypes "cosmossdk.io/x/upgrade/types"
-	"github.com/dydxprotocol/slinky/providers/apis/dydx"
-	dydxtypes "github.com/dydxprotocol/slinky/providers/apis/dydx/types"
-	marketmapkeeper "github.com/dydxprotocol/slinky/x/marketmap/keeper"
-	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	indexerevents "github.com/danielvindax/vd-chain/protocol/indexer/events"
 	"github.com/danielvindax/vd-chain/protocol/indexer/indexer_manager"
 	indexershared "github.com/danielvindax/vd-chain/protocol/indexer/shared"
@@ -18,6 +14,10 @@ import (
 	revsharetypes "github.com/danielvindax/vd-chain/protocol/x/revshare/types"
 	vaultkeeper "github.com/danielvindax/vd-chain/protocol/x/vault/keeper"
 	vaulttypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
+	"github.com/dydxprotocol/slinky/providers/apis/dydx"
+	dydxtypes "github.com/dydxprotocol/slinky/providers/apis/dydx/types"
+	marketmapkeeper "github.com/dydxprotocol/slinky/x/marketmap/keeper"
+	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"

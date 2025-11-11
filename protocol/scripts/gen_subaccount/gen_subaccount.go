@@ -14,6 +14,7 @@ import (
 Generate a valid SubaccountId with "vindax" prefix
 
 Usage:
+
 	go run scripts/gen_subaccount/gen_subaccount.go
 	go run scripts/gen_subaccount/gen_subaccount.go -number 5
 */
@@ -60,4 +61,3 @@ func main() {
 	fmt.Printf("    Number: %d,\n", number)
 	fmt.Printf("}\n")
 }
-

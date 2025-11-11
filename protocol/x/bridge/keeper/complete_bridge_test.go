@@ -28,7 +28,7 @@ func TestCompleteBridge(t *testing.T) {
 	}{
 		"Success": {
 			initialModAccBalance:  sdk.NewCoin("avdtn", sdkmath.NewInt(1_000)),
-			bridgeEvent:           constants.BridgeEvent_Id0_Height0,           // bridges 888 tokens.
+			bridgeEvent:           constants.BridgeEvent_Id0_Height0,         // bridges 888 tokens.
 			expectedModAccBalance: sdk.NewCoin("avdtn", sdkmath.NewInt(112)), // 1000 - 888.
 		},
 		"Success: coin amount is 0": {

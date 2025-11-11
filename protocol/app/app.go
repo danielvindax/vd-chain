@@ -132,9 +132,6 @@ import (
 	daemontypes "github.com/danielvindax/vd-chain/protocol/daemons/types"
 
 	// Modules
-	marketmapmodule "github.com/dydxprotocol/slinky/x/marketmap"
-	marketmapmodulekeeper "github.com/dydxprotocol/slinky/x/marketmap/keeper"
-	marketmapmoduletypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	accountplusmodule "github.com/danielvindax/vd-chain/protocol/x/accountplus"
 	"github.com/danielvindax/vd-chain/protocol/x/accountplus/authenticator"
 	accountplusmodulekeeper "github.com/danielvindax/vd-chain/protocol/x/accountplus/keeper"
@@ -201,6 +198,9 @@ import (
 	vestmodule "github.com/danielvindax/vd-chain/protocol/x/vest"
 	vestmodulekeeper "github.com/danielvindax/vd-chain/protocol/x/vest/keeper"
 	vestmoduletypes "github.com/danielvindax/vd-chain/protocol/x/vest/types"
+	marketmapmodule "github.com/dydxprotocol/slinky/x/marketmap"
+	marketmapmodulekeeper "github.com/dydxprotocol/slinky/x/marketmap/keeper"
+	marketmapmoduletypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 
 	// IBC
 	ica "github.com/cosmos/ibc-go/v8/modules/apps/27-interchain-accounts"
@@ -529,7 +529,7 @@ func New(
 		lib.GovModuleAddress.String(),
 		app.event,
 	)
-	
+
 	bApp.SetParamStore(&app.ConsensusParamsKeeper.ParamsStore)
 
 	// add capability keeper and ScopeToModule for ibc module

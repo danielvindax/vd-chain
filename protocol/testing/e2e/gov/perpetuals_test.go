@@ -9,14 +9,14 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	govtypesv1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
-	slinkytypes "github.com/dydxprotocol/slinky/pkg/types"
-	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
 	lttest "github.com/danielvindax/vd-chain/protocol/testutil/liquidity_tier"
 	pricestest "github.com/danielvindax/vd-chain/protocol/testutil/prices"
 	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
 	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
 	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	slinkytypes "github.com/dydxprotocol/slinky/pkg/types"
+	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
 	"github.com/stretchr/testify/require"
 )
 
