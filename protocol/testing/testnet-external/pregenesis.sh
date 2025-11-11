@@ -166,7 +166,6 @@ function overwrite_genesis_public_testnet() {
 }
 
 create_pregenesis_file() {
-    # Early validation of mnemonics to avoid downstream errors
 	VAL_HOME_DIR="$TMP_CHAIN_DIR/.vindax"
 	VAL_CONFIG_DIR="$VAL_HOME_DIR/config"
 

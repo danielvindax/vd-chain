@@ -30,7 +30,7 @@ pub struct Limiter {
     pub period: ::core::option::Option<::prost_types::Duration>,
     /// baseline_minimum is the minimum maximum withdrawal coin amount within the
     /// time period.
-    /// e.g. 100_000_000_000 uusdc for 100k USDC; 5e22 adv4tnt for 50k DV4TNT
+    /// e.g. 100_000_000_000 uusdc for 100k USDC; 5e22 avdtn for 50k DV4TNT
     #[prost(bytes = "vec", tag = "3")]
     pub baseline_minimum: ::prost::alloc::vec::Vec<u8>,
     /// baseline_tvl_ppm is the maximum ratio of TVL withdrawable in
