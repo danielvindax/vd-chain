@@ -156,7 +156,7 @@ func main() {
 				panic(fmt.Sprintf("Failed to parse amount: %s", valueStr))
 			}
 			return sdk.Coin{
-				Denom:  "adv4tnt",
+				Denom:  "avdtn",
 				Amount: amount,
 			}
 		}(),

@@ -216,28 +216,35 @@ test-all: test-unit test-race test-cover test-integration
 
 test-unit:
 	@mkdir -p $(BUILDDIR)
-	@VERSION=$(VERSION) go test -mod=readonly -tags='test_ledger_mock $(build_tags)' ./... 2>&1 | tee $(BUILDDIR)/test.log
+	@VERSION=$(VERSION) go test -mod=readonly -tags='test_ledger_mock $(build_tags)' ./... 2>&1 | tee $(BUILDDIR)/test-unit.log
 
 test-race:
-	@VERSION=$(VERSION) go test -mod=readonly -timeout 20m -race -tags='test_ledger_mock $(build_tags)' ./...
+	@mkdir -p $(BUILDDIR)
+	@VERSION=$(VERSION) go test -mod=readonly -timeout 20m -race -tags='test_ledger_mock $(build_tags)' ./... 2>&1 | tee $(BUILDDIR)/test-race.log
 
 test-cover:
-	@VERSION=$(VERSION) go test -mod=readonly -timeout 12m -coverprofile=coverage.out -covermode=atomic -coverpkg=github.com/danielvindax/vd-chain/protocol/... -tags='test_ledger_mock $(build_tags)' ./...
+	@mkdir -p $(BUILDDIR)
+	@VERSION=$(VERSION) go test -mod=readonly -timeout 12m -coverprofile=coverage.out -covermode=atomic -coverpkg=github.com/danielvindax/vd-chain/protocol/... -tags='test_ledger_mock $(build_tags)' ./... 2>&1 | tee $(BUILDDIR)/test-cover.log
 
 test-exchanges:
-	@VERSION=$(VERSION) go test -mod=readonly -tags='test_ledger_mock exchange_tests $(build_tags)' github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/handler -run "TestQueryingActualExchanges"
+	@mkdir -p $(BUILDDIR)
+	@VERSION=$(VERSION) go test -mod=readonly -tags='test_ledger_mock exchange_tests $(build_tags)' github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/handler -run "TestQueryingActualExchanges" 2>&1 | tee $(BUILDDIR)/test-exchanges.log
 
 test-unit-and-integration:
-	@VERSION=$(VERSION) go test -mod=readonly -tags='integration_test test_ledger_mock $(build_tags)' ./...
+	@mkdir -p $(BUILDDIR)
+	@VERSION=$(VERSION) go test -mod=readonly -tags='integration_test test_ledger_mock $(build_tags)' ./... 2>&1 | tee $(BUILDDIR)/test-unit-and-integration.log
 
 benchmark:
-	@VERSION=$(VERSION) go test -mod=readonly -tags='$(build_tags)' -run=^# -bench=. -benchtime=5s -benchmem ./...
+	@mkdir -p $(BUILDDIR)
+	@VERSION=$(VERSION) go test -mod=readonly -tags='$(build_tags)' -run=^# -bench=. -benchtime=5s -benchmem ./... 2>&1 | tee $(BUILDDIR)/benchmark.log
 
 test-container:
-	@SKIP_DISABLED=true VERSION=$(VERSION) go test -mod=readonly -tags='container_test $(build_tags)' ./...
+	@mkdir -p $(BUILDDIR)
+	@SKIP_DISABLED=true VERSION=$(VERSION) go test -mod=readonly -tags='container_test $(build_tags)' ./... 2>&1 | tee $(BUILDDIR)/test-container.log
 
 test-container-accept:
-	@SKIP_DISABLED=true VERSION=$(VERSION) go test -mod=readonly -tags='container_test $(build_tags)' ./... -args -accept
+	@mkdir -p $(BUILDDIR)
+	@SKIP_DISABLED=true VERSION=$(VERSION) go test -mod=readonly -tags='container_test $(build_tags)' ./... -args -accept 2>&1 | tee $(BUILDDIR)/test-container-accept.log
 
 test-container-build:
 	# $(MAKE) localnet-build

@@ -97,7 +97,7 @@
           "coins": [
             {
               "amount": "799000000000000000000000000",
-              "denom": "adv4tnt"
+              "denom": "avdtn"
             }
           ]
         },
@@ -106,7 +106,7 @@
           "coins": [
             {
               "amount": "1000000000000000000000000",
-              "denom": "adv4tnt"
+              "denom": "avdtn"
             },
             {
               "amount": "100000000000000000",
@@ -119,7 +119,7 @@
           "coins": [
             {
               "amount": "1000000000000000000000000",
-              "denom": "adv4tnt"
+              "denom": "avdtn"
             },
             {
               "amount": "100000000000000000",
@@ -141,7 +141,7 @@
           "coins": [
             {
               "amount": "1000000000000000000000000",
-              "denom": "adv4tnt"
+              "denom": "avdtn"
             },
             {
               "amount": "100000000000000000",
@@ -154,7 +154,7 @@
           "coins": [
             {
               "amount": "1000000000000000000000000",
-              "denom": "adv4tnt"
+              "denom": "avdtn"
             },
             {
               "amount": "100000000000000000",
@@ -167,7 +167,7 @@
           "coins": [
             {
               "amount": "1000000000000000000000000",
-              "denom": "adv4tnt"
+              "denom": "avdtn"
             },
             {
               "amount": "900000000000000000",
@@ -180,18 +180,18 @@
           "coins": [
             {
               "amount": "200000000000000000000000000",
-              "denom": "adv4tnt"
+              "denom": "avdtn"
             }
           ]
         }
       ],
       "denom_metadata": [
         {
-          "base": "adv4tnt",
+          "base": "avdtn",
           "denom_units": [
             {
               "aliases": [],
-              "denom": "adv4tnt",
+              "denom": "avdtn",
               "exponent": 0
             },
             {
@@ -229,7 +229,7 @@
         "next_id": 5
       },
       "event_params": {
-        "denom": "adv4tnt",
+        "denom": "avdtn",
         "eth_address": "0xf75012c350e4ad55be2048bd67ce6e03b20de82d",
         "eth_chain_id": 11155111
       },
@@ -705,7 +705,7 @@
     "crisis": {
       "constant_fee": {
         "amount": "1000",
-        "denom": "adv4tnt"
+        "denom": "avdtn"
       }
     },
     "delaymsg": {
@@ -992,7 +992,7 @@
                 "validator_address": "vindaxvaloper199tqg4wdlnu4qjlxchpd7seg454937hjrywlqt",
                 "value": {
                   "amount": "500000000000000000000000",
-                  "denom": "adv4tnt"
+                  "denom": "avdtn"
                 }
               }
             ],
@@ -1054,7 +1054,7 @@
                 "validator_address": "vindaxvaloper1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9w7x6z3",
                 "value": {
                   "amount": "500000000000000000000000",
-                  "denom": "adv4tnt"
+                  "denom": "avdtn"
                 }
               }
             ],
@@ -1116,7 +1116,7 @@
                 "validator_address": "vindaxvaloper1wau5mja7j7zdavtfq9lu7ejef05hm6ffepz4vd",
                 "value": {
                   "amount": "500000000000000000000000",
-                  "denom": "adv4tnt"
+                  "denom": "avdtn"
                 }
               }
             ],
@@ -1178,7 +1178,7 @@
                 "validator_address": "vindaxvaloper10fx7sy6ywd5senxae9dwytf8jxek3t2gctw8sw",
                 "value": {
                   "amount": "500000000000000000000000",
-                  "denom": "adv4tnt"
+                  "denom": "avdtn"
                 }
               }
             ],
@@ -1202,7 +1202,7 @@
         "expedited_min_deposit": [
           {
             "amount": "50000000",
-            "denom": "adv4tnt"
+            "denom": "avdtn"
           }
         ],
         "expedited_threshold": "0.75000",
@@ -1211,7 +1211,7 @@
         "min_deposit": [
           {
             "amount": "10000000",
-            "denom": "adv4tnt"
+            "denom": "avdtn"
           }
         ],
         "min_deposit_ratio": "0.010000000000000000",
@@ -4405,7 +4405,7 @@
     },
     "rewards": {
       "params": {
-        "denom": "adv4tnt",
+        "denom": "avdtn",
         "denom_exponent": -18,
         "fee_multiplier_ppm": 990000,
         "market_id": 11,
@@ -4430,7 +4430,7 @@
       "last_total_power": "0",
       "last_validator_powers": [],
       "params": {
-        "bond_denom": "adv4tnt",
+        "bond_denom": "avdtn",
         "historical_entries": 10000,
         "max_entries": 7,
         "max_validators": 100,
@@ -4556,14 +4556,14 @@
     "vest": {
       "vest_entries": [
         {
-          "denom": "adv4tnt",
+          "denom": "avdtn",
           "end_time": "2025-01-01T00:00:00Z",
           "start_time": "2023-01-01T00:00:00Z",
           "treasury_account": "community_treasury",
           "vester_account": "community_vester"
         },
         {
-          "denom": "adv4tnt",
+          "denom": "avdtn",
           "end_time": "2025-01-01T00:00:00Z",
           "start_time": "2023-01-01T00:00:00Z",
           "treasury_account": "rewards_treasury",
