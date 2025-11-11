@@ -1,14 +1,12 @@
 stages:
   - lint
 
-# Workflow triggers (equivalent to GitHub on: push / pull_request)
+# Always run pipeline on any push or merge request
 workflow:
   rules:
-    # Run on merge requests (similar to pull_request)
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    # Run on push to main or release/protocol/v* branches
-    - if: '$CI_COMMIT_BRANCH =~ /^main$/ || $CI_COMMIT_BRANCH =~ /^release\/protocol\/v[0-9]+(\.[0-9]+)?(\.x)?$/'
-    - when: never
+    - if: $CI_PIPELINE_SOURCE == "push"
+    - when: always
 
 # --- Job 1: validate-yaml ---
 validate_yaml:
