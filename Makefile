@@ -23,7 +23,7 @@ proto-gen-clean:
 	@rm -rf ./.proto-export
 	@echo "Generating Protobuf files"
 	@$(protoImage) sh ./protocol/scripts/protocgen.sh
-	@cd proto && make proto-export-v4-proto-js
+	@cd proto && make proto-export-proto-js
 
 proto-check-bc-breaking:
 	@rm -rf ./.proto-export

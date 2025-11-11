@@ -2,7 +2,7 @@ indexer:
   - indexer/**
 proto:
   - proto-py/**
-  - v4-proto-js/**
+  - proto-js/**
   - proto/**
 protocol:
   - protocol/**
