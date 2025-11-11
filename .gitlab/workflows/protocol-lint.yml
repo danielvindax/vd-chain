@@ -8,7 +8,7 @@ default:
 workflow:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_COMMIT_BRANCH =~ /^main$/ || $CI_COMMIT_BRANCH =~ /^release\/protocol\/v\d+\.\d+\.x$/ || $CI_COMMIT_BRANCH =~ /^release\/protocol\/v\d+\.x$/
+    - if: $CI_PIPELINE_SOURCE == "push"
     - when: never
 
 .validate_yaml_base:
@@ -16,10 +16,11 @@ workflow:
   image: python:3.11
   before_script:
     - pip install --no-cache-dir yamllint
-    - cd vd-chain/protocol
+    - cd protocol
   rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
     - changes:
-        - vd-chain/protocol/**
+        - protocol/**
 
 validate_yaml:
   extends: .validate_yaml_base
@@ -30,7 +31,7 @@ validate_yaml:
   stage: lint
   image: golang:1.23
   before_script:
-    - cd vd-chain/protocol
+    - cd protocol
   cache:
     key: "${CI_JOB_NAME}"
     policy: pull-push
@@ -38,8 +39,9 @@ validate_yaml:
       - /go/pkg/mod
       - /go/bin
   rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
     - changes:
-        - vd-chain/protocol/**
+        - protocol/**
 
 golangci_lint:
   extends: .golangci_lint_base
