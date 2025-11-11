@@ -25,7 +25,17 @@ validate_yaml:
 # --- Job 2: golangci-lint ---
 golangci_lint:
   stage: lint
-  image: vindax-dev   # custom image with Go, make, golangci-lint, etc.
+  image: golang:1.22   # custom image with Go, make, golangci-lint, etc.
+  cache:
+    key:
+      files:
+        - protocol/go.mod
+        - protocol/go.sum
+    policy: pull-push
+    paths:
+      - /go/pkg/mod
+      - /root/.cache/go-build
+      - /root/.cache/golangci-lint
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event"'
       changes:
