@@ -7,12 +7,12 @@ It is being rebranded into **Vindax Chain (vd-chain)** with a new identity, chai
 | Item | Value |
 |------|-------|
 | Project name | **Vindax Chain** |
-| Binary | `vdxd` |
+| Binary | `vindaxd` |
 | Chain ID (mainnet) | `vindax-1` |
-| Chain ID (dev/local) | `vindax-local-1` |
+| Chain ID (dev/local) | `localvindax` | `vindax-testnet` |
 | Bech32 prefix | `vindax` |
-| Base denom | `uvdx` |
-| Display denom | `VDX` |
+| Base denom | `avdtn` |
+| Display denom | `vdtn` |
 
 ## ✅ Go module rename
 `go.mod` updated to: module github.com/danielvindax/vd-chain
