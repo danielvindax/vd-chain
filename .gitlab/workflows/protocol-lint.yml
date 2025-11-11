@@ -1,49 +1,38 @@
 stages:
   - lint
 
-default:
-  interruptible: true
-
-# Run pipelines on MRs and on pushes to main and protocol release branches
+# Workflow triggers (equivalent to GitHub on: push / pull_request)
 workflow:
   rules:
+    # Run on merge requests (similar to pull_request)
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_PIPELINE_SOURCE == "push"
+    # Run on push to main or release/protocol/v* branches
+    - if: '$CI_COMMIT_BRANCH =~ /^main$/ || $CI_COMMIT_BRANCH =~ /^release\/protocol\/v[0-9]+(\.[0-9]+)?(\.x)?$/'
     - when: never
 
-.validate_yaml_base:
+# --- Job 1: validate-yaml ---
+validate_yaml:
   stage: lint
   image: python:3.11
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - protocol/**/*
   before_script:
     - pip install --no-cache-dir yamllint
     - cd protocol
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "push"
-    - changes:
-        - protocol/**
-
-validate_yaml:
-  extends: .validate_yaml_base
   script:
     - yamllint .golangci.yml .github/workflows/**.yml buf.work.yaml
 
-.golangci_lint_base:
+# --- Job 2: golangci-lint ---
+golangci_lint:
   stage: lint
-  image: golang:1.23
+  image: vindax-dev   # custom image with Go, make, golangci-lint, etc.
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - protocol/**/*
   before_script:
     - cd protocol
-  cache:
-    key: "${CI_JOB_NAME}"
-    policy: pull-push
-    paths:
-      - /go/pkg/mod
-      - /go/bin
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "push"
-    - changes:
-        - protocol/**
-
-golangci_lint:
-  extends: .golangci_lint_base
   script:
     - make lint
