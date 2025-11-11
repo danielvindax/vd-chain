@@ -54,7 +54,7 @@ By clicking the above links to third-party clients, you will leave the dYdX Trad
 
 `v4-proto-js` — Scripts for publishing proto package to [npm](https://www.npmjs.com/package/@dydxprotocol/v4-proto).
 
-`v4-proto-py` — Scripts for publishing proto package to [PyPI](https://pypi.org/project/v4-proto/).
+`proto-py` — Scripts for publishing proto package to [PyPI](https://pypi.org/project/v4-proto/).
 
 # Contributing
 

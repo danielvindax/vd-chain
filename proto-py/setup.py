@@ -6,9 +6,9 @@ with open('requirements.txt') as f:
 setup(
     name="v4-proto",
     version="0.0.0",
-    author="dYdX Trading Inc.",
-    author_email="contact@dydx.exchange",
-    description="Protos for dYdX Chain protocol",
+    author="Vindax Trading Inc.",
+    author_email="contact@vindax.exchange",
+    description="Protos for Vindax Chain protocol",
     packages = find_namespace_packages(),
     include_package_data=True,  # Include files specified in MANIFEST.in
     install_requires=required,
