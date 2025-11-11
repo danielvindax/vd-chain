@@ -11,4 +11,6 @@ RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 RUN /dydxprotocol/staging.sh
 
 ENV DAEMON_NAME=vindaxd
+ENV DAEMON_HOME=/vindax/chain/.alice
+ENV UNSAFE_SKIP_BACKUP=true
 ENTRYPOINT ["cosmovisor", "run"]

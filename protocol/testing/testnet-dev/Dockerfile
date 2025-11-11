@@ -11,4 +11,6 @@ RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 RUN /vindax/dev.sh
 
 ENV DAEMON_NAME=vindaxd
+
+
 ENTRYPOINT ["cosmovisor", "run"]

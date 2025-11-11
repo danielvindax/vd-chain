@@ -179,7 +179,7 @@ func (t *Testnet) initializeNode(moniker string) (*Node, error) {
 	resource, err := t.pool.RunWithOptions(
 		&dockertest.RunOptions{
 			Name:       fmt.Sprintf("testnet-local-%s-%s", moniker, t.uniqueId),
-			Repository: "dydxprotocol-container-test",
+			Repository: "vindax-container-test",
 			Tag:        "",
 			NetworkID:  t.network.Network.ID,
 			ExposedPorts: []string{
@@ -190,7 +190,7 @@ func (t *Testnet) initializeNode(moniker string) (*Node, error) {
 				entrypointCommand,
 				"start",
 				"--home",
-				fmt.Sprintf("/dydxprotocol/chain/.%s", moniker),
+				fmt.Sprintf("/vindax/chain/.%s", moniker),
 				"--p2p.persistent_peers",
 				persistentPeers,
 				"--bridge-daemon-eth-rpc-endpoint",

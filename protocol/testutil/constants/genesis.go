@@ -709,7 +709,7 @@ const GenesisState = `{
       "validator_historical_rewards": [],
       "validator_slash_events": []
     },
-    "dydxaccountplus": {
+    "vindaxaccountplus": {
       "accounts": [],
       "authenticator_data": [],
       "next_authenticator_id": "0",
