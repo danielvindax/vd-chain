@@ -27,7 +27,7 @@ var (
 		// "dydxd":          "vindaxd",
 
 		// Go module path
-		// "github.com/danielvindax/vd-chain": "github.com/miexs/vd-chain",
+		// "github.com/dydxprotocol/v4-chain": "https://github.com/danielvindax/vd-chain",
 	}
 
 	// Skip directories that should not be touched

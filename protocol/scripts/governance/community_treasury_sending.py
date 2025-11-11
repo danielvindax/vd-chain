@@ -27,7 +27,7 @@ TODO: Include a brief summary of the proposal and link to relevant governance fo
 ### TODO: update above fields as needed                                ###
 ########################################################################## 
 
-GOV_MODULE_ADDRESS="dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky" # Governance module account
+GOV_MODULE_ADDRESS="vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm" # Governance module account
 COMMUNITY_TREASURY_MODULE_NAME = "community_treasury"
 OUTPUT_FILE="proposal_community_treasury_sending.json"
 DEPOSIT = "{}{}".format(str(decimal.Decimal(10000)*TOKEN_MULTIPLE), NATIVE_TOKEN_DENOM)

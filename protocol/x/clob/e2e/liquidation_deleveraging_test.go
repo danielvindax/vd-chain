@@ -633,6 +633,24 @@ func TestLiquidationConfig(t *testing.T) {
 				require.Conditionf(t, resp.IsOK, "Expected CheckTx to succeed. Response: %+v", resp)
 			}
 
+			// DEBUG LOG: Log initial state before liquidation
+			t.Logf("=== DEBUG: Test case: %s - BEFORE LIQUIDATION ===", name)
+			for _, subaccountId := range tc.liquidatableSubaccountIds {
+				subaccount := tApp.App.SubaccountsKeeper.GetSubaccount(ctx, subaccountId)
+				t.Logf("Initial Subaccount %s:", subaccountId.String())
+				if len(subaccount.AssetPositions) > 0 {
+					for _, ap := range subaccount.AssetPositions {
+						t.Logf("  Initial Asset[%d]: %s (neg: %v)", ap.AssetId, ap.Quantums.BigInt().String(), ap.Quantums.BigInt().Sign() < 0)
+					}
+				}
+				if len(subaccount.PerpetualPositions) > 0 {
+					for _, pp := range subaccount.PerpetualPositions {
+						t.Logf("  Initial Perpetual[%d]: %s", pp.PerpetualId, pp.Quantums.BigInt().String())
+					}
+				}
+			}
+			t.Logf("LiquidationConfig - MaxQuantumsInsuranceLost: %d", tc.liquidationConfig.SubaccountBlockLimits.MaxQuantumsInsuranceLost)
+
 			_, err := tApp.App.Server.LiquidateSubaccounts(ctx, &api.LiquidateSubaccountsRequest{
 				LiquidatableSubaccountIds: tc.liquidatableSubaccountIds,
 			})
@@ -640,13 +658,54 @@ func TestLiquidationConfig(t *testing.T) {
 
 			// Verify test expectations.
 			ctx = tApp.AdvanceToBlock(3, testapp.AdvanceToBlockOptions{})
+			
+			// DEBUG LOG: Log subaccount states before verification
+			t.Logf("=== DEBUG: Test case: %s ===", name)
 			for _, expectedSubaccount := range tc.expectedSubaccounts {
+				actualSubaccount := tApp.App.SubaccountsKeeper.GetSubaccount(ctx, *expectedSubaccount.Id)
+				
+				// Log expected values
+				t.Logf("Expected Subaccount %s:", expectedSubaccount.Id.String())
+				if len(expectedSubaccount.AssetPositions) > 0 {
+					for _, ap := range expectedSubaccount.AssetPositions {
+						t.Logf("  Expected Asset[%d]: %s (neg: %v)", ap.AssetId, ap.Quantums.BigInt().String(), ap.Quantums.BigInt().Sign() < 0)
+					}
+				}
+				if len(expectedSubaccount.PerpetualPositions) > 0 {
+					for _, pp := range expectedSubaccount.PerpetualPositions {
+						t.Logf("  Expected Perpetual[%d]: %s", pp.PerpetualId, pp.Quantums.BigInt().String())
+					}
+				}
+				
+				// Log actual values
+				t.Logf("Actual Subaccount %s:", actualSubaccount.Id.String())
+				if len(actualSubaccount.AssetPositions) > 0 {
+					for _, ap := range actualSubaccount.AssetPositions {
+						t.Logf("  Actual Asset[%d]: %s (neg: %v)", ap.AssetId, ap.Quantums.BigInt().String(), ap.Quantums.BigInt().Sign() < 0)
+					}
+				} else {
+					t.Logf("  Actual AssetPositions: nil")
+				}
+				if len(actualSubaccount.PerpetualPositions) > 0 {
+					for _, pp := range actualSubaccount.PerpetualPositions {
+						t.Logf("  Actual Perpetual[%d]: %s", pp.PerpetualId, pp.Quantums.BigInt().String())
+					}
+				} else {
+					t.Logf("  Actual PerpetualPositions: nil")
+				}
+				
+				// Log liquidation info if available
+				liquidationInfo := tApp.App.ClobKeeper.GetSubaccountLiquidationInfo(ctx, *expectedSubaccount.Id)
+				t.Logf("  LiquidationInfo - NotionalLiquidated: %d, QuantumsInsuranceLost: %d", 
+					liquidationInfo.NotionalLiquidated, liquidationInfo.QuantumsInsuranceLost)
+				
 				require.Equal(
 					t,
 					expectedSubaccount,
-					tApp.App.SubaccountsKeeper.GetSubaccount(ctx, *expectedSubaccount.Id),
+					actualSubaccount,
 				)
 			}
+			t.Logf("=== END DEBUG ===")
 		})
 	}
 }

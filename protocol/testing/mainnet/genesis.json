@@ -1054,7 +1054,7 @@
           "id": 0,
           "msg": {
             "@type": "/dydxprotocol.feetiers.MsgUpdatePerpetualFeeParams",
-            "authority": "vindax1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5jljzu",
+            "authority": "vindax1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5zx6tr",
             "params": {
               "tiers": [
                 {
@@ -2628,7 +2628,7 @@
                 },
                 "min_self_delegation": "1",
                 "delegator_address": "vindax1j4ljutnh66r55a29jydgca7pfmhd40e3kpwlky",
-                "validator_address": "vindaxvaloper1j4ljutnh66r55a29jydgca7pfmhd40e3nlcfa4",
+                "validator_address": "vindaxvaloper199tqg4wdlnu4qjlxchpd7seg454937hjrywlqt",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "SkRnjuEBbhFYRFcLEaV0UKQz0i71PtZBBn1pzqKuQvU="

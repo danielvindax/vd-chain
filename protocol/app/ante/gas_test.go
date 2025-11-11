@@ -6,14 +6,10 @@ import (
 
 	"cosmossdk.io/errors"
 	sdkmath "cosmossdk.io/math"
-	"github.com/cometbft/cometbft/types"
-	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
-	
+	bank "github.com/cosmos/cosmos-sdk/x/bank/types"
 	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
 	assets "github.com/danielvindax/vd-chain/protocol/x/assets/types"
-	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
 	"github.com/cosmos/cosmos-sdk/testutil/testdata"
@@ -181,9 +177,9 @@ func TestSubmitTxnWithGas(t *testing.T) {
 				"25000ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5: insufficient fee",
 		},
 	}
-		for name, tc := range tests {
+	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
-			msg := &banktypes.MsgSend{
+			msg := &bank.MsgSend{
 				FromAddress: constants.BobAccAddress.String(),
 				ToAddress:   constants.AliceAccAddress.String(),
 				Amount: []sdk.Coin{
@@ -191,70 +187,7 @@ func TestSubmitTxnWithGas(t *testing.T) {
 				},
 			}
 
-			// Add Bob and Alice accounts to genesis state
-			tApp := testapp.NewTestAppBuilder(t).WithGenesisDocFn(func() (genesis types.GenesisDoc) {
-				genesis = testapp.DefaultGenesis()
-				testapp.UpdateGenesisDocWithAppStateForModule(
-					&genesis,
-					func(genesisState *authtypes.GenesisState) {
-						// Add Bob account
-						bobAccount := authtypes.NewBaseAccount(
-							constants.BobAccAddress,
-							constants.BobPrivateKey.PubKey(),
-							0,
-							0,
-						)
-						genesisState.Accounts = append(genesisState.Accounts, codectypes.UnsafePackAny(bobAccount))
-
-						// Add Alice account
-						aliceAccount := authtypes.NewBaseAccount(
-							constants.AliceAccAddress,
-							constants.AlicePrivateKey.PubKey(),
-							0,
-							0,
-						)
-						genesisState.Accounts = append(genesisState.Accounts, codectypes.UnsafePackAny(aliceAccount))
-					},
-				)
-				testapp.UpdateGenesisDocWithAppStateForModule(
-					&genesis,
-					func(genesisState *banktypes.GenesisState) {
-						// Add bank balances for Bob
-						// Bob needs: 1 USDC to send + gas fees (50000 USDC for USDC gas fee test, or native tokens for native token gas fee test)
-						// Give Bob plenty of both USDC and native tokens
-						bobFound := false
-						for i, bal := range genesisState.Balances {
-							if bal.Address == constants.BobAccAddress.String() {
-								// Update existing balance
-								genesisState.Balances[i] = banktypes.Balance{
-									Address: constants.BobAccAddress.String(),
-									Coins: sdk.NewCoins(
-										// 1 million USDC (plenty for sending 1 USDC + gas fees)
-										sdk.NewCoin(assets.AssetUsdc.Denom, sdkmath.NewInt(1_000_000_000_000)),
-										// 1 million native tokens (plenty for gas fees)
-										sdk.NewCoin(constants.TestNativeTokenDenom, sdkmath.NewInt(1_000_000_000_000_000_000_000_000)),
-									),
-								}
-								bobFound = true
-								break
-							}
-						}
-						if !bobFound {
-							// Add new balance for Bob
-							genesisState.Balances = append(genesisState.Balances, banktypes.Balance{
-								Address: constants.BobAccAddress.String(),
-								Coins: sdk.NewCoins(
-									// 1 million USDC (plenty for sending 1 USDC + gas fees)
-									sdk.NewCoin(assets.AssetUsdc.Denom, sdkmath.NewInt(1_000_000_000_000)),
-									// 1 million native tokens (plenty for gas fees)
-									sdk.NewCoin(constants.TestNativeTokenDenom, sdkmath.NewInt(1_000_000_000_000_000_000_000_000)),
-								),
-							})
-						}
-					},
-				)
-				return genesis
-			}).Build()
+			tApp := testapp.NewTestAppBuilder(t).Build()
 			ctx := tApp.InitChain()
 
 			msgSendCheckTx := testapp.MustMakeCheckTxWithPrivKeySupplier(

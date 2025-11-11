@@ -8,7 +8,7 @@ describe('getOrderIdHash', () => {
   it('hashes an order id correctly', () => {
     const orderId: IndexerOrderId = {
       subaccountId: {
-        owner: 'dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4',
+        owner: 'vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642',
         number: 0,
       },
       clientId: 0,
