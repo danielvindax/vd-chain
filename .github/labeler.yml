@@ -1,7 +1,7 @@
 indexer:
   - indexer/**
 proto:
-  - v4-proto-py/**
+  - proto-py/**
   - v4-proto-js/**
   - proto/**
 protocol:
