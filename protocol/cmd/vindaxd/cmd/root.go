@@ -119,7 +119,7 @@ func NewRootCmdWithInterceptors(
 
 	rootCmd := &cobra.Command{
 		Use:   constants.AppDaemonName,
-		Short: "Start dydxprotocol app",
+		Short: "Start vindax app",
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 			// set the default command outputs
 			cmd.SetOut(cmd.OutOrStdout())
@@ -453,7 +453,7 @@ func appExport(
 }
 
 var tempDir = func() string {
-	dir, err := os.MkdirTemp("", "dydxprotocol")
+	dir, err := os.MkdirTemp("", "vindax")
 	if err != nil {
 		dir = dydxapp.DefaultNodeHome
 	}

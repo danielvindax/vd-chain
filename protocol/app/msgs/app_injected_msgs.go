@@ -17,7 +17,7 @@ var (
 	// These messages are reserved for proposing validator's use only.
 	AppInjectedMsgSamples = map[string]sdk.Msg{
 		// bridge
-		"/dydxprotocol.bridge.MsgAcknowledgeBridges": &bridgetypes.MsgAcknowledgeBridges{
+		"/vindax.bridge.MsgAcknowledgeBridges": &bridgetypes.MsgAcknowledgeBridges{
 			Events: []bridgetypes.BridgeEvent{
 				{
 					Id: 0,
@@ -29,28 +29,28 @@ var (
 				},
 			},
 		},
-		"/dydxprotocol.bridge.MsgAcknowledgeBridgesResponse": nil,
+		"/vindax.bridge.MsgAcknowledgeBridgesResponse": nil,
 
 		// clob
-		"/dydxprotocol.clob.MsgProposedOperations": &clobtypes.MsgProposedOperations{
+		"/vindax.clob.MsgProposedOperations": &clobtypes.MsgProposedOperations{
 			OperationsQueue: make([]clobtypes.OperationRaw, 0),
 		},
-		"/dydxprotocol.clob.MsgProposedOperationsResponse": nil,
+		"/vindax.clob.MsgProposedOperationsResponse": nil,
 
 		// perpetuals
-		"/dydxprotocol.perpetuals.MsgAddPremiumVotes": &perptypes.MsgAddPremiumVotes{
+		"/vindax.perpetuals.MsgAddPremiumVotes": &perptypes.MsgAddPremiumVotes{
 			Votes: []perptypes.FundingPremium{
 				{PerpetualId: 0, PremiumPpm: 1_000},
 			},
 		},
-		"/dydxprotocol.perpetuals.MsgAddPremiumVotesResponse": nil,
+		"/vindax.perpetuals.MsgAddPremiumVotesResponse": nil,
 
 		// prices
-		"/dydxprotocol.prices.MsgUpdateMarketPrices": &pricestypes.MsgUpdateMarketPrices{
+		"/vindax.prices.MsgUpdateMarketPrices": &pricestypes.MsgUpdateMarketPrices{
 			MarketPriceUpdates: []*pricestypes.MsgUpdateMarketPrices_MarketPrice{
 				pricestypes.NewMarketPriceUpdate(constants.MarketId0, 123_000),
 			},
 		},
-		"/dydxprotocol.prices.MsgUpdateMarketPricesResponse": nil,
+		"/vindax.prices.MsgUpdateMarketPricesResponse": nil,
 	}
 )

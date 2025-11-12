@@ -26,7 +26,7 @@ TODO(CORE-512): add info/resources around Vindax Chain. [Doc](https://www.notion
 * `make test` runs unit tests.
 * `make lint` lints source code (`make lint-fix` to also fix).
 * `make build` builds source.
-* `make mock-gen` generates mocks for files listed in [mocks/Makefile](https://github.com/dydxprotocol/v4/tree/main/mocks/Makefile). More info about mocking [here](https://github.com/dydxprotocol/v4/tree/main/mocks/README.md).
+* `make mock-gen` generates mocks for files listed in [mocks/Makefile](https://github.com/vindax/v4/tree/main/mocks/Makefile). More info about mocking [here](https://github.com/vindax/v4/tree/main/mocks/README.md).
 
 
 ### Running the chain locally
@@ -68,7 +68,7 @@ We use [`yamllint`](https://github.com/adrienverge/yamllint) for linting YAML fi
 - [Running `yamllint`](https://yamllint.readthedocs.io/en/latest/quickstart.html#running-yamllint).
 - [Configuring `yamllint`](https://yamllint.readthedocs.io/en/latest/configuration.html).
 
-We currently lint the following YAML files in the [`Lint` CI job](https://github.com/dydxprotocol/v4/blob/c5ec83f074b4ff997d71a6f5dc486579ea112600/.github/workflows/lint.yml):
+We currently lint the following YAML files in the [`Lint` CI job](https://github.com/vindax/v4/blob/c5ec83f074b4ff997d71a6f5dc486579ea112600/.github/workflows/lint.yml):
 - `.golangci.yml`.
 - `.github/workflows/*.yml`.
   - Note this includes all files that end in the `yml` file extension in the `.github/workflows` directory.
@@ -104,7 +104,7 @@ Another module that can be modified similarly is the subaccounts. We can add ano
 ## Debugging Tips
 
 ### Setting up keychain
-To run the below commands, you'll want to import the private keys of the test accounts specified in [testnet-local/local.sh](https://github.com/dydxprotocol/v4/blob/main/testing/testnet-local/local.sh). Run the following commands and input the corresponding 12-word string from `MNEMONICS`. The resulting address should match those in `TEST_ACCOUNTS`.
+To run the below commands, you'll want to import the private keys of the test accounts specified in [testnet-local/local.sh](https://github.com/vindax/v4/blob/main/testing/testnet-local/local.sh). Run the following commands and input the corresponding 12-word string from `MNEMONICS`. The resulting address should match those in `TEST_ACCOUNTS`.
 
 ```sh
 ./build/vindaxd keys add alice --recover
@@ -147,7 +147,7 @@ When debugging or inspecting behavior of the chain locally, you may wish modify 
 Refer to the section above and change the `log_level` to `trace`. Note that `trace` can be pretty noisy as it logs every block proposal, message, and committed block to stdout.
 
 ### Debugging behavior in Cosmos SDK
-It's occasionally useful to be able to output logs or modify behavior in `cosmos-sdk` itself. To do this, check out [cosmos-sdk](https://github.com/cosmos/cosmos-sdk) locally at the branch which represents the version specified in the [`go.mod` file](https://github.com/dydxprotocol/v4/blob/main/go.mod) in this repository.
+It's occasionally useful to be able to output logs or modify behavior in `cosmos-sdk` itself. To do this, check out [cosmos-sdk](https://github.com/cosmos/cosmos-sdk) locally at the branch which represents the version specified in the [`go.mod` file](https://github.com/vindax/v4/blob/main/go.mod) in this repository.
 
 ```sh
 git clone git@github.com:cosmos/cosmos-sdk.git
@@ -183,11 +183,11 @@ dasel put string -f "$CONFIG_FOLDER"/config.toml '.consensus.timeout_commit' '60
 
 ## CometBFT fork
 
-Our current implementation contains a light fork of CometBFT. The fork can be found [here](https://github.com/dydxprotocol/cometbft). Instructions to update the fork are included there.
+Our current implementation contains a light fork of CometBFT. The fork can be found [here](https://github.com/vindax/cometbft). Instructions to update the fork are included there.
 
 ## CosmosSDK fork
 
-Our current implementation contains a light fork of CosmosSDK. The fork can be found [here](https://github.com/dydxprotocol/cosmos-sdk). Instructions to update the fork are included there.
+Our current implementation contains a light fork of CosmosSDK. The fork can be found [here](https://github.com/vindax/cosmos-sdk). Instructions to update the fork are included there.
 
 ## Daemons
 

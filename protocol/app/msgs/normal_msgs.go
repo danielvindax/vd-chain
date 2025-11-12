@@ -215,55 +215,55 @@ var (
 	// Custom modules
 	NormalMsgsDydxCustom = map[string]sdk.Msg{
 		// affiliates
-		"/dydxprotocol.affiliates.MsgRegisterAffiliate":         &affiliates.MsgRegisterAffiliate{},
-		"/dydxprotocol.affiliates.MsgRegisterAffiliateResponse": nil,
+		"/vindax.affiliates.MsgRegisterAffiliate":         &affiliates.MsgRegisterAffiliate{},
+		"/vindax.affiliates.MsgRegisterAffiliateResponse": nil,
 
 		// accountplus
-		"/dydxprotocol.accountplus.MsgAddAuthenticator":            &accountplus.MsgAddAuthenticator{},
-		"/dydxprotocol.accountplus.MsgAddAuthenticatorResponse":    nil,
-		"/dydxprotocol.accountplus.MsgRemoveAuthenticator":         &accountplus.MsgRemoveAuthenticator{},
-		"/dydxprotocol.accountplus.MsgRemoveAuthenticatorResponse": nil,
-		"/dydxprotocol.accountplus.TxExtension":                    nil,
+		"/vindax.accountplus.MsgAddAuthenticator":            &accountplus.MsgAddAuthenticator{},
+		"/vindax.accountplus.MsgAddAuthenticatorResponse":    nil,
+		"/vindax.accountplus.MsgRemoveAuthenticator":         &accountplus.MsgRemoveAuthenticator{},
+		"/vindax.accountplus.MsgRemoveAuthenticatorResponse": nil,
+		"/vindax.accountplus.TxExtension":                    nil,
 
 		// clob
-		"/dydxprotocol.clob.MsgBatchCancel":            &clob.MsgBatchCancel{},
-		"/dydxprotocol.clob.MsgBatchCancelResponse":    nil,
-		"/dydxprotocol.clob.MsgCancelOrder":            &clob.MsgCancelOrder{},
-		"/dydxprotocol.clob.MsgCancelOrderResponse":    nil,
-		"/dydxprotocol.clob.MsgPlaceOrder":             &clob.MsgPlaceOrder{},
-		"/dydxprotocol.clob.MsgPlaceOrderResponse":     nil,
-		"/dydxprotocol.clob.MsgUpdateLeverage":         &clob.MsgUpdateLeverage{},
-		"/dydxprotocol.clob.MsgUpdateLeverageResponse": nil,
+		"/vindax.clob.MsgBatchCancel":            &clob.MsgBatchCancel{},
+		"/vindax.clob.MsgBatchCancelResponse":    nil,
+		"/vindax.clob.MsgCancelOrder":            &clob.MsgCancelOrder{},
+		"/vindax.clob.MsgCancelOrderResponse":    nil,
+		"/vindax.clob.MsgPlaceOrder":             &clob.MsgPlaceOrder{},
+		"/vindax.clob.MsgPlaceOrderResponse":     nil,
+		"/vindax.clob.MsgUpdateLeverage":         &clob.MsgUpdateLeverage{},
+		"/vindax.clob.MsgUpdateLeverageResponse": nil,
 
 		// listing
-		"/dydxprotocol.listing.MsgCreateMarketPermissionless":         &listing.MsgCreateMarketPermissionless{},
-		"/dydxprotocol.listing.MsgCreateMarketPermissionlessResponse": nil,
+		"/vindax.listing.MsgCreateMarketPermissionless":         &listing.MsgCreateMarketPermissionless{},
+		"/vindax.listing.MsgCreateMarketPermissionlessResponse": nil,
 
 		// perpetuals
 
 		// prices
 
 		// sending
-		"/dydxprotocol.sending.MsgCreateTransfer":                 &sending.MsgCreateTransfer{},
-		"/dydxprotocol.sending.MsgCreateTransferResponse":         nil,
-		"/dydxprotocol.sending.MsgDepositToSubaccount":            &sending.MsgDepositToSubaccount{},
-		"/dydxprotocol.sending.MsgDepositToSubaccountResponse":    nil,
-		"/dydxprotocol.sending.MsgWithdrawFromSubaccount":         &sending.MsgWithdrawFromSubaccount{},
-		"/dydxprotocol.sending.MsgWithdrawFromSubaccountResponse": nil,
+		"/vindax.sending.MsgCreateTransfer":                 &sending.MsgCreateTransfer{},
+		"/vindax.sending.MsgCreateTransferResponse":         nil,
+		"/vindax.sending.MsgDepositToSubaccount":            &sending.MsgDepositToSubaccount{},
+		"/vindax.sending.MsgDepositToSubaccountResponse":    nil,
+		"/vindax.sending.MsgWithdrawFromSubaccount":         &sending.MsgWithdrawFromSubaccount{},
+		"/vindax.sending.MsgWithdrawFromSubaccountResponse": nil,
 
 		// vault
-		"/dydxprotocol.vault.MsgAllocateToVault":                    &vault.MsgAllocateToVault{},
-		"/dydxprotocol.vault.MsgAllocateToVaultResponse":            nil,
-		"/dydxprotocol.vault.MsgDepositToMegavault":                 &vault.MsgDepositToMegavault{},
-		"/dydxprotocol.vault.MsgDepositToMegavaultResponse":         nil,
-		"/dydxprotocol.vault.MsgRetrieveFromVault":                  &vault.MsgRetrieveFromVault{},
-		"/dydxprotocol.vault.MsgRetrieveFromVaultResponse":          nil,
-		"/dydxprotocol.vault.MsgSetVaultParams":                     &vault.MsgSetVaultParams{},
-		"/dydxprotocol.vault.MsgSetVaultParamsResponse":             nil,
-		"/dydxprotocol.vault.MsgUpdateDefaultQuotingParams":         &vault.MsgUpdateDefaultQuotingParams{},
-		"/dydxprotocol.vault.MsgUpdateDefaultQuotingParamsResponse": nil,
-		"/dydxprotocol.vault.MsgWithdrawFromMegavault":              &vault.MsgWithdrawFromMegavault{},
-		"/dydxprotocol.vault.MsgWithdrawFromMegavaultResponse":      nil,
+		"/vindax.vault.MsgAllocateToVault":                    &vault.MsgAllocateToVault{},
+		"/vindax.vault.MsgAllocateToVaultResponse":            nil,
+		"/vindax.vault.MsgDepositToMegavault":                 &vault.MsgDepositToMegavault{},
+		"/vindax.vault.MsgDepositToMegavaultResponse":         nil,
+		"/vindax.vault.MsgRetrieveFromVault":                  &vault.MsgRetrieveFromVault{},
+		"/vindax.vault.MsgRetrieveFromVaultResponse":          nil,
+		"/vindax.vault.MsgSetVaultParams":                     &vault.MsgSetVaultParams{},
+		"/vindax.vault.MsgSetVaultParamsResponse":             nil,
+		"/vindax.vault.MsgUpdateDefaultQuotingParams":         &vault.MsgUpdateDefaultQuotingParams{},
+		"/vindax.vault.MsgUpdateDefaultQuotingParamsResponse": nil,
+		"/vindax.vault.MsgWithdrawFromMegavault":              &vault.MsgWithdrawFromMegavault{},
+		"/vindax.vault.MsgWithdrawFromMegavaultResponse":      nil,
 	}
 
 	NormalMsgsSlinky = map[string]sdk.Msg{

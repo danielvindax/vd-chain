@@ -764,7 +764,7 @@ func TestPlaceOrder_PermissionedKeys_Success(t *testing.T) {
 		},
 		{
 			Type:   "MessageFilter",
-			Config: []byte("/dydxprotocol.clob.MsgPlaceOrder"),
+			Config: []byte("/vindax.clob.MsgPlaceOrder"),
 		},
 		{
 			Type:   "ClobPairIdFilter",

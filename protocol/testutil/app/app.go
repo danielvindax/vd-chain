@@ -1112,7 +1112,7 @@ func (tApp *TestApp) CheckTx(req abcitypes.RequestCheckTx) abcitypes.ResponseChe
 	tApp.panicIfChainIsHalted()
 	res, err := tApp.App.CheckTx(&req)
 	// Note that the dYdX fork of CometBFT explicitly excludes place and cancel order messages. See
-	// https://github.com/dydxprotocol/cometbft/blob/5e6c4b6/mempool/clist_mempool.go#L441
+	// https://github.com/vindax/cometbft/blob/5e6c4b6/mempool/clist_mempool.go#L441
 	if err == nil && res.IsOK() && !mempool.IsShortTermClobOrderTransaction(req.Tx, newTestingLogger()) {
 		// We want to ensure that we hold the lock only for updating passingCheckTxs so that App.CheckTx can execute
 		// concurrently.

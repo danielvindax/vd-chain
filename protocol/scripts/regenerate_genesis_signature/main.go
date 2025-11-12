@@ -21,7 +21,7 @@ import (
 )
 
 // This script regenerates signatures for genesis validator transactions
-// after fixing the validator_address prefix from dydxvaloper to vindaxvaloper
+// after fixing the validator_address prefix from vindaxvaloper to vindaxvaloper
 
 const (
 	chainID = "dydx-sample-1"

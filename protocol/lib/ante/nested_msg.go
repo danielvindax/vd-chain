@@ -11,7 +11,7 @@ import (
 	"github.com/danielvindax/vd-chain/protocol/lib/metrics"
 )
 
-const DYDX_MSG_PREFIX = "/" + constants.AppName
+const VINDAX_MSG_PREFIX = "/" + constants.AppName
 const SLINKY_MSG_PREFIX = "/slinky"
 
 // IsNestedMsg returns true if the given msg is a nested msg.
@@ -28,9 +28,10 @@ func IsNestedMsg(msg sdk.Msg) bool {
 	return false
 }
 
-// IsDydxMsg returns true if the given msg is a dYdX custom msg.
-func IsDydxMsg(msg sdk.Msg) bool {
-	return strings.HasPrefix(sdk.MsgTypeURL(msg), DYDX_MSG_PREFIX)
+// IsVindaxMsg returns true if the given msg is a Vindax custom msg.
+func IsVindaxMsg(msg sdk.Msg) bool {
+	fmt.Println("IsVindaxMsg: ", sdk.MsgTypeURL(msg))
+	return strings.HasPrefix(sdk.MsgTypeURL(msg), VINDAX_MSG_PREFIX)
 }
 
 // IsSlinkyMsg returns true if the given msg is a Slinky custom msg.
@@ -76,14 +77,14 @@ func validateInnerMsg(msg sdk.Msg) error {
 			return fmt.Errorf("Invalid nested msg: double-nested msg type")
 		}
 
-		// 4. Reject nested dydxprotocol messages in `MsgExec`.
+		// 4. Reject nested vindax messages in `MsgExec`.
 		if _, ok := msg.(*authz.MsgExec); ok {
 			metrics.IncrCountMetricWithLabels(
 				metrics.Ante,
 				metrics.MsgExec,
 				metrics.GetLabelForStringValue(metrics.InnerMsg, sdk.MsgTypeURL(inner)),
 			)
-			if IsDydxMsg(inner) {
+			if IsVindaxMsg(inner) {
 				return fmt.Errorf("Invalid nested msg for MsgExec: dydx msg type")
 			}
 			if IsSlinkyMsg(inner) {

@@ -20,20 +20,20 @@ import (
 func TestAppInjectedMsgSamples_Key(t *testing.T) {
 	expectedMsgs := []string{
 		// bridge
-		"/dydxprotocol.bridge.MsgAcknowledgeBridges",
-		"/dydxprotocol.bridge.MsgAcknowledgeBridgesResponse",
+		"/vindax.bridge.MsgAcknowledgeBridges",
+		"/vindax.bridge.MsgAcknowledgeBridgesResponse",
 
 		// clob
-		"/dydxprotocol.clob.MsgProposedOperations",
-		"/dydxprotocol.clob.MsgProposedOperationsResponse",
+		"/vindax.clob.MsgProposedOperations",
+		"/vindax.clob.MsgProposedOperationsResponse",
 
 		// perpetuals
-		"/dydxprotocol.perpetuals.MsgAddPremiumVotes",
-		"/dydxprotocol.perpetuals.MsgAddPremiumVotesResponse",
+		"/vindax.perpetuals.MsgAddPremiumVotes",
+		"/vindax.perpetuals.MsgAddPremiumVotesResponse",
 
 		// prices
-		"/dydxprotocol.prices.MsgUpdateMarketPrices",
-		"/dydxprotocol.prices.MsgUpdateMarketPricesResponse",
+		"/vindax.prices.MsgUpdateMarketPrices",
+		"/vindax.prices.MsgUpdateMarketPricesResponse",
 	}
 
 	require.Equal(t, expectedMsgs, lib.GetSortedKeys[sort.StringSlice](msgs.AppInjectedMsgSamples))

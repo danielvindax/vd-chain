@@ -1,6 +1,8 @@
 package ante
 
-import sdk "github.com/cosmos/cosmos-sdk/types"
+import (
+	sdk "github.com/cosmos/cosmos-sdk/types"
+)
 
 // IsDisallowExternalSubmitMsg returns true if the msg is not allowed to be submitted externally.
 func IsDisallowExternalSubmitMsg(msg sdk.Msg) bool {

@@ -78,7 +78,7 @@ go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 mkdir -p $WORKDIR
 cd $WORKDIR
 FILE_REGEX="vindaxd-v[0-9]+\.[0-9]+\.[0-9]+-linux-$ARCH.tar.gz"
-curl -s "https://api.github.com/repos/dydxprotocol/v4-chain/releases/tags/protocol/$VERSION" \
+curl -s "https://api.github.com/repos/vindax/v4-chain/releases/tags/protocol/$VERSION" \
 | grep -E $FILE_REGEX \
 | cut -d : -f 2,3 \
 | tr -d \" \

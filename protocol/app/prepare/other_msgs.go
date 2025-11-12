@@ -48,19 +48,43 @@ func RemoveDisallowMsgs(
 		metrics.Latency,
 	)
 
+	ctx.Logger().Info("RemoveDisallowMsgs: starting to filter txs",
+		"total_txs", len(txs),
+	)
 	var filteredTxs [][]byte
 	for i, txBytes := range txs {
 		// Decode tx so we can read msgs.
+		ctx.Logger().Debug("RemoveDisallowMsgs: decoding tx",
+			"tx_index", i,
+			"tx_bytes_len", len(txBytes),
+		)
 		tx, err := decoder(txBytes)
 		if err != nil {
 			ctx.Logger().Error(fmt.Sprintf("RemoveDisallowMsgs: failed to decode tx (index %v of %v txs): %v", i, len(txs), err))
 			continue // continue to next tx.
 		}
 
+		ctx.Logger().Debug("RemoveDisallowMsgs: decoded tx",
+			"tx_index", i,
+			"num_msgs", len(tx.GetMsgs()),
+		)
+
 		// For each msg in tx, check if it is disallowed.
 		containsDisallowMsg := false
-		for _, msg := range tx.GetMsgs() {
+		for j, msg := range tx.GetMsgs() {
+			msgType := proto.MessageName(msg)
+			ctx.Logger().Debug("RemoveDisallowMsgs: checking msg",
+				"tx_index", i,
+				"msg_index", j,
+				"msg_type", msgType,
+			)
+
 			if ante.IsDisallowExternalSubmitMsg(msg) {
+				ctx.Logger().Info("RemoveDisallowMsgs: found disallowed external submit msg",
+					"tx_index", i,
+					"msg_index", j,
+					"msg_type", msgType,
+				)
 				telemetry.IncrCounterWithLabels(
 					[]string{ModuleName, metrics.RemoveDisallowMsgs, metrics.DisallowMsg, metrics.Count},
 					1,
@@ -69,18 +93,39 @@ func RemoveDisallowMsgs(
 				containsDisallowMsg = true
 				break // break out of loop over msgs.
 			}
+
+			// Check for CLOB order msgs that should be disallowed
+			// Note: This check is also done in ProcessProposal, but we log it here for visibility
+			ctx.Logger().Debug("RemoveDisallowMsgs: msg passed external submit check",
+				"tx_index", i,
+				"msg_index", j,
+				"msg_type", msgType,
+			)
 		}
 
 		// If tx contains disallowed msg, skip it.
 		if containsDisallowMsg {
-			ctx.Logger().Error(
-				fmt.Sprintf("RemoveDisallowMsgs: skipping tx with disallowed msg. Size: %d", len(txBytes)))
+			ctx.Logger().Info("RemoveDisallowMsgs: skipping tx with disallowed msg",
+				"tx_index", i,
+				"tx_bytes_len", len(txBytes),
+				"num_msgs", len(tx.GetMsgs()),
+			)
 			continue // continue to next tx.
 		}
 
 		// Otherwise, add tx to filtered txs.
+		ctx.Logger().Debug("RemoveDisallowMsgs: tx passed all checks, adding to filtered list",
+			"tx_index", i,
+			"num_msgs", len(tx.GetMsgs()),
+		)
 		filteredTxs = append(filteredTxs, txBytes)
 	}
+
+	ctx.Logger().Info("RemoveDisallowMsgs: finished filtering txs",
+		"original_count", len(txs),
+		"filtered_count", len(filteredTxs),
+		"removed_count", len(txs)-len(filteredTxs),
+	)
 
 	return filteredTxs
 }

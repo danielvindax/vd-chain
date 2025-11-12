@@ -591,7 +591,7 @@
           "block_height": 6912000,
           "id": 0,
           "msg": {
-            "@type": "/dydxprotocol.feetiers.MsgUpdatePerpetualFeeParams",
+            "@type": "/vindax.feetiers.MsgUpdatePerpetualFeeParams",
             "authority": "vindax1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5jljzu",
             "params": {
               "tiers": [

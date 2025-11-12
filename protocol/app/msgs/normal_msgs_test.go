@@ -114,57 +114,6 @@ func TestNormalMsgs_Key(t *testing.T) {
 		"/cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal",
 		"/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal",
 
-		// accountplus
-		"/dydxprotocol.accountplus.MsgAddAuthenticator",
-		"/dydxprotocol.accountplus.MsgAddAuthenticatorResponse",
-		"/dydxprotocol.accountplus.MsgRemoveAuthenticator",
-		"/dydxprotocol.accountplus.MsgRemoveAuthenticatorResponse",
-		"/dydxprotocol.accountplus.TxExtension",
-
-		// affiliates
-		"/dydxprotocol.affiliates.MsgRegisterAffiliate",
-		"/dydxprotocol.affiliates.MsgRegisterAffiliateResponse",
-
-		// clob
-		"/dydxprotocol.clob.MsgBatchCancel",
-		"/dydxprotocol.clob.MsgBatchCancelResponse",
-		"/dydxprotocol.clob.MsgCancelOrder",
-		"/dydxprotocol.clob.MsgCancelOrderResponse",
-		"/dydxprotocol.clob.MsgPlaceOrder",
-		"/dydxprotocol.clob.MsgPlaceOrderResponse",
-		"/dydxprotocol.clob.MsgUpdateLeverage",
-		"/dydxprotocol.clob.MsgUpdateLeverageResponse",
-
-		// listing
-		"/dydxprotocol.listing.MsgCreateMarketPermissionless",
-		"/dydxprotocol.listing.MsgCreateMarketPermissionlessResponse",
-
-		// perpetuals
-
-		// prices
-
-		// sending
-		"/dydxprotocol.sending.MsgCreateTransfer",
-		"/dydxprotocol.sending.MsgCreateTransferResponse",
-		"/dydxprotocol.sending.MsgDepositToSubaccount",
-		"/dydxprotocol.sending.MsgDepositToSubaccountResponse",
-		"/dydxprotocol.sending.MsgWithdrawFromSubaccount",
-		"/dydxprotocol.sending.MsgWithdrawFromSubaccountResponse",
-
-		// vault
-		"/dydxprotocol.vault.MsgAllocateToVault",
-		"/dydxprotocol.vault.MsgAllocateToVaultResponse",
-		"/dydxprotocol.vault.MsgDepositToMegavault",
-		"/dydxprotocol.vault.MsgDepositToMegavaultResponse",
-		"/dydxprotocol.vault.MsgRetrieveFromVault",
-		"/dydxprotocol.vault.MsgRetrieveFromVaultResponse",
-		"/dydxprotocol.vault.MsgSetVaultParams",
-		"/dydxprotocol.vault.MsgSetVaultParamsResponse",
-		"/dydxprotocol.vault.MsgUpdateDefaultQuotingParams",
-		"/dydxprotocol.vault.MsgUpdateDefaultQuotingParamsResponse",
-		"/dydxprotocol.vault.MsgWithdrawFromMegavault",
-		"/dydxprotocol.vault.MsgWithdrawFromMegavaultResponse",
-
 		// ibc application module: ICA
 		"/ibc.applications.interchain_accounts.v1.InterchainAccount",
 
@@ -253,6 +202,57 @@ func TestNormalMsgs_Key(t *testing.T) {
 		"/slinky.marketmap.v1.MsgUpdateMarketsResponse",
 		"/slinky.marketmap.v1.MsgUpsertMarkets",
 		"/slinky.marketmap.v1.MsgUpsertMarketsResponse",
+
+		// accountplus
+		"/vindax.accountplus.MsgAddAuthenticator",
+		"/vindax.accountplus.MsgAddAuthenticatorResponse",
+		"/vindax.accountplus.MsgRemoveAuthenticator",
+		"/vindax.accountplus.MsgRemoveAuthenticatorResponse",
+		"/vindax.accountplus.TxExtension",
+
+		// affiliates
+		"/vindax.affiliates.MsgRegisterAffiliate",
+		"/vindax.affiliates.MsgRegisterAffiliateResponse",
+
+		// clob
+		"/vindax.clob.MsgBatchCancel",
+		"/vindax.clob.MsgBatchCancelResponse",
+		"/vindax.clob.MsgCancelOrder",
+		"/vindax.clob.MsgCancelOrderResponse",
+		"/vindax.clob.MsgPlaceOrder",
+		"/vindax.clob.MsgPlaceOrderResponse",
+		"/vindax.clob.MsgUpdateLeverage",
+		"/vindax.clob.MsgUpdateLeverageResponse",
+
+		// listing
+		"/vindax.listing.MsgCreateMarketPermissionless",
+		"/vindax.listing.MsgCreateMarketPermissionlessResponse",
+
+		// perpetuals
+
+		// prices
+
+		// sending
+		"/vindax.sending.MsgCreateTransfer",
+		"/vindax.sending.MsgCreateTransferResponse",
+		"/vindax.sending.MsgDepositToSubaccount",
+		"/vindax.sending.MsgDepositToSubaccountResponse",
+		"/vindax.sending.MsgWithdrawFromSubaccount",
+		"/vindax.sending.MsgWithdrawFromSubaccountResponse",
+
+		// vault
+		"/vindax.vault.MsgAllocateToVault",
+		"/vindax.vault.MsgAllocateToVaultResponse",
+		"/vindax.vault.MsgDepositToMegavault",
+		"/vindax.vault.MsgDepositToMegavaultResponse",
+		"/vindax.vault.MsgRetrieveFromVault",
+		"/vindax.vault.MsgRetrieveFromVaultResponse",
+		"/vindax.vault.MsgSetVaultParams",
+		"/vindax.vault.MsgSetVaultParamsResponse",
+		"/vindax.vault.MsgUpdateDefaultQuotingParams",
+		"/vindax.vault.MsgUpdateDefaultQuotingParamsResponse",
+		"/vindax.vault.MsgWithdrawFromMegavault",
+		"/vindax.vault.MsgWithdrawFromMegavaultResponse",
 	}
 
 	require.Equal(t, expectedMsgs, lib.GetSortedKeys[sort.StringSlice](msgs.NormalMsgs))

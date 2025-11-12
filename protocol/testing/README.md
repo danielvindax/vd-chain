@@ -54,8 +54,8 @@ $ docker run -it --entrypoint /bin/sh <image id>
 
 # Running a full-node
 
-If you wish to run as a full-node instead of a validator, specify the `--home` flag as ` /dydxprotocol/chain/.full-node`.
+If you wish to run as a full-node instead of a validator, specify the `--home` flag as ` /vindax/chain/.full-node`.
 
 ```sh
-$ docker build . --progress=plain --no-cache -f ./testing/testnet-dev/Dockerfile -t testnet && docker run testnet start --home /dydxprotocol/chain/.full-node
+$ docker build . --progress=plain --no-cache -f ./testing/testnet-dev/Dockerfile -t testnet && docker run testnet start --home /vindax/chain/.full-node
 ```
