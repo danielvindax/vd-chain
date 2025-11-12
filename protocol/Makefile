@@ -294,7 +294,7 @@ proto-download-deps:
 	mkdir -p "$(THIRD_PARTY_DIR)/cosmos_tmp" && \
 	cd "$(THIRD_PARTY_DIR)/cosmos_tmp" && \
 	git init && \
-	git remote add origin "https://github.com/dydxprotocol/cosmos-sdk.git" && \
+	git remote add origin "https://github.com/vindax/cosmos-sdk.git" && \
 	git config core.sparseCheckout true && \
 	printf "proto\nthird_party\n" > .git/info/sparse-checkout && \
 	git pull origin main && \

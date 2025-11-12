@@ -1,7 +1,7 @@
 package constants
 
 // This is a copy of the localnet genesis.json. This can be retrieved from the localnet docker container path:
-// /dydxprotocol/chain/.alice/config/genesis.json
+// /vindax/chain/.alice/config/genesis.json
 // Disable linter for exchange config.
 //
 //nolint:all
@@ -339,7 +339,7 @@ const GenesisState = `{
           "block_height": 6480000,
           "id": 0,
           "msg": {
-            "@type": "/dydxprotocol.feetiers.MsgUpdatePerpetualFeeParams",
+            "@type": "/vindax.feetiers.MsgUpdatePerpetualFeeParams",
             "authority": "vindax1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5jljzu",
             "params": {
               "tiers": [

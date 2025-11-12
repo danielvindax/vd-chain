@@ -74,9 +74,9 @@ func TestIsDydxMsg_Invalid(t *testing.T) {
 		appmsgs.InternalMsgSamplesDydxCustom,
 		map[string]sdk.Msg{
 			// nolint:staticcheck
-			"/dydxprotocol.vault.MsgSetVaultQuotingParams": &vaulttypes.MsgSetVaultQuotingParams{},
+			"/vindax.vault.MsgSetVaultQuotingParams": &vaulttypes.MsgSetVaultQuotingParams{},
 			// nolint:staticcheck
-			"/dydxprotocol.vault.MsgUpdateParams": &vaulttypes.MsgUpdateParams{},
+			"/vindax.vault.MsgUpdateParams": &vaulttypes.MsgUpdateParams{},
 		},
 	)
 	allMsgsMinusDydx := lib.MergeAllMapsMustHaveDistinctKeys(appmsgs.AllowMsgs, appmsgs.DisallowMsgs)
@@ -87,7 +87,7 @@ func TestIsDydxMsg_Invalid(t *testing.T) {
 
 	for _, sampleMsg := range allNonNilSampleMsgs {
 		t.Run(sampleMsg.Name, func(t *testing.T) {
-			require.False(t, ante.IsDydxMsg(sampleMsg.Msg))
+			require.False(t, ante.IsVindaxMsg(sampleMsg.Msg))
 		})
 	}
 }
@@ -102,7 +102,7 @@ func TestIsDydxMsg_Valid(t *testing.T) {
 
 	for _, sampleMsg := range allNonNilSampleMsgs {
 		t.Run(sampleMsg.Name, func(t *testing.T) {
-			require.True(t, ante.IsDydxMsg(sampleMsg.Msg))
+			require.True(t, ante.IsVindaxMsg(sampleMsg.Msg))
 		})
 	}
 }

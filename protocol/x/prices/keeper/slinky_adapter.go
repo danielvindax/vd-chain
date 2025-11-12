@@ -116,7 +116,7 @@ func (k Keeper) GetNumRemovedCurrencyPairs(_ sdk.Context) (uint64, error) {
 }
 
 // GetAllCurrencyPairs is not used with the DefaultCurrencyPair strategy.
-// See https://github.com/dydxprotocol/slinky/blob/main/abci/strategies/currencypair/default.go
+// See https://github.com/vindax/slinky/blob/main/abci/strategies/currencypair/default.go
 func (k Keeper) GetAllCurrencyPairs(_ sdk.Context) []slinkytypes.CurrencyPair {
 	return nil
 }

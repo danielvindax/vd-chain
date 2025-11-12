@@ -110,123 +110,123 @@ var (
 	// Custom modules
 	InternalMsgSamplesDydxCustom = map[string]sdk.Msg{
 		// affiliates
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateTiers":              &affiliates.MsgUpdateAffiliateTiers{},
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateTiersResponse":      nil,
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateWhitelist":          &affiliates.MsgUpdateAffiliateWhitelist{},
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateWhitelistResponse":  nil,
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateParameters":         &affiliates.MsgUpdateAffiliateParameters{},
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateParametersResponse": nil,
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateOverrides":          &affiliates.MsgUpdateAffiliateOverrides{},
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateOverridesResponse":  nil,
+		"/vindax.affiliates.MsgUpdateAffiliateTiers":              &affiliates.MsgUpdateAffiliateTiers{},
+		"/vindax.affiliates.MsgUpdateAffiliateTiersResponse":      nil,
+		"/vindax.affiliates.MsgUpdateAffiliateWhitelist":          &affiliates.MsgUpdateAffiliateWhitelist{},
+		"/vindax.affiliates.MsgUpdateAffiliateWhitelistResponse":  nil,
+		"/vindax.affiliates.MsgUpdateAffiliateParameters":         &affiliates.MsgUpdateAffiliateParameters{},
+		"/vindax.affiliates.MsgUpdateAffiliateParametersResponse": nil,
+		"/vindax.affiliates.MsgUpdateAffiliateOverrides":          &affiliates.MsgUpdateAffiliateOverrides{},
+		"/vindax.affiliates.MsgUpdateAffiliateOverridesResponse":  nil,
 
 		// accountplus
-		"/dydxprotocol.accountplus.MsgSetActiveState":         &accountplus.MsgSetActiveState{},
-		"/dydxprotocol.accountplus.MsgSetActiveStateResponse": nil,
+		"/vindax.accountplus.MsgSetActiveState":         &accountplus.MsgSetActiveState{},
+		"/vindax.accountplus.MsgSetActiveStateResponse": nil,
 
 		// blocktime
-		"/dydxprotocol.blocktime.MsgUpdateDowntimeParams":          &blocktime.MsgUpdateDowntimeParams{},
-		"/dydxprotocol.blocktime.MsgUpdateDowntimeParamsResponse":  nil,
-		"/dydxprotocol.blocktime.MsgUpdateSynchronyParams":         &blocktime.MsgUpdateSynchronyParams{},
-		"/dydxprotocol.blocktime.MsgUpdateSynchronyParamsResponse": nil,
+		"/vindax.blocktime.MsgUpdateDowntimeParams":          &blocktime.MsgUpdateDowntimeParams{},
+		"/vindax.blocktime.MsgUpdateDowntimeParamsResponse":  nil,
+		"/vindax.blocktime.MsgUpdateSynchronyParams":         &blocktime.MsgUpdateSynchronyParams{},
+		"/vindax.blocktime.MsgUpdateSynchronyParamsResponse": nil,
 
 		// bridge
-		"/dydxprotocol.bridge.MsgCompleteBridge":              &bridge.MsgCompleteBridge{},
-		"/dydxprotocol.bridge.MsgCompleteBridgeResponse":      nil,
-		"/dydxprotocol.bridge.MsgUpdateEventParams":           &bridge.MsgUpdateEventParams{},
-		"/dydxprotocol.bridge.MsgUpdateEventParamsResponse":   nil,
-		"/dydxprotocol.bridge.MsgUpdateProposeParams":         &bridge.MsgUpdateProposeParams{},
-		"/dydxprotocol.bridge.MsgUpdateProposeParamsResponse": nil,
-		"/dydxprotocol.bridge.MsgUpdateSafetyParams":          &bridge.MsgUpdateSafetyParams{},
-		"/dydxprotocol.bridge.MsgUpdateSafetyParamsResponse":  nil,
+		"/vindax.bridge.MsgCompleteBridge":              &bridge.MsgCompleteBridge{},
+		"/vindax.bridge.MsgCompleteBridgeResponse":      nil,
+		"/vindax.bridge.MsgUpdateEventParams":           &bridge.MsgUpdateEventParams{},
+		"/vindax.bridge.MsgUpdateEventParamsResponse":   nil,
+		"/vindax.bridge.MsgUpdateProposeParams":         &bridge.MsgUpdateProposeParams{},
+		"/vindax.bridge.MsgUpdateProposeParamsResponse": nil,
+		"/vindax.bridge.MsgUpdateSafetyParams":          &bridge.MsgUpdateSafetyParams{},
+		"/vindax.bridge.MsgUpdateSafetyParamsResponse":  nil,
 
 		// clob
-		"/dydxprotocol.clob.MsgCreateClobPair":                             &clob.MsgCreateClobPair{},
-		"/dydxprotocol.clob.MsgCreateClobPairResponse":                     nil,
-		"/dydxprotocol.clob.MsgUpdateBlockRateLimitConfiguration":          &clob.MsgUpdateBlockRateLimitConfiguration{},
-		"/dydxprotocol.clob.MsgUpdateBlockRateLimitConfigurationResponse":  nil,
-		"/dydxprotocol.clob.MsgUpdateClobPair":                             &clob.MsgUpdateClobPair{},
-		"/dydxprotocol.clob.MsgUpdateClobPairResponse":                     nil,
-		"/dydxprotocol.clob.MsgUpdateEquityTierLimitConfiguration":         &clob.MsgUpdateEquityTierLimitConfiguration{},
-		"/dydxprotocol.clob.MsgUpdateEquityTierLimitConfigurationResponse": nil,
-		"/dydxprotocol.clob.MsgUpdateLiquidationsConfig":                   &clob.MsgUpdateLiquidationsConfig{},
-		"/dydxprotocol.clob.MsgUpdateLiquidationsConfigResponse":           nil,
+		"/vindax.clob.MsgCreateClobPair":                             &clob.MsgCreateClobPair{},
+		"/vindax.clob.MsgCreateClobPairResponse":                     nil,
+		"/vindax.clob.MsgUpdateBlockRateLimitConfiguration":          &clob.MsgUpdateBlockRateLimitConfiguration{},
+		"/vindax.clob.MsgUpdateBlockRateLimitConfigurationResponse":  nil,
+		"/vindax.clob.MsgUpdateClobPair":                             &clob.MsgUpdateClobPair{},
+		"/vindax.clob.MsgUpdateClobPairResponse":                     nil,
+		"/vindax.clob.MsgUpdateEquityTierLimitConfiguration":         &clob.MsgUpdateEquityTierLimitConfiguration{},
+		"/vindax.clob.MsgUpdateEquityTierLimitConfigurationResponse": nil,
+		"/vindax.clob.MsgUpdateLiquidationsConfig":                   &clob.MsgUpdateLiquidationsConfig{},
+		"/vindax.clob.MsgUpdateLiquidationsConfigResponse":           nil,
 
 		// delaymsg
-		"/dydxprotocol.delaymsg.MsgDelayMessage":         &delaymsg.MsgDelayMessage{},
-		"/dydxprotocol.delaymsg.MsgDelayMessageResponse": nil,
+		"/vindax.delaymsg.MsgDelayMessage":         &delaymsg.MsgDelayMessage{},
+		"/vindax.delaymsg.MsgDelayMessageResponse": nil,
 
 		// feetiers
-		"/dydxprotocol.feetiers.MsgUpdatePerpetualFeeParams":           &feetiers.MsgUpdatePerpetualFeeParams{},
-		"/dydxprotocol.feetiers.MsgUpdatePerpetualFeeParamsResponse":   nil,
-		"/dydxprotocol.feetiers.MsgSetMarketFeeDiscountParams":         &feetiers.MsgSetMarketFeeDiscountParams{},
-		"/dydxprotocol.feetiers.MsgSetMarketFeeDiscountParamsResponse": nil,
-		"/dydxprotocol.feetiers.MsgSetStakingTiers":                    &feetiers.MsgSetStakingTiers{},
-		"/dydxprotocol.feetiers.MsgSetStakingTiersResponse":            nil,
+		"/vindax.feetiers.MsgUpdatePerpetualFeeParams":           &feetiers.MsgUpdatePerpetualFeeParams{},
+		"/vindax.feetiers.MsgUpdatePerpetualFeeParamsResponse":   nil,
+		"/vindax.feetiers.MsgSetMarketFeeDiscountParams":         &feetiers.MsgSetMarketFeeDiscountParams{},
+		"/vindax.feetiers.MsgSetMarketFeeDiscountParamsResponse": nil,
+		"/vindax.feetiers.MsgSetStakingTiers":                    &feetiers.MsgSetStakingTiers{},
+		"/vindax.feetiers.MsgSetStakingTiersResponse":            nil,
 
 		// govplus
-		"/dydxprotocol.govplus.MsgSlashValidator":         &govplus.MsgSlashValidator{},
-		"/dydxprotocol.govplus.MsgSlashValidatorResponse": nil,
+		"/vindax.govplus.MsgSlashValidator":         &govplus.MsgSlashValidator{},
+		"/vindax.govplus.MsgSlashValidatorResponse": nil,
 
 		// listing
-		"/dydxprotocol.listing.MsgSetMarketsHardCap":                       &listing.MsgSetMarketsHardCap{},
-		"/dydxprotocol.listing.MsgSetMarketsHardCapResponse":               nil,
-		"/dydxprotocol.listing.MsgSetListingVaultDepositParams":            &listing.MsgSetListingVaultDepositParams{},
-		"/dydxprotocol.listing.MsgSetListingVaultDepositParamsResponse":    nil,
-		"/dydxprotocol.listing.MsgUpgradeIsolatedPerpetualToCross":         &listing.MsgUpgradeIsolatedPerpetualToCross{},
-		"/dydxprotocol.listing.MsgUpgradeIsolatedPerpetualToCrossResponse": nil,
+		"/vindax.listing.MsgSetMarketsHardCap":                       &listing.MsgSetMarketsHardCap{},
+		"/vindax.listing.MsgSetMarketsHardCapResponse":               nil,
+		"/vindax.listing.MsgSetListingVaultDepositParams":            &listing.MsgSetListingVaultDepositParams{},
+		"/vindax.listing.MsgSetListingVaultDepositParamsResponse":    nil,
+		"/vindax.listing.MsgUpgradeIsolatedPerpetualToCross":         &listing.MsgUpgradeIsolatedPerpetualToCross{},
+		"/vindax.listing.MsgUpgradeIsolatedPerpetualToCrossResponse": nil,
 
 		// perpetuals
-		"/dydxprotocol.perpetuals.MsgCreatePerpetual":               &perpetuals.MsgCreatePerpetual{},
-		"/dydxprotocol.perpetuals.MsgCreatePerpetualResponse":       nil,
-		"/dydxprotocol.perpetuals.MsgSetLiquidityTier":              &perpetuals.MsgSetLiquidityTier{},
-		"/dydxprotocol.perpetuals.MsgSetLiquidityTierResponse":      nil,
-		"/dydxprotocol.perpetuals.MsgUpdateParams":                  &perpetuals.MsgUpdateParams{},
-		"/dydxprotocol.perpetuals.MsgUpdateParamsResponse":          nil,
-		"/dydxprotocol.perpetuals.MsgUpdatePerpetualParams":         &perpetuals.MsgUpdatePerpetualParams{},
-		"/dydxprotocol.perpetuals.MsgUpdatePerpetualParamsResponse": nil,
+		"/vindax.perpetuals.MsgCreatePerpetual":               &perpetuals.MsgCreatePerpetual{},
+		"/vindax.perpetuals.MsgCreatePerpetualResponse":       nil,
+		"/vindax.perpetuals.MsgSetLiquidityTier":              &perpetuals.MsgSetLiquidityTier{},
+		"/vindax.perpetuals.MsgSetLiquidityTierResponse":      nil,
+		"/vindax.perpetuals.MsgUpdateParams":                  &perpetuals.MsgUpdateParams{},
+		"/vindax.perpetuals.MsgUpdateParamsResponse":          nil,
+		"/vindax.perpetuals.MsgUpdatePerpetualParams":         &perpetuals.MsgUpdatePerpetualParams{},
+		"/vindax.perpetuals.MsgUpdatePerpetualParamsResponse": nil,
 
 		// prices
-		"/dydxprotocol.prices.MsgCreateOracleMarket":         &prices.MsgCreateOracleMarket{},
-		"/dydxprotocol.prices.MsgCreateOracleMarketResponse": nil,
-		"/dydxprotocol.prices.MsgUpdateMarketParam":          &prices.MsgUpdateMarketParam{},
-		"/dydxprotocol.prices.MsgUpdateMarketParamResponse":  nil,
+		"/vindax.prices.MsgCreateOracleMarket":         &prices.MsgCreateOracleMarket{},
+		"/vindax.prices.MsgCreateOracleMarketResponse": nil,
+		"/vindax.prices.MsgUpdateMarketParam":          &prices.MsgUpdateMarketParam{},
+		"/vindax.prices.MsgUpdateMarketParamResponse":  nil,
 
 		// ratelimit
-		"/dydxprotocol.ratelimit.MsgSetLimitParams":         &ratelimit.MsgSetLimitParams{},
-		"/dydxprotocol.ratelimit.MsgSetLimitParamsResponse": nil,
+		"/vindax.ratelimit.MsgSetLimitParams":         &ratelimit.MsgSetLimitParams{},
+		"/vindax.ratelimit.MsgSetLimitParamsResponse": nil,
 
 		// revshare
-		"/dydxprotocol.revshare.MsgSetMarketMapperRevShareDetailsForMarket":         &revshare.MsgSetMarketMapperRevShareDetailsForMarket{}, //nolint:lll
-		"/dydxprotocol.revshare.MsgSetMarketMapperRevShareDetailsForMarketResponse": nil,
-		"/dydxprotocol.revshare.MsgSetMarketMapperRevenueShare":                     &revshare.MsgSetMarketMapperRevenueShare{}, //nolint:lll
-		"/dydxprotocol.revshare.MsgSetMarketMapperRevenueShareResponse":             nil,
-		"/dydxprotocol.revshare.MsgSetOrderRouterRevShare":                          &revshare.MsgSetOrderRouterRevShare{}, //nolint:lll
-		"/dydxprotocol.revshare.MsgSetOrderRouterRevShareResponse":                  nil,
-		"/dydxprotocol.revshare.MsgUpdateUnconditionalRevShareConfig":               &revshare.MsgUpdateUnconditionalRevShareConfig{}, //nolint:lll
-		"/dydxprotocol.revshare.MsgUpdateUnconditionalRevShareConfigResponse":       nil,
+		"/vindax.revshare.MsgSetMarketMapperRevShareDetailsForMarket":         &revshare.MsgSetMarketMapperRevShareDetailsForMarket{}, //nolint:lll
+		"/vindax.revshare.MsgSetMarketMapperRevShareDetailsForMarketResponse": nil,
+		"/vindax.revshare.MsgSetMarketMapperRevenueShare":                     &revshare.MsgSetMarketMapperRevenueShare{}, //nolint:lll
+		"/vindax.revshare.MsgSetMarketMapperRevenueShareResponse":             nil,
+		"/vindax.revshare.MsgSetOrderRouterRevShare":                          &revshare.MsgSetOrderRouterRevShare{}, //nolint:lll
+		"/vindax.revshare.MsgSetOrderRouterRevShareResponse":                  nil,
+		"/vindax.revshare.MsgUpdateUnconditionalRevShareConfig":               &revshare.MsgUpdateUnconditionalRevShareConfig{}, //nolint:lll
+		"/vindax.revshare.MsgUpdateUnconditionalRevShareConfigResponse":       nil,
 
 		// rewards
-		"/dydxprotocol.rewards.MsgUpdateParams":         &rewards.MsgUpdateParams{},
-		"/dydxprotocol.rewards.MsgUpdateParamsResponse": nil,
+		"/vindax.rewards.MsgUpdateParams":         &rewards.MsgUpdateParams{},
+		"/vindax.rewards.MsgUpdateParamsResponse": nil,
 
 		// sending
-		"/dydxprotocol.sending.MsgSendFromModuleToAccount":         &sending.MsgSendFromModuleToAccount{},
-		"/dydxprotocol.sending.MsgSendFromModuleToAccountResponse": nil,
+		"/vindax.sending.MsgSendFromModuleToAccount":         &sending.MsgSendFromModuleToAccount{},
+		"/vindax.sending.MsgSendFromModuleToAccountResponse": nil,
 
 		// stats
-		"/dydxprotocol.stats.MsgUpdateParams":         &stats.MsgUpdateParams{},
-		"/dydxprotocol.stats.MsgUpdateParamsResponse": nil,
+		"/vindax.stats.MsgUpdateParams":         &stats.MsgUpdateParams{},
+		"/vindax.stats.MsgUpdateParamsResponse": nil,
 
 		// vault
-		"/dydxprotocol.vault.MsgUnlockShares":                 &vault.MsgUnlockShares{},
-		"/dydxprotocol.vault.MsgUnlockSharesResponse":         nil,
-		"/dydxprotocol.vault.MsgUpdateOperatorParams":         &vault.MsgUpdateOperatorParams{},
-		"/dydxprotocol.vault.MsgUpdateOperatorParamsResponse": nil,
+		"/vindax.vault.MsgUnlockShares":                 &vault.MsgUnlockShares{},
+		"/vindax.vault.MsgUnlockSharesResponse":         nil,
+		"/vindax.vault.MsgUpdateOperatorParams":         &vault.MsgUpdateOperatorParams{},
+		"/vindax.vault.MsgUpdateOperatorParamsResponse": nil,
 
 		// vest
-		"/dydxprotocol.vest.MsgSetVestEntry":            &vest.MsgSetVestEntry{},
-		"/dydxprotocol.vest.MsgSetVestEntryResponse":    nil,
-		"/dydxprotocol.vest.MsgDeleteVestEntry":         &vest.MsgDeleteVestEntry{},
-		"/dydxprotocol.vest.MsgDeleteVestEntryResponse": nil,
+		"/vindax.vest.MsgSetVestEntry":            &vest.MsgSetVestEntry{},
+		"/vindax.vest.MsgSetVestEntryResponse":    nil,
+		"/vindax.vest.MsgDeleteVestEntry":         &vest.MsgDeleteVestEntry{},
+		"/vindax.vest.MsgDeleteVestEntryResponse": nil,
 	}
 )
