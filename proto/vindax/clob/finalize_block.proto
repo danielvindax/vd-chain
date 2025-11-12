@@ -1,0 +1,16 @@
+syntax = "proto3";
+package vindax.clob;
+
+import "vindax/clob/clob_pair.proto";
+
+option go_package = "github.com/danielvindax/vd-chain/protocol/x/clob/types";
+
+// ClobStagedFinalizeBlockEvent defines a CLOB event staged during
+// FinalizeBlock.
+message ClobStagedFinalizeBlockEvent {
+  // event is the staged event.
+  oneof event {
+    // create_clob_pair indicates a new CLOB pair creation.
+    ClobPair create_clob_pair = 1;
+  }
+}
