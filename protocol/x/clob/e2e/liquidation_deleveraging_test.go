@@ -640,12 +640,8 @@ func TestLiquidationConfig(t *testing.T) {
 				t.Logf("Initial Subaccount %s:", subaccountId.String())
 				if len(subaccount.AssetPositions) > 0 {
 					for _, ap := range subaccount.AssetPositions {
-						t.Logf(
-							"  Initial Asset[%d]: %s (neg: %v)",
-							ap.AssetId,
-							ap.Quantums.BigInt().String(),
-							ap.Quantums.BigInt().Sign() < 0,
-						)
+						t.Logf("  Initial Asset[%d]: %s (neg: %v)",
+							ap.AssetId, ap.Quantums.BigInt().String(), ap.Quantums.BigInt().Sign() < 0)
 					}
 				}
 				if len(subaccount.PerpetualPositions) > 0 {
@@ -658,10 +654,8 @@ func TestLiquidationConfig(t *testing.T) {
 					}
 				}
 			}
-			t.Logf(
-				"LiquidationConfig - MaxQuantumsInsuranceLost: %d",
-				tc.liquidationConfig.SubaccountBlockLimits.MaxQuantumsInsuranceLost,
-			)
+			t.Logf("LiquidationConfig - MaxQuantumsInsuranceLost: %d",
+				tc.liquidationConfig.SubaccountBlockLimits.MaxQuantumsInsuranceLost)
 
 			_, err := tApp.App.Server.LiquidateSubaccounts(ctx, &api.LiquidateSubaccountsRequest{
 				LiquidatableSubaccountIds: tc.liquidatableSubaccountIds,
@@ -680,12 +674,8 @@ func TestLiquidationConfig(t *testing.T) {
 				t.Logf("Expected Subaccount %s:", expectedSubaccount.Id.String())
 				if len(expectedSubaccount.AssetPositions) > 0 {
 					for _, ap := range expectedSubaccount.AssetPositions {
-						t.Logf(
-							"  Expected Asset[%d]: %s (neg: %v)",
-							ap.AssetId,
-							ap.Quantums.BigInt().String(),
-							ap.Quantums.BigInt().Sign() < 0,
-						)
+						t.Logf("  Expected Asset[%d]: %s (neg: %v)",
+							ap.AssetId, ap.Quantums.BigInt().String(), ap.Quantums.BigInt().Sign() < 0)
 					}
 				}
 				if len(expectedSubaccount.PerpetualPositions) > 0 {
@@ -708,6 +698,8 @@ func TestLiquidationConfig(t *testing.T) {
 							ap.Quantums.BigInt().String(),
 							ap.Quantums.BigInt().Sign() < 0,
 						)
+						t.Logf("  Actual Asset[%d]: %s (neg: %v)",
+							ap.AssetId, ap.Quantums.BigInt().String(), ap.Quantums.BigInt().Sign() < 0)
 					}
 				} else {
 					t.Logf("  Actual AssetPositions: nil")

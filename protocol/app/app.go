@@ -1598,13 +1598,10 @@ func New(
 	// loaded and then immediately exported to a file. In those cases, `LoadHeight` within `app.go` is called instead.
 	// This behavior can be invoked via running `vindaxd export`, which exports the chain state to a JSON file.
 	// In the export case, the memclob does not need to be hydrated, as it is never used.
-	// if loadLatest {
-	// 	if err := app.LoadLatestVersion(); err != nil {
-	// 		tmos.Exit(err.Error())
-	// 	}
-	// }
-	if err := app.LoadLatestVersion(); err != nil {
-		tmos.Exit(err.Error())
+	if loadLatest {
+		if err := app.LoadLatestVersion(); err != nil {
+			tmos.Exit(err.Error())
+		}
 	}
 
 	app.initializeRateLimiters()

@@ -6,8 +6,28 @@ package constants
 //
 //nolint:all
 const GenesisState = `{
-  "app_hash": null,
-  "app_name": "vindaxd",
+  "initial_height": "1",
+  "genesis_time": "2023-07-10T19:23:15.891430637Z",
+  "chain_id": "dydx-sample-1",
+  "consensus_params": {
+    "block": {
+      "max_bytes": "22020096",
+      "max_gas": "-1"
+    },
+    "evidence": {
+      "max_age_num_blocks": "100000",
+      "max_age_duration": "172800000000000",
+      "max_bytes": "1048576"
+    },
+    "validator": {
+      "pub_key_types": [
+        "ed25519"
+      ]
+    },
+    "version": {
+      "app": "0"
+    }
+  },
   "app_state": {
     "affiliates": {},
     "assets": {
@@ -69,9 +89,6 @@ const GenesisState = `{
         "tx_size_cost_per_byte": "10"
       }
     },
-    "authz": {
-      "authorization": []
-    },
     "bank": {
       "params": {
         "send_enabled": [],
@@ -82,7 +99,7 @@ const GenesisState = `{
           "address": "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642",
           "coins": [
             {
-              "denom": "adv4tnt",
+              "denom": "avdtn",
               "amount": "1000000000000000000000000"
             },
             {
@@ -95,7 +112,7 @@ const GenesisState = `{
           "address": "vindax1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wuzlhs",
           "coins": [
             {
-              "denom": "adv4tnt",
+              "denom": "avdtn",
               "amount": "1000000000000000000000000"
             },
             {
@@ -117,7 +134,7 @@ const GenesisState = `{
           "address": "vindax1wau5mja7j7zdavtfq9lu7ejef05hm6fferxsev",
           "coins": [
             {
-              "denom": "adv4tnt",
+              "denom": "avdtn",
               "amount": "1000000000000000000000000"
             },
             {
@@ -130,7 +147,7 @@ const GenesisState = `{
           "address": "vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90",
           "coins": [
             {
-              "denom": "adv4tnt",
+              "denom": "avdtn",
               "amount": "1000000000000000000000000"
             },
             {
@@ -143,7 +160,7 @@ const GenesisState = `{
           "address": "vindax10ehz9v9ncpnj8hfwlsxhcg97zv5ag5w3sgac4k",
           "coins": [
             {
-              "denom": "adv4tnt",
+              "denom": "avdtn",
               "amount": "100000000000"
             },
             {
@@ -156,7 +173,7 @@ const GenesisState = `{
           "address": "vindax1zlefkpe3g0vvm9a4h0jf9000lmqutlh9j7tmen",
           "coins": [
             {
-              "denom": "adv4tnt",
+              "denom": "avdtn",
               "amount": "1000000000"
             }
           ]
@@ -313,7 +330,7 @@ const GenesisState = `{
     "crisis": {
       "constant_fee": {
         "amount": "1000",
-        "denom": "adv4tnt"
+        "denom": "avdtn"
       }
     },
     "delaymsg": {
@@ -463,9 +480,6 @@ const GenesisState = `{
         }
       ]
     },
-    "evidence": {
-      "evidence": []
-    },
     "feegrant": {
       "allowances": []
     },
@@ -473,76 +487,76 @@ const GenesisState = `{
       "params": {
         "tiers": [
           {
-            "absolute_volume_requirement": "0",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 0,
             "name": "1",
-            "taker_fee_ppm": 500,
-            "total_volume_share_requirement_ppm": 0
+            "absolute_volume_requirement": "0",
+            "total_volume_share_requirement_ppm": 0,
+            "maker_volume_share_requirement_ppm": 0,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 500
           },
           {
-            "absolute_volume_requirement": "1000000000000",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 0,
             "name": "2",
-            "taker_fee_ppm": 450,
-            "total_volume_share_requirement_ppm": 0
+            "absolute_volume_requirement": "1000000000000",
+            "total_volume_share_requirement_ppm": 0,
+            "maker_volume_share_requirement_ppm": 0,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 450
           },
           {
-            "absolute_volume_requirement": "5000000000000",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 0,
             "name": "3",
-            "taker_fee_ppm": 400,
-            "total_volume_share_requirement_ppm": 0
+            "absolute_volume_requirement": "5000000000000",
+            "total_volume_share_requirement_ppm": 0,
+            "maker_volume_share_requirement_ppm": 0,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 400
           },
           {
-            "absolute_volume_requirement": "25000000000000",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 0,
             "name": "4",
-            "taker_fee_ppm": 350,
-            "total_volume_share_requirement_ppm": 0
+            "absolute_volume_requirement": "25000000000000",
+            "total_volume_share_requirement_ppm": 0,
+            "maker_volume_share_requirement_ppm": 0,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 350
           },
           {
-            "absolute_volume_requirement": "125000000000000",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 0,
             "name": "5",
-            "taker_fee_ppm": 300,
-            "total_volume_share_requirement_ppm": 0
-          },
-          {
             "absolute_volume_requirement": "125000000000000",
-            "maker_fee_ppm": -110,
+            "total_volume_share_requirement_ppm": 0,
             "maker_volume_share_requirement_ppm": 0,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 300
+          },
+          {
             "name": "6",
-            "taker_fee_ppm": 250,
-            "total_volume_share_requirement_ppm": 5000
+            "absolute_volume_requirement": "125000000000000",
+            "total_volume_share_requirement_ppm": 5000,
+            "maker_volume_share_requirement_ppm": 0,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 250
           },
           {
-            "absolute_volume_requirement": "125000000000000",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 10000,
             "name": "7",
-            "taker_fee_ppm": 250,
-            "total_volume_share_requirement_ppm": 5000
+            "absolute_volume_requirement": "125000000000000",
+            "total_volume_share_requirement_ppm": 5000,
+            "maker_volume_share_requirement_ppm": 10000,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 250
           },
           {
-            "absolute_volume_requirement": "125000000000000",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 20000,
             "name": "8",
-            "taker_fee_ppm": 250,
-            "total_volume_share_requirement_ppm": 5000
+            "absolute_volume_requirement": "125000000000000",
+            "total_volume_share_requirement_ppm": 5000,
+            "maker_volume_share_requirement_ppm": 20000,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 250
           },
           {
-            "absolute_volume_requirement": "125000000000000",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 40000,
             "name": "9",
-            "taker_fee_ppm": 250,
-            "total_volume_share_requirement_ppm": 5000
+            "absolute_volume_requirement": "125000000000000",
+            "total_volume_share_requirement_ppm": 5000,
+            "maker_volume_share_requirement_ppm": 40000,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 250
           }
         ]
       },
@@ -575,7 +589,7 @@ const GenesisState = `{
                   "key": "YiARx8259Z+fGFUxQLrz/5FU2RYRT6f5yzvt7D7CrQM="
                 },
                 "value": {
-                  "denom": "adv4tnt",
+                  "denom": "avdtn",
                   "amount": "500000000000000000000000"
                 }
               }
@@ -609,7 +623,7 @@ const GenesisState = `{
             "tip": null
           },
           "signatures": [
-            "YWk+WjwFE6tq/TexcFo/1tBL+qMR6xvbz3dJwLa3pJFkbw6bGxME33yPf8W3GihzXf7PstcwxdXc9w/XcnJDtg=="
+            "XnWtzJEPkrGuO/3LE4OrtpdQoNRzohXywZpP2CfRiOoycGhb7aKhU55aK819EmUkWIqqDJYzez9brSXFk6yPTQ=="
           ]
         },
         {
@@ -637,7 +651,7 @@ const GenesisState = `{
                   "key": "ytLfs1W6E2I41iteKC/YwjyZ/51+CAYCHYxmRHiBeY4="
                 },
                 "value": {
-                  "denom": "adv4tnt",
+                  "denom": "avdtn",
                   "amount": "500000000000000000000000"
                 }
               }
@@ -671,7 +685,7 @@ const GenesisState = `{
             "tip": null
           },
           "signatures": [
-            "765bdX4FxMwmyCcT5McLnQz55bSpraq8SD0J5xxdSJI+gLsEjH1YjlQhEIgQvTolFecKO2XBaaOMH6JNo9pSaA=="
+            "rxbuOvPR4RGnHOUYw/BbsqZykVHY9PDDPFK5OEbzt9xYXdjnjKo16zmvoKBBoafyXS1v0Df+jR8BEh0XxnCWHw=="
           ]
         },
         {
@@ -699,7 +713,7 @@ const GenesisState = `{
                   "key": "yG29kRfZ/hgAE1I7uWjbKQJJL4/gX/05XBnfB+m196A="
                 },
                 "value": {
-                  "denom": "adv4tnt",
+                  "denom": "avdtn",
                   "amount": "500000000000000000000000"
                 }
               }
@@ -733,7 +747,7 @@ const GenesisState = `{
             "tip": null
           },
           "signatures": [
-            "33bH2ZZhS+DVfdV1ZY3QFLNygU4G+zeRMW9sD2sGkJw75dNG2FfKpwLCMhRWl6covv7zwRhonJamB05tihMEDw=="
+            "09qr+Juqe004pruv65UPuKEMVE004xLrDPiVvTMmcJgy5yWjrEzp/YxvBfb0t+I09foNZzQHvG60Qii6v+tZUw=="
           ]
         },
         {
@@ -761,7 +775,7 @@ const GenesisState = `{
                   "key": "+P8YiogqqQY+iD96yEa9OJx6EgieU95u9eR3pzxfDp0="
                 },
                 "value": {
-                  "denom": "adv4tnt",
+                  "denom": "avdtn",
                   "amount": "500000000000000000000000"
                 }
               }
@@ -795,7 +809,7 @@ const GenesisState = `{
             "tip": null
           },
           "signatures": [
-            "06/CHq0qCIGCseayWfV1xWrjIoCPQ0feHxlnNxtBivgE9tdqFpueyf3qwpam149vMZm0KghBvi4QRI/tAd3dNQ=="
+            "6dqbBr+Me/nL9qLmY0WO3jtFNPpbH+f3AKxtTvyPeqMXPfBdUdnhQsGQI6++d8lM/6xS7lMvikRMGHb8FsHZsQ=="
           ]
         }
       ]
@@ -810,7 +824,7 @@ const GenesisState = `{
         "min_deposit": [
           {
             "amount": "10000000",
-            "denom": "adv4tnt"
+            "denom": "avdtn"
           }
         ],
         "min_initial_deposit_ratio": "0.000000000000000000",
@@ -873,6 +887,102 @@ const GenesisState = `{
         "main_vault_deposit_amount": "0",
         "num_blocks_to_lock_shares": 2592000
       }
+    },
+      "perpetuals": {
+      "liquidity_tiers": [
+        {
+          "id": 0,
+          "impact_notional": 10000000000,
+          "initial_margin_ppm": 50000,
+          "maintenance_fraction_ppm": 600000,
+          "name": "Large-Cap",
+          "open_interest_lower_cap": 0,
+          "open_interest_upper_cap": 0
+        },
+        {
+          "id": 1,
+          "impact_notional": 5000000000,
+          "initial_margin_ppm": 100000,
+          "maintenance_fraction_ppm": 500000,
+          "name": "Small-Cap",
+          "open_interest_lower_cap": 20000000000000,
+          "open_interest_upper_cap": 50000000000000
+        },
+        {
+          "id": 2,
+          "impact_notional": 2500000000,
+          "initial_margin_ppm": 200000,
+          "maintenance_fraction_ppm": 500000,
+          "name": "Long-Tail",
+          "open_interest_lower_cap": 5000000000000,
+          "open_interest_upper_cap": 10000000000000
+        },
+        {
+          "id": 3,
+          "impact_notional": 2500000000,
+          "initial_margin_ppm": 1000000,
+          "maintenance_fraction_ppm": 200000,
+          "name": "Safety",
+          "open_interest_lower_cap": 2000000000000,
+          "open_interest_upper_cap": 5000000000000
+        },
+        {
+          "id": 4,
+          "impact_notional": 2500000000,
+          "initial_margin_ppm": 50000,
+          "maintenance_fraction_ppm": 600000,
+          "name": "Isolated",
+          "open_interest_lower_cap": 500000000000,
+          "open_interest_upper_cap": 1000000000000
+        },
+        {
+          "id": 5,
+          "impact_notional": 5000000000,
+          "initial_margin_ppm": 50000,
+          "maintenance_fraction_ppm": 600000,
+          "name": "Mid-Cap",
+          "open_interest_lower_cap": 40000000000000,
+          "open_interest_upper_cap": 100000000000000
+        },
+        {
+          "id": 6,
+          "impact_notional": 2500000000,
+          "initial_margin_ppm": 10000,
+          "maintenance_fraction_ppm": 500000,
+          "name": "FX",
+          "open_interest_lower_cap": 500000000000,
+          "open_interest_upper_cap": 1000000000000
+        }
+      ],
+      "params": {
+        "funding_rate_clamp_factor_ppm": 6000000,
+        "min_num_votes_per_sample": 15,
+        "premium_vote_clamp_factor_ppm": 60000000
+      },
+      "perpetuals": [
+        {
+          "params": {
+            "atomic_resolution": -10,
+            "default_funding_ppm": 0,
+            "id": 0,
+            "liquidity_tier": 0,
+            "market_id": 0,
+            "ticker": "BTC-USD",
+            "market_type": 1
+          }
+        },
+        {
+          "params": {
+            "atomic_resolution": -9,
+            "default_funding_ppm": 0,
+            "id": 1,
+            "liquidity_tier": 0,
+            "market_id": 1,
+            "ticker": "ETH-USD",
+		    "market_type": 1
+          }
+        }
+      ]
     },
     "marketmap": {
       "market_map": {
@@ -3853,103 +3963,6 @@ const GenesisState = `{
         "market_authorities": ["vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm"]
       }
     },
-    "params": null,
-    "perpetuals": {
-      "liquidity_tiers": [
-        {
-          "id": 0,
-          "impact_notional": 10000000000,
-          "initial_margin_ppm": 50000,
-          "maintenance_fraction_ppm": 600000,
-          "name": "Large-Cap",
-          "open_interest_lower_cap": 0,
-          "open_interest_upper_cap": 0
-        },
-        {
-          "id": 1,
-          "impact_notional": 5000000000,
-          "initial_margin_ppm": 100000,
-          "maintenance_fraction_ppm": 500000,
-          "name": "Small-Cap",
-          "open_interest_lower_cap": 20000000000000,
-          "open_interest_upper_cap": 50000000000000
-        },
-        {
-          "id": 2,
-          "impact_notional": 2500000000,
-          "initial_margin_ppm": 200000,
-          "maintenance_fraction_ppm": 500000,
-          "name": "Long-Tail",
-          "open_interest_lower_cap": 5000000000000,
-          "open_interest_upper_cap": 10000000000000
-        },
-        {
-          "id": 3,
-          "impact_notional": 2500000000,
-          "initial_margin_ppm": 1000000,
-          "maintenance_fraction_ppm": 200000,
-          "name": "Safety",
-          "open_interest_lower_cap": 2000000000000,
-          "open_interest_upper_cap": 5000000000000
-        },
-        {
-          "id": 4,
-          "impact_notional": 2500000000,
-          "initial_margin_ppm": 50000,
-          "maintenance_fraction_ppm": 600000,
-          "name": "Isolated",
-          "open_interest_lower_cap": 500000000000,
-          "open_interest_upper_cap": 1000000000000
-        },
-        {
-          "id": 5,
-          "impact_notional": 5000000000,
-          "initial_margin_ppm": 50000,
-          "maintenance_fraction_ppm": 600000,
-          "name": "Mid-Cap",
-          "open_interest_lower_cap": 40000000000000,
-          "open_interest_upper_cap": 100000000000000
-        },
-        {
-          "id": 6,
-          "impact_notional": 2500000000,
-          "initial_margin_ppm": 10000,
-          "maintenance_fraction_ppm": 500000,
-          "name": "FX",
-          "open_interest_lower_cap": 500000000000,
-          "open_interest_upper_cap": 1000000000000
-        }
-      ],
-      "params": {
-        "funding_rate_clamp_factor_ppm": 6000000,
-        "min_num_votes_per_sample": 15,
-        "premium_vote_clamp_factor_ppm": 60000000
-      },
-      "perpetuals": [
-        {
-          "params": {
-            "atomic_resolution": -10,
-            "default_funding_ppm": 0,
-            "id": 0,
-            "liquidity_tier": 0,
-            "market_id": 0,
-            "ticker": "BTC-USD",
-            "market_type": 1
-          }
-        },
-        {
-          "params": {
-            "atomic_resolution": -9,
-            "default_funding_ppm": 0,
-            "id": 1,
-            "liquidity_tier": 0,
-            "market_id": 1,
-            "ticker": "ETH-USD",
-		    "market_type": 1
-          }
-        }
-      ]
-    },
     "prices": {
       "market_params": [
         {
@@ -4534,8 +4547,7 @@ const GenesisState = `{
         "receive_enabled": true,
         "send_enabled": true
       },
-      "port_id": "transfer",
-      "total_escrowed": []
+      "port_id": "transfer"
     },
     "upgrade": {},
     "vault": {
@@ -4565,14 +4577,14 @@ const GenesisState = `{
     "vest": {
       "vest_entries": [
         {
-          "denom": "adv4tnt",
+          "denom": "avdtn",
           "end_time": "2025-01-01T00:00:00Z",
           "start_time": "2023-01-01T00:00:00Z",
           "treasury_account": "community_treasury",
           "vester_account": "community_vester"
         },
         {
-          "denom": "adv4tnt",
+          "denom": "avdtn",
           "end_time": "2025-01-01T00:00:00Z",
           "start_time": "2023-01-01T00:00:00Z",
           "treasury_account": "rewards_treasury",
@@ -4580,29 +4592,5 @@ const GenesisState = `{
         }
       ]
     }
-  },
-  "app_version": "6361c69c",
-  "chain_id": "dydx-sample-1",
-  "consensus_params": {
-    "block": {
-      "max_bytes": "22020096",
-      "max_gas": "-1"
-    },
-    "evidence": {
-      "max_age_num_blocks": "100000",
-      "max_age_duration": "172800000000000",
-      "max_bytes": "1048576"
-    },
-    "validator": {
-      "pub_key_types": [
-        "ed25519"
-      ]
-    },
-    "version": {
-      "app": "0"
-    }
-  },
-  "genesis_time": "2023-07-10T19:23:15.891430637Z",
-  "initial_height": "1"
-}
-`
+  }
+}`

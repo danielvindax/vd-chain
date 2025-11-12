@@ -3,11 +3,6 @@
   "app_name": "vindaxd",
   "app_state": {
     "affiliates": {
-      "affiliate_parameters": {
-        "maximum_30d_affiliate_revenue_per_referred_user_quote_quantums": "10000000000",
-        "maximum_30d_attributable_volume_per_referred_user_quote_quantums": "100000000000000",
-        "referee_minimum_fee_tier_idx": 2
-      },
       "affiliate_tiers": {
         "tiers": [
           {
@@ -29,11 +24,6 @@
             "req_referred_volume_quote_quantums": "25000000000000",
             "req_staked_whole_coins": 5000,
             "taker_fee_share_ppm": 150000
-          },
-          {
-            "req_referred_volume_quote_quantums": "50000000000000",
-            "req_staked_whole_coins": 100000000,
-            "taker_fee_share_ppm": 250000
           }
         ]
       }
@@ -52,7 +42,43 @@
       ]
     },
     "auth": {
-      "accounts": [],
+      "accounts": [
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "0",
+          "address": "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642",
+          "pub_key": null,
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "1",
+          "address": "vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90",
+          "pub_key": null,
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "2",
+          "address": "vindax1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wuzlhs",
+          "pub_key": null,
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "3",
+          "address": "vindax1wau5mja7j7zdavtfq9lu7ejef05hm6fferxsev",
+          "pub_key": null,
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "4",
+          "address": "vindax10ehz9v9ncpnj8hfwlsxhcg97zv5ag5w3sgac4k",
+          "pub_key": null,
+          "sequence": "0"
+        }
+      ],
       "params": {
         "max_memo_characters": "256",
         "sig_verify_cost_ed25519": "590",
@@ -70,7 +96,90 @@
           "address": "vindax1zlefkpe3g0vvm9a4h0jf9000lmqutlh9j7tmen",
           "coins": [
             {
-              "amount": "1000000000000000000000000000",
+              "amount": "799000000000000000000000000",
+              "denom": "avdtn"
+            }
+          ]
+        },
+        {
+          "address": "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642",
+          "coins": [
+            {
+              "amount": "1000000000000000000000000",
+              "denom": "avdtn"
+            },
+            {
+              "amount": "100000000000000000",
+              "denom": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5"
+            }
+          ]
+        },
+        {
+          "address": "vindax1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wuzlhs",
+          "coins": [
+            {
+              "amount": "1000000000000000000000000",
+              "denom": "avdtn"
+            },
+            {
+              "amount": "100000000000000000",
+              "denom": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5"
+            }
+          ]
+        },
+        {
+          "address": "vindax1v88c3xv9xyv3eetdx0tvcmq7ung3dywp5vcx39",
+          "coins": [
+            {
+              "amount": "900000002000000000",
+              "denom": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5"
+            }
+          ]
+        },
+        {
+          "address": "vindax1wau5mja7j7zdavtfq9lu7ejef05hm6fferxsev",
+          "coins": [
+            {
+              "amount": "1000000000000000000000000",
+              "denom": "avdtn"
+            },
+            {
+              "amount": "100000000000000000",
+              "denom": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5"
+            }
+          ]
+        },
+        {
+          "address": "vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90",
+          "coins": [
+            {
+              "amount": "1000000000000000000000000",
+              "denom": "avdtn"
+            },
+            {
+              "amount": "100000000000000000",
+              "denom": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5"
+            }
+          ]
+        },
+        {
+          "address": "vindax10ehz9v9ncpnj8hfwlsxhcg97zv5ag5w3sgac4k",
+          "coins": [
+            {
+              "amount": "1000000000000000000000000",
+              "denom": "avdtn"
+            },
+            {
+              "amount": "900000000000000000",
+              "denom": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5"
+            }
+          ]
+        },
+        {
+          "address": "vindax1ltyc6y4skclzafvpznpt2qjwmfwgsndp4y7tj7",
+          "coins": [
+            {
+              "amount": "200000000000000000000000000",
               "denom": "avdtn"
             }
           ]
@@ -81,17 +190,22 @@
           "base": "avdtn",
           "denom_units": [
             {
-              "denom": "avdtn"
+              "aliases": [],
+              "denom": "avdtn",
+              "exponent": 0
             },
             {
-              "denom": "sample",
+              "aliases": [],
+              "denom": "dv4tnt",
               "exponent": 18
             }
           ],
           "description": "The native token of the network",
-          "display": "sample",
-          "name": "Sample Coin Name",
-          "symbol": "sample"
+          "display": "dv4tnt",
+          "name": "dYdX V4 Testnet Token",
+          "symbol": "dv4tnt",
+          "uri": "",
+          "uri_hash": ""
         }
       ],
       "params": {
@@ -111,13 +225,13 @@
     },
     "bridge": {
       "acknowledged_event_info": {
-        "eth_block_height": 99999,
-        "next_id": 99
+        "eth_block_height": 4322136,
+        "next_id": 5
       },
       "event_params": {
         "denom": "avdtn",
-        "eth_address": "0xsampleaddress",
-        "eth_chain_id": 9
+        "eth_address": "0xf75012c350e4ad55be2048bd67ce6e03b20de82d",
+        "eth_chain_id": 11155111
       },
       "propose_params": {
         "max_bridges_per_block": 10,
@@ -126,7 +240,7 @@
         "skip_rate_ppm": 800000
       },
       "safety_params": {
-        "delay_blocks": 86400,
+        "delay_blocks": 30,
         "is_disabled": false
       }
     },
@@ -136,7 +250,6 @@
     },
     "clob": {
       "block_rate_limit_config": {
-        "max_leverage_updates_per_n_blocks": [],
         "max_short_term_order_cancellations_per_n_blocks": [],
         "max_short_term_orders_and_cancels_per_n_blocks": [
           {
@@ -163,7 +276,7 @@
             "perpetual_id": 0
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 100000
         },
@@ -173,7 +286,7 @@
             "perpetual_id": 1
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 100000
         },
@@ -183,7 +296,7 @@
             "perpetual_id": 2
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -193,7 +306,7 @@
             "perpetual_id": 3
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -203,7 +316,7 @@
             "perpetual_id": 4
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -213,7 +326,7 @@
             "perpetual_id": 5
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -223,7 +336,7 @@
             "perpetual_id": 6
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -233,7 +346,7 @@
             "perpetual_id": 7
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -243,7 +356,7 @@
             "perpetual_id": 8
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -253,7 +366,7 @@
             "perpetual_id": 9
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -263,7 +376,7 @@
             "perpetual_id": 10
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -273,7 +386,7 @@
             "perpetual_id": 11
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -283,7 +396,7 @@
             "perpetual_id": 12
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -293,7 +406,7 @@
             "perpetual_id": 13
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -303,7 +416,7 @@
             "perpetual_id": 14
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -313,7 +426,7 @@
             "perpetual_id": 15
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -323,7 +436,7 @@
             "perpetual_id": 16
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -333,7 +446,7 @@
             "perpetual_id": 17
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -343,7 +456,7 @@
             "perpetual_id": 18
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -353,7 +466,7 @@
             "perpetual_id": 19
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -363,7 +476,7 @@
             "perpetual_id": 20
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -373,7 +486,7 @@
             "perpetual_id": 21
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -383,7 +496,7 @@
             "perpetual_id": 22
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -393,7 +506,7 @@
             "perpetual_id": 23
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -403,7 +516,7 @@
             "perpetual_id": 24
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -413,7 +526,7 @@
             "perpetual_id": 25
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -423,7 +536,7 @@
             "perpetual_id": 26
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -433,7 +546,7 @@
             "perpetual_id": 27
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -443,7 +556,7 @@
             "perpetual_id": 28
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -453,7 +566,7 @@
             "perpetual_id": 29
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -463,7 +576,7 @@
             "perpetual_id": 30
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -473,7 +586,7 @@
             "perpetual_id": 31
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -483,7 +596,7 @@
             "perpetual_id": 32
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -493,7 +606,7 @@
             "perpetual_id": 300
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
         },
@@ -503,9 +616,19 @@
             "perpetual_id": 301
           },
           "quantum_conversion_exponent": -9,
-          "status": "STATUS_INITIALIZING",
+          "status": "STATUS_ACTIVE",
           "step_base_quantums": 1000000,
           "subticks_per_tick": 1000000
+        },
+        {
+          "id": 35,
+          "perpetual_clob_metadata": {
+            "perpetual_id": 35
+          },
+          "quantum_conversion_exponent": -8,
+          "status": "STATUS_ACTIVE",
+          "step_base_quantums": 1000000,
+          "subticks_per_tick": 100
         }
       ],
       "equity_tier_limit_config": {
@@ -581,18 +704,18 @@
     "consensus": null,
     "crisis": {
       "constant_fee": {
-        "amount": "1000000000000000000",
+        "amount": "1000",
         "denom": "avdtn"
       }
     },
     "delaymsg": {
       "delayed_messages": [
         {
-          "block_height": 6912000,
+          "block_height": 378000,
           "id": 0,
           "msg": {
             "@type": "/dydxprotocol.feetiers.MsgUpdatePerpetualFeeParams",
-            "authority": "vindax1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5jljzu",
+            "authority": "dydx1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5zx6tr",
             "params": {
               "tiers": [
                 {
@@ -684,7 +807,7 @@
       "params": {
         "base_proposer_reward": "0.000000000000000000",
         "bonus_proposer_reward": "0.000000000000000000",
-        "community_tax": "0.0",
+        "community_tax": "0.020000000000000000",
         "withdraw_addr_enabled": true
       },
       "previous_proposer": "",
@@ -693,7 +816,7 @@
       "validator_historical_rewards": [],
       "validator_slash_events": []
     },
-    "vindaxaccountplus": {
+    "dydxaccountplus": {
       "accounts": [],
       "authenticator_data": [],
       "next_authenticator_id": "0",
@@ -814,11 +937,259 @@
             "total_volume_share_requirement_ppm": 5000
           }
         ]
-      },
-      "staking_tiers": []
+      }
     },
     "genutil": {
-      "gen_txs": []
+      "gen_txs": [
+        {
+          "auth_info": {
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "granter": "",
+              "payer": ""
+            },
+            "signer_infos": [
+              {
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "A0iQ+HpUfJGcgcH7iiEzY9VwCYWCTwg5LsTjc/q1XwSc"
+                },
+                "sequence": "0"
+              }
+            ],
+            "tip": null
+          },
+          "body": {
+            "extension_options": [],
+            "memo": "17e5e45691f0d01449c84fd4ae87279578cdd7ec@172.17.0.3:26656",
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "commission": {
+                  "max_change_rate": "0.010000000000000000",
+                  "max_rate": "1.000000000000000000",
+                  "rate": "1.000000000000000000"
+                },
+                "delegator_address": "",
+                "description": {
+                  "details": "",
+                  "identity": "",
+                  "moniker": "alice",
+                  "security_contact": "",
+                  "website": ""
+                },
+                "min_self_delegation": "1",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "YiARx8259Z+fGFUxQLrz/5FU2RYRT6f5yzvt7D7CrQM="
+                },
+                "validator_address": "vindaxvaloper199tqg4wdlnu4qjlxchpd7seg454937hjrywlqt",
+                "value": {
+                  "amount": "500000000000000000000000",
+                  "denom": "avdtn"
+                }
+              }
+            ],
+            "non_critical_extension_options": [],
+            "timeout_height": "0"
+          },
+          "signatures": [
+            "o7/jwawe+iQdx9pXi5iTIQHcMKqKmARwDtItmSFK/w4ynDuE8nfRw63x1Noz6U4OCxvzF+z3OWdN1Hfy+jQL/Q=="
+          ]
+        },
+        {
+          "auth_info": {
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "granter": "",
+              "payer": ""
+            },
+            "signer_infos": [
+              {
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "AkA1fsLUhCSWbnemBIAR9CPkK1Ra1LlYZcrAKm/Ymvqn"
+                },
+                "sequence": "0"
+              }
+            ],
+            "tip": null
+          },
+          "body": {
+            "extension_options": [],
+            "memo": "47539956aaa8e624e0f1d926040e54908ad0eb44@172.17.0.3:26656",
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "commission": {
+                  "max_change_rate": "0.010000000000000000",
+                  "max_rate": "1.000000000000000000",
+                  "rate": "1.000000000000000000"
+                },
+                "delegator_address": "",
+                "description": {
+                  "details": "",
+                  "identity": "",
+                  "moniker": "carl",
+                  "security_contact": "",
+                  "website": ""
+                },
+                "min_self_delegation": "1",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "ytLfs1W6E2I41iteKC/YwjyZ/51+CAYCHYxmRHiBeY4="
+                },
+                "validator_address": "vindaxvaloper1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9w7x6z3",
+                "value": {
+                  "amount": "500000000000000000000000",
+                  "denom": "avdtn"
+                }
+              }
+            ],
+            "non_critical_extension_options": [],
+            "timeout_height": "0"
+          },
+          "signatures": [
+            "H9jhpEkk9ZU4tlE+WEidH4chXzS+hJfMBOMGLAH753BPDYdrXQ71Wq46fMteHgxIAYD/kClgfp6dy5aBBsO4kQ=="
+          ]
+        },
+        {
+          "auth_info": {
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "granter": "",
+              "payer": ""
+            },
+            "signer_infos": [
+              {
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "A87MchHGMj7i1xBwUfECtXzXJIgli/JVFoSaxUqIN86R"
+                },
+                "sequence": "0"
+              }
+            ],
+            "tip": null
+          },
+          "body": {
+            "extension_options": [],
+            "memo": "5882428984d83b03d0c907c1f0af343534987052@172.17.0.3:26656",
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "commission": {
+                  "max_change_rate": "0.010000000000000000",
+                  "max_rate": "1.000000000000000000",
+                  "rate": "1.000000000000000000"
+                },
+                "delegator_address": "",
+                "description": {
+                  "details": "",
+                  "identity": "",
+                  "moniker": "dave",
+                  "security_contact": "",
+                  "website": ""
+                },
+                "min_self_delegation": "1",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "yG29kRfZ/hgAE1I7uWjbKQJJL4/gX/05XBnfB+m196A="
+                },
+                "validator_address": "vindaxvaloper1wau5mja7j7zdavtfq9lu7ejef05hm6ffepz4vd",
+                "value": {
+                  "amount": "500000000000000000000000",
+                  "denom": "avdtn"
+                }
+              }
+            ],
+            "non_critical_extension_options": [],
+            "timeout_height": "0"
+          },
+          "signatures": [
+            "2MOIzF19n9O9YQM7/36XqpMF4BXP4PMvWVXqLRMnZgwn5ft2qsyZ438Kf+ffL5nAmBMYYUFR4q14oJ2mQHKT0w=="
+          ]
+        },
+        {
+          "auth_info": {
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "granter": "",
+              "payer": ""
+            },
+            "signer_infos": [
+              {
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "AlamQtNuTEHlCbn4ZQ20em/bbQNcaAJO54yMOCoE8OTy"
+                },
+                "sequence": "0"
+              }
+            ],
+            "tip": null
+          },
+          "body": {
+            "extension_options": [],
+            "memo": "b69182310be02559483e42c77b7b104352713166@172.17.0.3:26656",
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "commission": {
+                  "max_change_rate": "0.010000000000000000",
+                  "max_rate": "1.000000000000000000",
+                  "rate": "1.000000000000000000"
+                },
+                "delegator_address": "",
+                "description": {
+                  "details": "",
+                  "identity": "",
+                  "moniker": "bob",
+                  "security_contact": "",
+                  "website": ""
+                },
+                "min_self_delegation": "1",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "+P8YiogqqQY+iD96yEa9OJx6EgieU95u9eR3pzxfDp0="
+                },
+                "validator_address": "vindaxvaloper10fx7sy6ywd5senxae9dwytf8jxek3t2gctw8sw",
+                "value": {
+                  "amount": "500000000000000000000000",
+                  "denom": "avdtn"
+                }
+              }
+            ],
+            "non_critical_extension_options": [],
+            "timeout_height": "0"
+          },
+          "signatures": [
+            "cB8el4/gLUu/FHUP9uzipRB3G7lzuWCDEAunrQjI4VZn2YJYh6q9NniE5nmekecbmuQcZM5n+h5AjxLHJ2Bshg=="
+          ]
+        }
+      ]
     },
     "gov": {
       "constitution": "",
@@ -835,11 +1206,11 @@
           }
         ],
         "expedited_threshold": "0.75000",
-        "expedited_voting_period": "86400s",
-        "max_deposit_period": "172800s",
+        "expedited_voting_period": "60s",
+        "max_deposit_period": "120s",
         "min_deposit": [
           {
-            "amount": "10000000000000000000000",
+            "amount": "10000000",
             "denom": "avdtn"
           }
         ],
@@ -847,10 +1218,10 @@
         "min_initial_deposit_ratio": "0.20000",
         "proposal_cancel_dest": "",
         "proposal_cancel_ratio": "1",
-        "quorum": "0.33400",
-        "threshold": "0.50000",
-        "veto_threshold": "0.33400",
-        "voting_period": "345600s"
+        "quorum": "0.334000000000000000",
+        "threshold": "0.500000000000000000",
+        "veto_threshold": "0.334000000000000000",
+        "voting_period": "120s"
       },
       "proposals": [],
       "starting_proposal_id": "1",
@@ -3160,6 +3531,20 @@
           "name": "FX",
           "open_interest_lower_cap": 500000000000,
           "open_interest_upper_cap": 1000000000000
+        },
+        {
+          "id": 7,
+          "impact_notional": 50000000000,
+          "initial_margin_ppm": 10007,
+          "maintenance_fraction_ppm": 500009,
+          "name": "test-usd-100x-liq-tier-linear"
+        },
+        {
+          "id": 8,
+          "impact_notional": 50000000000,
+          "initial_margin_ppm": 10007,
+          "maintenance_fraction_ppm": 500009,
+          "name": "test-usd-100x-liq-tier-nonlinear"
         }
       ],
       "params": {
@@ -3552,6 +3937,17 @@
             "market_type": 2,
             "ticker": "BOME-USD"
           }
+        },
+        {
+          "params": {
+            "atomic_resolution": -10,
+            "default_funding_ppm": 100,
+            "id": 35,
+            "liquidity_tier": 7,
+            "market_id": 33,
+            "market_type": 1,
+            "ticker": "TEST-USD"
+          }
         }
       ]
     },
@@ -3780,6 +4176,12 @@
           "min_exchanges": 1,
           "min_price_change_ppm": 800,
           "pair": "BOME-USD"
+        },
+        {
+          "exponent": -5,
+          "id": 33,
+          "min_price_change_ppm": 250,
+          "pair": "TEST-USD"
         }
       ],
       "market_prices": [
@@ -3967,6 +4369,11 @@
           "exponent": -12,
           "id": 301,
           "price": 8695478191
+        },
+        {
+          "exponent": -5,
+          "id": 33,
+          "price": 10000000
         }
       ]
     },
@@ -4000,8 +4407,8 @@
       "params": {
         "denom": "avdtn",
         "denom_exponent": -18,
-        "fee_multiplier_ppm": 0,
-        "market_id": 1,
+        "fee_multiplier_ppm": 990000,
+        "market_id": 11,
         "treasury_account": "rewards_treasury"
       }
     },
@@ -4009,11 +4416,11 @@
     "slashing": {
       "missed_blocks": [],
       "params": {
-        "downtime_jail_duration": "7200s",
-        "min_signed_per_window": "0.2",
-        "signed_blocks_window": "8192",
-        "slash_fraction_double_sign": "0.0",
-        "slash_fraction_downtime": "0.0"
+        "downtime_jail_duration": "60s",
+        "min_signed_per_window": "0.050000000000000000",
+        "signed_blocks_window": "3000",
+        "slash_fraction_double_sign": "0.000000000000000000",
+        "slash_fraction_downtime": "0.000000000000000000"
       },
       "signing_infos": []
     },
@@ -4026,9 +4433,9 @@
         "bond_denom": "avdtn",
         "historical_entries": 10000,
         "max_entries": 7,
-        "max_validators": 60,
-        "min_commission_rate": "0.05",
-        "unbonding_time": "2592000s"
+        "max_validators": 100,
+        "min_commission_rate": "0.000000000000000000",
+        "unbonding_time": "1814400s"
       },
       "proposers": [],
       "redelegations": [],
@@ -4041,7 +4448,50 @@
       }
     },
     "subaccounts": {
-      "subaccounts": []
+      "subaccounts": [
+        {
+          "asset_positions": [
+            {
+              "asset_id": 0,
+              "index": 0,
+              "quantums": "900000000000000000"
+            }
+          ],
+          "id": {
+            "number": 0,
+            "owner": "vindax10ehz9v9ncpnj8hfwlsxhcg97zv5ag5w3sgac4k"
+          },
+          "margin_enabled": true
+        },
+        {
+          "asset_positions": [
+            {
+              "asset_id": 0,
+              "index": 0,
+              "quantums": "1000000000"
+            }
+          ],
+          "id": {
+            "number": 0,
+            "owner": "vindax1c0m5x87llaunl5sgv3q5vd7j5uha26d2q66zfs"
+          },
+          "margin_enabled": true
+        },
+        {
+          "asset_positions": [
+            {
+              "asset_id": 0,
+              "index": 0,
+              "quantums": "1000000000"
+            }
+          ],
+          "id": {
+            "number": 0,
+            "owner": "vindax14rplxdyycc6wxmgl8fggppgq4774l70zt2cll3"
+          },
+          "margin_enabled": true
+        }
+      ]
     },
     "transfer": {
       "denom_traces": [],
@@ -4069,42 +4519,61 @@
           "description": "Governance Module Account",
           "name": "Governance"
         },
-        "operator": "vindax1vlthgax23ca9syk7xgaz347xmf4nunefwppm9c"
+        "operator": "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm"
       },
       "owner_shares": [
         {
           "owner": "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642",
           "shares": {
-            "num_shares": "0"
+            "num_shares": "2000000000"
           }
         }
       ],
       "total_shares": {
-        "num_shares": "0"
+        "num_shares": "2000000000"
       },
-      "vaults": []
+      "vaults": [
+        {
+          "vault_id": {
+            "number": 0,
+            "type": "VAULT_TYPE_CLOB"
+          },
+          "vault_params": {
+            "status": "VAULT_STATUS_QUOTING"
+          }
+        },
+        {
+          "vault_id": {
+            "number": 1,
+            "type": "VAULT_TYPE_CLOB"
+          },
+          "vault_params": {
+            "status": "VAULT_STATUS_QUOTING"
+          }
+        }
+      ]
     },
     "vest": {
       "vest_entries": [
         {
           "denom": "avdtn",
-          "end_time": "2050-01-01T00:00:00Z",
-          "start_time": "2001-01-01T00:00:00Z",
+          "end_time": "2025-01-01T00:00:00Z",
+          "start_time": "2023-01-01T00:00:00Z",
           "treasury_account": "community_treasury",
           "vester_account": "community_vester"
         },
         {
           "denom": "avdtn",
-          "end_time": "2050-01-01T00:00:00Z",
-          "start_time": "2001-01-01T00:00:00Z",
+          "end_time": "2025-01-01T00:00:00Z",
+          "start_time": "2023-01-01T00:00:00Z",
           "treasury_account": "rewards_treasury",
           "vester_account": "rewards_vester"
         }
       ]
     }
   },
-  "app_version": "6361c69c",
-  "chain_id": "dydx-sample-1",
+  "app_version": "9.2.1",
+  "chain_id": "localdydxprotocol",
   "consensus": {
     "params": {
       "abci": {
@@ -4129,6 +4598,6 @@
       }
     }
   },
-  "genesis_time": "2023-12-31T00:00:00Z",
+  "genesis_time": "2023-01-01T00:00:00Z",
   "initial_height": 1
 }
