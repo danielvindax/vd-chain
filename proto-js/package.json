@@ -1,10 +1,10 @@
 {
-  "name": "@dydxprotocol/v4-proto",
+  "name": "@danielvindax/proto",
   "version": "0.0.0",
   "access": "public",
-  "description": "Protos for dYdX v4 protocol",
-  "author": "dYdX Trading Inc.",
-  "homepage": "https://github.com/dydxprotocol/v4-chain",
+  "description": "Protos for Vindax protocol",
+  "author": "Vindax Trading Inc.",
+  "homepage": "https://github.com/danielvindax/vd-chain",
   "license": "AGPL-3.0",
   "main": "main/index.js",
   "module": "module/index.js",
@@ -28,11 +28,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dydxprotocol/v4-chain"
+    "url": "https://github.com/danielvindax/vd-chain"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/dydxprotocol/v4-chain/issues"
+    "url": "https://github.com/danielvindax/vd-chain/issues"
   },
   "devDependencies": {
     "@cosmjs/stargate": "^0.32.1",

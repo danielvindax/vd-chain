@@ -122,11 +122,11 @@ jobs:
         run: |
           twine upload --verbose -r pypi dist/*
 
-  v4-proto-js-release:
+  proto-js-release:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./v4-proto-js
+        working-directory: ./proto-js
 
     steps:
       - name: Check out repository code
