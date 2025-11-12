@@ -27,10 +27,7 @@ golangci_lint:
   stage: lint
   image: golang:1.23.2   # custom image with Go, make, golangci-lint, etc.
   cache:
-    key:
-      files:
-        - protocol/go.mod
-        - protocol/go.sum
+    key: "go-modules"
     policy: pull-push
     paths:
       - /go/pkg/mod
