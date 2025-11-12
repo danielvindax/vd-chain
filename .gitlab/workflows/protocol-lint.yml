@@ -25,7 +25,7 @@ validate_yaml:
 # --- Job 2: golangci-lint ---
 golangci_lint:
   stage: lint
-  image: golang:1.22   # custom image with Go, make, golangci-lint, etc.
+  image: golang:1.23.2   # custom image with Go, make, golangci-lint, etc.
   cache:
     key:
       files:
