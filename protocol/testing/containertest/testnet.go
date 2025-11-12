@@ -163,7 +163,7 @@ func (t *Testnet) cleanupExistingResources() {
 func (t *Testnet) initializeNode(moniker string) (*Node, error) {
 	var entrypointCommand string
 	if t.isPreupgradeGenesis {
-		entrypointCommand = "/dydxprotocol/preupgrade_entrypoint.sh"
+		entrypointCommand = "/vindax/preupgrade_entrypoint.sh"
 	} else {
 		entrypointCommand = "vindaxd"
 	}
@@ -198,7 +198,7 @@ func (t *Testnet) initializeNode(moniker string) (*Node, error) {
 			},
 			Env: []string{
 				"DAEMON_NAME=vindaxd",
-				fmt.Sprintf("DAEMON_HOME=/dydxprotocol/chain/.%s", moniker),
+				fmt.Sprintf("DAEMON_HOME=/vindax/chain/.%s", moniker),
 				fmt.Sprintf("UPGRADE_TO_VERSION=%s", version.CurrentVersion),
 			},
 			ExtraHosts: []string{

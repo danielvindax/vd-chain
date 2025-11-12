@@ -120,7 +120,7 @@ func (n *Node) getContextForBroadcastTx(signer string) (*client.Context, *pflag.
 		return nil, nil, err
 	}
 
-	// NB: In `cmd/dydxprotocol/root.go` this step is done before ReadFromClientConfig, but here we choose to
+	// NB: In `cmd/vindax/root.go` this step is done before ReadFromClientConfig, but here we choose to
 	// do it second because ReadPersistentCommandFlags sets the node address we configured in flags.
 	// If we were to do it in reverse, ReadFromClientConfig would overwrite the node address.
 	initClientCtx, err := client.ReadPersistentCommandFlags(initClientCtx, flags)

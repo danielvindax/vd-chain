@@ -4,7 +4,7 @@ set -eo pipefail
 # This file is the startup script for the validator / full-nodes. Copies the correct binaries into
 # the validator home directories, and starts the node using `cosmovisor` to run `vindaxd`.
 # Any arguments passed into this script is forwarded to `cosmovisor`.
-# Example usage: ./start.sh run start --home chain/.dydx-1
+# Example usage: ./start.sh run start --home chain/.vindax-1
 
 source "./vars.sh"
 

@@ -28,10 +28,10 @@ It's necessary to specify the `--home` flag as this is how the container knows w
 
 ```sh
 # dev
-docker build . --progress=plain --no-cache -f ./testing/testnet-dev/Dockerfile -t testnet && docker run testnet start --home /vindax/chain/.alice
+docker build . --progress=plain --no-cache -f ./testing/testnet-dev/Dockerfile -t testnet && docker run -e DAEMON_HOME=/vindax/chain/.alice -e UNSAFE_SKIP_BACKUP=true testnet start --home /vindax/chain/.alice --bridge-daemon-enabled=true --bridge-daemon-eth-rpc-endpoint=https://eth-sepolia.g.alchemy.com/v2/demo 
 
 # staging
-docker build . --progress=plain --no-cache -f ./testing/testnet-staging/Dockerfile -t testnet && docker run testnet start --home /vindax/chain/.alice
+docker build . --progress=plain --no-cache -f ./testing/testnet-staging/Dockerfile -t testnet && docker run testnet start --home /vindax/chain/.alice --bridge-daemon-enabled=true --bridge-daemon-eth-rpc-endpoint=https://eth-sepolia.g.alchemy.com/v2/demo 
 ```
 
 # Building and Pushing the Docker container image to ECR

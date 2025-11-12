@@ -44,7 +44,7 @@ NODE_KEYS=(
 )
 
 # Define monikers for each validator. These are made up strings and can be anything.
-# This also controls in which directory the validator's home will be located. i.e. `/dydxprotocol/chain/.alice`
+# This also controls in which directory the validator's home will be located. i.e. `/vindax/chain/.alice`
 MONIKERS=(
 	"alice"
 	"bob"
@@ -263,8 +263,8 @@ download_preupgrade_binary() {
 	tar_path='/tmp/vindaxd/vindaxd.tar.gz'
 	mkdir -p /tmp/vindaxd
 	curl -vL $tar_url -o $tar_path
-	dydxprotocold_path=$(tar -xvf $tar_path --directory /tmp/vindaxd)
-	cp /tmp/vindaxd/$dydxprotocold_path /bin/dydxprotocold_preupgrade
+	vindaxd_path=$(tar -xvf $tar_path --directory /tmp/vindaxd)
+	cp /tmp/vindaxd/$vindaxd_path /bin/vindaxd_preupgrade
 }
 
 # TODO(DEC-1894): remove this function once we migrate off of persistent peers.
