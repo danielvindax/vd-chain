@@ -22,12 +22,11 @@ var (
 
 		// message type URLs
 		"/dydxprotocol.": "/vindax.",
-		
+
 		// proto package names and file paths
 		"dydxprotocol.": "vindax.",
 		"dydxprotocol/": "vindax/",
 		// "dydxprotocol":  "vindax", // for gRPC gateway patterns and standalone strings
-		
 
 		// denom, chain-id, binary
 		// "avdtn":        "avdtn",
@@ -51,13 +50,13 @@ var (
 		"scripts/rebrand.go": true, // run from repo root
 		"rebrand.go":         true, // in case running in the scripts directory itself
 	}
-	
+
 	// Skip generated files
 	skipGenerated = map[string]bool{
-		".pb.go": true,
+		".pb.go":    true,
 		".pb.gw.go": true,
-		"go.mod": true,
-		"go.sum": true,
+		"go.mod":    true,
+		"go.sum":    true,
 	}
 )
 
@@ -106,21 +105,21 @@ func main() {
 		if !isTextFile(path) {
 			return nil
 		}
-		
+
 		// Skip generated files
 		for suffix := range skipGenerated {
 			if strings.HasSuffix(path, suffix) {
 				return nil
 			}
 		}
-		
+
 		data, err := os.ReadFile(path)
 		if err != nil {
 			return nil
 		}
 		orig := string(data)
 		mod := orig
-		
+
 		// Apply replacements in order from longest to shortest to avoid conflicts
 		// (e.g., "dydxprotocol." should be replaced before "dydxprotocol")
 		type replacement struct {
@@ -139,16 +138,16 @@ func main() {
 				}
 			}
 		}
-		
+
 		// Apply replacements, but skip import lines in Go files
 		if strings.HasSuffix(path, ".go") {
 			lines := strings.Split(orig, "\n")
 			var result []string
 			inImportBlock := false
-			
+
 			for _, line := range lines {
 				trimmed := strings.TrimSpace(line)
-				
+
 				// Check for single-line import: import "package" or import _ "package"
 				if strings.HasPrefix(trimmed, "import ") {
 					// Check if it's a single-line import (no opening paren on same line)
@@ -157,14 +156,14 @@ func main() {
 						continue
 					}
 				}
-				
+
 				// Check for start of import block: import (
 				if strings.HasPrefix(trimmed, "import (") {
 					inImportBlock = true
 					result = append(result, line) // Keep original
 					continue
 				}
-				
+
 				// Check if we're inside import block
 				if inImportBlock {
 					result = append(result, line) // Keep original, don't replace
@@ -174,7 +173,7 @@ func main() {
 					}
 					continue
 				}
-				
+
 				// Apply replacements to non-import lines
 				modifiedLine := line
 				for _, r := range sortedReplacements {
