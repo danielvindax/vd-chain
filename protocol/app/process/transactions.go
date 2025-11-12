@@ -80,7 +80,6 @@ func DecodeProcessProposalTxs(
 		"total_txs", len(req.Txs),
 		"height", ctx.BlockHeight(),
 	)
-
 	// Check len (accounting for offset from injected vote-extensions if applicable)
 	offset := pricesTxDecoder.GetTxOffset(ctx)
 	injectedTxCount := minTxsCount + offset
