@@ -6,8 +6,28 @@ package constants
 //
 //nolint:all
 const GenesisState = `{
-  "app_hash": null,
-  "app_name": "vindaxd",
+  "initial_height": "1",
+  "genesis_time": "2023-07-10T19:23:15.891430637Z",
+  "chain_id": "dydx-sample-1",
+  "consensus_params": {
+    "block": {
+      "max_bytes": "22020096",
+      "max_gas": "-1"
+    },
+    "evidence": {
+      "max_age_num_blocks": "100000",
+      "max_age_duration": "172800000000000",
+      "max_bytes": "1048576"
+    },
+    "validator": {
+      "pub_key_types": [
+        "ed25519"
+      ]
+    },
+    "version": {
+      "app": "0"
+    }
+  },
   "app_state": {
     "affiliates": {},
     "assets": {
@@ -68,9 +88,6 @@ const GenesisState = `{
         "tx_sig_limit": "7",
         "tx_size_cost_per_byte": "10"
       }
-    },
-    "authz": {
-      "authorization": []
     },
     "bank": {
       "params": {
@@ -463,9 +480,6 @@ const GenesisState = `{
         }
       ]
     },
-    "evidence": {
-      "evidence": []
-    },
     "feegrant": {
       "allowances": []
     },
@@ -473,76 +487,76 @@ const GenesisState = `{
       "params": {
         "tiers": [
           {
-            "absolute_volume_requirement": "0",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 0,
             "name": "1",
-            "taker_fee_ppm": 500,
-            "total_volume_share_requirement_ppm": 0
+            "absolute_volume_requirement": "0",
+            "total_volume_share_requirement_ppm": 0,
+            "maker_volume_share_requirement_ppm": 0,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 500
           },
           {
-            "absolute_volume_requirement": "1000000000000",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 0,
             "name": "2",
-            "taker_fee_ppm": 450,
-            "total_volume_share_requirement_ppm": 0
+            "absolute_volume_requirement": "1000000000000",
+            "total_volume_share_requirement_ppm": 0,
+            "maker_volume_share_requirement_ppm": 0,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 450
           },
           {
-            "absolute_volume_requirement": "5000000000000",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 0,
             "name": "3",
-            "taker_fee_ppm": 400,
-            "total_volume_share_requirement_ppm": 0
+            "absolute_volume_requirement": "5000000000000",
+            "total_volume_share_requirement_ppm": 0,
+            "maker_volume_share_requirement_ppm": 0,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 400
           },
           {
-            "absolute_volume_requirement": "25000000000000",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 0,
             "name": "4",
-            "taker_fee_ppm": 350,
-            "total_volume_share_requirement_ppm": 0
+            "absolute_volume_requirement": "25000000000000",
+            "total_volume_share_requirement_ppm": 0,
+            "maker_volume_share_requirement_ppm": 0,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 350
           },
           {
-            "absolute_volume_requirement": "125000000000000",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 0,
             "name": "5",
-            "taker_fee_ppm": 300,
-            "total_volume_share_requirement_ppm": 0
-          },
-          {
             "absolute_volume_requirement": "125000000000000",
-            "maker_fee_ppm": -110,
+            "total_volume_share_requirement_ppm": 0,
             "maker_volume_share_requirement_ppm": 0,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 300
+          },
+          {
             "name": "6",
-            "taker_fee_ppm": 250,
-            "total_volume_share_requirement_ppm": 5000
+            "absolute_volume_requirement": "125000000000000",
+            "total_volume_share_requirement_ppm": 5000,
+            "maker_volume_share_requirement_ppm": 0,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 250
           },
           {
-            "absolute_volume_requirement": "125000000000000",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 10000,
             "name": "7",
-            "taker_fee_ppm": 250,
-            "total_volume_share_requirement_ppm": 5000
+            "absolute_volume_requirement": "125000000000000",
+            "total_volume_share_requirement_ppm": 5000,
+            "maker_volume_share_requirement_ppm": 10000,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 250
           },
           {
-            "absolute_volume_requirement": "125000000000000",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 20000,
             "name": "8",
-            "taker_fee_ppm": 250,
-            "total_volume_share_requirement_ppm": 5000
+            "absolute_volume_requirement": "125000000000000",
+            "total_volume_share_requirement_ppm": 5000,
+            "maker_volume_share_requirement_ppm": 20000,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 250
           },
           {
-            "absolute_volume_requirement": "125000000000000",
-            "maker_fee_ppm": -110,
-            "maker_volume_share_requirement_ppm": 40000,
             "name": "9",
-            "taker_fee_ppm": 250,
-            "total_volume_share_requirement_ppm": 5000
+            "absolute_volume_requirement": "125000000000000",
+            "total_volume_share_requirement_ppm": 5000,
+            "maker_volume_share_requirement_ppm": 40000,
+            "maker_fee_ppm": -110,
+            "taker_fee_ppm": 250
           }
         ]
       },
@@ -873,6 +887,102 @@ const GenesisState = `{
         "main_vault_deposit_amount": "0",
         "num_blocks_to_lock_shares": 2592000
       }
+    },
+      "perpetuals": {
+      "liquidity_tiers": [
+        {
+          "id": 0,
+          "impact_notional": 10000000000,
+          "initial_margin_ppm": 50000,
+          "maintenance_fraction_ppm": 600000,
+          "name": "Large-Cap",
+          "open_interest_lower_cap": 0,
+          "open_interest_upper_cap": 0
+        },
+        {
+          "id": 1,
+          "impact_notional": 5000000000,
+          "initial_margin_ppm": 100000,
+          "maintenance_fraction_ppm": 500000,
+          "name": "Small-Cap",
+          "open_interest_lower_cap": 20000000000000,
+          "open_interest_upper_cap": 50000000000000
+        },
+        {
+          "id": 2,
+          "impact_notional": 2500000000,
+          "initial_margin_ppm": 200000,
+          "maintenance_fraction_ppm": 500000,
+          "name": "Long-Tail",
+          "open_interest_lower_cap": 5000000000000,
+          "open_interest_upper_cap": 10000000000000
+        },
+        {
+          "id": 3,
+          "impact_notional": 2500000000,
+          "initial_margin_ppm": 1000000,
+          "maintenance_fraction_ppm": 200000,
+          "name": "Safety",
+          "open_interest_lower_cap": 2000000000000,
+          "open_interest_upper_cap": 5000000000000
+        },
+        {
+          "id": 4,
+          "impact_notional": 2500000000,
+          "initial_margin_ppm": 50000,
+          "maintenance_fraction_ppm": 600000,
+          "name": "Isolated",
+          "open_interest_lower_cap": 500000000000,
+          "open_interest_upper_cap": 1000000000000
+        },
+        {
+          "id": 5,
+          "impact_notional": 5000000000,
+          "initial_margin_ppm": 50000,
+          "maintenance_fraction_ppm": 600000,
+          "name": "Mid-Cap",
+          "open_interest_lower_cap": 40000000000000,
+          "open_interest_upper_cap": 100000000000000
+        },
+        {
+          "id": 6,
+          "impact_notional": 2500000000,
+          "initial_margin_ppm": 10000,
+          "maintenance_fraction_ppm": 500000,
+          "name": "FX",
+          "open_interest_lower_cap": 500000000000,
+          "open_interest_upper_cap": 1000000000000
+        }
+      ],
+      "params": {
+        "funding_rate_clamp_factor_ppm": 6000000,
+        "min_num_votes_per_sample": 15,
+        "premium_vote_clamp_factor_ppm": 60000000
+      },
+      "perpetuals": [
+        {
+          "params": {
+            "atomic_resolution": -10,
+            "default_funding_ppm": 0,
+            "id": 0,
+            "liquidity_tier": 0,
+            "market_id": 0,
+            "ticker": "BTC-USD",
+            "market_type": 1
+          }
+        },
+        {
+          "params": {
+            "atomic_resolution": -9,
+            "default_funding_ppm": 0,
+            "id": 1,
+            "liquidity_tier": 0,
+            "market_id": 1,
+            "ticker": "ETH-USD",
+		    "market_type": 1
+          }
+        }
+      ]
     },
     "marketmap": {
       "market_map": {
@@ -3853,103 +3963,6 @@ const GenesisState = `{
         "market_authorities": ["vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm"]
       }
     },
-    "params": null,
-    "perpetuals": {
-      "liquidity_tiers": [
-        {
-          "id": 0,
-          "impact_notional": 10000000000,
-          "initial_margin_ppm": 50000,
-          "maintenance_fraction_ppm": 600000,
-          "name": "Large-Cap",
-          "open_interest_lower_cap": 0,
-          "open_interest_upper_cap": 0
-        },
-        {
-          "id": 1,
-          "impact_notional": 5000000000,
-          "initial_margin_ppm": 100000,
-          "maintenance_fraction_ppm": 500000,
-          "name": "Small-Cap",
-          "open_interest_lower_cap": 20000000000000,
-          "open_interest_upper_cap": 50000000000000
-        },
-        {
-          "id": 2,
-          "impact_notional": 2500000000,
-          "initial_margin_ppm": 200000,
-          "maintenance_fraction_ppm": 500000,
-          "name": "Long-Tail",
-          "open_interest_lower_cap": 5000000000000,
-          "open_interest_upper_cap": 10000000000000
-        },
-        {
-          "id": 3,
-          "impact_notional": 2500000000,
-          "initial_margin_ppm": 1000000,
-          "maintenance_fraction_ppm": 200000,
-          "name": "Safety",
-          "open_interest_lower_cap": 2000000000000,
-          "open_interest_upper_cap": 5000000000000
-        },
-        {
-          "id": 4,
-          "impact_notional": 2500000000,
-          "initial_margin_ppm": 50000,
-          "maintenance_fraction_ppm": 600000,
-          "name": "Isolated",
-          "open_interest_lower_cap": 500000000000,
-          "open_interest_upper_cap": 1000000000000
-        },
-        {
-          "id": 5,
-          "impact_notional": 5000000000,
-          "initial_margin_ppm": 50000,
-          "maintenance_fraction_ppm": 600000,
-          "name": "Mid-Cap",
-          "open_interest_lower_cap": 40000000000000,
-          "open_interest_upper_cap": 100000000000000
-        },
-        {
-          "id": 6,
-          "impact_notional": 2500000000,
-          "initial_margin_ppm": 10000,
-          "maintenance_fraction_ppm": 500000,
-          "name": "FX",
-          "open_interest_lower_cap": 500000000000,
-          "open_interest_upper_cap": 1000000000000
-        }
-      ],
-      "params": {
-        "funding_rate_clamp_factor_ppm": 6000000,
-        "min_num_votes_per_sample": 15,
-        "premium_vote_clamp_factor_ppm": 60000000
-      },
-      "perpetuals": [
-        {
-          "params": {
-            "atomic_resolution": -10,
-            "default_funding_ppm": 0,
-            "id": 0,
-            "liquidity_tier": 0,
-            "market_id": 0,
-            "ticker": "BTC-USD",
-            "market_type": 1
-          }
-        },
-        {
-          "params": {
-            "atomic_resolution": -9,
-            "default_funding_ppm": 0,
-            "id": 1,
-            "liquidity_tier": 0,
-            "market_id": 1,
-            "ticker": "ETH-USD",
-		    "market_type": 1
-          }
-        }
-      ]
-    },
     "prices": {
       "market_params": [
         {
@@ -4534,8 +4547,7 @@ const GenesisState = `{
         "receive_enabled": true,
         "send_enabled": true
       },
-      "port_id": "transfer",
-      "total_escrowed": []
+      "port_id": "transfer"
     },
     "upgrade": {},
     "vault": {
@@ -4580,29 +4592,5 @@ const GenesisState = `{
         }
       ]
     }
-  },
-  "app_version": "6361c69c",
-  "chain_id": "dydx-sample-1",
-  "consensus_params": {
-    "block": {
-      "max_bytes": "22020096",
-      "max_gas": "-1"
-    },
-    "evidence": {
-      "max_age_num_blocks": "100000",
-      "max_age_duration": "172800000000000",
-      "max_bytes": "1048576"
-    },
-    "validator": {
-      "pub_key_types": [
-        "ed25519"
-      ]
-    },
-    "version": {
-      "app": "0"
-    }
-  },
-  "genesis_time": "2023-07-10T19:23:15.891430637Z",
-  "initial_height": "1"
-}
-`
+  }
+}`
