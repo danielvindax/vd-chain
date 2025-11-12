@@ -25,7 +25,7 @@ if [[ -z "${DAEMON_HOME}" ]]; then
 fi
 
 rm "$DAEMON_HOME/cosmovisor/genesis/bin/vindaxd"
-ln -s /bin/dydxprotocold_preupgrade "$DAEMON_HOME/cosmovisor/genesis/bin/vindaxd"
+ln -s /bin/vindaxd_preupgrade "$DAEMON_HOME/cosmovisor/genesis/bin/vindaxd"
 mkdir -p "$DAEMON_HOME/cosmovisor/upgrades/$UPGRADE_TO_VERSION/bin/"
 ln -s /bin/vindaxd "$DAEMON_HOME/cosmovisor/upgrades/$UPGRADE_TO_VERSION/bin/vindaxd"
 
