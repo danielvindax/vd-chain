@@ -25,11 +25,7 @@ validate_yaml:
 # --- Job 2: golangci-lint ---
 golangci_lint:
   stage: lint
-  image: golang:1.23.2   # custom image with Go, make, golangci-lint, etc.
-  variables:
-    GOMODCACHE: /go/pkg/mod
-    GOCACHE: /root/.cache/go-build
-    GOLANGCILINT_CACHE: /root/.cache/golangci-lint
+  image: golang:1.25   # custom image with Go, make, golangci-lint, etc.
   cache:
     key: "go-modules"
     policy: pull-push

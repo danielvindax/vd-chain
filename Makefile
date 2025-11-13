@@ -54,4 +54,7 @@ proto-py-gen: proto-export-deps
 	done;
 	perl -i -pe 's/^from (?!google\.protobuf)([^ ]*) import ([^ ]*)_pb2 as ([^ ]*)$$/from v4_proto.\1 import \2_pb2 as \3/' $$(find ./proto-py/v4_proto -type f \( -name '*_pb2.py' -o -name '*_pb2_grpc.py' -o -name '*_pb2.pyi' -o -name '*_pb2_grpc.pyi' \))
 
-.PHONY: proto-format proto-lint proto-check-bc-breaking proto-export proto-export-deps proto-py-gen
+lint:
+	@cd protocol && $(MAKE) lint
+
+.PHONY: proto-format proto-lint proto-check-bc-breaking proto-export proto-export-deps proto-py-gen lint

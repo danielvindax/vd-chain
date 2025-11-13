@@ -22,7 +22,6 @@ var (
 
 		// message type URLs
 		"/dydxprotocol.": "/vindax.",
-
 		// proto package names and file paths
 		"dydxprotocol.": "vindax.",
 		"dydxprotocol/": "vindax/",
@@ -105,21 +104,18 @@ func main() {
 		if !isTextFile(path) {
 			return nil
 		}
-
 		// Skip generated files
 		for suffix := range skipGenerated {
 			if strings.HasSuffix(path, suffix) {
 				return nil
 			}
 		}
-
 		data, err := os.ReadFile(path)
 		if err != nil {
 			return nil
 		}
 		orig := string(data)
 		mod := orig
-
 		// Apply replacements in order from longest to shortest to avoid conflicts
 		// (e.g., "dydxprotocol." should be replaced before "dydxprotocol")
 		type replacement struct {
@@ -138,7 +134,6 @@ func main() {
 				}
 			}
 		}
-
 		// Apply replacements, but skip import lines in Go files
 		if strings.HasSuffix(path, ".go") {
 			lines := strings.Split(orig, "\n")
@@ -156,14 +151,12 @@ func main() {
 						continue
 					}
 				}
-
 				// Check for start of import block: import (
 				if strings.HasPrefix(trimmed, "import (") {
 					inImportBlock = true
 					result = append(result, line) // Keep original
 					continue
 				}
-
 				// Check if we're inside import block
 				if inImportBlock {
 					result = append(result, line) // Keep original, don't replace
@@ -173,7 +166,6 @@ func main() {
 					}
 					continue
 				}
-
 				// Apply replacements to non-import lines
 				modifiedLine := line
 				for _, r := range sortedReplacements {

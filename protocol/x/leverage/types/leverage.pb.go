@@ -6,6 +6,10 @@ package types
 import (
 	context "context"
 	fmt "fmt"
+	io "io"
+	math "math"
+	math_bits "math/bits"
+
 	_ "github.com/cosmos/cosmos-proto"
 	_ "github.com/cosmos/cosmos-sdk/types/msgservice"
 	_ "github.com/cosmos/gogoproto/gogoproto"
@@ -14,9 +18,6 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	io "io"
-	math "math"
-	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -236,10 +237,10 @@ func (m *LeverageInfo) GetLastUpdatedBlock() int64 {
 }
 
 func init() {
-	proto.RegisterType((*MsgUpdateLeverage)(nil), "dydxprotocol.leverage.MsgUpdateLeverage")
-	proto.RegisterType((*MsgUpdateLeverageResponse)(nil), "dydxprotocol.leverage.MsgUpdateLeverageResponse")
-	proto.RegisterType((*LeverageParams)(nil), "dydxprotocol.leverage.LeverageParams")
-	proto.RegisterType((*LeverageInfo)(nil), "dydxprotocol.leverage.LeverageInfo")
+	proto.RegisterType((*MsgUpdateLeverage)(nil), "vindax.leverage.MsgUpdateLeverage")
+	proto.RegisterType((*MsgUpdateLeverageResponse)(nil), "vindax.leverage.MsgUpdateLeverageResponse")
+	proto.RegisterType((*LeverageParams)(nil), "vindax.leverage.LeverageParams")
+	proto.RegisterType((*LeverageInfo)(nil), "vindax.leverage.LeverageInfo")
 }
 
 func init() {
@@ -301,7 +302,7 @@ func NewMsgClient(cc grpc1.ClientConn) MsgClient {
 
 func (c *msgClient) UpdateLeverage(ctx context.Context, in *MsgUpdateLeverage, opts ...grpc.CallOption) (*MsgUpdateLeverageResponse, error) {
 	out := new(MsgUpdateLeverageResponse)
-	err := c.cc.Invoke(ctx, "/dydxprotocol.leverage.Msg/UpdateLeverage", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/vindax.leverage.Msg/UpdateLeverage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -335,7 +336,7 @@ func _Msg_UpdateLeverage_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/dydxprotocol.leverage.Msg/UpdateLeverage",
+		FullMethod: "/vindax.leverage.Msg/UpdateLeverage",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).UpdateLeverage(ctx, req.(*MsgUpdateLeverage))
@@ -344,7 +345,7 @@ func _Msg_UpdateLeverage_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 var _Msg_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "dydxprotocol.leverage.Msg",
+	ServiceName: "vindax.leverage.Msg",
 	HandlerType: (*MsgServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

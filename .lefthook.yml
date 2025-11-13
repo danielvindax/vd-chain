@@ -1,0 +1,8 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      run: make lint
+      stage_fixed: true
+      fail_text: "Lint failed! Please fix the errors before committing."
+

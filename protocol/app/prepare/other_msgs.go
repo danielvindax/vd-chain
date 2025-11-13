@@ -69,6 +69,11 @@ func RemoveDisallowMsgs(
 			"num_msgs", len(tx.GetMsgs()),
 		)
 
+		ctx.Logger().Debug("RemoveDisallowMsgs: decoded tx",
+			"tx_index", i,
+			"num_msgs", len(tx.GetMsgs()),
+		)
+
 		// For each msg in tx, check if it is disallowed.
 		containsDisallowMsg := false
 		for j, msg := range tx.GetMsgs() {
@@ -78,7 +83,6 @@ func RemoveDisallowMsgs(
 				"msg_index", j,
 				"msg_type", msgType,
 			)
-
 			if ante.IsDisallowExternalSubmitMsg(msg) {
 				ctx.Logger().Info("RemoveDisallowMsgs: found disallowed external submit msg",
 					"tx_index", i,
@@ -93,7 +97,6 @@ func RemoveDisallowMsgs(
 				containsDisallowMsg = true
 				break // break out of loop over msgs.
 			}
-
 			// Check for CLOB order msgs that should be disallowed
 			// Note: This check is also done in ProcessProposal, but we log it here for visibility
 			ctx.Logger().Debug("RemoveDisallowMsgs: msg passed external submit check",
@@ -120,6 +123,12 @@ func RemoveDisallowMsgs(
 		)
 		filteredTxs = append(filteredTxs, txBytes)
 	}
+
+	ctx.Logger().Info("RemoveDisallowMsgs: finished filtering txs",
+		"original_count", len(txs),
+		"filtered_count", len(filteredTxs),
+		"removed_count", len(txs)-len(filteredTxs),
+	)
 
 	ctx.Logger().Info("RemoveDisallowMsgs: finished filtering txs",
 		"original_count", len(txs),
