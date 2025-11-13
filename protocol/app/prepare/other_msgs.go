@@ -63,7 +63,7 @@ func RemoveDisallowMsgs(
 			ctx.Logger().Error(fmt.Sprintf("RemoveDisallowMsgs: failed to decode tx (index %v of %v txs): %v", i, len(txs), err))
 			continue // continue to next tx.
 		}
-		
+
 		ctx.Logger().Debug("RemoveDisallowMsgs: decoded tx",
 			"tx_index", i,
 			"num_msgs", len(tx.GetMsgs()),
@@ -123,7 +123,7 @@ func RemoveDisallowMsgs(
 		)
 		filteredTxs = append(filteredTxs, txBytes)
 	}
-	
+
 	ctx.Logger().Info("RemoveDisallowMsgs: finished filtering txs",
 		"original_count", len(txs),
 		"filtered_count", len(filteredTxs),

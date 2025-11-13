@@ -703,9 +703,9 @@ var (
 			),
 		},
 	}
-	Dave_Num1_1BTC_Long_49501USD_Short = satypes.Subaccount{
+	Dave_Num1_1BTC_Long_49502USD_Short = satypes.Subaccount{
 		Id:             &Dave_Num1,
-		AssetPositions: testutil.CreateUsdcAssetPositions(big.NewInt(-49_502_000_000)), // -$49,501
+		AssetPositions: testutil.CreateUsdcAssetPositions(big.NewInt(-49_502_000_000)), // -$49,502
 		PerpetualPositions: []*satypes.PerpetualPosition{
 			testutil.CreateSinglePerpetualPosition(
 				0,

@@ -481,8 +481,8 @@ func TestLiquidationConfig(t *testing.T) {
 			subaccounts: []satypes.Subaccount{
 				// Carl_Num0 is irrelevant to the test, but is used to seed the insurance fund.
 				constants.Carl_Num0_1BTC_Short_100000USD,
-				constants.Dave_Num0_1BTC_Long_49502USD_Short,
-				constants.Dave_Num1_1BTC_Long_49501USD_Short,
+				constants.Dave_Num0_1BTC_Long_49501USD_Short,
+				constants.Dave_Num1_1BTC_Long_49502USD_Short,
 			},
 
 			placedMatchableOrders: []clobtypes.MatchableOrder{
