@@ -99,7 +99,7 @@ def main():
                 order_router_rev_share_msg = {
                     "messages": [
                         {
-                        "@type": "/dydxprotocol.revshare.MsgSetOrderRouterRevShare",
+                        "@type": "/vindax.revshare.MsgSetOrderRouterRevShare",
                         "authority": "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm",
                         "order_router_rev_share": {
                             "address": args.order_router_addr,

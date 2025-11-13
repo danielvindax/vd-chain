@@ -5,8 +5,9 @@ package common
 
 import (
 	fmt "fmt"
-	proto "github.com/cosmos/gogoproto/proto"
 	math "math"
+
+	proto "github.com/cosmos/gogoproto/proto"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -103,11 +104,11 @@ func (OrderRemovalReason) EnumDescriptor() ([]byte, []int) {
 }
 
 func init() {
-	proto.RegisterEnum("dydxprotocol.indexer.common.OrderRemovalReason", OrderRemovalReason_name, OrderRemovalReason_value)
+	proto.RegisterEnum("vindax.indexer.common.OrderRemovalReason", OrderRemovalReason_name, OrderRemovalReason_value)
 }
 
 func init() {
-	proto.RegisterFile("dydxprotocol/indexer/common/common.proto", fileDescriptor_cc7f22a39c006b65)
+	proto.RegisterFile("vindax/indexer/common/common.proto", fileDescriptor_cc7f22a39c006b65)
 }
 
 var fileDescriptor_cc7f22a39c006b65 = []byte{
