@@ -1,176 +1,176 @@
-# Test Documentation: Wind Down Market Proposal
+# Tài liệu Test: Wind Down Market Proposal
 
-## Overview
+## Tổng quan
 
-This test file verifies the **Wind Down Market** (market closure) functionality through governance proposals. The test ensures that when a CLOB pair transitions to `STATUS_FINAL_SETTLEMENT`, the system will:
-1. Cancel all open stateful orders
-2. Perform final settlement deleveraging
-3. Block new order placement
+File test này xác minh chức năng **Wind Down Market** (đóng market) thông qua governance proposals. Test đảm bảo rằng khi một CLOB pair chuyển sang `STATUS_FINAL_SETTLEMENT`, hệ thống sẽ:
+1. Hủy tất cả stateful orders đang mở
+2. Thực hiện final settlement deleveraging
+3. Chặn đặt lệnh mới
 
 ---
 
-## Test Case 1: Final Settlement Deleveraging - Non-negative TNC Accounts
+## Test Case 1: Final Settlement Deleveraging - Tài khoản TNC Không Âm
 
-### Input
+### Đầu vào
 - **Initial Subaccounts:**
-  - `Carl_Num0`: 1 BTC Short position with 100,000 USD collateral
-  - `Dave_Num0`: 1 BTC Long position with 50,000 USD collateral
-- **ClobPair:** BTC-USD with initial status `STATUS_ACTIVE`
-- **Proposal:** Transition ClobPair to `STATUS_FINAL_SETTLEMENT`
+  - `Carl_Num0`: 1 BTC Short position với 100,000 USD collateral
+  - `Dave_Num0`: 1 BTC Long position với 50,000 USD collateral
+- **ClobPair:** BTC-USD với trạng thái ban đầu `STATUS_ACTIVE`
+- **Proposal:** Chuyển ClobPair sang `STATUS_FINAL_SETTLEMENT`
 
-### Output
-- **Subaccounts after final settlement:**
-  - `Carl_Num0`: Only 50,000 USD remaining (short position closed at oracle price)
-  - `Dave_Num0`: Has 100,000 USD (long position closed at oracle price)
+### Đầu ra
+- **Subaccounts sau final settlement:**
+  - `Carl_Num0`: Chỉ còn 50,000 USD (short position đóng ở oracle price)
+  - `Dave_Num0`: Có 100,000 USD (long position đóng ở oracle price)
 - **ClobPair status:** `STATUS_FINAL_SETTLEMENT`
-- **Events:** Indexer events emitted for ClobPair update
+- **Events:** Indexer events được emit cho ClobPair update
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Non-negative TNC (Total Net Collateral):** Both subaccounts have positive TNC, meaning sufficient collateral for settlement.
-2. **Deleveraging at Oracle Price:** Since both accounts have positive TNC, deleveraging is performed at oracle price (reference price).
+1. **Non-negative TNC (Total Net Collateral):** Cả hai subaccounts có TNC dương, có nghĩa là có đủ collateral cho settlement.
+2. **Deleveraging at Oracle Price:** Vì cả hai accounts có TNC dương, deleveraging được thực hiện ở oracle price (reference price).
 3. **Result:** 
-   - Carl (short 1 BTC) must pay Dave (long 1 BTC) an amount equal to oracle price
-   - If oracle price is 50,000 USD/BTC:
-     - Carl initially: 100,000 USD - must pay 50,000 USD = 50,000 USD remaining
-     - Dave initially: 50,000 USD + receives 50,000 USD = 100,000 USD
+   - Carl (short 1 BTC) phải trả Dave (long 1 BTC) một số tiền bằng oracle price
+   - Nếu oracle price là 50,000 USD/BTC:
+     - Carl ban đầu: 100,000 USD - phải trả 50,000 USD = còn lại 50,000 USD
+     - Dave ban đầu: 50,000 USD + nhận 50,000 USD = 100,000 USD
 
 ---
 
-## Test Case 2: Final Settlement Deleveraging - Negative TNC Accounts
+## Test Case 2: Final Settlement Deleveraging - Tài khoản TNC Âm
 
-### Input
+### Đầu vào
 - **Initial Subaccounts:**
-  - `Carl_Num0`: 1 BTC Short position with 49,999 USD collateral (negative TNC)
-  - `Dave_Num0`: 1 BTC Long position with 50,001 USD collateral
-- **ClobPair:** BTC-USD with initial status `STATUS_ACTIVE`
-- **Proposal:** Transition ClobPair to `STATUS_FINAL_SETTLEMENT`
+  - `Carl_Num0`: 1 BTC Short position với 49,999 USD collateral (TNC âm)
+  - `Dave_Num0`: 1 BTC Long position với 50,001 USD collateral
+- **ClobPair:** BTC-USD với trạng thái ban đầu `STATUS_ACTIVE`
+- **Proposal:** Chuyển ClobPair sang `STATUS_FINAL_SETTLEMENT`
 
-### Output
-- **Subaccounts after final settlement:**
-  - `Carl_Num0`: Empty (nothing left due to negative TNC)
-  - `Dave_Num0`: Has 100,000 USD
+### Đầu ra
+- **Subaccounts sau final settlement:**
+  - `Carl_Num0`: Rỗng (không còn gì do TNC âm)
+  - `Dave_Num0`: Có 100,000 USD
 - **ClobPair status:** `STATUS_FINAL_SETTLEMENT`
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Negative TNC:** Carl has negative TNC (49,999 USD < 50,000 USD needed to cover short position), meaning this account is undercollateralized.
-2. **Deleveraging at Bankruptcy Price:** When an account has negative TNC, deleveraging is performed at "bankruptcy price" - the price at which the account has nothing left after settlement.
+1. **Negative TNC:** Carl có TNC âm (49,999 USD < 50,000 USD cần để cover short position), có nghĩa là tài khoản này undercollateralized.
+2. **Deleveraging at Bankruptcy Price:** Khi một account có TNC âm, deleveraging được thực hiện ở "bankruptcy price" - giá mà account không còn gì sau settlement.
 3. **Result:**
-   - Carl doesn't have enough funds to fully settle, so all of Carl's collateral (49,999 USD) is transferred to Dave
-   - Dave receives 49,999 USD from Carl + 50,001 USD initially = 100,000 USD
-   - Carl loses everything and the account becomes empty
+   - Carl không có đủ funds để settle đầy đủ, vì vậy tất cả collateral của Carl (49,999 USD) được chuyển cho Dave
+   - Dave nhận 49,999 USD từ Carl + 50,001 USD ban đầu = 100,000 USD
+   - Carl mất tất cả và tài khoản trở thành rỗng
 
 ---
 
-## Test Case 3: Cancel Open Stateful Orders
+## Test Case 3: Hủy Stateful Orders Đang Mở
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - `Alice_Num0`: 10,000 USD
   - `Bob_Num0`: 10,000 USD
 - **Preexisting Stateful Orders:**
-  - Long-term order from Alice: Buy 5 units at price 5, GoodTilBlockTime = 5
-  - Long-term order from Bob: Sell 10 units at price 10, GoodTilBlockTime = 10, PostOnly
-  - Conditional order from Alice: Buy 1 BTC at price 50,000, GoodTilBlockTime = 10, StopLoss trigger = 50,001
-- **Proposal:** Transition ClobPair to `STATUS_FINAL_SETTLEMENT`
+  - Long-term order từ Alice: Mua 5 units ở giá 5, GoodTilBlockTime = 5
+  - Long-term order từ Bob: Bán 10 units ở giá 10, GoodTilBlockTime = 10, PostOnly
+  - Conditional order từ Alice: Mua 1 BTC ở giá 50,000, GoodTilBlockTime = 10, StopLoss trigger = 50,001
+- **Proposal:** Chuyển ClobPair sang `STATUS_FINAL_SETTLEMENT`
 
-### Output
-- **Stateful Orders:** All 3 orders removed from state
-- **Indexer Events:** Events emitted for each removed order with reason `ORDER_REMOVAL_REASON_FINAL_SETTLEMENT`
+### Đầu ra
+- **Stateful Orders:** Tất cả 3 orders được xóa khỏi state
+- **Indexer Events:** Events được emit cho mỗi order bị xóa với lý do `ORDER_REMOVAL_REASON_FINAL_SETTLEMENT`
 - **ClobPair status:** `STATUS_FINAL_SETTLEMENT`
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Stateful Orders:** These are orders that persist across multiple blocks (long-term and conditional orders), different from short-term orders that only exist for 1 block.
-2. **Must Cancel When Wind Down:** When market is closed, all pending orders must be canceled as they can no longer be executed.
-3. **Events:** Indexer needs to be notified about order cancellations to update off-chain state.
-4. **Both Sides:** This test ensures orders from both sides (buy and sell) are canceled, including conditional orders.
+1. **Stateful Orders:** Đây là các orders tồn tại qua nhiều blocks (long-term và conditional orders), khác với short-term orders chỉ tồn tại trong 1 block.
+2. **Must Cancel When Wind Down:** Khi market đóng, tất cả pending orders phải được hủy vì chúng không thể được thực thi nữa.
+3. **Events:** Indexer cần được thông báo về order cancellations để cập nhật off-chain state.
+4. **Both Sides:** Test này đảm bảo orders từ cả hai phía (buy và sell) đều được hủy, bao gồm conditional orders.
 
 ---
 
-## Test Case 4: Block New Order Placement
+## Test Case 4: Chặn Đặt Lệnh Mới
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - `Alice_Num0`: 10,000 USD
   - `Bob_Num0`: 10,000 USD
   - `Carl_Num0`: 10,000 USD
-- **Orders attempting to place (after wind down):**
-  - Short-term orders: Buy 10, Sell 15, IOC order
-  - Long-term orders: Buy 5, Sell 10
-  - Conditional orders: Buy 1 BTC with stop loss
-- **Proposal:** ClobPair has been transitioned to `STATUS_FINAL_SETTLEMENT`
+- **Orders cố gắng đặt (sau wind down):**
+  - Short-term orders: Mua 10, Bán 15, IOC order
+  - Long-term orders: Mua 5, Bán 10
+  - Conditional orders: Mua 1 BTC với stop loss
+- **Proposal:** ClobPair đã được chuyển sang `STATUS_FINAL_SETTLEMENT`
 
-### Output
-- **All CheckTx responses:** FAIL with log containing "trading is disabled for clob pair"
-- **No orders placed:** All orders are rejected
+### Đầu ra
+- **Tất cả CheckTx responses:** FAIL với log chứa "trading is disabled for clob pair"
+- **Không có orders được đặt:** Tất cả orders bị từ chối
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Protect Final Settlement State:** Once market is in final settlement state, new orders are not allowed because:
-   - Market is in the process of closing
-   - Only final settlement deleveraging is allowed
-   - No new trading activity can occur
+1. **Protect Final Settlement State:** Khi market ở trạng thái final settlement, lệnh mới không được phép vì:
+   - Market đang trong quá trình đóng
+   - Chỉ final settlement deleveraging được phép
+   - Không có hoạt động trading mới có thể xảy ra
 
-2. **Validation at CheckTx:** Validation is performed at `CheckTx` to reject orders early, before they enter the mempool.
+2. **Validation at CheckTx:** Validation được thực hiện tại `CheckTx` để từ chối orders sớm, trước khi chúng vào mempool.
 
-3. **All Order Types:** This test ensures short-term, long-term, and conditional orders are all blocked, regardless of order type.
+3. **All Order Types:** Test này đảm bảo short-term, long-term, và conditional orders đều bị chặn, bất kể loại order.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Wind Down Market Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. INITIALIZE GENESIS STATE                                  │
-│    - Create ClobPair with ACTIVE status                     │
-│    - Create subaccounts with positions                      │
-│    - Place stateful orders (if any)                          │
+│ 1. KHỞI TẠO GENESIS STATE                                   │
+│    - Tạo ClobPair với trạng thái ACTIVE                     │
+│    - Tạo subaccounts với positions                          │
+│    - Đặt stateful orders (nếu có)                            │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 2. SUBMIT GOVERNANCE PROPOSAL                                │
-│    - Create MsgUpdateClobPair with FINAL_SETTLEMENT status  │
-│    - Submit proposal through governance module               │
-│    - Validators vote (in test: all vote YES)                 │
+│    - Tạo MsgUpdateClobPair với trạng thái FINAL_SETTLEMENT │
+│    - Submit proposal qua governance module                   │
+│    - Validators vote (trong test: tất cả vote YES)          │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. PROPOSAL EXECUTED                                         │
 │    - Proposal status: PROPOSAL_STATUS_PASSED                │
-│    - ClobPair status transitions to FINAL_SETTLEMENT        │
-│    - Indexer events emitted                                  │
+│    - ClobPair status chuyển sang FINAL_SETTLEMENT          │
+│    - Indexer events được emit                                │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 4. CANCEL STATEFUL ORDERS                                    │
-│    - All long-term orders removed                            │
-│    - All conditional orders removed                          │
-│    - Indexer events emitted for each removed order           │
+│ 4. HỦY STATEFUL ORDERS                                      │
+│    - Tất cả long-term orders được xóa                       │
+│    - Tất cả conditional orders được xóa                     │
+│    - Indexer events được emit cho mỗi order bị xóa         │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 5. FINAL SETTLEMENT DELEVERAGING                             │
-│    - Liquidations daemon provides SubaccountOpenPositionInfo │
-│    - System identifies accounts needing deleverage           │
-│    - Perform deleveraging:                                   │
-│      * Non-negative TNC → deleverage at oracle price         │
-│      * Negative TNC → deleverage at bankruptcy price        │
-│    - Update subaccount balances                              │
+│ 5. FINAL SETTLEMENT DELEVERAGING                            │
+│    - Liquidations daemon cung cấp SubaccountOpenPositionInfo │
+│    - Hệ thống xác định accounts cần deleverage              │
+│    - Thực hiện deleveraging:                                 │
+│      * TNC không âm → deleverage ở oracle price              │
+│      * TNC âm → deleverage ở bankruptcy price               │
+│    - Cập nhật subaccount balances                            │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 6. BLOCK NEW ORDERS                                          │
-│    - CheckTx validation rejects all new orders               │
+│ 6. CHẶN LỆNH MỚI                                            │
+│    - CheckTx validation từ chối tất cả lệnh mới             │
 │    - Log: "trading is disabled for clob pair"                │
-│    - Applies to all order types                              │
+│    - Áp dụng cho tất cả loại orders                          │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **ClobPair Status Transition:**
    ```
@@ -178,39 +178,38 @@ This test file verifies the **Wind Down Market** (market closure) functionality 
    ```
 
 2. **Subaccount State Changes:**
-   - Positions are closed (deleveraged)
-   - Balances updated based on oracle/bankruptcy price
-   - Negative TNC accounts may be wiped clean
+   - Positions được đóng (deleveraged)
+   - Số dư được cập nhật dựa trên oracle/bankruptcy price
+   - Tài khoản TNC âm có thể bị xóa sạch
 
 3. **Order State:**
-   - Stateful orders: Removed from state
-   - New orders: Rejected at CheckTx
+   - Stateful orders: Được xóa khỏi state
+   - Lệnh mới: Bị từ chối tại CheckTx
 
-### Key Points
+### Điểm quan trọng
 
-1. **Timing:** Final settlement deleveraging only occurs after proposal execution and liquidations daemon has provided position information.
+1. **Timing:** Final settlement deleveraging chỉ xảy ra sau khi proposal execution và liquidations daemon đã cung cấp thông tin position.
 
 2. **Price Determination:**
-   - **Oracle Price:** Used for accounts with positive TNC
-   - **Bankruptcy Price:** Used for accounts with negative TNC (price at which account has nothing left)
+   - **Oracle Price:** Được sử dụng cho accounts có TNC dương
+   - **Bankruptcy Price:** Được sử dụng cho accounts có TNC âm (giá mà account không còn gì)
 
-3. **Event Emission:** Indexer needs to be notified about:
+3. **Event Emission:** Indexer cần được thông báo về:
    - ClobPair status update
    - Stateful order removals
-   - To sync state off-chain
+   - Để đồng bộ state off-chain
 
-4. **Validation:** CheckTx validation ensures no new orders can be placed after market has been wound down.
+4. **Validation:** CheckTx validation đảm bảo không có lệnh mới nào có thể được đặt sau khi market đã được wind down.
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Safety:** Wind down market is a critical process that must ensure:
-   - All positions are settled correctly
-   - No new trading activity
-   - State is updated consistently
+1. **An toàn:** Wind down market là quy trình quan trọng phải đảm bảo:
+   - Tất cả positions được settle đúng cách
+   - Không có hoạt động trading mới
+   - State được cập nhật nhất quán
 
-2. **Fairness:** 
-   - Non-negative TNC accounts are settled at oracle price (fair value)
-   - Negative TNC accounts are settled at bankruptcy price (lose everything)
+2. **Công bằng:** 
+   - Tài khoản TNC không âm được settle ở oracle price (giá trị công bằng)
+   - Tài khoản TNC âm được settle ở bankruptcy price (mất tất cả)
 
-3. **Transparency:** Indexer events ensure off-chain systems can track all changes.
-
+3. **Minh bạch:** Indexer events đảm bảo off-chain systems có thể theo dõi tất cả thay đổi.

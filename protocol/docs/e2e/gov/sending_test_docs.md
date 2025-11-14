@@ -1,109 +1,109 @@
-# Test Documentation: Sending Module Governance Proposals
+# Tài liệu Test: Sending Module Governance Proposals
 
-## Overview
+## Tổng quan
 
-This test file verifies governance proposal to **send tokens from module account to user account or another module account**. This is the mechanism for governance to distribute tokens from treasury or module accounts.
+File test này xác minh governance proposal để **gửi tokens từ module account đến user account hoặc module account khác**. Đây là cơ chế để governance phân phối tokens từ treasury hoặc module accounts.
 
 ---
 
 ## Test Function: TestSendFromModuleToAccount
 
-### Test Case 1: Success - Send from Module to User Account
+### Test Case 1: Thành công - Gửi từ Module đến User Account
 
-### Input
+### Đầu vào
 - **Genesis State:**
-  - Community Treasury module has balance: 200 avdtn
+  - Community Treasury module có số dư: 200 avdtn
 - **Proposed Message:**
   - `MsgSendFromModuleToAccount`:
     - SenderModuleName: "community_treasury"
-    - Recipient: Alice's address
+    - Recipient: Địa chỉ của Alice
     - Coin: 123 avdtn
     - Authority: gov module
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
 - **Module Balance:** 200 - 123 = 77 avdtn
-- **Alice Balance:** Increased by 123 avdtn
+- **Alice Balance:** Tăng 123 avdtn
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Module-to-Account Transfer:** Allows governance to distribute tokens from module accounts (like treasury) to user accounts.
+1. **Module-to-Account Transfer:** Cho phép governance phân phối tokens từ module accounts (như treasury) đến user accounts.
 2. **Use Cases:** 
    - Airdrops
-   - Rewards distribution
+   - Phân phối rewards
    - Treasury disbursements
-3. **Governance Control:** Only governance has permission to perform transfers from module accounts.
+3. **Governance Control:** Chỉ governance có quyền thực hiện transfers từ module accounts.
 
 ---
 
-### Test Case 2: Success - Send from Module to Module Account
+### Test Case 2: Thành công - Gửi từ Module đến Module Account
 
-### Input
+### Đầu vào
 - **Genesis State:**
-  - Community Treasury module has balance: 123 avdtn
+  - Community Treasury module có số dư: 123 avdtn
 - **Proposed Message:**
   - `MsgSendFromModuleToAccount`:
     - SenderModuleName: "community_treasury"
-    - Recipient: Community Vester module address
+    - Recipient: Địa chỉ Community Vester module
     - Coin: 123 avdtn
     - Authority: gov module
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Treasury Balance:** 0 avdtn (all transferred)
-- **Vester Balance:** Increased by 123 avdtn
+- **Treasury Balance:** 0 avdtn (tất cả đã chuyển)
+- **Vester Balance:** Tăng 123 avdtn
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Module-to-Module Transfer:** Allows transferring tokens between module accounts.
+1. **Module-to-Module Transfer:** Cho phép chuyển tokens giữa các module accounts.
 2. **Use Cases:**
    - Funding vesting contracts
    - Rebalancing module accounts
    - Treasury management
-3. **Flexibility:** Supports both user accounts and module accounts as recipients.
+3. **Flexibility:** Hỗ trợ cả user accounts và module accounts làm recipients.
 
 ---
 
-### Test Case 3: Failure - Insufficient Balance
+### Test Case 3: Thất bại - Số dư Không Đủ
 
-### Input
+### Đầu vào
 - **Genesis State:**
-  - Community Treasury module has balance: 123 avdtn
+  - Community Treasury module có số dư: 123 avdtn
 - **Proposed Message:**
   - `MsgSendFromModuleToAccount`:
-    - Coin: 124 avdtn (more than balance)
+    - Coin: 124 avdtn (nhiều hơn số dư)
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_FAILED`
-- **State:** No change (balances remain unchanged)
+- **State:** Không thay đổi (số dư vẫn giữ nguyên)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Balance Check:** Module account must have sufficient balance to transfer.
-2. **Execution-Time Validation:** Validation occurs when proposal executes.
-3. **State Protection:** Ensures no negative balances.
+1. **Balance Check:** Module account phải có số dư đủ để chuyển.
+2. **Execution-Time Validation:** Validation xảy ra khi proposal thực thi.
+3. **State Protection:** Đảm bảo không có số dư âm.
 
 ---
 
-### Test Case 4: Failure - Invalid Authority
+### Test Case 4: Thất bại - Invalid Authority
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgSendFromModuleToAccount` with Authority = sending module address (instead of gov module)
+  - `MsgSendFromModuleToAccount` với Authority = địa chỉ sending module (thay vì gov module)
 
-### Output
+### Đầu ra
 - **Proposal Submission:** FAIL
-- **Proposals:** No proposals created
+- **Proposals:** Không có proposals được tạo
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Authority Check:** Only governance module has permission to send from module accounts.
-2. **Security:** Ensures only governance can control module account transfers.
-3. **Early Rejection:** Validation at proposal submission time.
+1. **Authority Check:** Chỉ governance module có quyền gửi từ module accounts.
+2. **Bảo mật:** Đảm bảo chỉ governance có thể kiểm soát module account transfers.
+3. **Early Rejection:** Validation tại thời điểm proposal submission.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Send From Module To Account Process
 
@@ -111,8 +111,8 @@ This test file verifies governance proposal to **send tokens from module account
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. VALIDATE INPUT                                            │
 │    - Authority = gov module                                  │
-│    - SenderModuleName valid                                 │
-│    - Recipient address valid                                │
+│    - SenderModuleName hợp lệ                                │
+│    - Recipient address hợp lệ                               │
 │    - Coin amount > 0                                         │
 └─────────────────────────────────────────────────────────────┘
                         ↓
@@ -123,19 +123,19 @@ This test file verifies governance proposal to **send tokens from module account
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. PROPOSAL EXECUTION                                        │
-│    - Check sender module balance >= coin amount             │
-│    - Transfer coins from sender module                       │
-│    - Transfer coins to recipient                             │
-│    - Update balances                                         │
+│    - Kiểm tra sender module balance >= coin amount         │
+│    - Chuyển coins từ sender module                           │
+│    - Chuyển coins đến recipient                             │
+│    - Cập nhật số dư                                          │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **Balance Changes:**
    ```
-   Sender Module: Balance -= Amount
-   Recipient: Balance += Amount
+   Sender Module: Số dư -= Số tiền
+   Recipient: Số dư += Số tiền
    ```
 
 2. **Validation Points:**
@@ -144,37 +144,37 @@ This test file verifies governance proposal to **send tokens from module account
    Execution: Balance check
    ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Balance Validation:**
-   - Sender module must have sufficient balance
-   - Validation occurs at execution time
-   - If insufficient, proposal fails and state rolls back
+   - Sender module phải có số dư đủ
+   - Validation xảy ra tại execution time
+   - Nếu không đủ, proposal thất bại và state rollback
 
 2. **Authority:**
-   - Only governance module has permission
-   - Validation at proposal submission time
+   - Chỉ governance module có quyền
+   - Validation tại thời điểm proposal submission
 
 3. **Recipient Types:**
-   - Supports both user accounts and module accounts
-   - Recipient address must be valid
+   - Hỗ trợ cả user accounts và module accounts
+   - Recipient address phải hợp lệ
 
 4. **Atomic Execution:**
-   - If balance insufficient, entire proposal fails
-   - State is rolled back to before execution
+   - Nếu số dư không đủ, toàn bộ proposal thất bại
+   - State được rollback về trước khi execution
 
 5. **Use Cases:**
    - Treasury disbursements
-   - Rewards distribution
-   - Module account rebalancing
+   - Phân phối rewards
+   - Rebalancing module accounts
    - Funding vesting contracts
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Governance Control:** Only governance has permission to transfer from module accounts to ensure decentralization and security.
+1. **Governance Control:** Chỉ governance có quyền chuyển từ module accounts để đảm bảo decentralization và bảo mật.
 
-2. **Safety:** Balance validation ensures no negative balances or insufficient funds.
+2. **An toàn:** Balance validation đảm bảo không có số dư âm hoặc không đủ funds.
 
-3. **Flexibility:** Supports both user and module accounts as recipients to support many use cases.
+3. **Linh hoạt:** Hỗ trợ cả user và module accounts làm recipients để hỗ trợ nhiều use cases.
 
-4. **Transparency:** All transfers from module accounts go through governance proposals, ensuring transparency.
+4. **Minh bạch:** Tất cả transfers từ module accounts đi qua governance proposals, đảm bảo tính minh bạch.

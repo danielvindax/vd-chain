@@ -1,13 +1,13 @@
-# Test Documentation: Order Removal E2E Tests
+# Tài liệu Test: Order Removal E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies **Order Removal** functionality in the CLOB module. Orders can be removed from the order book for various reasons. The test ensures that:
-1. Conditional orders are removed when they cross maker orders (PostOnly violation)
-2. Conditional IOC orders are removed if not fully filled
-3. Self-trading removes maker orders
-4. Fully filled orders are removed
-5. Under-collateralized orders are removed
+File test này xác minh chức năng **Order Removal** trong CLOB module. Orders có thể được xóa khỏi order book vì nhiều lý do. Test đảm bảo rằng:
+1. Conditional orders được xóa khi chúng cross maker orders (PostOnly violation)
+2. Conditional IOC orders được xóa nếu không fill đầy
+3. Self-trading xóa maker orders
+4. Fully filled orders được xóa
+5. Under-collateralized orders được xóa
 
 ---
 
@@ -15,181 +15,180 @@ This test file verifies **Order Removal** functionality in the CLOB module. Orde
 
 ### Test Case 1: Conditional PostOnly Order Crosses Maker - Removed
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Alice: 10,000 USD
   - Bob: 10,000 USD
 - **Orders:**
-  - Long-term order: Alice buys 5 at price 10 (maker)
-  - Conditional order: Bob sells 10 at price 10, PostOnly, StopLoss trigger at 15
-- **Price Update:** Price rises to 14.9 (triggers conditional order)
+  - Long-term order: Alice mua 5 ở giá 10 (maker)
+  - Conditional order: Bob bán 10 ở giá 10, PostOnly, StopLoss trigger ở 15
+- **Price Update:** Giá tăng lên 14.9 (trigger conditional order)
 
-### Output
-- **Alice Order:** Not removed (maker order)
-- **Bob Order:** Removed (PostOnly violation - crosses maker)
+### Đầu ra
+- **Alice Order:** Không bị xóa (maker order)
+- **Bob Order:** Bị xóa (PostOnly violation - crosses maker)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **PostOnly Violation:** When conditional order triggers, it would cross existing maker order.
-2. **PostOnly Rule:** PostOnly orders cannot cross existing orders, must be maker.
-3. **Removal:** Conditional order is removed instead of crossing.
+1. **PostOnly Violation:** Khi conditional order trigger, nó sẽ cross existing maker order.
+2. **PostOnly Rule:** PostOnly orders không thể cross existing orders, phải là maker.
+3. **Removal:** Conditional order được xóa thay vì cross.
 
 ---
 
-### Test Case 2: Conditional IOC Order Not Fully Filled - Removed
+### Test Case 2: Conditional IOC Order Không Fill Đầy - Removed
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Carl: 10,000 USD
   - Dave: 10,000 USD
 - **Orders:**
-  - Long-term order: Dave sells 0.25 BTC at 50,000
-  - Conditional order: Carl buys 0.5 BTC at 50,000, IOC, StopLoss trigger at 50,003
-- **Price Update:** Price rises to 50,004 (triggers conditional order)
+  - Long-term order: Dave bán 0.25 BTC ở 50,000
+  - Conditional order: Carl mua 0.5 BTC ở 50,000, IOC, StopLoss trigger ở 50,003
+- **Price Update:** Giá tăng lên 50,004 (trigger conditional order)
 
-### Output
-- **Dave Order:** Removed (fully filled)
-- **Carl Order:** Removed (IOC not fully filled)
+### Đầu ra
+- **Dave Order:** Bị xóa (fully filled)
+- **Carl Order:** Bị xóa (IOC không fill đầy)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **IOC Rule:** Immediate-Or-Cancel orders must be fully filled immediately or cancelled.
-2. **Partial Fill:** Only 0.25 BTC available, but order wants 0.5 BTC.
-3. **Removal:** IOC order is removed because it cannot be fully filled.
+1. **IOC Rule:** Immediate-Or-Cancel orders phải được fill đầy ngay lập tức hoặc bị hủy.
+2. **Partial Fill:** Chỉ có 0.25 BTC available, nhưng order muốn 0.5 BTC.
+3. **Removal:** IOC order được xóa vì không thể fill đầy.
 
 ---
 
-### Test Case 3: Conditional Self Trade - Removes Maker Order
+### Test Case 3: Conditional Self Trade - Xóa Maker Order
 
-### Input
-- **Subaccount:** Alice with 10,000 USD
+### Đầu vào
+- **Subaccount:** Alice với 10,000 USD
 - **Orders:**
-  - Long-term order: Alice buys 5 at price 10
-  - Conditional order: Alice sells 20 at price 10, StopLoss trigger at 15
-- **Price Update:** Price rises to 14.9 (triggers conditional order)
+  - Long-term order: Alice mua 5 ở giá 10
+  - Conditional order: Alice bán 20 ở giá 10, StopLoss trigger ở 15
+- **Price Update:** Giá tăng lên 14.9 (trigger conditional order)
 
-### Output
-- **Long-term Order:** Removed (self-trade removes maker)
-- **Conditional Order:** Not removed (taker in self-trade)
+### Đầu ra
+- **Long-term Order:** Bị xóa (self-trade xóa maker)
+- **Conditional Order:** Không bị xóa (taker trong self-trade)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Self-Trade:** Same subaccount has both maker and taker orders.
-2. **Maker Removal:** Self-trading removes the maker order to prevent abuse.
-3. **Taker Kept:** Taker order (conditional) is kept.
+1. **Self-Trade:** Cùng subaccount có cả maker và taker orders.
+2. **Maker Removal:** Self-trading xóa maker order để ngăn chặn abuse.
+3. **Taker Kept:** Taker order (conditional) được giữ lại.
 
 ---
 
 ### Test Case 4: Fully Filled Maker Orders - Removed
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Alice: 10,000 USD
   - Bob: 10,000 USD
 - **Orders:**
-  - Long-term order: Alice buys 5 at price 10
-  - Conditional order: Bob sells 50 at price 10, StopLoss trigger at 15
-- **Price Update:** Price rises to 14.9 (triggers conditional order)
+  - Long-term order: Alice mua 5 ở giá 10
+  - Conditional order: Bob bán 50 ở giá 10, StopLoss trigger ở 15
+- **Price Update:** Giá tăng lên 14.9 (trigger conditional order)
 
-### Output
-- **Alice Order:** Removed (fully filled by conditional order)
-- **Bob Order:** Not removed (partially filled, 45 remaining)
+### Đầu ra
+- **Alice Order:** Bị xóa (fully filled bởi conditional order)
+- **Bob Order:** Không bị xóa (partially filled, 45 còn lại)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Full Fill:** Conditional order fully fills maker order (5 units).
-2. **Maker Removal:** Fully filled maker order is removed.
-3. **Taker Partial:** Conditional order partially filled, remains on book.
+1. **Full Fill:** Conditional order fill đầy maker order (5 units).
+2. **Maker Removal:** Fully filled maker order được xóa.
+3. **Taker Partial:** Conditional order partially filled, vẫn trên book.
 
 ---
 
 ### Test Case 5: Under-Collateralized Conditional Taker - Removed
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Carl: 100,000 USD
   - Dave: 10,000 USD
 - **Orders:**
-  - Long-term order: Carl buys 1 BTC at 50,000
-  - Conditional order: Dave sells 1 BTC at 50,000, StopLoss trigger at 50,003
-- **Withdrawal:** Dave withdraws 10,000 USD (becomes under-collateralized)
-- **Price Update:** Price rises to 50,002.5 (triggers conditional order)
+  - Long-term order: Carl mua 1 BTC ở 50,000
+  - Conditional order: Dave bán 1 BTC ở 50,000, StopLoss trigger ở 50,003
+- **Withdrawal:** Dave rút 10,000 USD (trở nên under-collateralized)
+- **Price Update:** Giá tăng lên 50,002.5 (trigger conditional order)
 
-### Output
-- **Carl Order:** Not removed
-- **Dave Order:** Removed (fails collateralization check during matching)
+### Đầu ra
+- **Carl Order:** Không bị xóa
+- **Dave Order:** Bị xóa (thất bại collateralization check trong quá trình matching)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Collateralization Check:** When conditional order triggers and tries to match, system checks collateral.
-2. **Insufficient Collateral:** Dave doesn't have enough collateral after withdrawal.
-3. **Removal:** Order is removed instead of executing trade.
+1. **Collateralization Check:** Khi conditional order trigger và cố gắng match, hệ thống kiểm tra collateral.
+2. **Insufficient Collateral:** Dave không có đủ collateral sau withdrawal.
+3. **Removal:** Order được xóa thay vì thực thi trade.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Order Removal Reasons
 
 1. **PostOnly Violation:**
-   - Order would cross existing maker
-   - PostOnly orders must be maker
-   - Order removed instead of crossing
+   - Order sẽ cross existing maker
+   - PostOnly orders phải là maker
+   - Order được xóa thay vì cross
 
 2. **IOC Not Fully Filled:**
-   - IOC order cannot be fully filled immediately
-   - IOC orders must fill completely or be cancelled
-   - Order removed
+   - IOC order không thể fill đầy ngay lập tức
+   - IOC orders phải fill hoàn toàn hoặc bị hủy
+   - Order được xóa
 
 3. **Self-Trade:**
-   - Same subaccount has maker and taker orders
-   - Maker order removed to prevent abuse
-   - Taker order kept
+   - Cùng subaccount có maker và taker orders
+   - Maker order được xóa để ngăn chặn abuse
+   - Taker order được giữ lại
 
 4. **Fully Filled:**
-   - Order completely filled by matching
-   - Fully filled orders removed from book
-   - State updated to reflect fill
+   - Order được fill hoàn toàn bởi matching
+   - Fully filled orders được xóa khỏi book
+   - State được cập nhật để reflect fill
 
 5. **Under-Collateralized:**
-   - Order fails collateralization check
-   - Insufficient margin for position
-   - Order removed before execution
+   - Order thất bại collateralization check
+   - Insufficient margin cho position
+   - Order được xóa trước khi execution
 
-### Key Points
+### Điểm quan trọng
 
 1. **Removal Timing:**
-   - Orders removed during DeliverTx
-   - Removal happens before state update
-   - Events emitted for removed orders
+   - Orders được xóa trong DeliverTx
+   - Removal xảy ra trước state update
+   - Events được emit cho removed orders
 
 2. **Removal Reasons:**
-   - Tracked in order removal events
-   - Different reasons for different scenarios
-   - Used for off-chain tracking
+   - Được track trong order removal events
+   - Các lý do khác nhau cho các scenarios khác nhau
+   - Được sử dụng cho off-chain tracking
 
 3. **State Consistency:**
-   - Removed orders not in state
-   - Cannot query removed orders
-   - Fill amounts tracked before removal
+   - Removed orders không có trong state
+   - Không thể query removed orders
+   - Fill amounts được track trước khi removal
 
 4. **Event Emission:**
-   - Order removal events emitted
-   - Include removal reason
-   - Used by indexer for off-chain sync
+   - Order removal events được emit
+   - Bao gồm removal reason
+   - Được sử dụng bởi indexer cho off-chain sync
 
 5. **Collateralization:**
-   - Checked when order tries to match
-   - Must have sufficient margin
-   - Under-collateralized orders removed
+   - Được kiểm tra khi order cố gắng match
+   - Phải có sufficient margin
+   - Under-collateralized orders được xóa
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Order Book Integrity:** Removal prevents invalid orders from staying on book.
+1. **Order Book Integrity:** Removal ngăn chặn invalid orders ở lại trên book.
 
-2. **Risk Management:** Under-collateralized orders removed to prevent bad trades.
+2. **Risk Management:** Under-collateralized orders được xóa để ngăn chặn bad trades.
 
-3. **Fairness:** Self-trade removal prevents manipulation.
+3. **Fairness:** Self-trade removal ngăn chặn manipulation.
 
-4. **Efficiency:** Removal of invalid orders keeps book clean.
-
+4. **Efficiency:** Removal của invalid orders giữ book sạch.

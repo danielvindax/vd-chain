@@ -1,21 +1,21 @@
-# Test Documentation: Equity Tier Limit E2E Tests
+# Tài liệu Test: Equity Tier Limit E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies **Equity Tier Limit** functionality in the CLOB module. Equity tier limits restrict the number of stateful orders (long-term and conditional orders) a subaccount can have open based on their Total Net Collateral (TNC). The test ensures that:
-1. Subaccounts with lower TNC have fewer allowed stateful orders
-2. Subaccounts with higher TNC have more allowed stateful orders
-3. Order cancellation can free up slots for new orders
-4. Both long-term and conditional orders count toward limits
+File test này xác minh chức năng **Equity Tier Limit** trong CLOB module. Equity tier limits giới hạn số lượng stateful orders (long-term và conditional orders) một subaccount có thể có mở dựa trên Total Net Collateral (TNC) của họ. Test đảm bảo rằng:
+1. Subaccounts với TNC thấp hơn có ít allowed stateful orders hơn
+2. Subaccounts với TNC cao hơn có nhiều allowed stateful orders hơn
+3. Order cancellation có thể giải phóng slots cho orders mới
+4. Cả long-term và conditional orders đều tính vào limits
 
 ---
 
 ## Test Function: TestPlaceOrder_EquityTierLimit
 
-### Test Case 1: Failure - Long-Term Order Exceeds Max Open Stateful Orders
+### Test Case 1: Thất bại - Long-Term Order Vượt Quá Max Open Stateful Orders
 
-### Input
-- **Subaccount:** Alice with TNC < $5,000
+### Đầu vào
+- **Subaccount:** Alice với TNC < $5,000
 - **Existing Orders:**
   - 1 conditional order (StopLoss)
 - **New Order:** Long-term order
@@ -24,120 +24,120 @@ This test file verifies **Equity Tier Limit** functionality in the CLOB module. 
   - Tier 1: $5,000 TNC → 1 order
   - Tier 2: $70,000 TNC → 100 orders
 
-### Output
-- **CheckTx:** FAIL (after advancing block)
-- **Error:** Would exceed max open stateful orders
+### Đầu ra
+- **CheckTx:** FAIL (sau khi tiến block)
+- **Error:** Sẽ vượt quá max open stateful orders
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Tier Limit:** Alice is in tier 1 (TNC < $5,000), limit = 1 order.
-2. **Already Has 1:** Already has 1 conditional order.
-3. **Exceeds Limit:** New long-term order would exceed limit of 1.
-4. **Rejection:** Order rejected to prevent exceeding limit.
+1. **Tier Limit:** Alice ở tier 1 (TNC < $5,000), limit = 1 order.
+2. **Already Has 1:** Đã có 1 conditional order.
+3. **Exceeds Limit:** Long-term order mới sẽ vượt quá limit của 1.
+4. **Rejection:** Order bị từ chối để ngăn chặn vượt quá limit.
 
 ---
 
-### Test Case 2: Failure - Conditional Order Exceeds Max Open Stateful Orders
+### Test Case 2: Thất bại - Conditional Order Vượt Quá Max Open Stateful Orders
 
-### Input
-- **Subaccount:** Alice with TNC < $5,000
+### Đầu vào
+- **Subaccount:** Alice với TNC < $5,000
 - **Existing Orders:**
   - 1 long-term order
 - **New Order:** Conditional order (StopLoss)
-- **Equity Tier Config:** Same as Test Case 1
+- **Equity Tier Config:** Giống Test Case 1
 
-### Output
-- **CheckTx:** FAIL (after advancing block)
-- **Error:** Would exceed max open stateful orders
+### Đầu ra
+- **CheckTx:** FAIL (sau khi tiến block)
+- **Error:** Sẽ vượt quá max open stateful orders
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Same Limit:** Conditional orders count toward same limit as long-term orders.
-2. **Already Has 1:** Already has 1 long-term order.
-3. **Exceeds Limit:** New conditional order would exceed limit of 1.
+1. **Same Limit:** Conditional orders tính vào cùng limit như long-term orders.
+2. **Already Has 1:** Đã có 1 long-term order.
+3. **Exceeds Limit:** Conditional order mới sẽ vượt quá limit của 1.
 
 ---
 
-### Test Case 3: Success - Order Cancellation Frees Up Slot
+### Test Case 3: Thành công - Order Cancellation Giải phóng Slot
 
-### Input
-- **Subaccount:** Alice with TNC < $5,000
+### Đầu vào
+- **Subaccount:** Alice với TNC < $5,000
 - **Existing Orders:**
   - 1 conditional order (StopLoss)
-- **Cancellation:** Cancel the conditional order
-- **New Order:** Long-term order (same block)
-- **Equity Tier Config:** Same as Test Case 1
+- **Cancellation:** Hủy conditional order
+- **New Order:** Long-term order (cùng block)
+- **Equity Tier Config:** Giống Test Case 1
 
-### Output
+### Đầu ra
 - **Cancellation:** SUCCESS
 - **New Order:** SUCCESS
-- **Final State:** 1 long-term order (conditional cancelled)
+- **Final State:** 1 long-term order (conditional đã hủy)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Cancellation First:** Conditional order cancelled, freeing up slot.
-2. **Slot Available:** After cancellation, slot available for new order.
-3. **Same Block:** Cancellation and placement in same block works.
-4. **Limit Respected:** Final state has 1 order, within limit.
+1. **Cancellation First:** Conditional order được hủy, giải phóng slot.
+2. **Slot Available:** Sau cancellation, slot có sẵn cho order mới.
+3. **Same Block:** Cancellation và placement trong cùng block hoạt động.
+4. **Limit Respected:** Final state có 1 order, trong limit.
 
 ---
 
-### Test Case 4: Failure - Conditional Order Would Exceed Limit (Untriggered)
+### Test Case 4: Thất bại - Conditional Order Sẽ Vượt Quá Limit (Untriggered)
 
-### Input
-- **Subaccount:** Alice with TNC < $5,000
+### Đầu vào
+- **Subaccount:** Alice với TNC < $5,000
 - **Existing Orders:**
   - 1 long-term order
 - **New Order:** Conditional order (TakeProfit, untriggered)
-- **Equity Tier Config:** Same as Test Case 1
+- **Equity Tier Config:** Giống Test Case 1
 
-### Output
-- **CheckTx:** FAIL (after advancing block)
-- **Error:** Would exceed max open stateful orders
+### Đầu ra
+- **CheckTx:** FAIL (sau khi tiến block)
+- **Error:** Sẽ vượt quá max open stateful orders
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Untriggered Counts:** Untriggered conditional orders count toward limit.
-2. **Same Limit:** Both triggered and untriggered conditional orders count.
-3. **Exceeds Limit:** New conditional order would exceed limit.
+1. **Untriggered Counts:** Untriggered conditional orders tính vào limit.
+2. **Same Limit:** Cả triggered và untriggered conditional orders đều tính.
+3. **Exceeds Limit:** Conditional order mới sẽ vượt quá limit.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Equity Tier Limit Check
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. CALCULATE SUBACCOUNT TNC                                 │
-│    - Get subaccount's Total Net Collateral                  │
-│    - Include all positions and assets                        │
+│ 1. TÍNH TOÁN SUBACCOUNT TNC                                 │
+│    - Lấy Total Net Collateral của subaccount                │
+│    - Bao gồm tất cả positions và assets                      │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. DETERMINE EQUITY TIER                                     │
-│    - Find tier based on TNC amount                           │
+│ 2. XÁC ĐỊNH EQUITY TIER                                     │
+│    - Tìm tier dựa trên TNC amount                           │
 │    - Tier 0: $0 TNC → 0 orders                              │
 │    - Tier 1: $5,000 TNC → 1 order                           │
 │    - Tier 2: $70,000 TNC → 100 orders                       │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. COUNT EXISTING STATEFUL ORDERS                            │
-│    - Count long-term orders                                  │
-│    - Count conditional orders (triggered and untriggered)   │
-│    - Count orders in same block (uncommitted)                │
+│ 3. ĐẾM EXISTING STATEFUL ORDERS                             │
+│    - Đếm long-term orders                                   │
+│    - Đếm conditional orders (triggered và untriggered)      │
+│    - Đếm orders trong cùng block (uncommitted)              │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 4. VALIDATE LIMIT                                            │
-│    - Check if new order would exceed limit                   │
-│    - Consider cancellations in same block                    │
-│    - Reject if would exceed limit                            │
+│    - Kiểm tra nếu order mới sẽ vượt quá limit                │
+│    - Xem xét cancellations trong cùng block                  │
+│    - Từ chối nếu sẽ vượt quá limit                           │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **Equity Tiers:**
    ```
@@ -148,45 +148,44 @@ This test file verifies **Equity Tier Limit** functionality in the CLOB module. 
 
 2. **Order Counting:**
    ```
-   Long-term orders: Count toward limit
-   Conditional orders (triggered): Count toward limit
-   Conditional orders (untriggered): Count toward limit
+   Long-term orders: Tính vào limit
+   Conditional orders (triggered): Tính vào limit
+   Conditional orders (untriggered): Tính vào limit
    ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **TNC-Based Limits:**
-   - Limits based on Total Net Collateral
-   - Higher TNC = more allowed orders
-   - Protects system from order book spam
+   - Limits dựa trên Total Net Collateral
+   - TNC cao hơn = nhiều allowed orders hơn
+   - Bảo vệ hệ thống khỏi order book spam
 
 2. **Stateful Orders:**
-   - Long-term orders count toward limit
-   - Conditional orders count toward limit
-   - Short-term orders don't count (expire same block)
+   - Long-term orders tính vào limit
+   - Conditional orders tính vào limit
+   - Short-term orders không tính (expire cùng block)
 
 3. **Same Block Logic:**
-   - Cancellations free up slots immediately
-   - Can cancel and place in same block
-   - Uncommitted orders count toward limit
+   - Cancellations giải phóng slots ngay lập tức
+   - Có thể hủy và đặt trong cùng block
+   - Uncommitted orders tính vào limit
 
 4. **Untriggered Conditionals:**
-   - Untriggered conditional orders count toward limit
-   - Must have slot available when placing
-   - Triggering doesn't change count (same order)
+   - Untriggered conditional orders tính vào limit
+   - Phải có slot available khi đặt
+   - Triggering không thay đổi count (cùng order)
 
 5. **Validation Timing:**
-   - Checked when placing order
-   - After block advancement (for committed orders)
-   - Considers same-block cancellations
+   - Được kiểm tra khi đặt order
+   - Sau block advancement (cho committed orders)
+   - Xem xét same-block cancellations
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Resource Management:** Limits prevent order book spam from low-collateral accounts.
+1. **Resource Management:** Limits ngăn chặn order book spam từ low-collateral accounts.
 
-2. **Fairness:** Higher collateral accounts get more order slots.
+2. **Fairness:** Higher collateral accounts có nhiều order slots hơn.
 
-3. **Flexibility:** Cancellations allow users to manage their order slots.
+3. **Flexibility:** Cancellations cho phép users quản lý order slots của họ.
 
-4. **Safety:** Prevents system overload from excessive stateful orders.
-
+4. **Safety:** Ngăn chặn system overload từ excessive stateful orders.

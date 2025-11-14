@@ -1,159 +1,158 @@
-# Test Documentation: Order Matches E2E Tests
+# Tài liệu Test: Order Matches E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies **Order Matching Validation** in the CLOB module. The test ensures that order matching operations are correctly validated during DeliverTx, including:
-1. IOC orders cannot be matched twice
-2. Partially filled conditional IOC orders cannot be matched again
-3. IOC orders can match with multiple makers in single operation
-4. IOC orders cannot be taker in multiple separate matches
+File test này xác minh **Order Matching Validation** trong CLOB module. Test đảm bảo rằng order matching operations được validate đúng trong DeliverTx, bao gồm:
+1. IOC orders không thể được match hai lần
+2. Partially filled conditional IOC orders không thể được match lại
+3. IOC orders có thể match với nhiều makers trong single operation
+4. IOC orders không thể là taker trong nhiều separate matches
 
 ---
 
 ## Test Function: TestDeliverTxMatchValidation
 
-### Test Case 1: Failure - Partially Filled IOC Taker Order Cannot Be Matched Twice
+### Test Case 1: Thất bại - Partially Filled IOC Taker Order Không thể Match Hai Lần
 
-### Input
+### Đầu vào
 - **Block 1:**
-  - Place order: Bob buys 5 at price 40
-  - Place order: Alice sells 10 at price 15, IOC
-  - Match operation: Alice (IOC taker) matches with Bob (maker), fill 5
+  - Đặt order: Bob mua 5 ở giá 40
+  - Đặt order: Alice bán 10 ở giá 15, IOC
+  - Match operation: Alice (IOC taker) match với Bob (maker), fill 5
 - **Block 2:**
-  - Place order: Bob buys 5 at price 40
-  - Place order: Alice sells 10 at price 15, IOC (same order)
-  - Match operation: Attempt to match Alice IOC order again
+  - Đặt order: Bob mua 5 ở giá 40
+  - Đặt order: Alice bán 10 ở giá 15, IOC (cùng order)
+  - Match operation: Cố gắng match Alice IOC order lại
 
-### Output
+### Đầu ra
 - **Block 1 DeliverTx:** SUCCESS
-- **Block 2 DeliverTx:** FAIL with error "IOC order is already filled, remaining size is cancelled."
+- **Block 2 DeliverTx:** FAIL với lỗi "IOC order is already filled, remaining size is cancelled."
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **IOC Rule:** IOC orders must be fully filled immediately or cancelled.
-2. **Partial Fill:** Order was partially filled in block 1 (5 out of 10).
-3. **Remaining Cancelled:** Remaining size (5) was cancelled after partial fill.
-4. **Cannot Reuse:** Cannot match the same IOC order again in later block.
+1. **IOC Rule:** IOC orders phải được fill đầy ngay lập tức hoặc bị hủy.
+2. **Partial Fill:** Order được partially fill trong block 1 (5 trong 10).
+3. **Remaining Cancelled:** Remaining size (5) được hủy sau partial fill.
+4. **Cannot Reuse:** Không thể match cùng IOC order lại trong block sau.
 
 ---
 
-### Test Case 2: Failure - Cannot Match Partially Filled Conditional IOC Order
+### Test Case 2: Thất bại - Không thể Match Partially Filled Conditional IOC Order
 
-### Input
+### Đầu vào
 - **Block 1:**
-  - Place conditional IOC order: Alice buys 1 BTC at 50,000, TakeProfit trigger at 49,999
-  - Place long-term order: Dave sells 0.25 BTC at 50,000
+  - Đặt conditional IOC order: Alice mua 1 BTC ở 50,000, TakeProfit trigger ở 49,999
+  - Đặt long-term order: Dave bán 0.25 BTC ở 50,000
 - **Block 2:**
-  - Conditional order triggers and partially matches (0.25 BTC filled)
+  - Conditional order trigger và partially match (0.25 BTC filled)
 - **Block 3:**
-  - Place order: Dave sells 1 BTC at 50,000
-  - Match operation: Attempt to match conditional IOC order again
+  - Đặt order: Dave bán 1 BTC ở 50,000
+  - Match operation: Cố gắng match conditional IOC order lại
 
-### Output
+### Đầu ra
 - **Block 2 DeliverTx:** SUCCESS (partial fill)
-- **Block 3 DeliverTx:** FAIL with error `ErrStatefulOrderDoesNotExist`
+- **Block 3 DeliverTx:** FAIL với lỗi `ErrStatefulOrderDoesNotExist`
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Conditional IOC:** Conditional IOC order partially filled in block 2.
-2. **Order Removed:** After partial fill, conditional IOC order is removed from state.
-3. **Cannot Match:** Cannot match order that no longer exists in state.
+1. **Conditional IOC:** Conditional IOC order được partially fill trong block 2.
+2. **Order Removed:** Sau partial fill, conditional IOC order được xóa khỏi state.
+3. **Cannot Match:** Không thể match order không còn tồn tại trong state.
 
 ---
 
-### Test Case 3: Success - IOC Order Matches with Multiple Makers in Single Operation
+### Test Case 3: Thành công - IOC Order Match với Nhiều Makers trong Single Operation
 
-### Input
+### Đầu vào
 - **Orders:**
-  - Bob buys 5 at price 40 (maker 1)
-  - Bob buys 5 at price 40 (maker 2)
-  - Alice sells 10 at price 15, IOC (taker)
+  - Bob mua 5 ở giá 40 (maker 1)
+  - Bob mua 5 ở giá 40 (maker 2)
+  - Alice bán 10 ở giá 15, IOC (taker)
 - **Match Operation:**
-  - Alice IOC order matches with both Bob orders
-  - Fill 5 from maker 1, fill 5 from maker 2
+  - Alice IOC order match với cả hai Bob orders
+  - Fill 5 từ maker 1, fill 5 từ maker 2
 
-### Output
+### Đầu ra
 - **DeliverTx:** SUCCESS
-- **Result:** Alice order fully filled (10), both Bob orders fully filled (5 each)
+- **Result:** Alice order fill đầy (10), cả hai Bob orders fill đầy (5 mỗi)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Multiple Makers:** IOC order can match with multiple maker orders in single operation.
-2. **Full Fill:** Order is fully filled by combining fills from multiple makers.
-3. **Single Operation:** All matches happen in one match operation.
+1. **Multiple Makers:** IOC order có thể match với nhiều maker orders trong single operation.
+2. **Full Fill:** Order được fill đầy bằng cách kết hợp fills từ nhiều makers.
+3. **Single Operation:** Tất cả matches xảy ra trong một match operation.
 
 ---
 
-### Test Case 4: Failure - IOC Order Cannot Be Taker in Multiple Matches
+### Test Case 4: Thất bại - IOC Order Không thể Là Taker trong Nhiều Matches
 
-### Input
+### Đầu vào
 - **Orders:**
-  - Bob buys 5 at price 40 (maker 1)
-  - Alice sells 10 at price 15, IOC (taker)
-  - Bob buys 5 at price 40 (maker 2)
+  - Bob mua 5 ở giá 40 (maker 1)
+  - Alice bán 10 ở giá 15, IOC (taker)
+  - Bob mua 5 ở giá 40 (maker 2)
 - **Match Operations:**
-  - Match 1: Alice IOC with maker 1 (fill 5)
-  - Match 2: Alice IOC with maker 2 (fill 5)
+  - Match 1: Alice IOC với maker 1 (fill 5)
+  - Match 2: Alice IOC với maker 2 (fill 5)
 
-### Output
-- **DeliverTx:** FAIL with error "IOC order is already filled, remaining size is cancelled."
+### Đầu ra
+- **DeliverTx:** FAIL với lỗi "IOC order is already filled, remaining size is cancelled."
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Multiple Matches:** IOC order cannot be taker in multiple separate match operations.
-2. **First Match:** After first match, order is considered filled/cancelled.
-3. **Second Match Fails:** Cannot use same IOC order in second match operation.
+1. **Multiple Matches:** IOC order không thể là taker trong nhiều separate match operations.
+2. **First Match:** Sau match đầu tiên, order được coi là filled/cancelled.
+3. **Second Match Fails:** Không thể sử dụng cùng IOC order trong match operation thứ hai.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### IOC Order Matching Rules
 
 1. **Single Match Operation:**
-   - IOC order can match with multiple makers in one operation
-   - All fills happen atomically
-   - Order fully filled or cancelled
+   - IOC order có thể match với nhiều makers trong một operation
+   - Tất cả fills xảy ra atomically
+   - Order fill đầy hoặc bị hủy
 
 2. **No Multiple Matches:**
-   - IOC order cannot be taker in multiple separate operations
-   - After first match, order is filled/cancelled
-   - Subsequent matches fail
+   - IOC order không thể là taker trong nhiều separate operations
+   - Sau match đầu tiên, order được fill/cancel
+   - Subsequent matches thất bại
 
 3. **Partial Fill Handling:**
-   - If IOC order partially fills, remaining size is cancelled
-   - Order removed from state after partial fill
-   - Cannot match again in later blocks
+   - Nếu IOC order partially fill, remaining size được hủy
+   - Order được xóa khỏi state sau partial fill
+   - Không thể match lại trong blocks sau
 
-### Key Points
+### Điểm quan trọng
 
 1. **IOC Order Behavior:**
-   - Must fill completely immediately or be cancelled
-   - Cannot persist across blocks if partially filled
-   - Remaining size cancelled after partial fill
+   - Phải fill hoàn toàn ngay lập tức hoặc bị hủy
+   - Không thể tồn tại qua blocks nếu partially filled
+   - Remaining size được hủy sau partial fill
 
 2. **Match Operation:**
-   - Single match operation can include multiple maker fills
-   - All fills happen atomically
-   - Order state updated after operation
+   - Single match operation có thể bao gồm nhiều maker fills
+   - Tất cả fills xảy ra atomically
+   - Order state được cập nhật sau operation
 
 3. **State Management:**
-   - Partially filled IOC orders removed from state
-   - Cannot query or match removed orders
-   - State consistency maintained
+   - Partially filled IOC orders được xóa khỏi state
+   - Không thể query hoặc match removed orders
+   - State consistency được duy trì
 
 4. **Validation:**
-   - DeliverTx validates match operations
-   - Checks order existence and state
-   - Rejects invalid matches
+   - DeliverTx validate match operations
+   - Kiểm tra order existence và state
+   - Từ chối invalid matches
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Immediate Execution:** IOC orders ensure immediate execution or cancellation.
+1. **Immediate Execution:** IOC orders đảm bảo immediate execution hoặc cancellation.
 
-2. **State Consistency:** Prevents matching orders that no longer exist.
+2. **State Consistency:** Ngăn chặn matching orders không còn tồn tại.
 
-3. **Atomic Operations:** Single match operation ensures atomic fills.
+3. **Atomic Operations:** Single match operation đảm bảo atomic fills.
 
-4. **Safety:** Validation prevents invalid match operations.
-
+4. **Safety:** Validation ngăn chặn invalid match operations.

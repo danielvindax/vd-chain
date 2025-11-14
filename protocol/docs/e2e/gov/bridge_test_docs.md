@@ -1,19 +1,19 @@
-# Test Documentation: Bridge Module Governance Proposals
+# Tài liệu Test: Bridge Module Governance Proposals
 
-## Overview
+## Tổng quan
 
-This test file verifies governance proposals related to the **Bridge Module**, including:
-1. **Update Event Params:** Update event parameters for bridge operations
-2. **Update Propose Params:** Update propose parameters for bridge proposals
-3. **Update Safety Params:** Update safety parameters for bridge safety controls
+File test này xác minh các governance proposals liên quan đến **Bridge Module**, bao gồm:
+1. **Update Event Params:** Cập nhật event parameters cho bridge operations
+2. **Update Propose Params:** Cập nhật propose parameters cho bridge proposals
+3. **Update Safety Params:** Cập nhật safety parameters cho bridge safety controls
 
 ---
 
 ## Test Function: TestUpdateEventParams
 
-### Test Case 1: Success - Update Event Params
+### Test Case 1: Thành công - Cập nhật Event Params
 
-### Input
+### Đầu vào
 - **Genesis State:**
   - Event params:
     - Denom: "testdenom"
@@ -21,219 +21,219 @@ This test file verifies governance proposals related to the **Bridge Module**, i
     - EthAddress: "0x0123"
 - **Proposed Message:**
   - `MsgUpdateEventParams`:
-    - Denom: "advtnt" (changed)
-    - EthChainId: 1 (changed)
-    - EthAddress: "0xabcd" (changed)
+    - Denom: "advtnt" (thay đổi)
+    - EthChainId: 1 (thay đổi)
+    - EthAddress: "0xabcd" (thay đổi)
     - Authority: gov module
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Event Params:** Updated with new values
+- **Event Params:** Được cập nhật với giá trị mới
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Event Configuration:** Event params control how bridge events are processed and validated.
-2. **Denom:** The denomination of tokens used in bridge operations.
-3. **EthChainId:** Ethereum chain ID for cross-chain bridge operations.
-4. **EthAddress:** Ethereum address for bridge contract or operations.
-5. **Governance Control:** Only governance has permission to update event params.
+1. **Event Configuration:** Event params điều khiển cách bridge events được xử lý và validate.
+2. **Denom:** Denomination của tokens được sử dụng trong bridge operations.
+3. **EthChainId:** Ethereum chain ID cho cross-chain bridge operations.
+4. **EthAddress:** Ethereum address cho bridge contract hoặc operations.
+5. **Governance Control:** Chỉ governance có quyền cập nhật event params.
 
 ---
 
-### Test Case 2: Failure - Empty ETH Address
+### Test Case 2: Thất bại - ETH Address Rỗng
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdateEventParams` with EthAddress = "" (empty string)
+  - `MsgUpdateEventParams` với EthAddress = "" (chuỗi rỗng)
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Proposal:** Not submitted
+- **Proposal:** Không được submit
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Required Field:** EthAddress is required for bridge operations, cannot be empty.
-2. **Early Validation:** Validation at CheckTx to reject early.
-3. **Data Integrity:** Ensures bridge always has valid Ethereum address.
+1. **Required Field:** EthAddress là bắt buộc cho bridge operations, không thể rỗng.
+2. **Early Validation:** Validation tại CheckTx để từ chối sớm.
+3. **Data Integrity:** Đảm bảo bridge luôn có Ethereum address hợp lệ.
 
 ---
 
-### Test Case 3: Failure - Invalid Authority
+### Test Case 3: Thất bại - Invalid Authority
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdateEventParams` with Authority = Bob's address (not gov module)
+  - `MsgUpdateEventParams` với Authority = địa chỉ của Bob (không phải gov module)
 
-### Output
+### Đầu ra
 - **Proposal Submission:** FAIL
-- **Proposals:** No proposals created
+- **Proposals:** Không có proposals được tạo
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Authority Check:** Only governance module has permission to update event params.
-2. **Security:** Ensures only governance can change bridge event configuration.
-3. **Early Rejection:** Validation at proposal submission time.
+1. **Authority Check:** Chỉ governance module có quyền cập nhật event params.
+2. **Bảo mật:** Đảm bảo chỉ governance có thể thay đổi bridge event configuration.
+3. **Early Rejection:** Validation tại thời điểm proposal submission.
 
 ---
 
 ## Test Function: TestUpdateProposeParams
 
-### Test Case 1: Success - Update Propose Params
+### Test Case 1: Thành công - Cập nhật Propose Params
 
-### Input
+### Đầu vào
 - **Genesis State:**
   - Propose params:
     - MaxBridgesPerBlock: 10
-    - ProposeDelayDuration: 1 minute
+    - ProposeDelayDuration: 1 phút
     - SkipRatePpm: 800_000
-    - SkipIfBlockDelayedByDuration: 1 minute
+    - SkipIfBlockDelayedByDuration: 1 phút
 - **Proposed Message:**
   - `MsgUpdateProposeParams`:
-    - MaxBridgesPerBlock: 7 (changed)
-    - ProposeDelayDuration: 1 second (changed)
-    - SkipRatePpm: 700_007 (changed)
-    - SkipIfBlockDelayedByDuration: 1 second (changed)
+    - MaxBridgesPerBlock: 7 (thay đổi)
+    - ProposeDelayDuration: 1 giây (thay đổi)
+    - SkipRatePpm: 700_007 (thay đổi)
+    - SkipIfBlockDelayedByDuration: 1 giây (thay đổi)
     - Authority: gov module
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Propose Params:** Updated with new values
+- **Propose Params:** Được cập nhật với giá trị mới
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Propose Configuration:** Propose params control how bridge proposals are submitted and processed.
-2. **MaxBridgesPerBlock:** Maximum number of bridges that can be proposed per block.
-3. **ProposeDelayDuration:** Delay duration before proposal can be submitted.
-4. **SkipRatePpm:** Rate (parts per million) to skip proposals under certain conditions.
-5. **SkipIfBlockDelayedByDuration:** Duration threshold to skip proposals if block is delayed.
+1. **Propose Configuration:** Propose params điều khiển cách bridge proposals được submit và xử lý.
+2. **MaxBridgesPerBlock:** Số lượng bridges tối đa có thể được propose mỗi block.
+3. **ProposeDelayDuration:** Thời gian delay trước khi proposal có thể được submit.
+4. **SkipRatePpm:** Tỷ lệ (parts per million) để skip proposals trong một số điều kiện.
+5. **SkipIfBlockDelayedByDuration:** Ngưỡng thời gian để skip proposals nếu block bị delay.
 
 ---
 
-### Test Case 2: Failure - Negative Propose Delay Duration
+### Test Case 2: Thất bại - Propose Delay Duration Âm
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdateProposeParams` with ProposeDelayDuration = -1 second (negative)
+  - `MsgUpdateProposeParams` với ProposeDelayDuration = -1 giây (âm)
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Proposal:** Not submitted
+- **Proposal:** Không được submit
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Non-Negative Validation:** Duration cannot be negative.
-2. **Early Rejection:** Validation at CheckTx to reject early.
-3. **Logical Constraint:** Negative duration doesn't make sense for delay.
+1. **Non-Negative Validation:** Duration không thể âm.
+2. **Early Rejection:** Validation tại CheckTx để từ chối sớm.
+3. **Logical Constraint:** Duration âm không có ý nghĩa cho delay.
 
 ---
 
-### Test Case 3: Failure - Negative Skip If Block Delayed By Duration
+### Test Case 3: Thất bại - Skip If Block Delayed By Duration Âm
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdateProposeParams` with SkipIfBlockDelayedByDuration = -1 second (negative)
+  - `MsgUpdateProposeParams` với SkipIfBlockDelayedByDuration = -1 giây (âm)
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Proposal:** Not submitted
+- **Proposal:** Không được submit
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Non-Negative Validation:** Duration cannot be negative.
-2. **Early Rejection:** Validation at CheckTx.
-3. **Logical Constraint:** Negative duration is invalid.
+1. **Non-Negative Validation:** Duration không thể âm.
+2. **Early Rejection:** Validation tại CheckTx.
+3. **Logical Constraint:** Duration âm là không hợp lệ.
 
 ---
 
-### Test Case 4: Failure - Skip Rate PPM Out of Bounds
+### Test Case 4: Thất bại - Skip Rate PPM Vượt Quá Giới Hạn
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdateProposeParams` with SkipRatePpm = 1_000_001 (> 1 million)
+  - `MsgUpdateProposeParams` với SkipRatePpm = 1_000_001 (> 1 triệu)
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Proposal:** Not submitted
+- **Proposal:** Không được submit
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Boundary Check:** SkipRatePpm must be <= 1_000_000 (1 million ppm = 100%).
-2. **PPM Format:** PPM (parts per million) has maximum of 1 million.
-3. **Logical Constraint:** Rate cannot exceed 100%.
+1. **Boundary Check:** SkipRatePpm phải <= 1_000_000 (1 triệu ppm = 100%).
+2. **PPM Format:** PPM (parts per million) có tối đa là 1 triệu.
+3. **Logical Constraint:** Rate không thể vượt quá 100%.
 
 ---
 
-### Test Case 5: Failure - Invalid Authority
+### Test Case 5: Thất bại - Invalid Authority
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdateProposeParams` with Authority = Alice's address (not gov module)
+  - `MsgUpdateProposeParams` với Authority = địa chỉ của Alice (không phải gov module)
 
-### Output
+### Đầu ra
 - **Proposal Submission:** FAIL
-- **Proposals:** No proposals created
+- **Proposals:** Không có proposals được tạo
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Authority Check:** Only governance module has permission to update propose params.
-2. **Security:** Ensures only governance can change bridge proposal configuration.
+1. **Authority Check:** Chỉ governance module có quyền cập nhật propose params.
+2. **Bảo mật:** Đảm bảo chỉ governance có thể thay đổi bridge proposal configuration.
 
 ---
 
 ## Test Function: TestUpdateSafetyParams
 
-### Test Case 1: Success - Update Safety Params
+### Test Case 1: Thành công - Cập nhật Safety Params
 
-### Input
+### Đầu vào
 - **Genesis State:**
   - Safety params:
     - IsDisabled: false
     - DelayBlocks: 10
 - **Proposed Message:**
   - `MsgUpdateSafetyParams`:
-    - IsDisabled: true (changed)
-    - DelayBlocks: 5 (changed)
+    - IsDisabled: true (thay đổi)
+    - DelayBlocks: 5 (thay đổi)
     - Authority: gov module
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Safety Params:** Updated with new values
+- **Safety Params:** Được cập nhật với giá trị mới
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Safety Configuration:** Safety params control safety mechanisms for bridge operations.
-2. **IsDisabled:** Flag to enable/disable bridge safety checks.
-3. **DelayBlocks:** Number of blocks to delay before executing bridge operations.
-4. **Governance Control:** Only governance has permission to update safety params.
+1. **Safety Configuration:** Safety params điều khiển cơ chế an toàn cho bridge operations.
+2. **IsDisabled:** Flag để enable/disable bridge safety checks.
+3. **DelayBlocks:** Số lượng blocks để delay trước khi thực thi bridge operations.
+4. **Governance Control:** Chỉ governance có quyền cập nhật safety params.
 
 ---
 
-### Test Case 2: Failure - Invalid Authority
+### Test Case 2: Thất bại - Invalid Authority
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdateSafetyParams` with Authority = Alice's address (not gov module)
+  - `MsgUpdateSafetyParams` với Authority = địa chỉ của Alice (không phải gov module)
 
-### Output
+### Đầu ra
 - **Proposal Submission:** FAIL
-- **Proposals:** No proposals created
+- **Proposals:** Không có proposals được tạo
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Authority Check:** Only governance module has permission to update safety params.
-2. **Security:** Ensures only governance can change bridge safety configuration.
-3. **Early Rejection:** Validation at proposal submission time.
+1. **Authority Check:** Chỉ governance module có quyền cập nhật safety params.
+2. **Bảo mật:** Đảm bảo chỉ governance có thể thay đổi bridge safety configuration.
+3. **Early Rejection:** Validation tại thời điểm proposal submission.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Update Event Params Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. VALIDATE INPUT                                            │
-│    - EthAddress not empty                                    │
+│    - EthAddress không rỗng                                   │
 │    - Authority = gov module                                  │
 └─────────────────────────────────────────────────────────────┘
                         ↓
@@ -244,8 +244,8 @@ This test file verifies governance proposals related to the **Bridge Module**, i
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. PROPOSAL EXECUTION                                        │
-│    - Update event params                                      │
-│    - Apply new configuration                                 │
+│    - Cập nhật event params                                    │
+│    - Áp dụng configuration mới                                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -267,8 +267,8 @@ This test file verifies governance proposals related to the **Bridge Module**, i
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. PROPOSAL EXECUTION                                        │
-│    - Update propose params                                    │
-│    - Apply new configuration                                 │
+│    - Cập nhật propose params                                  │
+│    - Áp dụng configuration mới                                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -287,63 +287,62 @@ This test file verifies governance proposals related to the **Bridge Module**, i
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. PROPOSAL EXECUTION                                        │
-│    - Update safety params                                     │
-│    - Apply new configuration                                 │
+│    - Cập nhật safety params                                   │
+│    - Áp dụng configuration mới                                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **Event Params Update:**
    ```
-   Old Params → New Params (UPDATE)
+   Params Cũ → Params Mới (UPDATE)
    ```
 
 2. **Propose Params Update:**
    ```
-   Old Params → New Params (UPDATE)
+   Params Cũ → Params Mới (UPDATE)
    ```
 
 3. **Safety Params Update:**
    ```
-   Old Params → New Params (UPDATE)
+   Params Cũ → Params Mới (UPDATE)
    ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Event Params:**
-   - Denom: Token denomination for bridge operations
-   - EthChainId: Ethereum chain ID for cross-chain operations
-   - EthAddress: Must not be empty
-   - Validation at CheckTx
+   - Denom: Token denomination cho bridge operations
+   - EthChainId: Ethereum chain ID cho cross-chain operations
+   - EthAddress: Không được rỗng
+   - Validation tại CheckTx
 
 2. **Propose Params:**
-   - MaxBridgesPerBlock: Maximum bridges per block
-   - ProposeDelayDuration: Must be >= 0
-   - SkipRatePpm: Must be <= 1_000_000
-   - SkipIfBlockDelayedByDuration: Must be >= 0
-   - Validation at CheckTx
+   - MaxBridgesPerBlock: Số lượng bridges tối đa mỗi block
+   - ProposeDelayDuration: Phải >= 0
+   - SkipRatePpm: Phải <= 1_000_000
+   - SkipIfBlockDelayedByDuration: Phải >= 0
+   - Validation tại CheckTx
 
 3. **Safety Params:**
    - IsDisabled: Enable/disable safety checks
-   - DelayBlocks: Number of blocks to delay
-   - No CheckTx validation (only authority check)
+   - DelayBlocks: Số lượng blocks để delay
+   - Không có CheckTx validation (chỉ authority check)
 
 4. **Authority:**
-   - Only governance module has permission to update all params
-   - Validation at proposal submission time
+   - Chỉ governance module có quyền cập nhật tất cả params
+   - Validation tại thời điểm proposal submission
 
 5. **Atomic Execution:**
-   - If validation fails, entire proposal fails
-   - State is rolled back to before execution
+   - Nếu validation thất bại, toàn bộ proposal thất bại
+   - State được rollback về trước khi execution
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Governance Control:** Only governance has permission to change bridge configuration to ensure decentralization and security.
+1. **Governance Control:** Chỉ governance có quyền thay đổi bridge configuration để đảm bảo decentralization và bảo mật.
 
-2. **Safety:** Validation ensures no invalid states (empty address, negative duration, out of bounds rate).
+2. **An toàn:** Validation đảm bảo không có invalid states (empty address, negative duration, out of bounds rate).
 
-3. **Flexibility:** Allows adjusting bridge parameters when needed to optimize bridge operations.
+3. **Linh hoạt:** Cho phép điều chỉnh bridge parameters khi cần để tối ưu bridge operations.
 
-4. **Consistency:** Ensures bridge module always has valid configuration.
-
+4. **Nhất quán:** Đảm bảo bridge module luôn có configuration hợp lệ.

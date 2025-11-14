@@ -1,187 +1,187 @@
-# Test Documentation: Rate Limiting E2E Tests
+# Tài liệu Test: Rate Limiting E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies **Rate Limiting** functionality in the CLOB module. Rate limits restrict the number of operations (orders, cancellations, leverage updates) a subaccount can perform within a specified number of blocks. The test ensures that:
-1. Short-term orders are rate limited
-2. Stateful orders are rate limited
-3. Order cancellations are rate limited
-4. Batch cancellations are rate limited
-5. Leverage updates are rate limited
-6. Rate limits apply per subaccount
+File test này xác minh chức năng **Rate Limiting** trong CLOB module. Rate limits giới hạn số lượng operations (orders, cancellations, leverage updates) một subaccount có thể thực hiện trong một số blocks được chỉ định. Test đảm bảo rằng:
+1. Short-term orders được rate limit
+2. Stateful orders được rate limit
+3. Order cancellations được rate limit
+4. Batch cancellations được rate limit
+5. Leverage updates được rate limit
+6. Rate limits áp dụng per subaccount
 
 ---
 
 ## Test Function: TestRateLimitingOrders_RateLimitsAreEnforced
 
-### Test Case 1: Failure - Short-Term Orders with Same Subaccount Exceed Limit
+### Test Case 1: Thất bại - Short-Term Orders với Cùng Subaccount Vượt Quá Limit
 
-### Input
+### Đầu vào
 - **Rate Limit Config:**
   - MaxShortTermOrdersAndCancelsPerNBlocks: 1 order per 2 blocks
 - **Block 2:**
-  - Place order: Alice buys 5 at price 10, CLOB 0
+  - Đặt order: Alice mua 5 ở giá 10, CLOB 0
 - **Block 2:**
-  - Attempt to place order: Alice buys 5 at price 10, CLOB 1
+  - Cố gắng đặt order: Alice mua 5 ở giá 10, CLOB 1
 
-### Output
+### Đầu ra
 - **First Order CheckTx:** SUCCESS
-- **Second Order CheckTx:** FAIL with error `ErrBlockRateLimitExceeded`
+- **Second Order CheckTx:** FAIL với lỗi `ErrBlockRateLimitExceeded`
 - **Error Message:** "exceeds configured block rate limit"
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
 1. **Rate Limit:** 1 order per 2 blocks.
-2. **First Order:** Consumes the limit for blocks 2-3.
-3. **Second Order:** Attempts to place in same block, exceeds limit.
-4. **Rejection:** CheckTx rejects second order immediately.
+2. **First Order:** Tiêu thụ limit cho blocks 2-3.
+3. **Second Order:** Cố gắng đặt trong cùng block, vượt quá limit.
+4. **Rejection:** CheckTx từ chối order thứ hai ngay lập tức.
 
 ---
 
-### Test Case 2: Failure - Short-Term Orders with Different Subaccounts Exceed Limit
+### Test Case 2: Thất bại - Short-Term Orders với Subaccounts Khác nhau Vượt Quá Limit
 
-### Input
-- **Rate Limit Config:** Same as Test Case 1
+### Đầu vào
+- **Rate Limit Config:** Giống Test Case 1
 - **Block 2:**
-  - Place order: Alice_Num0 buys 5 at price 10
+  - Đặt order: Alice_Num0 mua 5 ở giá 10
 - **Block 2:**
-  - Attempt to place order: Alice_Num1 buys 5 at price 10
+  - Cố gắng đặt order: Alice_Num1 mua 5 ở giá 10
 
-### Output
+### Đầu ra
 - **First Order CheckTx:** SUCCESS
-- **Second Order CheckTx:** FAIL with error `ErrBlockRateLimitExceeded`
+- **Second Order CheckTx:** FAIL với lỗi `ErrBlockRateLimitExceeded`
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Per Subaccount:** Rate limits apply per subaccount.
-2. **Different Subaccounts:** Alice_Num0 and Alice_Num1 are different subaccounts.
-3. **Still Limited:** Even different subaccounts of same owner are rate limited.
-4. **Owner-Based:** Rate limits may be based on owner address, not just subaccount.
+1. **Per Subaccount:** Rate limits áp dụng per subaccount.
+2. **Different Subaccounts:** Alice_Num0 và Alice_Num1 là các subaccounts khác nhau.
+3. **Still Limited:** Ngay cả các subaccounts khác nhau của cùng owner cũng bị rate limit.
+4. **Owner-Based:** Rate limits có thể dựa trên owner address, không chỉ subaccount.
 
 ---
 
-### Test Case 3: Failure - Stateful Orders Exceed Limit
+### Test Case 3: Thất bại - Stateful Orders Vượt Quá Limit
 
-### Input
+### Đầu vào
 - **Rate Limit Config:**
   - MaxStatefulOrdersPerNBlocks: 1 order per 2 blocks
 - **Block 2:**
-  - Place long-term order: Alice buys 5 at price 10, CLOB 0
+  - Đặt long-term order: Alice mua 5 ở giá 10, CLOB 0
 - **Block 2:**
-  - Attempt to place long-term order: Alice buys 5 at price 10, CLOB 1
+  - Cố gắng đặt long-term order: Alice mua 5 ở giá 10, CLOB 1
 
-### Output
+### Đầu ra
 - **First Order CheckTx:** SUCCESS
-- **Second Order CheckTx:** FAIL with error `ErrBlockRateLimitExceeded`
+- **Second Order CheckTx:** FAIL với lỗi `ErrBlockRateLimitExceeded`
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Stateful Limit:** Separate limit for stateful orders.
-2. **Same Limit Logic:** Works same as short-term order limits.
-3. **Per Subaccount:** Limits apply per subaccount.
+1. **Stateful Limit:** Limit riêng cho stateful orders.
+2. **Same Limit Logic:** Hoạt động giống như short-term order limits.
+3. **Per Subaccount:** Limits áp dụng per subaccount.
 
 ---
 
-### Test Case 4: Failure - Order Cancellations Exceed Limit
+### Test Case 4: Thất bại - Order Cancellations Vượt Quá Limit
 
-### Input
+### Đầu vào
 - **Rate Limit Config:**
   - MaxShortTermOrdersAndCancelsPerNBlocks: 1 operation per 2 blocks
 - **Block 2:**
-  - Cancel order: Alice cancels order on CLOB 1
+  - Cancel order: Alice hủy order trên CLOB 1
 - **Block 2:**
-  - Attempt to cancel order: Alice cancels order on CLOB 0
+  - Cố gắng cancel order: Alice hủy order trên CLOB 0
 
-### Output
+### Đầu ra
 - **First Cancel CheckTx:** SUCCESS
-- **Second Cancel CheckTx:** FAIL with error `ErrBlockRateLimitExceeded`
+- **Second Cancel CheckTx:** FAIL với lỗi `ErrBlockRateLimitExceeded`
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Cancellation Counts:** Cancellations count toward same limit as orders.
-2. **Combined Limit:** Orders and cancellations share the same rate limit.
-3. **Same Logic:** Works same as order placement limits.
+1. **Cancellation Counts:** Cancellations tính vào cùng limit như orders.
+2. **Combined Limit:** Orders và cancellations chia sẻ cùng rate limit.
+3. **Same Logic:** Hoạt động giống như order placement limits.
 
 ---
 
-### Test Case 5: Failure - Batch Cancellations Exceed Limit
+### Test Case 5: Thất bại - Batch Cancellations Vượt Quá Limit
 
-### Input
+### Đầu vào
 - **Rate Limit Config:**
   - MaxShortTermOrdersAndCancelsPerNBlocks: 2 operations per 2 blocks
 - **Block 2:**
-  - Batch cancel: Alice cancels 3 orders (counts as 1 operation)
+  - Batch cancel: Alice hủy 3 orders (tính là 1 operation)
 - **Block 2:**
-  - Attempt batch cancel: Alice cancels 3 orders
+  - Cố gắng batch cancel: Alice hủy 3 orders
 
-### Output
+### Đầu ra
 - **First Batch Cancel CheckTx:** SUCCESS
-- **Second Batch Cancel CheckTx:** FAIL with error `ErrBlockRateLimitExceeded`
+- **Second Batch Cancel CheckTx:** FAIL với lỗi `ErrBlockRateLimitExceeded`
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Batch Counts as One:** Batch cancel counts as 1 operation, not per order.
-2. **Limit Exceeded:** Second batch cancel exceeds limit of 2 per 2 blocks.
-3. **Efficiency:** Batch operations are more efficient for rate limits.
+1. **Batch Counts as One:** Batch cancel tính là 1 operation, không phải per order.
+2. **Limit Exceeded:** Batch cancel thứ hai vượt quá limit của 2 per 2 blocks.
+3. **Efficiency:** Batch operations hiệu quả hơn cho rate limits.
 
 ---
 
-### Test Case 6: Failure - Leverage Updates Exceed Limit
+### Test Case 6: Thất bại - Leverage Updates Vượt Quá Limit
 
-### Input
+### Đầu vào
 - **Rate Limit Config:**
   - MaxLeverageUpdatesPerNBlocks: 1 update per 2 blocks
 - **Block 2:**
-  - Update leverage: Alice updates leverage for perpetual 0 to 5x
+  - Update leverage: Alice cập nhật leverage cho perpetual 0 lên 5x
 - **Block 2:**
-  - Attempt to update leverage: Alice updates leverage for perpetual 1 to 10x
+  - Cố gắng update leverage: Alice cập nhật leverage cho perpetual 1 lên 10x
 
-### Output
+### Đầu ra
 - **First Update CheckTx:** SUCCESS
-- **Second Update CheckTx:** FAIL with error `ErrBlockRateLimitExceeded`
+- **Second Update CheckTx:** FAIL với lỗi `ErrBlockRateLimitExceeded`
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Separate Limit:** Leverage updates have separate rate limit.
-2. **Per Subaccount:** Limits apply per subaccount.
-3. **Prevents Spam:** Prevents excessive leverage update operations.
+1. **Separate Limit:** Leverage updates có rate limit riêng.
+2. **Per Subaccount:** Limits áp dụng per subaccount.
+3. **Prevents Spam:** Ngăn chặn excessive leverage update operations.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Rate Limit Check Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. IDENTIFY OPERATION TYPE                                   │
+│ 1. XÁC ĐỊNH LOẠI OPERATION                                  │
 │    - Short-term order/cancel                                 │
 │    - Stateful order                                          │
 │    - Leverage update                                         │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. GET RATE LIMIT CONFIG                                     │
-│    - Find limit for operation type                           │
-│    - Get NumBlocks and Limit                                 │
+│ 2. LẤY RATE LIMIT CONFIG                                    │
+│    - Tìm limit cho operation type                            │
+│    - Lấy NumBlocks và Limit                                 │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. COUNT RECENT OPERATIONS                                   │
-│    - Count operations in last N blocks                        │
-│    - Include current block                                   │
-│    - Count per subaccount                                    │
+│ 3. ĐẾM RECENT OPERATIONS                                    │
+│    - Đếm operations trong N blocks cuối                      │
+│    - Bao gồm current block                                  │
+│    - Đếm per subaccount                                     │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 4. VALIDATE LIMIT                                            │
-│    - Check if count >= limit                                 │
-│    - Reject if exceeds limit                                 │
-│    - Allow if within limit                                   │
+│    - Kiểm tra nếu count >= limit                            │
+│    - Từ chối nếu vượt quá limit                             │
+│    - Cho phép nếu trong limit                               │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **Rate Limit Config:**
    ```
@@ -192,50 +192,49 @@ This test file verifies **Rate Limiting** functionality in the CLOB module. Rate
 
 2. **Operation Counting:**
    ```
-   Count operations in sliding window of N blocks
-   Include operations from current block
-   Count per subaccount
+   Đếm operations trong sliding window của N blocks
+   Bao gồm operations từ current block
+   Đếm per subaccount
    ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Per Subaccount Limits:**
-   - Limits apply per subaccount
-   - Different subaccounts have separate limits
-   - Owner address may also be considered
+   - Limits áp dụng per subaccount
+   - Các subaccounts khác nhau có limits riêng
+   - Owner address cũng có thể được xem xét
 
 2. **Sliding Window:**
-   - Count operations in last N blocks
-   - Window slides as blocks advance
-   - Operations expire after N blocks
+   - Đếm operations trong N blocks cuối
+   - Window trượt khi blocks tiến
+   - Operations expire sau N blocks
 
 3. **Operation Types:**
-   - Short-term orders and cancellations share limit
-   - Stateful orders have separate limit
-   - Leverage updates have separate limit
+   - Short-term orders và cancellations chia sẻ limit
+   - Stateful orders có limit riêng
+   - Leverage updates có limit riêng
 
 4. **Batch Operations:**
-   - Batch cancel counts as 1 operation
-   - More efficient than individual cancels
-   - Still subject to rate limits
+   - Batch cancel tính là 1 operation
+   - Hiệu quả hơn individual cancels
+   - Vẫn subject to rate limits
 
 5. **CheckTx Validation:**
-   - Rate limits checked at CheckTx
-   - Early rejection prevents wasted computation
+   - Rate limits được kiểm tra tại CheckTx
+   - Early rejection ngăn chặn wasted computation
    - Error code: `ErrBlockRateLimitExceeded`
 
 6. **Block Advancement:**
-   - Limits persist across blocks
-   - Operations count toward limit for N blocks
-   - After N blocks, operations no longer count
+   - Limits tồn tại qua blocks
+   - Operations tính vào limit cho N blocks
+   - Sau N blocks, operations không còn tính
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Spam Prevention:** Rate limits prevent order book spam from single subaccount.
+1. **Spam Prevention:** Rate limits ngăn chặn order book spam từ single subaccount.
 
-2. **Fairness:** Ensures all users have fair access to order book.
+2. **Fairness:** Đảm bảo tất cả users có fair access đến order book.
 
-3. **System Stability:** Prevents system overload from excessive operations.
+3. **System Stability:** Ngăn chặn system overload từ excessive operations.
 
-4. **Flexibility:** Different limits for different operation types.
-
+4. **Flexibility:** Các limits khác nhau cho các operation types khác nhau.

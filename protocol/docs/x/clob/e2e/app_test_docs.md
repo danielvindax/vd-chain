@@ -1,157 +1,157 @@
-# Test Documentation: CLOB App E2E Tests
+# Tài liệu Test: CLOB App E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies core **CLOB application** functionality including order hydration, concurrent operations, transaction validation, and statistics tracking. The tests ensure that:
-1. Long-term orders are properly hydrated from state to memclob on startup
-2. Orders can be matched during hydration
-3. Concurrent matches and cancels work correctly
-4. Transaction signature validation works correctly
-5. Statistics are tracked correctly for trading activity
+File test này xác minh chức năng **CLOB application** cốt lõi bao gồm order hydration, concurrent operations, transaction validation, và statistics tracking. Các tests đảm bảo rằng:
+1. Long-term orders được hydrate đúng từ state sang memclob khi khởi động
+2. Orders có thể được match trong quá trình hydration
+3. Concurrent matches và cancels hoạt động đúng
+4. Transaction signature validation hoạt động đúng
+5. Statistics được track đúng cho trading activity
 
 ---
 
 ## Test Function: TestHydrationInPreBlocker
 
-### Test Case: Success - Hydrate Long-Term Order from State
+### Test Case: Thành công - Hydrate Long-Term Order từ State
 
-### Input
+### Đầu vào
 - **Genesis State:**
-  - Long-term order exists in state (not in memclob)
-  - Order: Carl_Num0, Buy 1 BTC at 50,000 USDC, GoodTilTime = 10
-  - Order placed at block 1
+  - Long-term order tồn tại trong state (không có trong memclob)
+  - Order: Carl_Num0, Mua 1 BTC ở 50,000 USDC, GoodTilTime = 10
+  - Order được đặt ở block 1
   - Order expiration: time.Unix(50, 0)
-- **Block:** Advance to block 2
+- **Block:** Tiến đến block 2
 
-### Output
-- **Order in State:** Order exists in state storage
-- **Order in MemClob:** Order is hydrated and exists in memclob
-- **Order on Orderbook:** Order is visible on the orderbook
+### Đầu ra
+- **Order in State:** Order tồn tại trong state storage
+- **Order in MemClob:** Order được hydrate và tồn tại trong memclob
+- **Order on Orderbook:** Order hiển thị trên orderbook
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **State Hydration:** Long-term orders are stored in state but need to be loaded into memclob on startup.
-2. **PreBlocker:** PreBlocker is called before each block to hydrate orders from state.
-3. **Order Visibility:** Orders must be in memclob to be visible on the orderbook.
-4. **Persistence:** Orders persist across restarts, so hydration is critical.
+1. **State Hydration:** Long-term orders được lưu trong state nhưng cần được load vào memclob khi khởi động.
+2. **PreBlocker:** PreBlocker được gọi trước mỗi block để hydrate orders từ state.
+3. **Order Visibility:** Orders phải ở trong memclob để hiển thị trên orderbook.
+4. **Persistence:** Orders tồn tại qua restarts, vì vậy hydration là quan trọng.
 
 ---
 
 ## Test Function: TestHydrationWithMatchPreBlocker
 
-### Test Case: Success - Hydrate Orders That Match During Hydration
+### Test Case: Thành công - Hydrate Orders Match Trong Quá trình Hydration
 
-### Input
+### Đầu vào
 - **Genesis State:**
-  - Carl: Long-term buy order (1 BTC at 50,000 USDC)
-  - Dave: Long-term sell order (1 BTC at 50,000 USDC)
-  - Both orders placed at block 1
-  - Both orders expire at time.Unix(10, 0)
-- **Block:** Advance to block 2
+  - Carl: Long-term buy order (1 BTC ở 50,000 USDC)
+  - Dave: Long-term sell order (1 BTC ở 50,000 USDC)
+  - Cả hai orders được đặt ở block 1
+  - Cả hai orders expire ở time.Unix(10, 0)
+- **Block:** Tiến đến block 2
 
-### Output
-- **PreBlocker:** Orders are hydrated and matched during PreBlocker
-- **State Changes Discarded:** State changes from PreBlocker are discarded (IsCheckTx = true)
-- **Operations Queue:** Match operation is added to operations queue
-- **Block 2:** Orders are fully filled and removed from state
+### Đầu ra
+- **PreBlocker:** Orders được hydrate và match trong PreBlocker
+- **State Changes Discarded:** State changes từ PreBlocker bị loại bỏ (IsCheckTx = true)
+- **Operations Queue:** Match operation được thêm vào operations queue
+- **Block 2:** Orders được fill đầy và xóa khỏi state
 - **Final State:**
-  - Carl: Long 1 BTC, USDC balance decreased by 50,000 USDC
-  - Dave: Short 1 BTC, USDC balance increased by 50,000 USDC
+  - Carl: Long 1 BTC, USDC balance giảm 50,000 USDC
+  - Dave: Short 1 BTC, USDC balance tăng 50,000 USDC
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Hydration Matching:** Orders that match during hydration should generate match operations.
-2. **State Isolation:** PreBlocker runs in CheckTx context, so state changes are discarded.
-3. **Operations Queue:** Matches are queued and processed in the next block.
-4. **Full Fill:** Matching orders are fully filled and removed from state.
+1. **Hydration Matching:** Orders match trong quá trình hydration nên tạo match operations.
+2. **State Isolation:** PreBlocker chạy trong CheckTx context, vì vậy state changes bị loại bỏ.
+3. **Operations Queue:** Matches được queue và xử lý trong block tiếp theo.
+4. **Full Fill:** Matching orders được fill đầy và xóa khỏi state.
 
 ---
 
 ## Test Function: TestConcurrentMatchesAndCancels
 
-### Test Case: Success - Concurrent Matches and Cancels
+### Test Case: Thành công - Concurrent Matches và Cancels
 
-### Input
-- **Accounts:** 1000 random accounts
+### Đầu vào
+- **Accounts:** 1000 tài khoản ngẫu nhiên
 - **Orders:**
-  - 300 orders that match (150 buys, 150 sells)
-    - 50 orders of size 5, 10, 15 each for both sides
-    - Total matched volume: 1,500 quantums
-  - 700 orders that are cancelled
-    - Orders placed then immediately cancelled
-- **Execution:** All CheckTx calls executed concurrently
-- **Block:** Advance to block 3
+  - 300 orders match (150 buys, 150 sells)
+    - 50 orders mỗi size 5, 10, 15 cho cả hai phía
+    - Tổng matched volume: 1,500 quantums
+  - 700 orders bị hủy
+    - Orders được đặt rồi ngay lập tức hủy
+- **Execution:** Tất cả CheckTx calls được thực thi đồng thời
+- **Block:** Tiến đến block 3
 
-### Output
-- **Matched Orders:** All 300 orders are fully filled
-- **Cancelled Orders:** All 700 orders are cancelled (no fills)
-- **No Data Races:** Test passes with `-race` flag enabled
+### Đầu ra
+- **Matched Orders:** Tất cả 300 orders được fill đầy
+- **Cancelled Orders:** Tất cả 700 orders bị hủy (không fill)
+- **No Data Races:** Test pass với flag `-race` được bật
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Concurrency Testing:** Tests that the system handles concurrent operations correctly.
-2. **Race Detection:** Uses Go's race detector to find data races.
-3. **Mixed Operations:** Tests both matches and cancels happening concurrently.
-4. **Stress Test:** 1000 accounts with concurrent operations stress tests the system.
+1. **Concurrency Testing:** Test rằng hệ thống xử lý concurrent operations đúng cách.
+2. **Race Detection:** Sử dụng Go's race detector để tìm data races.
+3. **Mixed Operations:** Test cả matches và cancels xảy ra đồng thời.
+4. **Stress Test:** 1000 accounts với concurrent operations stress test hệ thống.
 
 ---
 
 ## Test Function: TestFailsDeliverTxWithIncorrectlySignedPlaceOrderTx
 
-### Test Case: Failure - Incorrectly Signed Order Placement
+### Test Case: Thất bại - Incorrectly Signed Order Placement
 
-### Input
-- **Order:** Alice's order (from Alice_Num0)
-- **Signer:** Bob's private key (incorrect signer)
-- **Transaction:** Order placement transaction signed by Bob
+### Đầu vào
+- **Order:** Order của Alice (từ Alice_Num0)
+- **Signer:** Private key của Bob (signer sai)
+- **Transaction:** Order placement transaction được ký bởi Bob
 
-### Output
+### Đầu ra
 - **DeliverTx:** FAIL
 - **Error:** "invalid pubkey: MsgProposedOperations is invalid"
-- **Transaction:** Rejected
+- **Transaction:** Bị từ chối
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Signature Validation:** Transactions must be signed by the correct account.
-2. **Security:** Prevents unauthorized order placement.
-3. **DeliverTx Validation:** Validation happens in DeliverTx, not just CheckTx.
+1. **Signature Validation:** Transactions phải được ký bởi account đúng.
+2. **Bảo mật:** Ngăn chặn order placement trái phép.
+3. **DeliverTx Validation:** Validation xảy ra trong DeliverTx, không chỉ CheckTx.
 
 ---
 
 ## Test Function: TestFailsDeliverTxWithUnsignedTransactions
 
-### Test Case: Failure - Unsigned Order Placement
+### Test Case: Thất bại - Unsigned Order Placement
 
-### Input
-- **Order:** Alice's order (from Alice_Num0)
-- **Transaction:** Order placement transaction with no signatures
+### Đầu vào
+- **Order:** Order của Alice (từ Alice_Num0)
+- **Transaction:** Order placement transaction không có signatures
 
-### Output
+### Đầu ra
 - **DeliverTx:** FAIL
 - **Error:** "Error: no signatures supplied: MsgProposedOperations is invalid"
-- **Transaction:** Rejected
+- **Transaction:** Bị từ chối
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Signature Requirement:** All transactions must be signed.
-2. **Security:** Prevents unsigned transactions from being processed.
-3. **Validation:** Signature validation happens in DeliverTx.
+1. **Signature Requirement:** Tất cả transactions phải được ký.
+2. **Bảo mật:** Ngăn chặn unsigned transactions được xử lý.
+3. **Validation:** Signature validation xảy ra trong DeliverTx.
 
 ---
 
 ## Test Function: TestStats
 
-### Test Case: Success - Statistics Tracking
+### Test Case: Thành công - Statistics Tracking
 
-### Input
-- **Epochs:** Multiple epochs with trading activity
+### Đầu vào
+- **Epochs:** Nhiều epochs với trading activity
 - **Orders:**
-  - Block 2-5: Alice (maker) and Bob (taker) trade 10,000 notional
-  - Block 6: Alice and Bob trade 5,000 notional (same epoch)
-  - Block 8: Alice and Bob trade 5,000 notional (new epoch)
-- **Time:** Epochs advance based on StatsEpochDuration
+  - Block 2-5: Alice (maker) và Bob (taker) trade 10,000 notional
+  - Block 6: Alice và Bob trade 5,000 notional (cùng epoch)
+  - Block 8: Alice và Bob trade 5,000 notional (epoch mới)
+- **Time:** Epochs tiến dựa trên StatsEpochDuration
 
-### Output
+### Đầu ra
 - **User Stats:**
   - Alice: MakerNotional = 20,000, TakerNotional = 0
   - Bob: MakerNotional = 0, TakerNotional = 20,000
@@ -159,40 +159,40 @@ This test file verifies core **CLOB application** functionality including order 
 - **Epoch Stats:**
   - Epoch 0: 15,000 notional
   - Epoch 2: 5,000 notional
-- **Window Expiration:** Stats expire after window duration
+- **Window Expiration:** Stats expire sau window duration
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Statistics Tracking:** Tracks trading activity for rewards and analytics.
-2. **Maker/Taker:** Distinguishes between maker and taker roles.
-3. **Epochs:** Statistics are tracked per epoch.
-4. **Window:** Statistics expire after a window duration.
-5. **Aggregation:** User stats, global stats, and epoch stats are all tracked.
+1. **Statistics Tracking:** Theo dõi trading activity cho rewards và analytics.
+2. **Maker/Taker:** Phân biệt giữa maker và taker roles.
+3. **Epochs:** Statistics được track theo epoch.
+4. **Window:** Statistics expire sau window duration.
+5. **Aggregation:** User stats, global stats, và epoch stats đều được track.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Order Hydration Flow
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. GENESIS STATE                                             │
-│    - Long-term orders stored in state                        │
-│    - Orders not in memclob                                   │
+│    - Long-term orders được lưu trong state                  │
+│    - Orders không có trong memclob                           │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 2. PREBLOCKER                                                │
-│    - Load orders from state                                  │
-│    - Hydrate orders into memclob                             │
-│    - Check for matches                                       │
+│    - Load orders từ state                                   │
+│    - Hydrate orders vào memclob                              │
+│    - Kiểm tra matches                                        │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. ORDERBOOK                                                 │
-│    - Orders visible on orderbook                             │
-│    - Orders can be matched                                   │
+│    - Orders hiển thị trên orderbook                          │
+│    - Orders có thể được match                                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -200,22 +200,22 @@ This test file verifies core **CLOB application** functionality including order 
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. CONCURRENT CHECKTX                                         │
-│    - Multiple goroutines execute CheckTx                     │
-│    - Orders placed and cancelled concurrently                │
+│ 1. CONCURRENT CHECKTX                                        │
+│    - Nhiều goroutines thực thi CheckTx                       │
+│    - Orders được đặt và hủy đồng thời                       │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 2. BLOCK ADVANCEMENT                                         │
-│    - All transactions included in block                      │
-│    - Matches and cancels processed                           │
+│    - Tất cả transactions được bao gồm trong block            │
+│    - Matches và cancels được xử lý                           │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. VERIFICATION                                              │
-│    - Matched orders fully filled                             │
-│    - Cancelled orders not filled                             │
-│    - No data races detected                                  │
+│    - Matched orders được fill đầy                            │
+│    - Cancelled orders không fill                             │
+│    - Không phát hiện data races                              │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -224,59 +224,58 @@ This test file verifies core **CLOB application** functionality including order 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. ORDER MATCHING                                            │
-│    - Orders matched in block                                 │
-│    - Maker and taker identified                              │
+│    - Orders match trong block                                │
+│    - Maker và taker được xác định                           │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 2. STATISTICS UPDATE                                         │
-│    - User stats updated                                      │
-│    - Global stats updated                                    │
-│    - Epoch stats updated                                     │
+│    - User stats được cập nhật                                │
+│    - Global stats được cập nhật                              │
+│    - Epoch stats được cập nhật                               │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. EPOCH ADVANCEMENT                                          │
-│    - New epoch starts                                        │
-│    - Previous epoch stats preserved                          │
+│ 3. EPOCH ADVANCEMENT                                         │
+│    - Epoch mới bắt đầu                                       │
+│    - Previous epoch stats được giữ lại                      │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 4. WINDOW EXPIRATION                                         │
 │    - Old epoch stats expire                                 │
-│    - Stats removed from window                               │
+│    - Stats được xóa khỏi window                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Order Hydration:**
-   - Long-term orders must be hydrated from state on startup
-   - Hydration happens in PreBlocker
-   - Orders become visible on orderbook after hydration
+   - Long-term orders phải được hydrate từ state khi khởi động
+   - Hydration xảy ra trong PreBlocker
+   - Orders trở nên hiển thị trên orderbook sau hydration
 
 2. **Concurrent Operations:**
-   - System must handle concurrent CheckTx calls
-   - Race detector helps find data races
-   - Stress testing with many accounts
+   - Hệ thống phải xử lý concurrent CheckTx calls
+   - Race detector giúp tìm data races
+   - Stress testing với nhiều accounts
 
 3. **Transaction Validation:**
-   - Signatures must be valid
-   - Signer must match transaction sender
-   - Validation happens in DeliverTx
+   - Signatures phải hợp lệ
+   - Signer phải khớp với transaction sender
+   - Validation xảy ra trong DeliverTx
 
 4. **Statistics:**
-   - Maker/Taker distinction is important
-   - Statistics tracked per epoch
-   - Statistics expire after window duration
+   - Maker/Taker distinction là quan trọng
+   - Statistics được track theo epoch
+   - Statistics expire sau window duration
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **State Hydration:** Ensures orders persist across restarts and are available for matching.
+1. **State Hydration:** Đảm bảo orders tồn tại qua restarts và có sẵn cho matching.
 
-2. **Concurrency:** System must handle high concurrency in production.
+2. **Concurrency:** Hệ thống phải xử lý high concurrency trong production.
 
-3. **Security:** Signature validation prevents unauthorized transactions.
+3. **Bảo mật:** Signature validation ngăn chặn transactions trái phép.
 
-4. **Analytics:** Statistics enable rewards and analytics features.
-
+4. **Analytics:** Statistics cho phép rewards và analytics features.

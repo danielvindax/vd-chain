@@ -1,122 +1,122 @@
-# Test Documentation: Prices Module Governance Proposals
+# Tài liệu Test: Prices Module Governance Proposals
 
-## Overview
+## Tổng quan
 
-This test file verifies governance proposal to **update Market Param** in Prices module. Market param contains information about price feed configuration for a market.
+File test này xác minh governance proposal để **cập nhật Market Param** trong Prices module. Market param chứa thông tin về price feed configuration cho một market.
 
 ---
 
 ## Test Function: TestUpdateMarketParam
 
-### Test Case 1: Success - Update Market Param
+### Test Case 1: Thành công - Cập nhật Market Param
 
-### Input
+### Đầu vào
 - **Genesis State:**
-  - Has market param with ID = 0, Pair = "btc-avdtn", MinPriceChangePpm = 1_000
-  - Market exists in market map
+  - Có market param với ID = 0, Pair = "btc-avdtn", MinPriceChangePpm = 1_000
+  - Market tồn tại trong market map
 - **Proposed Message:**
   - `MsgUpdateMarketParam`:
     - Id: 0
-    - Pair: "btc-avdtn" (unchanged)
-    - MinPriceChangePpm: 2_002 (changed from 1_000)
+    - Pair: "btc-avdtn" (không thay đổi)
+    - MinPriceChangePpm: 2_002 (thay đổi từ 1_000)
     - Authority: gov module
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Market Param:** MinPriceChangePpm updated to 2_002
+- **Market Param:** MinPriceChangePpm được cập nhật thành 2_002
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Market Param Update:** Allows adjusting minimum price change threshold for a market.
-2. **MinPriceChangePpm:** This is the threshold (parts per million) to determine when price change is large enough to be considered significant change.
-3. **Governance Control:** Only governance has permission to update market params to ensure consistency.
+1. **Market Param Update:** Cho phép điều chỉnh ngưỡng thay đổi giá tối thiểu cho một market.
+2. **MinPriceChangePpm:** Đây là ngưỡng (parts per million) để xác định khi nào thay đổi giá đủ lớn để được coi là thay đổi đáng kể.
+3. **Governance Control:** Chỉ governance có quyền cập nhật market params để đảm bảo tính nhất quán.
 
 ---
 
-### Test Case 2: Failure - Market Param Does Not Exist
+### Test Case 2: Thất bại - Market Param Không Tồn tại
 
-### Input
-- **Genesis State:** Only has market param with ID = 0
+### Đầu vào
+- **Genesis State:** Chỉ có market param với ID = 0
 - **Proposed Message:** 
-  - `MsgUpdateMarketParam` with ID = 1 (does not exist)
+  - `MsgUpdateMarketParam` với ID = 1 (không tồn tại)
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_FAILED`
-- **State:** No change
+- **State:** Không thay đổi
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Existence Check:** Cannot update market param that doesn't exist.
-2. **Execution-Time Validation:** Validation occurs when proposal executes, not at submission.
-3. **State Protection:** Ensures no partial updates.
+1. **Existence Check:** Không thể cập nhật market param không tồn tại.
+2. **Execution-Time Validation:** Validation xảy ra khi proposal thực thi, không phải khi submit.
+3. **State Protection:** Đảm bảo không có partial updates.
 
 ---
 
-### Test Case 3: Failure - New Pair Name Does Not Exist in Market Map
+### Test Case 3: Thất bại - Pair Name Mới Không Tồn tại trong Market Map
 
-### Input
+### Đầu vào
 - **Genesis State:** 
-  - Has market param with ID = 0, Pair = "btc-avdtn"
-  - Market map only has "btc-avdtn"
+  - Có market param với ID = 0, Pair = "btc-avdtn"
+  - Market map chỉ có "btc-avdtn"
 - **Proposed Message:**
-  - `MsgUpdateMarketParam` with Pair = "nonexistent-pair"
+  - `MsgUpdateMarketParam` với Pair = "nonexistent-pair"
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_FAILED`
-- **State:** No change
+- **State:** Không thay đổi
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Market Map Integration:** Market param must reference a pair that exists in market map.
-2. **Consistency:** Ensures market param and market map always sync with each other.
-3. **Dependency:** Market param depends on market map configuration.
+1. **Market Map Integration:** Market param phải tham chiếu đến một pair tồn tại trong market map.
+2. **Consistency:** Đảm bảo market param và market map luôn đồng bộ với nhau.
+3. **Dependency:** Market param phụ thuộc vào market map configuration.
 
 ---
 
-### Test Case 4: Failure - Empty Pair
+### Test Case 4: Thất bại - Pair Rỗng
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdateMarketParam` with Pair = "" (empty string)
+  - `MsgUpdateMarketParam` với Pair = "" (chuỗi rỗng)
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Proposal:** Not submitted
+- **Proposal:** Không được submit
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Required Field:** Pair is the identifier of market, cannot be empty.
-2. **Early Validation:** Validation at CheckTx to reject early.
-3. **Data Integrity:** Ensures all market params have valid pair name.
+1. **Required Field:** Pair là identifier của market, không thể rỗng.
+2. **Early Validation:** Validation tại CheckTx để từ chối sớm.
+3. **Data Integrity:** Đảm bảo tất cả market params có pair name hợp lệ.
 
 ---
 
-### Test Case 5: Failure - Invalid Authority
+### Test Case 5: Thất bại - Invalid Authority
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdateMarketParam` with Authority = Alice's address (not gov module)
+  - `MsgUpdateMarketParam` với Authority = địa chỉ của Alice (không phải gov module)
 
-### Output
+### Đầu ra
 - **Proposal Submission:** FAIL
-- **Proposals:** No proposals created
+- **Proposals:** Không có proposals được tạo
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Authority Check:** Only governance module has permission to update market params.
-2. **Security:** Ensures only governance can change price feed configuration.
-3. **Early Rejection:** Validation at proposal submission time.
+1. **Authority Check:** Chỉ governance module có quyền cập nhật market params.
+2. **Bảo mật:** Đảm bảo chỉ governance có thể thay đổi price feed configuration.
+3. **Early Rejection:** Validation tại thời điểm proposal submission.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Update Market Param Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. VALIDATE INPUT                                            │
-│    - Pair not empty                                          │
+│    - Pair không rỗng                                         │
 │    - Authority = gov module                                  │
 └─────────────────────────────────────────────────────────────┘
                         ↓
@@ -127,54 +127,54 @@ This test file verifies governance proposal to **update Market Param** in Prices
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. PROPOSAL EXECUTION                                        │
-│    - Check market param exists                               │
-│    - Check pair exists in market map                         │
-│    - Update market param                                     │
+│    - Kiểm tra market param tồn tại                            │
+│    - Kiểm tra pair tồn tại trong market map                  │
+│    - Cập nhật market param                                    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **Market Param State:**
    ```
-   Exists → Updated (UPDATE)
-   Does not exist → FAIL
+   Tồn tại → Được cập nhật (UPDATE)
+   Không tồn tại → FAIL
    ```
 
 2. **Market Map Integration:**
    ```
-   Pair must exist in market map
-   Cannot update with non-existent pair
+   Pair phải tồn tại trong market map
+   Không thể cập nhật với pair không tồn tại
    ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Existence Validation:**
-   - Market param must exist to update
-   - Pair must exist in market map
+   - Market param phải tồn tại để cập nhật
+   - Pair phải tồn tại trong market map
 
 2. **Authority:**
-   - Only governance module has permission to update
-   - Validation at both submission and execution time
+   - Chỉ governance module có quyền cập nhật
+   - Validation tại cả submission và execution time
 
 3. **MinPriceChangePpm:**
-   - This is the threshold to determine significant price changes
-   - Can be adjusted to fine-tune price update frequency
+   - Đây là ngưỡng để xác định thay đổi giá đáng kể
+   - Có thể được điều chỉnh để tinh chỉnh tần suất cập nhật giá
 
 4. **Market Map Dependency:**
-   - Market param depends on market map
-   - Ensures consistency between two systems
+   - Market param phụ thuộc vào market map
+   - Đảm bảo tính nhất quán giữa hai hệ thống
 
 5. **Atomic Execution:**
-   - If validation fails, entire proposal fails
-   - State is rolled back to before execution
+   - Nếu validation thất bại, toàn bộ proposal thất bại
+   - State được rollback về trước khi execution
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Governance Control:** Only governance has permission to change price feed configuration to ensure decentralization and consistency.
+1. **Governance Control:** Chỉ governance có quyền thay đổi price feed configuration để đảm bảo decentralization và tính nhất quán.
 
-2. **Consistency:** Market param and market map must always sync with each other to ensure price feeds work correctly.
+2. **Consistency:** Market param và market map phải luôn đồng bộ với nhau để đảm bảo price feeds hoạt động đúng.
 
-3. **Safety:** Validation ensures no invalid states (empty pair, non-existent market).
+3. **An toàn:** Validation đảm bảo không có invalid states (empty pair, non-existent market).
 
-4. **Flexibility:** Allows adjusting MinPriceChangePpm to optimize price update frequency.
+4. **Linh hoạt:** Cho phép điều chỉnh MinPriceChangePpm để tối ưu tần suất cập nhật giá.

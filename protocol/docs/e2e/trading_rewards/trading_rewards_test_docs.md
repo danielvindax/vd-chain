@@ -1,22 +1,22 @@
-# Test Documentation: Trading Rewards E2E Tests
+# Tài liệu Test: Trading Rewards E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies the **Trading Rewards** distribution mechanism. Trading rewards are distributed to traders based on their trading activity (fees paid). The test ensures that:
-1. Rewards are calculated based on trading fees
-2. Rewards are distributed from treasury account
-3. Only one taker account gets rewards per block
-4. Multiple accounts can receive rewards in the same block
-5. Rewards multiplier affects distribution amount
-6. Vesting tokens are transferred from vester to treasury
+File test này xác minh cơ chế phân phối **Trading Rewards**. Trading rewards được phân phối cho traders dựa trên hoạt động trading của họ (phí đã trả). Test đảm bảo rằng:
+1. Rewards được tính toán dựa trên trading fees
+2. Rewards được phân phối từ treasury account
+3. Chỉ một tài khoản taker nhận rewards mỗi block
+4. Nhiều tài khoản có thể nhận rewards trong cùng block
+5. Rewards multiplier ảnh hưởng đến số tiền phân phối
+6. Vesting tokens được chuyển từ vester đến treasury
 
 ---
 
 ## Test Function: TestTradingRewards
 
-### Test Case 1: Every Block, Only One Taker Account Gets Rewards
+### Test Case 1: Mỗi Block, Chỉ Một Tài khoản Taker Nhận Rewards
 
-### Input
+### Đầu vào
 - **Vest Entry:**
   - VesterAccount: rewards_vester
   - TreasuryAccount: rewards_treasury
@@ -26,161 +26,161 @@ This test file verifies the **Trading Rewards** distribution mechanism. Trading 
   - FeeMultiplierPpm: 990_000 (99%)
   - MarketId: 30 (rewards token)
 - **Orders:**
-  - Block 2: Bob (maker) sells, Alice (taker) buys 1 BTC at 28,003
-  - Block 13: Alice (maker) buys, Bob (taker) sells 1 BTC at 28,003
+  - Block 2: Bob (maker) bán, Alice (taker) mua 1 BTC ở 28,003
+  - Block 13: Alice (maker) mua, Bob (taker) bán 1 BTC ở 28,003
 - **Oracle Prices:**
   - Rewards token: $1.95
   - BTC: $28,003
 
-### Output
+### Đầu ra
 - **Block 0 (Vest Start):**
-  - Vester: 200 million tokens
+  - Vester: 200 triệu tokens
   - Treasury: 0 tokens
 - **Block 1:**
-  - Vester: ~199,999,997.47 tokens (vesting started)
+  - Vester: ~199,999,997.47 tokens (vesting đã bắt đầu)
   - Treasury: ~2.53 tokens (vested)
 - **Block 2:**
   - Vester: ~199,999,994.93 tokens
-  - Treasury: ~3.07 tokens (after distributing ~1.99 to Alice)
-  - Alice: Starting balance + ~1.99 tokens (rewards)
-  - Bob: Starting balance (no rewards - was maker)
+  - Treasury: ~3.07 tokens (sau khi phân phối ~1.99 cho Alice)
+  - Alice: Số dư ban đầu + ~1.99 tokens (rewards)
+  - Bob: Số dư ban đầu (không có rewards - là maker)
 - **Block 13:**
   - Vester: ~199,999,967.05 tokens
   - Treasury: ~28.96 tokens
-  - Bob: Starting balance + ~1.99 tokens (rewards - was taker)
-  - Alice: Starting balance + ~1.99 tokens (from block 2)
+  - Bob: Số dư ban đầu + ~1.99 tokens (rewards - là taker)
+  - Alice: Số dư ban đầu + ~1.99 tokens (từ block 2)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Vesting:** Tokens vest from vester account to treasury account over time.
+1. **Vesting:** Tokens vest từ vester account đến treasury account theo thời gian.
 2. **Rewards Calculation:** Rewards = (TakerFee - MakerRebate - TakerFeeRevShare) × FeeMultiplierPpm
-   - For 1 BTC at $28,003: ($14.0015 - $3.08033 - $7.00075) × 0.99 = $3.8812158
+   - Cho 1 BTC ở $28,003: ($14.0015 - $3.08033 - $7.00075) × 0.99 = $3.8812158
    - Reward tokens = $3.8812158 / $1.95 = ~1.99 tokens
-3. **Taker Only:** Only the taker account receives rewards, not the maker.
-4. **One Per Block:** Only one taker account gets rewards per block (the first taker in that block).
+3. **Taker Only:** Chỉ tài khoản taker nhận rewards, không phải maker.
+4. **One Per Block:** Chỉ một tài khoản taker nhận rewards mỗi block (taker đầu tiên trong block đó).
 
 ---
 
-### Test Case 2: Multiple Accounts Get Rewards
+### Test Case 2: Nhiều Tài khoản Nhận Rewards
 
-### Input
-- **Vest Entry:** Same as Test Case 1
-- **Rewards Params:** Same as Test Case 1
+### Đầu vào
+- **Vest Entry:** Giống Test Case 1
+- **Rewards Params:** Giống Test Case 1
 - **Orders (Block 10):**
-  - BTC: Bob (maker) sells 2 BTC, Alice (taker) buys 2 BTC
-  - BTC: Alice (maker) buys 2 BTC, Bob (taker) sells 2 BTC
-  - ETH: Carl (maker) buys 20 ETH, Dave (taker) sells 20 ETH
-  - ETH: Dave (maker) sells 20 ETH, Carl (taker) buys 20 ETH
+  - BTC: Bob (maker) bán 2 BTC, Alice (taker) mua 2 BTC
+  - BTC: Alice (maker) mua 2 BTC, Bob (taker) bán 2 BTC
+  - ETH: Carl (maker) mua 20 ETH, Dave (taker) bán 20 ETH
+  - ETH: Dave (maker) bán 20 ETH, Carl (taker) mua 20 ETH
 - **Oracle Prices:**
   - Rewards token: $1.95
   - BTC: $28,003
   - ETH: $1,605
 
-### Output
+### Đầu ra
 - **Block 0:**
-  - Vester: 200 million tokens
+  - Vester: 200 triệu tokens
   - Treasury: 0 tokens
 - **Block 10:**
   - Vester: ~199,999,974.66 tokens
-  - Treasury: ~12.82 tokens (after distributing rewards)
-  - Alice: Starting balance + ~3.98 tokens (rewards from BTC trading)
-  - Bob: Starting balance + ~3.98 tokens (rewards from BTC trading)
-  - Carl: Starting balance + ~2.28 tokens (rewards from ETH trading)
-  - Dave: Starting balance + ~2.28 tokens (rewards from ETH trading)
+  - Treasury: ~12.82 tokens (sau khi phân phối rewards)
+  - Alice: Số dư ban đầu + ~3.98 tokens (rewards từ BTC trading)
+  - Bob: Số dư ban đầu + ~3.98 tokens (rewards từ BTC trading)
+  - Carl: Số dư ban đầu + ~2.28 tokens (rewards từ ETH trading)
+  - Dave: Số dư ban đầu + ~2.28 tokens (rewards từ ETH trading)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Multiple Takers:** Multiple accounts can receive rewards in the same block.
-2. **Rewards Per Trade:** Each taker receives rewards based on their trading fees.
-3. **Different Markets:** Rewards are calculated separately for each market (BTC, ETH).
-4. **Total Distribution:** Total rewards distributed = sum of individual rewards.
+1. **Multiple Takers:** Nhiều tài khoản có thể nhận rewards trong cùng block.
+2. **Rewards Per Trade:** Mỗi taker nhận rewards dựa trên trading fees của họ.
+3. **Different Markets:** Rewards được tính riêng cho mỗi market (BTC, ETH).
+4. **Total Distribution:** Tổng rewards phân phối = tổng rewards cá nhân.
 
 ---
 
-### Test Case 3: Rewards Fee Multiplier = 0, No Rewards Distributed
+### Test Case 3: Rewards Fee Multiplier = 0, Không Phân phối Rewards
 
-### Input
-- **Vest Entry:** Same as Test Case 1
+### Đầu vào
+- **Vest Entry:** Giống Test Case 1
 - **Rewards Params:**
-  - FeeMultiplierPpm: 0 (0% - no rewards)
+  - FeeMultiplierPpm: 0 (0% - không có rewards)
 - **Orders (Block 10):**
-  - BTC: Bob (maker) sells 2 BTC, Alice (taker) buys 2 BTC
-  - ETH: Carl (maker) buys 20 ETH, Dave (taker) sells 20 ETH
-- **Oracle Prices:** Same as Test Case 2
+  - BTC: Bob (maker) bán 2 BTC, Alice (taker) mua 2 BTC
+  - ETH: Carl (maker) mua 20 ETH, Dave (taker) bán 20 ETH
+- **Oracle Prices:** Giống Test Case 2
 
-### Output
+### Đầu ra
 - **Block 0:**
-  - Vester: 200 million tokens
+  - Vester: 200 triệu tokens
   - Treasury: 0 tokens
 - **Block 10:**
-  - Vester: ~199,999,974.66 tokens (vesting continues)
-  - Treasury: ~25.34 tokens (vested, but no rewards distributed)
-  - Alice: Starting balance (no rewards)
-  - Bob: Starting balance (no rewards)
-  - Carl: Starting balance (no rewards)
-  - Dave: Starting balance (no rewards)
+  - Vester: ~199,999,974.66 tokens (vesting tiếp tục)
+  - Treasury: ~25.34 tokens (vested, nhưng không phân phối rewards)
+  - Alice: Số dư ban đầu (không có rewards)
+  - Bob: Số dư ban đầu (không có rewards)
+  - Carl: Số dư ban đầu (không có rewards)
+  - Dave: Số dư ban đầu (không có rewards)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Zero Multiplier:** When FeeMultiplierPpm = 0, no rewards are distributed.
-2. **Vesting Continues:** Tokens still vest from vester to treasury.
-3. **No Distribution:** Treasury accumulates tokens but doesn't distribute them.
-4. **Traders Get Nothing:** Even though trading occurs, no rewards are given.
+1. **Zero Multiplier:** Khi FeeMultiplierPpm = 0, không có rewards được phân phối.
+2. **Vesting Continues:** Tokens vẫn vest từ vester đến treasury.
+3. **No Distribution:** Treasury tích lũy tokens nhưng không phân phối chúng.
+4. **Traders Get Nothing:** Mặc dù trading xảy ra, không có rewards được trao.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Trading Rewards Distribution Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. INITIALIZE VESTING                                        │
-│    - Vester account has initial balance                      │
-│    - Treasury account starts at 0                           │
-│    - Vest entry defines vesting schedule                     │
+│ 1. KHỞI TẠO VESTING                                         │
+│    - Vester account có số dư ban đầu                         │
+│    - Treasury account bắt đầu ở 0                            │
+│    - Vest entry định nghĩa vesting schedule                 │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. VESTING OCCURS                                            │
-│    - Tokens vest from vester to treasury each block          │
+│ 2. VESTING XẢY RA                                           │
+│    - Tokens vest từ vester đến treasury mỗi block           │
 │    - Vesting rate = total_vest / (end_time - start_time)     │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. TRADING ACTIVITY                                          │
-│    - Users place and match orders                            │
-│    - Trading fees are collected                              │
-│    - Taker and maker roles are identified                    │
+│ 3. HOẠT ĐỘNG TRADING                                        │
+│    - Users đặt và match orders                              │
+│    - Trading fees được thu thập                              │
+│    - Taker và maker roles được xác định                     │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 4. CALCULATE REWARDS                                         │
+│ 4. TÍNH TOÁN REWARDS                                        │
 │    - Net fees = TakerFee - MakerRebate - TakerFeeRevShare    │
 │    - Rewards = Net fees × FeeMultiplierPpm                   │
 │    - Reward tokens = Rewards (USD) / Rewards token price     │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 5. DISTRIBUTE REWARDS                                        │
-│    - Only taker accounts receive rewards                     │
-│    - Rewards distributed from treasury                       │
-│    - Indexer events emitted                                  │
+│ 5. PHÂN PHỐI REWARDS                                        │
+│    - Chỉ tài khoản taker nhận rewards                        │
+│    - Rewards được phân phối từ treasury                      │
+│    - Indexer events được emit                                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **Vesting State:**
    ```
-   Vester: 200M → Decreasing (tokens vesting out)
-   Treasury: 0 → Increasing (tokens vesting in)
+   Vester: 200M → Giảm (tokens vesting ra)
+   Treasury: 0 → Tăng (tokens vesting vào)
    ```
 
 2. **Rewards Distribution:**
    ```
-   Treasury: Accumulates vested tokens
-   Traders: Receive rewards based on trading activity
+   Treasury: Tích lũy vested tokens
+   Traders: Nhận rewards dựa trên hoạt động trading
    ```
 
 3. **Rewards Calculation:**
@@ -190,51 +190,50 @@ This test file verifies the **Trading Rewards** distribution mechanism. Trading 
    Reward Tokens = Rewards (USD) / Token Price
    ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Vesting:**
-   - Tokens vest from vester account to treasury account
-   - Vesting occurs continuously over vesting period
+   - Tokens vest từ vester account đến treasury account
+   - Vesting xảy ra liên tục trong vesting period
    - Vesting rate = total_vest / (end_time - start_time)
 
 2. **Rewards Calculation:**
-   - Based on trading fees (taker fees)
+   - Dựa trên trading fees (taker fees)
    - Net fees = taker fee - maker rebate - taker fee revenue share
    - Rewards = net fees × fee multiplier (PPM)
    - Reward tokens = rewards (USD) / rewards token price
 
 3. **Distribution:**
-   - Only taker accounts receive rewards (not makers)
-   - Rewards distributed from treasury account
-   - Multiple accounts can receive rewards in same block
-   - Only one taker per block gets rewards (first taker)
+   - Chỉ tài khoản taker nhận rewards (không phải makers)
+   - Rewards được phân phối từ treasury account
+   - Nhiều tài khoản có thể nhận rewards trong cùng block
+   - Chỉ một taker mỗi block nhận rewards (taker đầu tiên)
 
 4. **Fee Multiplier:**
-   - Controls what percentage of net fees become rewards
-   - 990,000 PPM = 99% of net fees become rewards
-   - 0 PPM = no rewards distributed
+   - Điều khiển phần trăm net fees trở thành rewards
+   - 990,000 PPM = 99% net fees trở thành rewards
+   - 0 PPM = không phân phối rewards
 
 5. **Indexer Events:**
-   - Trading rewards events emitted for each distribution
-   - Events include account address and reward amount
-   - Used by off-chain systems to track rewards
+   - Trading rewards events được emit cho mỗi phân phối
+   - Events bao gồm account address và reward amount
+   - Được sử dụng bởi off-chain systems để theo dõi rewards
 
 6. **Oracle Prices:**
-   - Rewards token price used to convert USD rewards to tokens
-   - Trading asset prices used to calculate trading fees
-   - Prices must be available for rewards calculation
+   - Rewards token price được sử dụng để chuyển đổi USD rewards sang tokens
+   - Trading asset prices được sử dụng để tính trading fees
+   - Prices phải có sẵn cho rewards calculation
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Incentivize Trading:** Rewards incentivize users to trade and provide liquidity.
+1. **Khuyến khích Trading:** Rewards khuyến khích users trade và cung cấp liquidity.
 
-2. **Fair Distribution:** Rewards based on trading fees ensure active traders receive more rewards.
+2. **Phân phối Công bằng:** Rewards dựa trên trading fees đảm bảo active traders nhận nhiều rewards hơn.
 
-3. **Taker Focus:** Only takers receive rewards to incentivize market taking and liquidity consumption.
+3. **Tập trung Taker:** Chỉ takers nhận rewards để khuyến khích market taking và liquidity consumption.
 
-4. **Vesting Control:** Vesting mechanism controls token distribution rate over time.
+4. **Kiểm soát Vesting:** Cơ chế vesting kiểm soát tốc độ phân phối token theo thời gian.
 
-5. **Flexibility:** Fee multiplier allows adjusting rewards percentage without changing vesting schedule.
+5. **Linh hoạt:** Fee multiplier cho phép điều chỉnh phần trăm rewards mà không thay đổi vesting schedule.
 
-6. **Transparency:** Indexer events provide transparency into rewards distribution.
-
+6. **Minh bạch:** Indexer events cung cấp minh bạch vào phân phối rewards.

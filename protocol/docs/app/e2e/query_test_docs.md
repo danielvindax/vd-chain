@@ -1,119 +1,118 @@
-# Test Documentation: App Query E2E Tests
+# Tài liệu Test: App Query E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies **Parallel Query** functionality in the application. The test ensures that the application can handle concurrent queries safely without data races. The test uses Go's race detector to verify thread safety.
+File test này xác minh chức năng **Parallel Query** trong ứng dụng. Test đảm bảo rằng ứng dụng có thể xử lý các query đồng thời an toàn mà không có data race. Test sử dụng Go's race detector để xác minh thread safety.
 
 ---
 
 ## Test Function: TestParallelQuery
 
-### Test Case: Success - Parallel Queries Without Data Races
+### Test Case: Thành công - Query song song không có Data Race
 
-### Input
-- **Concurrent Operations:**
-  - Thread 1: Advance blocks (blocks 2-49)
-  - Thread 2: Query app/version repeatedly
-  - Thread 3: Query store/blocktime/key directly
+### Đầu vào
+- **Thao tác đồng thời:**
+  - Thread 1: Tiến block (block 2-49)
+  - Thread 2: Query app/version lặp lại
+  - Thread 3: Query store/blocktime/key trực tiếp
   - Thread 4: Query gRPC PreviousBlockInfo
-- **Synchronization:** Atomic boolean to coordinate threads
-- **Execution:** All operations run concurrently until block limit reached
+- **Đồng bộ:** Atomic boolean để điều phối thread
+- **Thực thi:** Tất cả thao tác chạy đồng thời cho đến khi đạt giới hạn block
 
-### Output
-- **No Data Races:** Test passes with `-race` flag enabled
-- **Query Results:** All queries return valid results
-- **Height Monotonicity:** Query heights are monotonically increasing
-- **Consistency:** Store queries and gRPC queries return consistent data
+### Đầu ra
+- **Không có Data Race:** Test pass với flag `-race` được bật
+- **Kết quả Query:** Tất cả query trả về kết quả hợp lệ
+- **Tính đơn điệu Height:** Query heights tăng đơn điệu
+- **Nhất quán:** Store queries và gRPC queries trả về dữ liệu nhất quán
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Concurrency Testing:** Tests that the application handles concurrent queries correctly.
-2. **Race Detection:** Uses Go's race detector to find data races.
-3. **Multiple Query Types:** Tests different query paths (app, store, gRPC).
-4. **Stress Test:** Concurrent queries while blocks advance stress tests the system.
-5. **Atomic Coordination:** Uses atomic boolean to maximize potential for data races.
+1. **Test đồng thời:** Test rằng ứng dụng xử lý các query đồng thời đúng cách.
+2. **Phát hiện Race:** Sử dụng Go's race detector để tìm data race.
+3. **Nhiều loại Query:** Test các đường dẫn query khác nhau (app, store, gRPC).
+4. **Stress Test:** Query đồng thời trong khi block tiến stress test hệ thống.
+5. **Điều phối Atomic:** Sử dụng atomic boolean để tối đa hóa khả năng data race.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Parallel Query Flow
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. START CONCURRENT THREADS                                  │
-│    - Block advancement thread                                │
-│    - App/version query thread                                │
-│    - Store query thread                                       │
-│    - gRPC query thread                                       │
+│ 1. BẮT ĐẦU CÁC THREAD ĐỒNG THỜI                            │
+│    - Thread tiến block                                      │
+│    - Thread query app/version                                │
+│    - Thread query store                                      │
+│    - Thread query gRPC                                       │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. CONCURRENT EXECUTION                                      │
-│    - Blocks advance while queries execute                    │
-│    - No synchronization between threads                      │
-│    - Atomic boolean coordinates completion                   │
+│ 2. THỰC THI ĐỒNG THỜI                                        │
+│    - Block tiến trong khi query thực thi                    │
+│    - Không có đồng bộ giữa các thread                       │
+│    - Atomic boolean điều phối hoàn thành                    │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. QUERY EXECUTION                                           │
-│    - App/version: Query application version                  │
-│    - Store: Query blocktime store directly                    │
-│    - gRPC: Query PreviousBlockInfo via gRPC                  │
+│ 3. THỰC THI QUERY                                            │
+│    - App/version: Query phiên bản ứng dụng                  │
+│    - Store: Query blocktime store trực tiếp                  │
+│    - gRPC: Query PreviousBlockInfo qua gRPC                  │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 4. VERIFICATION                                              │
-│    - All queries return valid results                        │
-│    - Heights are monotonically increasing                    │
-│    - No data races detected                                  │
+│ 4. XÁC MINH                                                 │
+│    - Tất cả query trả về kết quả hợp lệ                     │
+│    - Heights tăng đơn điệu                                   │
+│    - Không phát hiện data race                              │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
-1. **Query States:**
+1. **Trạng thái Query:**
    ```
-   Query Request → Execute Query → Return Result → Verify Result
-   ```
-
-2. **Concurrent Execution:**
-   ```
-   Thread 1: Block Advancement
-   Thread 2: App/Version Queries
-   Thread 3: Store Queries
-   Thread 4: gRPC Queries
+   Yêu cầu Query → Thực thi Query → Trả về Kết quả → Xác minh Kết quả
    ```
 
-### Key Points
+2. **Thực thi đồng thời:**
+   ```
+   Thread 1: Tiến Block
+   Thread 2: Query App/Version
+   Thread 3: Query Store
+   Thread 4: Query gRPC
+   ```
 
-1. **Query Types:**
-   - App/Version: Application version query
-   - Store: Direct store query (blocktime key)
-   - gRPC: gRPC service query (PreviousBlockInfo)
+### Điểm quan trọng
 
-2. **Concurrency:**
-   - Multiple threads execute queries concurrently
-   - Blocks advance while queries execute
-   - No synchronization between query threads
+1. **Loại Query:**
+   - App/Version: Query phiên bản ứng dụng
+   - Store: Query store trực tiếp (blocktime key)
+   - gRPC: Query dịch vụ gRPC (PreviousBlockInfo)
 
-3. **Race Detection:**
-   - Uses Go's `-race` flag to detect data races
-   - Atomic boolean maximizes potential for races
-   - Wait group coordinates thread completion
+2. **Đồng thời:**
+   - Nhiều thread thực thi query đồng thời
+   - Block tiến trong khi query thực thi
+   - Không có đồng bộ giữa các thread query
 
-4. **Verification:**
-   - Heights must be monotonically increasing
-   - Store and gRPC queries must return consistent data
-   - All queries must return valid results
+3. **Phát hiện Race:**
+   - Sử dụng flag `-race` của Go để phát hiện data race
+   - Atomic boolean tối đa hóa khả năng race
+   - Wait group điều phối hoàn thành thread
 
-### Design Rationale
+4. **Xác minh:**
+   - Heights phải tăng đơn điệu
+   - Store và gRPC queries phải trả về dữ liệu nhất quán
+   - Tất cả query phải trả về kết quả hợp lệ
 
-1. **Thread Safety:** Application must be thread-safe for concurrent queries.
+### Lý do thiết kế
 
-2. **Race Detection:** Go's race detector helps find data races during testing.
+1. **Thread Safety:** Ứng dụng phải thread-safe cho các query đồng thời.
 
-3. **Stress Testing:** Concurrent queries while blocks advance stress tests the system.
+2. **Phát hiện Race:** Go's race detector giúp tìm data race trong quá trình test.
 
-4. **Multiple Paths:** Tests different query paths to ensure all are thread-safe.
+3. **Stress Testing:** Query đồng thời trong khi block tiến stress test hệ thống.
 
+4. **Nhiều đường dẫn:** Test các đường dẫn query khác nhau để đảm bảo tất cả đều thread-safe.

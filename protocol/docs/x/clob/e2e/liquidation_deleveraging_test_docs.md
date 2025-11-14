@@ -1,179 +1,178 @@
-# Test Documentation: Liquidation and Deleveraging E2E Tests
+# Tài liệu Test: Liquidation và Deleveraging E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies **Liquidation and Deleveraging** functionality in the CLOB module. When a subaccount becomes undercollateralized (below maintenance margin), it can be liquidated. The test ensures that:
-1. Liquidations respect position block limits (MinPositionNotionalLiquidated, MaxPositionPortionLiquidatedPpm)
-2. Liquidations respect subaccount block limits (MaxNotionalLiquidated)
-3. Liquidations work for both long and short positions
-4. Insurance fund covers losses when needed
+File test này xác minh chức năng **Liquidation và Deleveraging** trong CLOB module. Khi một subaccount trở nên undercollateralized (dưới maintenance margin), nó có thể được liquidate. Test đảm bảo rằng:
+1. Liquidations tôn trọng position block limits (MinPositionNotionalLiquidated, MaxPositionPortionLiquidatedPpm)
+2. Liquidations tôn trọng subaccount block limits (MaxNotionalLiquidated)
+3. Liquidations hoạt động cho cả long và short positions
+4. Insurance fund cover losses khi cần
 
 ---
 
 ## Test Function: TestLiquidationConfig
 
-### Test Case 1: Liquidating Short - Respects MinPositionNotionalLiquidated
+### Test Case 1: Liquidating Short - Tôn trọng MinPositionNotionalLiquidated
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Carl: 1 BTC Short, 50,499 USD collateral (undercollateralized)
   - Dave: 1 BTC Long, 50,000 USD collateral
-- **Order:** Dave sells 1 BTC at 50,000
+- **Order:** Dave bán 1 BTC ở 50,000
 - **Liquidation Config:**
   - MinPositionNotionalLiquidated: $100,000
   - MaxPositionPortionLiquidatedPpm: 1% (10,000 ppm)
   - Oracle Price: 50,000
 
-### Output
-- **Liquidation:** Entire position liquidated (1 BTC)
+### Đầu ra
+- **Liquidation:** Toàn bộ position được liquidate (1 BTC)
 - **Carl Balance:** 50,499 - 50,000 - 250 (fees) = 249 USD
 - **Dave Balance:** 50,000 + 50,000 = 100,000 USD
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Minimum Notional:** 1% of $50,000 = $500, but minimum is $100,000.
-2. **Entire Position:** Since $500 < $100,000, entire position is liquidated.
-3. **Full Liquidation:** All 1 BTC is liquidated to meet minimum requirement.
+1. **Minimum Notional:** 1% của $50,000 = $500, nhưng minimum là $100,000.
+2. **Entire Position:** Vì $500 < $100,000, toàn bộ position được liquidate.
+3. **Full Liquidation:** Tất cả 1 BTC được liquidate để đáp ứng minimum requirement.
 
 ---
 
-### Test Case 2: Liquidating Long - Respects MaxPositionPortionLiquidatedPpm
+### Test Case 2: Liquidating Long - Tôn trọng MaxPositionPortionLiquidatedPpm
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Carl: 1 BTC Short, 100,000 USD
   - Dave: 1 BTC Long, 49,501 USD (undercollateralized)
-- **Order:** Carl buys 1 BTC at 50,000
+- **Order:** Carl mua 1 BTC ở 50,000
 - **Liquidation Config:**
   - MinPositionNotionalLiquidated: $1,000
   - MaxPositionPortionLiquidatedPpm: 10% (100,000 ppm)
   - Oracle Price: 50,000
 
-### Output
-- **Liquidation:** 10% of position liquidated (0.1 BTC)
+### Đầu ra
+- **Liquidation:** 10% của position được liquidate (0.1 BTC)
 - **Dave Balance:** -49,501 + 5,000 - 25 (fees) = -44,526 USD
-- **Dave Position:** 0.9 BTC long remaining
+- **Dave Position:** 0.9 BTC long còn lại
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Portion Limit:** 10% of $50,000 = $5,000 worth of BTC.
-2. **Partial Liquidation:** Only 0.1 BTC (10%) is liquidated.
-3. **Remaining Position:** 0.9 BTC position remains.
+1. **Portion Limit:** 10% của $50,000 = $5,000 worth của BTC.
+2. **Partial Liquidation:** Chỉ 0.1 BTC (10%) được liquidate.
+3. **Remaining Position:** 0.9 BTC position vẫn còn.
 
 ---
 
-### Test Case 3: Liquidating Short - Respects MaxNotionalLiquidated
+### Test Case 3: Liquidating Short - Tôn trọng MaxNotionalLiquidated
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Carl: 1 BTC Short, 50,499 USD (undercollateralized)
   - Dave: 1 BTC Long, 50,000 USD
-- **Order:** Dave sells 1 BTC at 49,500
+- **Order:** Dave bán 1 BTC ở 49,500
 - **Liquidation Config:**
-  - MaxNotionalLiquidated: $5,000 per block
+  - MaxNotionalLiquidated: $5,000 mỗi block
   - Oracle Price: 50,000
 
-### Output
-- **Liquidation:** Only $5,000 worth liquidated (0.1 BTC)
+### Đầu ra
+- **Liquidation:** Chỉ $5,000 worth được liquidate (0.1 BTC)
 - **Carl Balance:** 50,499 - 5,000 - 25 (fees) = 45,474 USD
-- **Carl Position:** 0.9 BTC short remaining
+- **Carl Position:** 0.9 BTC short còn lại
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Subaccount Limit:** Maximum $5,000 can be liquidated per block.
-2. **Partial Liquidation:** Only 0.1 BTC ($5,000 worth) is liquidated.
-3. **Remaining Position:** 0.9 BTC position remains for future liquidation.
+1. **Subaccount Limit:** Tối đa $5,000 có thể được liquidate mỗi block.
+2. **Partial Liquidation:** Chỉ 0.1 BTC ($5,000 worth) được liquidate.
+3. **Remaining Position:** 0.9 BTC position vẫn còn cho future liquidation.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Liquidation Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. DETECT UNDERCOLLATERALIZATION                            │
+│ 1. PHÁT HIỆN UNDERCOLLATERALIZATION                        │
 │    - Subaccount TNC < maintenance margin                    │
-│    - Liquidations daemon identifies liquidatable accounts    │
+│    - Liquidations daemon xác định liquidatable accounts     │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. CALCULATE LIQUIDATION AMOUNT                              │
-│    - Apply position block limits                             │
+│ 2. TÍNH TOÁN LIQUIDATION AMOUNT                             │
+│    - Áp dụng position block limits                           │
 │      * MinPositionNotionalLiquidated                         │
 │      * MaxPositionPortionLiquidatedPpm                       │
-│    - Apply subaccount block limits                           │
+│    - Áp dụng subaccount block limits                         │
 │      * MaxNotionalLiquidated                                 │
-│    - Take minimum of all limits                              │
+│    - Lấy minimum của tất cả limits                           │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. FIND MATCHING ORDERS                                      │
-│    - Search order book for matching orders                   │
-│    - Use fillable price config                               │
-│    - Match at best available price                           │
+│ 3. TÌM MATCHING ORDERS                                      │
+│    - Tìm kiếm order book cho matching orders                 │
+│    - Sử dụng fillable price config                           │
+│    - Match ở best available price                            │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 4. EXECUTE LIQUIDATION                                       │
-│    - Close portion of position                              │
-│    - Transfer funds to counterparty                          │
-│    - Charge liquidation fee                                 │
-│    - Update subaccount state                                 │
+│ 4. THỰC THI LIQUIDATION                                     │
+│    - Đóng phần position                                      │
+│    - Chuyển funds đến counterparty                           │
+│    - Charge liquidation fee                                  │
+│    - Cập nhật subaccount state                               │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ### Liquidation Limits
 
 1. **Position Block Limits:**
-   - MinPositionNotionalLiquidated: Minimum $ amount to liquidate
-   - MaxPositionPortionLiquidatedPpm: Maximum % of position to liquidate
-   - Applied per position per block
+   - MinPositionNotionalLiquidated: Minimum $ amount để liquidate
+   - MaxPositionPortionLiquidatedPpm: Maximum % của position để liquidate
+   - Áp dụng per position per block
 
 2. **Subaccount Block Limits:**
    - MaxNotionalLiquidated: Maximum $ amount per subaccount per block
    - MaxQuantumsInsuranceLost: Maximum insurance fund loss per block
-   - Applied per subaccount per block
+   - Áp dụng per subaccount per block
 
-### Key Points
+### Điểm quan trọng
 
 1. **Liquidation Triggers:**
    - Subaccount TNC < maintenance margin
-   - Detected by liquidations daemon
-   - Liquidatable accounts identified each block
+   - Được phát hiện bởi liquidations daemon
+   - Liquidatable accounts được xác định mỗi block
 
 2. **Liquidation Amount:**
-   - Calculated based on multiple limits
-   - Minimum of position limits and subaccount limits
-   - Ensures controlled liquidation rate
+   - Được tính dựa trên nhiều limits
+   - Minimum của position limits và subaccount limits
+   - Đảm bảo controlled liquidation rate
 
 3. **Price Discovery:**
-   - Uses fillable price config
-   - Matches at best available price on order book
-   - May use insurance fund if no matching orders
+   - Sử dụng fillable price config
+   - Match ở best available price trên order book
+   - Có thể sử dụng insurance fund nếu không có matching orders
 
 4. **Liquidation Fees:**
-   - Charged to liquidated account
-   - MaxLiquidationFeePpm sets maximum fee
+   - Được charge cho liquidated account
+   - MaxLiquidationFeePpm set maximum fee
    - Fees compensate liquidators
 
 5. **Partial Liquidation:**
-   - Can liquidate portion of position
-   - Remaining position stays open
-   - Can be liquidated again in future blocks
+   - Có thể liquidate phần position
+   - Remaining position vẫn mở
+   - Có thể được liquidate lại trong future blocks
 
 6. **Insurance Fund:**
-   - Covers losses when liquidation price is unfavorable
-   - MaxQuantumsInsuranceLost limits fund exposure
-   - Protects protocol from excessive losses
+   - Cover losses khi liquidation price không thuận lợi
+   - MaxQuantumsInsuranceLost giới hạn fund exposure
+   - Bảo vệ protocol khỏi excessive losses
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Risk Management:** Liquidation limits prevent excessive liquidation in single block.
+1. **Risk Management:** Liquidation limits ngăn chặn excessive liquidation trong single block.
 
-2. **Market Stability:** Controlled liquidation rate prevents market disruption.
+2. **Market Stability:** Controlled liquidation rate ngăn chặn market disruption.
 
-3. **Fairness:** Limits ensure all liquidatable accounts get fair treatment.
+3. **Fairness:** Limits đảm bảo tất cả liquidatable accounts được đối xử công bằng.
 
-4. **Safety:** Insurance fund protects protocol from extreme market conditions.
-
+4. **Safety:** Insurance fund bảo vệ protocol khỏi extreme market conditions.

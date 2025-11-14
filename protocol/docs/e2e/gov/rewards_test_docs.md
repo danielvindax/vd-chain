@@ -1,18 +1,18 @@
-# Test Documentation: Rewards Module Governance Proposals
+# Tài liệu Test: Rewards Module Governance Proposals
 
-## Overview
+## Tổng quan
 
-This test file verifies governance proposal to **update Rewards Module Params**. Rewards module manages reward distribution to users based on trading activity.
+File test này xác minh governance proposal để **cập nhật Rewards Module Params**. Rewards module quản lý phân phối rewards cho users dựa trên hoạt động trading.
 
 ---
 
 ## Test Function: TestUpdateRewardsModuleParams
 
-### Test Case 1: Success - Update Rewards Module Params
+### Test Case 1: Thành công - Cập nhật Rewards Module Params
 
-### Input
+### Đầu vào
 - **Genesis State:**
-  - Rewards module has params:
+  - Rewards module có params:
     - TreasuryAccount: "test_treasury"
     - Denom: "avdtn"
     - DenomExponent: -18
@@ -20,107 +20,107 @@ This test file verifies governance proposal to **update Rewards Module Params**.
     - FeeMultiplierPpm: 700_000
 - **Proposed Message:**
   - `MsgUpdateParams`:
-    - TreasuryAccount: "test_treasury" (unchanged)
-    - Denom: "avdtn" (unchanged)
-    - DenomExponent: -5 (changed from -18)
-    - MarketId: 0 (changed from 1234)
-    - FeeMultiplierPpm: 700_001 (changed from 700_000)
+    - TreasuryAccount: "test_treasury" (không thay đổi)
+    - Denom: "avdtn" (không thay đổi)
+    - DenomExponent: -5 (thay đổi từ -18)
+    - MarketId: 0 (thay đổi từ 1234)
+    - FeeMultiplierPpm: 700_001 (thay đổi từ 700_000)
     - Authority: gov module
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Module Params:** Updated with new values
+- **Module Params:** Được cập nhật với giá trị mới
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Rewards Configuration:** These params control how rewards are calculated and distributed.
-2. **FeeMultiplierPpm:** This is the multiplier (parts per million) to calculate rewards based on trading fees.
-3. **DenomExponent:** Exponent of denom to convert between different units.
-4. **MarketId:** Market ID to track rewards for specific market.
+1. **Rewards Configuration:** Các params này điều khiển cách rewards được tính toán và phân phối.
+2. **FeeMultiplierPpm:** Đây là multiplier (parts per million) để tính rewards dựa trên trading fees.
+3. **DenomExponent:** Exponent của denom để chuyển đổi giữa các đơn vị khác nhau.
+4. **MarketId:** Market ID để theo dõi rewards cho market cụ thể.
 
 ---
 
-### Test Case 2: Failure - Treasury Account is Empty
+### Test Case 2: Thất bại - Treasury Account Rỗng
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdateParams` with TreasuryAccount = "" (empty string)
+  - `MsgUpdateParams` với TreasuryAccount = "" (chuỗi rỗng)
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Proposal:** Not submitted
+- **Proposal:** Không được submit
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Required Field:** TreasuryAccount is the source of funds to distribute rewards, cannot be empty.
-2. **Early Validation:** Validation at CheckTx to reject early.
-3. **Data Integrity:** Ensures rewards module always has valid treasury account.
+1. **Required Field:** TreasuryAccount là nguồn funds để phân phối rewards, không thể rỗng.
+2. **Early Validation:** Validation tại CheckTx để từ chối sớm.
+3. **Data Integrity:** Đảm bảo rewards module luôn có treasury account hợp lệ.
 
 ---
 
-### Test Case 3: Failure - Denom is Invalid
+### Test Case 3: Thất bại - Denom Không Hợp lệ
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdateParams` with Denom = "7avdtn" (invalid - starts with number)
+  - `MsgUpdateParams` với Denom = "7avdtn" (không hợp lệ - bắt đầu bằng số)
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Proposal:** Not submitted
+- **Proposal:** Không được submit
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Denom Format:** Denom must follow standard format (cannot start with number).
-2. **Validation:** Cosmos SDK has rules about denom format.
-3. **Early Rejection:** Validation at CheckTx to prevent invalid proposals.
+1. **Denom Format:** Denom phải tuân theo format chuẩn (không thể bắt đầu bằng số).
+2. **Validation:** Cosmos SDK có quy tắc về denom format.
+3. **Early Rejection:** Validation tại CheckTx để ngăn chặn proposals không hợp lệ.
 
 ---
 
-### Test Case 4: Failure - Fee Multiplier PPM Greater Than 1 Million
+### Test Case 4: Thất bại - Fee Multiplier PPM Lớn Hơn 1 Triệu
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdateParams` with FeeMultiplierPpm = 1_000_001 (> 1 million)
+  - `MsgUpdateParams` với FeeMultiplierPpm = 1_000_001 (> 1 triệu)
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Proposal:** Not submitted
+- **Proposal:** Không được submit
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Boundary Check:** FeeMultiplierPpm must be <= 1_000_000 (1 million ppm = 100%).
-2. **PPM Format:** PPM (parts per million) has maximum of 1 million.
-3. **Logical Constraint:** Multiplier cannot be > 100% in this context.
+1. **Boundary Check:** FeeMultiplierPpm phải <= 1_000_000 (1 triệu ppm = 100%).
+2. **PPM Format:** PPM (parts per million) có tối đa là 1 triệu.
+3. **Logical Constraint:** Multiplier không thể > 100% trong context này.
 
 ---
 
-### Test Case 5: Failure - Invalid Authority
+### Test Case 5: Thất bại - Invalid Authority
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdateParams` with Authority = rewards module address (instead of gov module)
+  - `MsgUpdateParams` với Authority = địa chỉ rewards module (thay vì gov module)
 
-### Output
+### Đầu ra
 - **Proposal Submission:** FAIL
-- **Proposals:** No proposals created
+- **Proposals:** Không có proposals được tạo
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Authority Check:** Only governance module has permission to update rewards params.
-2. **Security:** Ensures only governance can change rewards configuration.
-3. **Early Rejection:** Validation at proposal submission time.
+1. **Authority Check:** Chỉ governance module có quyền cập nhật rewards params.
+2. **Bảo mật:** Đảm bảo chỉ governance có thể thay đổi rewards configuration.
+3. **Early Rejection:** Validation tại thời điểm proposal submission.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Update Rewards Module Params Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. VALIDATE INPUT                                            │
-│    - TreasuryAccount not empty                              │
-│    - Denom valid (standard format)                          │
+│    - TreasuryAccount không rỗng                             │
+│    - Denom hợp lệ (format chuẩn)                            │
 │    - FeeMultiplierPpm <= 1_000_000                          │
 │    - Authority = gov module                                  │
 └─────────────────────────────────────────────────────────────┘
@@ -132,16 +132,16 @@ This test file verifies governance proposal to **update Rewards Module Params**.
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. PROPOSAL EXECUTION                                        │
-│    - Update rewards module params                            │
-│    - Apply new configuration                                 │
+│    - Cập nhật rewards module params                          │
+│    - Áp dụng configuration mới                                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **Params Update:**
    ```
-   Old Params → New Params (UPDATE)
+   Params Cũ → Params Mới (UPDATE)
    ```
 
 2. **Validation Points:**
@@ -150,37 +150,37 @@ This test file verifies governance proposal to **update Rewards Module Params**.
    Submission: Authority
    ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **TreasuryAccount:**
-   - Must not be empty
-   - This is the source of funds to distribute rewards
-   - Validation at CheckTx
+   - Không được rỗng
+   - Đây là nguồn funds để phân phối rewards
+   - Validation tại CheckTx
 
 2. **Denom Format:**
-   - Must follow Cosmos SDK denom format
-   - Cannot start with number
-   - Validation at CheckTx
+   - Phải tuân theo Cosmos SDK denom format
+   - Không thể bắt đầu bằng số
+   - Validation tại CheckTx
 
 3. **FeeMultiplierPpm:**
-   - Must be <= 1_000_000 (100%)
-   - This is the multiplier to calculate rewards
-   - Validation at CheckTx
+   - Phải <= 1_000_000 (100%)
+   - Đây là multiplier để tính rewards
+   - Validation tại CheckTx
 
 4. **Authority:**
-   - Only governance module has permission
-   - Validation at proposal submission time
+   - Chỉ governance module có quyền
+   - Validation tại thời điểm proposal submission
 
 5. **Atomic Execution:**
-   - If validation fails, entire proposal fails
-   - State is rolled back to before execution
+   - Nếu validation thất bại, toàn bộ proposal thất bại
+   - State được rollback về trước khi execution
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Governance Control:** Only governance has permission to change rewards configuration to ensure decentralization.
+1. **Governance Control:** Chỉ governance có quyền thay đổi rewards configuration để đảm bảo decentralization.
 
-2. **Safety:** Validation ensures no invalid states (empty treasury, invalid denom, out of bounds multiplier).
+2. **An toàn:** Validation đảm bảo không có invalid states (empty treasury, invalid denom, out of bounds multiplier).
 
-3. **Flexibility:** Allows adjusting rewards parameters when needed to optimize rewards distribution.
+3. **Linh hoạt:** Cho phép điều chỉnh rewards parameters khi cần để tối ưu phân phối rewards.
 
-4. **Consistency:** Ensures rewards module always has valid configuration.
+4. **Nhất quán:** Đảm bảo rewards module luôn có configuration hợp lệ.

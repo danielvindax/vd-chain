@@ -1,20 +1,20 @@
-# Test Documentation: Isolated Subaccount Orders E2E Tests
+# Tài liệu Test: Isolated Subaccount Orders E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies **Isolated Subaccount Order** functionality in the CLOB module. Isolated subaccounts are subaccounts that can only trade in specific isolated markets. The test ensures that:
-1. Isolated subaccounts cannot place orders for cross-market (non-isolated) perpetuals
-2. Isolated subaccounts can place orders for their isolated market
-3. Isolated subaccounts can match with other subaccounts in isolated market
-4. Isolated subaccounts use isolated collateral pool
+File test này xác minh chức năng **Isolated Subaccount Order** trong CLOB module. Isolated subaccounts là các subaccounts chỉ có thể trade trong các isolated markets cụ thể. Test đảm bảo rằng:
+1. Isolated subaccounts không thể đặt orders cho cross-market (non-isolated) perpetuals
+2. Isolated subaccounts có thể đặt orders cho isolated market của họ
+3. Isolated subaccounts có thể match với các subaccounts khác trong isolated market
+4. Isolated subaccounts sử dụng isolated collateral pool
 
 ---
 
 ## Test Function: TestIsolatedSubaccountOrders
 
-### Test Case 1: Failure - Isolated Subaccount Cannot Place Cross-Market Order
+### Test Case 1: Thất bại - Isolated Subaccount Không thể Đặt Cross-Market Order
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Alice: 1 ISO Long, 10,000 USD (isolated to ISO market)
   - Bob: 10,000 USD
@@ -23,53 +23,53 @@ This test file verifies **Isolated Subaccount Order** functionality in the CLOB 
   - ETH-USD (market 1)
   - ISO-USD (market 3, isolated)
 - **Orders:**
-  - Alice: Attempts to buy 5 BTC at price 10 (CLOB 0 - cross-market)
-  - Bob: Sells 5 BTC at price 10 (CLOB 0)
+  - Alice: Cố gắng mua 5 BTC ở giá 10 (CLOB 0 - cross-market)
+  - Bob: Bán 5 BTC ở giá 10 (CLOB 0)
 
-### Output
-- **Alice Order:** Rejected (invalid for isolated subaccount)
-- **Bob Order:** Accepted
-- **Orders Filled:** None (Alice's order invalid)
-- **Subaccounts:** Unchanged
+### Đầu ra
+- **Alice Order:** Bị từ chối (invalid cho isolated subaccount)
+- **Bob Order:** Được chấp nhận
+- **Orders Filled:** Không có (order của Alice invalid)
+- **Subaccounts:** Không thay đổi
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Isolation Constraint:** Alice's subaccount is isolated to ISO market only.
-2. **Cross-Market Rejection:** Cannot place orders for BTC market (market 0).
-3. **Validation:** System validates subaccount can trade in requested market.
-4. **Protection:** Prevents isolated subaccounts from trading cross-markets.
+1. **Isolation Constraint:** Subaccount của Alice bị isolated chỉ cho ISO market.
+2. **Cross-Market Rejection:** Không thể đặt orders cho BTC market (market 0).
+3. **Validation:** Hệ thống validate subaccount có thể trade trong requested market.
+4. **Protection:** Ngăn chặn isolated subaccounts trade cross-markets.
 
 ---
 
-### Test Case 2: Success - Isolated Subaccount Places Order in Isolated Market
+### Test Case 2: Thành công - Isolated Subaccount Đặt Order trong Isolated Market
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Alice: 1 ISO Long, 10,000 USD (isolated to ISO market)
   - Bob: 10,000 USD
 - **Perpetuals:**
   - ISO-USD (market 3, isolated)
 - **Orders:**
-  - Alice: Buys 1 ISO at price 10 (CLOB 3 - isolated market)
-  - Bob: Sells 1 ISO at price 10 (CLOB 3)
+  - Alice: Mua 1 ISO ở giá 10 (CLOB 3 - isolated market)
+  - Bob: Bán 1 ISO ở giá 10 (CLOB 3)
 
-### Output
-- **Both Orders:** Accepted
-- **Orders Matched:** Both orders fully matched
-- **Alice Position:** 2 ISO Long (1 existing + 1 from match)
+### Đầu ra
+- **Both Orders:** Được chấp nhận
+- **Orders Matched:** Cả hai orders match đầy đủ
+- **Alice Position:** 2 ISO Long (1 existing + 1 từ match)
 - **Bob Position:** 1 ISO Short
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Isolated Market:** Alice can trade in ISO market (her isolated market).
-2. **Order Matching:** Orders match normally in isolated market.
-3. **Position Updates:** Positions updated correctly after match.
+1. **Isolated Market:** Alice có thể trade trong ISO market (isolated market của cô ấy).
+2. **Order Matching:** Orders match bình thường trong isolated market.
+3. **Position Updates:** Positions được cập nhật đúng sau match.
 
 ---
 
-### Test Case 3: Success - Isolated Subaccount Uses Isolated Collateral Pool
+### Test Case 3: Thành công - Isolated Subaccount Sử dụng Isolated Collateral Pool
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Alice: 1 ISO Long, 10,000 USD (isolated)
   - Bob: 10,000 USD
@@ -77,102 +77,101 @@ This test file verifies **Isolated Subaccount Order** functionality in the CLOB 
   - Main pool: 10,000 USD
   - ISO isolated pool: 10,000 USD
 - **Orders:**
-  - Alice: Buys 1 ISO at price 10
-  - Bob: Sells 1 ISO at price 10
+  - Alice: Mua 1 ISO ở giá 10
+  - Bob: Bán 1 ISO ở giá 10
 
-### Output
-- **Orders Matched:** Successfully
-- **Collateral Pool:** ISO isolated pool used for Alice
-- **Main Pool:** Not affected
+### Đầu ra
+- **Orders Matched:** Thành công
+- **Collateral Pool:** ISO isolated pool được sử dụng cho Alice
+- **Main Pool:** Không bị ảnh hưởng
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Isolated Pool:** Isolated subaccounts use separate collateral pool.
-2. **Pool Isolation:** Main pool and isolated pools are separate.
-3. **Risk Isolation:** Isolated markets have isolated risk.
+1. **Isolated Pool:** Isolated subaccounts sử dụng separate collateral pool.
+2. **Pool Isolation:** Main pool và isolated pools là riêng biệt.
+3. **Risk Isolation:** Isolated markets có isolated risk.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Isolated Subaccount Order Validation
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. RECEIVE ORDER                                             │
-│    - Order specifies CLOB pair / perpetual                   │
-│    - Order specifies subaccount ID                           │
+│ 1. NHẬN ORDER                                              │
+│    - Order chỉ định CLOB pair / perpetual                    │
+│    - Order chỉ định subaccount ID                            │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. CHECK SUBACCOUNT ISOLATION                                │
-│    - Query subaccount's isolated market (if any)              │
-│    - Check if subaccount is isolated                          │
+│ 2. KIỂM TRA SUBACCOUNT ISOLATION                            │
+│    - Query isolated market của subaccount (nếu có)          │
+│    - Kiểm tra nếu subaccount bị isolated                    │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. VALIDATE MARKET                                           │
-│    - If isolated: Check if order market = isolated market    │
-│    - If not isolated: Allow any market                        │
-│    - Reject if isolated subaccount tries cross-market         │
+│ 3. VALIDATE MARKET                                          │
+│    - Nếu isolated: Kiểm tra nếu order market = isolated market │
+│    - Nếu không isolated: Cho phép bất kỳ market nào          │
+│    - Từ chối nếu isolated subaccount cố gắng cross-market   │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 4. PROCESS ORDER                                             │
-│    - If valid: Process normally                              │
-│    - Use isolated collateral pool if applicable               │
-│    - Update positions in isolated market                      │
+│ 4. XỬ LÝ ORDER                                              │
+│    - Nếu hợp lệ: Xử lý bình thường                          │
+│    - Sử dụng isolated collateral pool nếu applicable        │
+│    - Cập nhật positions trong isolated market                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **Subaccount Isolation:**
    ```
-   Non-Isolated: Can trade any market
-   Isolated: Can only trade isolated market
+   Non-Isolated: Có thể trade bất kỳ market nào
+   Isolated: Chỉ có thể trade isolated market
    ```
 
 2. **Collateral Pools:**
    ```
-   Main Pool: For non-isolated markets
-   Isolated Pool: For isolated markets (per market)
+   Main Pool: Cho non-isolated markets
+   Isolated Pool: Cho isolated markets (mỗi market)
    ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Isolation Constraint:**
-   - Isolated subaccounts can only trade their isolated market
-   - Cannot place orders for other markets
-   - Validation at CheckTx
+   - Isolated subaccounts chỉ có thể trade isolated market của họ
+   - Không thể đặt orders cho các markets khác
+   - Validation tại CheckTx
 
 2. **Market Matching:**
-   - Isolated subaccounts can match with any subaccount in isolated market
-   - Matching works normally within isolated market
-   - Cross-market matching prevented
+   - Isolated subaccounts có thể match với bất kỳ subaccount nào trong isolated market
+   - Matching hoạt động bình thường trong isolated market
+   - Cross-market matching bị ngăn chặn
 
 3. **Collateral Pools:**
-   - Isolated markets have separate collateral pools
-   - Isolated subaccounts use isolated pool
+   - Isolated markets có separate collateral pools
+   - Isolated subaccounts sử dụng isolated pool
    - Risk isolated per market
 
 4. **Position Management:**
-   - Positions tracked per market
-   - Isolated positions separate from cross-market positions
+   - Positions được track theo market
+   - Isolated positions riêng biệt với cross-market positions
    - Collateral requirements per pool
 
 5. **Validation:**
-   - CheckTx validates market access
-   - Early rejection for invalid orders
-   - Clear error messages
+   - CheckTx validate market access
+   - Early rejection cho invalid orders
+   - Error messages rõ ràng
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Risk Isolation:** Isolated markets prevent risk spillover to main system.
+1. **Risk Isolation:** Isolated markets ngăn chặn risk spillover đến main system.
 
-2. **Capital Efficiency:** Isolated markets can have different risk parameters.
+2. **Capital Efficiency:** Isolated markets có thể có risk parameters khác nhau.
 
-3. **Market Segregation:** Prevents isolated subaccounts from affecting main markets.
+3. **Market Segregation:** Ngăn chặn isolated subaccounts ảnh hưởng đến main markets.
 
-4. **Flexibility:** Allows new markets with different risk profiles.
-
+4. **Flexibility:** Cho phép các markets mới với risk profiles khác nhau.

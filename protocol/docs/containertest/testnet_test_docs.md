@@ -1,17 +1,17 @@
-# Test Documentation: Container Tests
+# Tài liệu Test: Container Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies the **Container Test Framework** functionality. Container tests run a full network of nodes in Docker containers, allowing end-to-end testing of the blockchain. The test framework provides interfaces to interact with the chain through CometBFT and gRPC clients. The framework also runs an HTTP server for exchange price feeds.
+File test này xác minh chức năng **Container Test Framework**. Container tests chạy một mạng lưới đầy đủ các node trong Docker containers, cho phép test end-to-end của blockchain. Framework test cung cấp các interface để tương tác với chain thông qua CometBFT và gRPC clients. Framework cũng chạy một HTTP server cho exchange price feeds.
 
 ---
 
 ## Test Function: TestPlaceOrder
 
-### Test Case: Success - Place Order on Network
+### Test Case: Thành công - Đặt lệnh trên Network
 
-### Input
-- **Network:** Full testnet with multiple nodes running in Docker containers
+### Đầu vào
+- **Network:** Testnet đầy đủ với nhiều node chạy trong Docker containers
 - **Node:** Alice node
 - **Order:**
   - SubaccountId: Alice_Num0
@@ -21,201 +21,200 @@ This test file verifies the **Container Test Framework** functionality. Containe
   - Subticks: 1,000,000
   - GoodTilBlock: 20
 
-### Output
-- **Transaction:** Successfully broadcast and included in block
-- **Order:** Order placed on order book
+### Đầu ra
+- **Giao dịch:** Broadcast thành công và được bao gồm trong block
+- **Order:** Lệnh được đặt trên order book
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Full Network Test:** Tests order placement in a real network environment with multiple nodes.
-2. **Docker Containers:** Each node runs in a separate Docker container, simulating a real network.
-3. **End-to-End:** Verifies the complete flow from transaction submission to order placement.
-4. **Network Interaction:** Tests interaction with the network through gRPC and CometBFT clients.
+1. **Test mạng đầy đủ:** Test đặt lệnh trong môi trường mạng thực với nhiều node.
+2. **Docker Containers:** Mỗi node chạy trong một Docker container riêng, mô phỏng mạng thực.
+3. **End-to-End:** Xác minh flow hoàn chỉnh từ submit giao dịch đến đặt lệnh.
+4. **Tương tác mạng:** Test tương tác với mạng thông qua gRPC và CometBFT clients.
 
 ---
 
 ## Test Function: TestBankSend
 
-### Test Case: Success - Send Tokens Between Accounts
+### Test Case: Thành công - Gửi Token giữa các Tài khoản
 
-### Input
-- **Network:** Full testnet with multiple nodes
+### Đầu vào
+- **Network:** Testnet đầy đủ với nhiều node
 - **Node:** Alice node
-- **Initial State:**
-  - Alice has initial balance
-  - Bob has initial balance
-- **Transaction:**
+- **Trạng thái ban đầu:**
+  - Alice có số dư ban đầu
+  - Bob có số dư ban đầu
+- **Giao dịch:**
   - From: Bob
   - To: Alice
   - Amount: 1 USDC
 
-### Output
-- **Initial Balances:** Verified against expected values
-  - Alice initial balance matches expected
-  - Bob initial balance matches expected
-- **Final Balances:** Verified after transaction
-  - Alice balance increased by 1 USDC
-  - Bob balance decreased by 1 USDC
+### Đầu ra
+- **Số dư ban đầu:** Xác minh với giá trị mong đợi
+  - Số dư ban đầu của Alice khớp với mong đợi
+  - Số dư ban đầu của Bob khớp với mong đợi
+- **Số dư cuối:** Xác minh sau giao dịch
+  - Số dư Alice tăng 1 USDC
+  - Số dư Bob giảm 1 USDC
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Balance Verification:** Tests that balances are correctly tracked and updated.
-2. **Expected Output:** Uses expect files to verify exact balance values.
-3. **Network Consensus:** Verifies that transactions are properly propagated and included in blocks.
-4. **State Consistency:** Ensures all nodes have consistent state after transaction.
+1. **Xác minh số dư:** Test rằng số dư được theo dõi và cập nhật đúng cách.
+2. **Đầu ra mong đợi:** Sử dụng expect files để xác minh giá trị số dư chính xác.
+3. **Consensus mạng:** Xác minh rằng giao dịch được propagate và bao gồm trong block đúng cách.
+4. **Nhất quán State:** Đảm bảo tất cả node có state nhất quán sau giao dịch.
 
 ---
 
 ## Test Function: TestMarketPrices
 
-### Test Case: Success - Market Prices Update from Exchange
+### Test Case: Thành công - Giá thị trường cập nhật từ Exchange
 
-### Input
-- **Network:** Full testnet with multiple nodes
-- **Exchange Prices Set Before Start:**
+### Đầu vào
+- **Network:** Testnet đầy đủ với nhiều node
+- **Giá Exchange được đặt trước khi bắt đầu:**
   - BTC-USD: 50,001
   - ETH-USD: 55,002
   - LINK-USD: 55,003
 - **Node:** Alice node
-- **Timeout:** 30 seconds
+- **Timeout:** 30 giây
 
-### Output
-- **Market Prices:** Prices updated to match exchange prices
-  - BTC-USD price matches expected
-  - ETH-USD price matches expected
-  - LINK-USD price matches expected
+### Đầu ra
+- **Giá thị trường:** Giá được cập nhật để khớp với giá exchange
+  - Giá BTC-USD khớp với mong đợi
+  - Giá ETH-USD khớp với mong đợi
+  - Giá LINK-USD khớp với mong đợi
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Price Feed Integration:** Tests integration with external exchange price feeds.
-2. **HTTP Server:** Framework runs HTTP server that provides exchange prices.
-3. **Oracle Updates:** Verifies that oracle prices are updated from exchange feeds.
-4. **Moving Window:** Prices use a moving window, so prices should be set before network start.
-5. **Polling:** Uses polling with timeout to wait for prices to update.
+1. **Tích hợp Price Feed:** Test tích hợp với external exchange price feeds.
+2. **HTTP Server:** Framework chạy HTTP server cung cấp giá exchange.
+3. **Cập nhật Oracle:** Xác minh rằng giá oracle được cập nhật từ exchange feeds.
+4. **Moving Window:** Giá sử dụng moving window, vì vậy giá nên được đặt trước khi mạng bắt đầu.
+5. **Polling:** Sử dụng polling với timeout để chờ giá cập nhật.
 
 ---
 
 ## Test Function: TestUpgrade
 
-### Test Case: Success - Upgrade Network to New Version
+### Test Case: Thành công - Nâng cấp Network lên Phiên bản mới
 
-### Input
-- **Network:** Testnet with pre-upgrade genesis
+### Đầu vào
+- **Network:** Testnet với genesis trước nâng cấp
 - **Node:** Alice node
-- **Upgrade:** Upgrade to current version
-- **Upgrader:** Alice account
+- **Upgrade:** Nâng cấp lên phiên bản hiện tại
+- **Upgrader:** Tài khoản Alice
 
-### Output
-- **Upgrade:** Successfully executed
-- **Network:** Running on new version
+### Đầu ra
+- **Upgrade:** Thực thi thành công
+- **Network:** Chạy trên phiên bản mới
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Upgrade Testing:** Tests the network upgrade mechanism.
-2. **Pre-upgrade Genesis:** Uses special genesis state for pre-upgrade testing.
-3. **Version Management:** Verifies that network can upgrade to new version.
-4. **State Migration:** Ensures state is correctly migrated during upgrade.
+1. **Test nâng cấp:** Test cơ chế nâng cấp mạng.
+2. **Genesis trước nâng cấp:** Sử dụng genesis state đặc biệt cho test trước nâng cấp.
+3. **Quản lý phiên bản:** Xác minh rằng mạng có thể nâng cấp lên phiên bản mới.
+4. **Migration State:** Đảm bảo state được migrate đúng cách trong quá trình nâng cấp.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Container Test Framework Flow
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. CREATE TESTNET                                            │
-│    - Initialize testnet with nodes                           │
-│    - Configure Docker containers                             │
-│    - Set up HTTP server for price feeds                      │
+│ 1. TẠO TESTNET                                              │
+│    - Khởi tạo testnet với các node                          │
+│    - Cấu hình Docker containers                             │
+│    - Thiết lập HTTP server cho price feeds                  │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. CONFIGURE BEFORE START                                    │
-│    - Set exchange prices (if needed)                        │
-│    - Configure genesis state                                 │
+│ 2. CẤU HÌNH TRƯỚC KHI BẮT ĐẦU                              │
+│    - Đặt giá exchange (nếu cần)                            │
+│    - Cấu hình genesis state                                 │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. START NETWORK                                             │
-│    - Start Docker containers                                 │
-│    - Wait for nodes to sync                                  │
-│    - Verify network is ready                                │
+│ 3. BẮT ĐẦU NETWORK                                          │
+│    - Khởi động Docker containers                            │
+│    - Chờ các node sync                                      │
+│    - Xác minh mạng đã sẵn sàng                             │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 4. INTERACT WITH NETWORK                                     │
-│    - Query state (balances, prices, etc.)                    │
-│    - Broadcast transactions                                 │
-│    - Wait for blocks                                         │
+│ 4. TƯƠNG TÁC VỚI NETWORK                                   │
+│    - Query state (số dư, giá, v.v.)                        │
+│    - Broadcast giao dịch                                   │
+│    - Chờ block                                              │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 5. VERIFY RESULTS                                            │
-│    - Compare against expected output                         │
-│    - Verify state changes                                    │
-│    - Clean up containers                                     │
+│ 5. XÁC MINH KẾT QUẢ                                        │
+│    - So sánh với đầu ra mong đợi                           │
+│    - Xác minh thay đổi state                                │
+│    - Dọn dẹp containers                                     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
-1. **Network State:**
+1. **Trạng thái Network:**
    ```
-   Not Started → Starting → Running → Cleaned Up
-   ```
-
-2. **Price Updates:**
-   ```
-   Exchange Price → HTTP Server → Oracle → Market Price
+   Chưa bắt đầu → Đang bắt đầu → Đang chạy → Đã dọn dẹp
    ```
 
-3. **Transaction Flow:**
+2. **Cập nhật giá:**
    ```
-   Broadcast → Mempool → Block → State Update
+   Giá Exchange → HTTP Server → Oracle → Giá thị trường
    ```
 
-### Key Points
+3. **Flow giao dịch:**
+   ```
+   Broadcast → Mempool → Block → Cập nhật State
+   ```
+
+### Điểm quan trọng
 
 1. **Docker Containers:**
-   - Each node runs in a separate Docker container
-   - Simulates a real network environment
-   - Allows testing network consensus and propagation
+   - Mỗi node chạy trong một Docker container riêng
+   - Mô phỏng môi trường mạng thực
+   - Cho phép test consensus mạng và propagation
 
-2. **Price Feed Integration:**
-   - HTTP server provides exchange prices
-   - Prices should be set before network start
-   - Oracle uses moving window for price updates
+2. **Tích hợp Price Feed:**
+   - HTTP server cung cấp giá exchange
+   - Giá nên được đặt trước khi mạng bắt đầu
+   - Oracle sử dụng moving window cho cập nhật giá
 
-3. **Expected Output:**
-   - Tests use expect files to verify exact output
-   - Use `-accept` flag to update expect files
-   - Ensures deterministic test results
+3. **Đầu ra mong đợi:**
+   - Test sử dụng expect files để xác minh đầu ra chính xác
+   - Sử dụng flag `-accept` để cập nhật expect files
+   - Đảm bảo kết quả test xác định
 
-4. **Network Interaction:**
-   - Query: Read state from nodes
-   - BroadcastTx: Submit transactions to network
-   - Wait: Wait for blocks to be produced
+4. **Tương tác mạng:**
+   - Query: Đọc state từ các node
+   - BroadcastTx: Submit giao dịch đến mạng
+   - Wait: Chờ block được tạo
 
-5. **Cleanup:**
-   - Always clean up containers after tests
-   - Use `defer testnet.MustCleanUp()`
-   - Prevents resource leaks
+5. **Dọn dẹp:**
+   - Luôn dọn dẹp containers sau test
+   - Sử dụng `defer testnet.MustCleanUp()`
+   - Ngăn chặn rò rỉ tài nguyên
 
-6. **Upgrade Testing:**
-   - Tests network upgrade mechanism
-   - Uses pre-upgrade genesis state
-   - Verifies state migration
+6. **Test nâng cấp:**
+   - Test cơ chế nâng cấp mạng
+   - Sử dụng genesis state trước nâng cấp
+   - Xác minh migration state
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **End-to-End Testing:** Container tests provide full network testing, not just unit tests.
+1. **End-to-End Testing:** Container tests cung cấp test mạng đầy đủ, không chỉ unit tests.
 
-2. **Real Environment:** Docker containers simulate real network conditions.
+2. **Môi trường thực:** Docker containers mô phỏng điều kiện mạng thực.
 
-3. **Integration Testing:** Tests integration between components (nodes, price feeds, etc.).
+3. **Integration Testing:** Test tích hợp giữa các component (node, price feeds, v.v.).
 
-4. **Deterministic:** Expect files ensure tests are deterministic and reproducible.
+4. **Xác định:** Expect files đảm bảo test xác định và có thể tái tạo.
 
-5. **Flexibility:** Framework allows testing various scenarios (upgrades, price updates, etc.).
-
+5. **Linh hoạt:** Framework cho phép test các scenario khác nhau (nâng cấp, cập nhật giá, v.v.).

@@ -1,24 +1,24 @@
-# Test Documentation: Isolated Subaccount Transfers E2E Tests
+# Tài liệu Test: Isolated Subaccount Transfers E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies **Isolated Subaccount Transfer** functionality in the Sending module. Isolated subaccounts are subaccounts that are isolated to specific perpetual markets. The test ensures that:
-1. Transfers between isolated and non-isolated subaccounts work correctly
-2. Collateral pools are updated correctly when transferring between different market types
-3. Transfers between isolated subaccounts in different markets work correctly
-4. Transfers fail when collateral pools have insufficient funds
-5. Transfers within the same isolated market don't move collateral
+File test này xác minh chức năng **Isolated Subaccount Transfer** trong Sending module. Isolated subaccounts là các subaccounts được cô lập với các perpetual markets cụ thể. Test đảm bảo rằng:
+1. Transfers giữa isolated và non-isolated subaccounts hoạt động đúng
+2. Collateral pools được cập nhật đúng khi transfer giữa các loại market khác nhau
+3. Transfers giữa isolated subaccounts trong các markets khác nhau hoạt động đúng
+4. Transfers thất bại khi collateral pools có insufficient funds
+5. Transfers trong cùng isolated market không di chuyển collateral
 
 ---
 
 ## Test Function: TestTransfer_Isolated_Non_Isolated_Subaccounts
 
-### Test Case 1: Success - Transfer from Isolated to Non-Isolated Subaccount
+### Test Case 1: Thành công - Transfer từ Isolated đến Non-Isolated Subaccount
 
-### Input
+### Đầu vào
 - **Subaccounts:**
-  - Alice_Num0: Isolated subaccount with 1 ISO long position, 10,000 USDC
-  - Bob_Num0: Non-isolated subaccount with 10,000 USDC
+  - Alice_Num0: Isolated subaccount với 1 ISO long position, 10,000 USDC
+  - Bob_Num0: Non-isolated subaccount với 10,000 USDC
 - **Collateral Pools:**
   - Cross collateral pool: 10,000 USDC
   - Isolated market collateral pool: 10,000 USDC
@@ -27,28 +27,28 @@ This test file verifies **Isolated Subaccount Transfer** functionality in the Se
   - To: Bob_Num0 (non-isolated)
   - Amount: 100 USDC
 
-### Output
+### Đầu ra
 - **Subaccounts:**
-  - Alice_Num0: Balance decreased by 100 USDC
-  - Bob_Num0: Balance increased by 100 USDC
+  - Alice_Num0: Số dư giảm 100 USDC
+  - Bob_Num0: Số dư tăng 100 USDC
 - **Collateral Pools:**
-  - Cross collateral pool: Increased by 100 USDC (10,100 USDC)
-  - Isolated market collateral pool: Decreased by 100 USDC (9,900 USDC)
+  - Cross collateral pool: Tăng 100 USDC (10,100 USDC)
+  - Isolated market collateral pool: Giảm 100 USDC (9,900 USDC)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Collateral Pool Movement:** When transferring from isolated to non-isolated, collateral moves from isolated pool to cross pool.
-2. **Isolation:** Isolated subaccounts have separate collateral pools for each market.
-3. **Pool Updates:** Collateral pools must be updated to maintain balance.
+1. **Collateral Pool Movement:** Khi transfer từ isolated đến non-isolated, collateral di chuyển từ isolated pool đến cross pool.
+2. **Isolation:** Isolated subaccounts có separate collateral pools cho mỗi market.
+3. **Pool Updates:** Collateral pools phải được cập nhật để duy trì balance.
 
 ---
 
-### Test Case 2: Success - Transfer from Non-Isolated to Isolated Subaccount
+### Test Case 2: Thành công - Transfer từ Non-Isolated đến Isolated Subaccount
 
-### Input
+### Đầu vào
 - **Subaccounts:**
-  - Alice_Num0: Isolated subaccount with 1 ISO long position, 10,000 USDC
-  - Bob_Num0: Non-isolated subaccount with 10,000 USDC
+  - Alice_Num0: Isolated subaccount với 1 ISO long position, 10,000 USDC
+  - Bob_Num0: Non-isolated subaccount với 10,000 USDC
 - **Collateral Pools:**
   - Cross collateral pool: 10,000 USDC
   - Isolated market collateral pool: 10,000 USDC
@@ -57,28 +57,28 @@ This test file verifies **Isolated Subaccount Transfer** functionality in the Se
   - To: Alice_Num0 (isolated)
   - Amount: 100 USDC
 
-### Output
+### Đầu ra
 - **Subaccounts:**
-  - Alice_Num0: Balance increased by 100 USDC
-  - Bob_Num0: Balance decreased by 100 USDC
+  - Alice_Num0: Số dư tăng 100 USDC
+  - Bob_Num0: Số dư giảm 100 USDC
 - **Collateral Pools:**
-  - Cross collateral pool: Decreased by 100 USDC (9,900 USDC)
-  - Isolated market collateral pool: Increased by 100 USDC (10,100 USDC)
+  - Cross collateral pool: Giảm 100 USDC (9,900 USDC)
+  - Isolated market collateral pool: Tăng 100 USDC (10,100 USDC)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Collateral Pool Movement:** When transferring from non-isolated to isolated, collateral moves from cross pool to isolated pool.
-2. **Reverse Flow:** Opposite direction of Test Case 1.
-3. **Pool Updates:** Collateral pools must be updated to maintain balance.
+1. **Collateral Pool Movement:** Khi transfer từ non-isolated đến isolated, collateral di chuyển từ cross pool đến isolated pool.
+2. **Reverse Flow:** Hướng ngược lại của Test Case 1.
+3. **Pool Updates:** Collateral pools phải được cập nhật để duy trì balance.
 
 ---
 
-### Test Case 3: Success - Transfer Between Isolated Subaccounts in Different Markets
+### Test Case 3: Thành công - Transfer giữa Isolated Subaccounts trong Markets Khác nhau
 
-### Input
+### Đầu vào
 - **Subaccounts:**
-  - Alice_Num0: Isolated subaccount in ISO market, 1 ISO long, 10,000 USDC
-  - Bob_Num0: Isolated subaccount in ISO2 market, 1 ISO2 long, 10,000 USDC
+  - Alice_Num0: Isolated subaccount trong ISO market, 1 ISO long, 10,000 USDC
+  - Bob_Num0: Isolated subaccount trong ISO2 market, 1 ISO2 long, 10,000 USDC
 - **Collateral Pools:**
   - ISO market collateral pool: 10,000 USDC
   - ISO2 market collateral pool: 10,000 USDC
@@ -87,86 +87,86 @@ This test file verifies **Isolated Subaccount Transfer** functionality in the Se
   - To: Bob_Num0 (ISO2 market)
   - Amount: 100 USDC
 
-### Output
+### Đầu ra
 - **Subaccounts:**
-  - Alice_Num0: Balance decreased by 100 USDC
-  - Bob_Num0: Balance increased by 100 USDC
+  - Alice_Num0: Số dư giảm 100 USDC
+  - Bob_Num0: Số dư tăng 100 USDC
 - **Collateral Pools:**
-  - ISO market collateral pool: Decreased by 100 USDC (9,900 USDC)
-  - ISO2 market collateral pool: Increased by 100 USDC (10,100 USDC)
+  - ISO market collateral pool: Giảm 100 USDC (9,900 USDC)
+  - ISO2 market collateral pool: Tăng 100 USDC (10,100 USDC)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Different Markets:** Isolated subaccounts in different markets have separate collateral pools.
-2. **Pool Movement:** Collateral moves from one isolated pool to another.
-3. **Isolation:** Each isolated market maintains its own collateral pool.
+1. **Different Markets:** Isolated subaccounts trong các markets khác nhau có separate collateral pools.
+2. **Pool Movement:** Collateral di chuyển từ một isolated pool đến pool khác.
+3. **Isolation:** Mỗi isolated market duy trì collateral pool riêng của nó.
 
 ---
 
-### Test Case 4: Failure - Insufficient Funds in Isolated Collateral Pool
+### Test Case 4: Thất bại - Insufficient Funds trong Isolated Collateral Pool
 
-### Input
+### Đầu vào
 - **Subaccounts:**
-  - Alice_Num0: Isolated subaccount with 1 ISO long position, 10,000 USDC
-  - Bob_Num0: Non-isolated subaccount with 10,000 USDC
+  - Alice_Num0: Isolated subaccount với 1 ISO long position, 10,000 USDC
+  - Bob_Num0: Non-isolated subaccount với 10,000 USDC
 - **Collateral Pools:**
   - Cross collateral pool: 10,000 USDC
-  - Isolated market collateral pool: 0 USDC (empty)
+  - Isolated market collateral pool: 0 USDC (rỗng)
 - **Transfer:**
   - From: Alice_Num0 (isolated)
   - To: Bob_Num0 (non-isolated)
   - Amount: 100 USDC
 
-### Output
+### Đầu ra
 - **DeliverTx:** FAIL
 - **Error:** "insufficient funds"
 - **Error Code:** `ErrInsufficientFunds`
-- **Subaccounts:** No changes (transfer failed)
-- **Collateral Pools:** No changes (transfer failed)
+- **Subaccounts:** Không thay đổi (transfer thất bại)
+- **Collateral Pools:** Không thay đổi (transfer thất bại)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Pool Balance:** Collateral pool must have sufficient funds for transfer.
-2. **Validation:** System validates pool balance before allowing transfer.
-3. **Failure Handling:** Transfer fails if pool has insufficient funds.
+1. **Pool Balance:** Collateral pool phải có đủ funds cho transfer.
+2. **Validation:** Hệ thống validate pool balance trước khi cho phép transfer.
+3. **Failure Handling:** Transfer thất bại nếu pool có insufficient funds.
 
 ---
 
-### Test Case 5: Failure - Insufficient Funds Between Isolated Markets
+### Test Case 5: Thất bại - Insufficient Funds giữa Isolated Markets
 
-### Input
+### Đầu vào
 - **Subaccounts:**
-  - Alice_Num0: Isolated subaccount in ISO market, 1 ISO long, 10,000 USDC
-  - Bob_Num0: Isolated subaccount in ISO2 market, 1 ISO2 long, 10,000 USDC
+  - Alice_Num0: Isolated subaccount trong ISO market, 1 ISO long, 10,000 USDC
+  - Bob_Num0: Isolated subaccount trong ISO2 market, 1 ISO2 long, 10,000 USDC
 - **Collateral Pools:**
-  - ISO market collateral pool: 0 USDC (empty)
+  - ISO market collateral pool: 0 USDC (rỗng)
   - ISO2 market collateral pool: 10,000 USDC
 - **Transfer:**
   - From: Alice_Num0 (ISO market)
   - To: Bob_Num0 (ISO2 market)
   - Amount: 100 USDC
 
-### Output
+### Đầu ra
 - **DeliverTx:** FAIL
 - **Error:** "insufficient funds"
 - **Error Code:** `ErrInsufficientFunds`
-- **Subaccounts:** No changes (transfer failed)
-- **Collateral Pools:** No changes (transfer failed)
+- **Subaccounts:** Không thay đổi (transfer thất bại)
+- **Collateral Pools:** Không thay đổi (transfer thất bại)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Pool Balance:** Source collateral pool must have sufficient funds.
-2. **Validation:** System validates pool balance before allowing transfer.
-3. **Failure Handling:** Transfer fails if source pool has insufficient funds.
+1. **Pool Balance:** Source collateral pool phải có đủ funds.
+2. **Validation:** Hệ thống validate pool balance trước khi cho phép transfer.
+3. **Failure Handling:** Transfer thất bại nếu source pool có insufficient funds.
 
 ---
 
-### Test Case 6: Success - Transfer Within Same Isolated Market
+### Test Case 6: Thành công - Transfer trong Cùng Isolated Market
 
-### Input
+### Đầu vào
 - **Subaccounts:**
-  - Alice_Num0: Isolated subaccount in ISO market, 1 ISO long, 10,000 USDC
-  - Bob_Num0: Isolated subaccount in ISO market, 1 ISO long, 10,000 USDC
+  - Alice_Num0: Isolated subaccount trong ISO market, 1 ISO long, 10,000 USDC
+  - Bob_Num0: Isolated subaccount trong ISO market, 1 ISO long, 10,000 USDC
 - **Collateral Pools:**
   - ISO market collateral pool: 10,000 USDC
 - **Transfer:**
@@ -174,98 +174,97 @@ This test file verifies **Isolated Subaccount Transfer** functionality in the Se
   - To: Bob_Num0 (ISO market)
   - Amount: 100 USDC
 
-### Output
+### Đầu ra
 - **Subaccounts:**
-  - Alice_Num0: Balance decreased by 100 USDC
-  - Bob_Num0: Balance increased by 100 USDC
+  - Alice_Num0: Số dư giảm 100 USDC
+  - Bob_Num0: Số dư tăng 100 USDC
 - **Collateral Pools:**
-  - ISO market collateral pool: No change (10,000 USDC)
+  - ISO market collateral pool: Không thay đổi (10,000 USDC)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Same Market:** Both subaccounts are in the same isolated market.
-2. **No Pool Movement:** Collateral stays within the same pool.
-3. **Efficiency:** No need to move collateral between pools.
+1. **Same Market:** Cả hai subaccounts đều trong cùng isolated market.
+2. **No Pool Movement:** Collateral ở trong cùng pool.
+3. **Efficiency:** Không cần di chuyển collateral giữa các pools.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Isolated Subaccount Transfer Flow
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. CREATE TRANSFER MESSAGE                                  │
-│    - Sender subaccount ID                                   │
-│    - Receiver subaccount ID                                 │
-│    - Asset ID and amount                                     │
+│ 1. TẠO TRANSFER MESSAGE                                     │
+│    - Sender subaccount ID                                    │
+│    - Receiver subaccount ID                                  │
+│    - Asset ID và amount                                      │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. DETERMINE MARKET TYPES                                   │
-│    - Check if sender is isolated                            │
-│    - Check if receiver is isolated                           │
-│    - Identify market types                                  │
+│ 2. XÁC ĐỊNH LOẠI MARKET                                     │
+│    - Kiểm tra nếu sender là isolated                        │
+│    - Kiểm tra nếu receiver là isolated                       │
+│    - Xác định loại market                                   │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. VALIDATE COLLATERAL POOLS                                 │
-│    - Check source pool balance                               │
-│    - Verify sufficient funds                                 │
+│    - Kiểm tra source pool balance                            │
+│    - Xác minh sufficient funds                               │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 4. UPDATE COLLATERAL POOLS                                  │
-│    - If different markets: Move collateral between pools    │
-│    - If same market: No pool movement                        │
+│ 4. CẬP NHẬT COLLATERAL POOLS                                │
+│    - Nếu markets khác nhau: Di chuyển collateral giữa pools  │
+│    - Nếu cùng market: Không di chuyển pool                   │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 5. UPDATE SUBACCOUNTS                                       │
-│    - Decrease sender balance                                 │
-│    - Increase receiver balance                               │
+│ 5. CẬP NHẬT SUBACCOUNTS                                      │
+│    - Giảm sender balance                                     │
+│    - Tăng receiver balance                                   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **Transfer States:**
    ```
-   Create Transfer → Validate Pools → Update Pools → Update Subaccounts → Complete
+   Tạo Transfer → Validate Pools → Cập nhật Pools → Cập nhật Subaccounts → Hoàn thành
    ```
 
 2. **Collateral Pool Updates:**
    ```
    Isolated → Non-Isolated: Isolated Pool ↓, Cross Pool ↑
    Non-Isolated → Isolated: Cross Pool ↓, Isolated Pool ↑
-   Isolated → Isolated (Different): Source Pool ↓, Dest Pool ↑
-   Isolated → Isolated (Same): No Change
+   Isolated → Isolated (Khác nhau): Source Pool ↓, Dest Pool ↑
+   Isolated → Isolated (Cùng): Không thay đổi
    ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Collateral Pools:**
-   - Cross collateral pool: For non-isolated subaccounts
-   - Isolated market pools: One pool per isolated market
-   - Pools must maintain balance
+   - Cross collateral pool: Cho non-isolated subaccounts
+   - Isolated market pools: Một pool cho mỗi isolated market
+   - Pools phải duy trì balance
 
 2. **Transfer Rules:**
-   - Different markets: Collateral moves between pools
-   - Same market: No pool movement
-   - Insufficient funds: Transfer fails
+   - Markets khác nhau: Collateral di chuyển giữa pools
+   - Cùng market: Không di chuyển pool
+   - Insufficient funds: Transfer thất bại
 
 3. **Validation:**
-   - Pool balance must be sufficient
-   - Transfer amount must be valid
-   - Subaccounts must exist
+   - Pool balance phải đủ
+   - Transfer amount phải hợp lệ
+   - Subaccounts phải tồn tại
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Isolation:** Isolated markets maintain separate collateral pools for risk management.
+1. **Isolation:** Isolated markets duy trì separate collateral pools cho risk management.
 
-2. **Pool Management:** Collateral pools ensure sufficient funds for positions.
+2. **Pool Management:** Collateral pools đảm bảo sufficient funds cho positions.
 
-3. **Efficiency:** Same-market transfers don't move collateral for efficiency.
+3. **Efficiency:** Transfers cùng market không di chuyển collateral để hiệu quả.
 
-4. **Safety:** Validation prevents transfers when pools have insufficient funds.
-
+4. **Safety:** Validation ngăn chặn transfers khi pools có insufficient funds.

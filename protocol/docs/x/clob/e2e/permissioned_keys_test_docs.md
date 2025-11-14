@@ -1,205 +1,204 @@
-# Test Documentation: Permissioned Keys E2E Tests
+# Tài liệu Test: Permissioned Keys E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies **Permissioned Keys (Smart Account Authenticators)** functionality in the CLOB module. Smart accounts can have multiple authenticators that control which operations can be performed. The test ensures that:
-1. Orders can be placed with specific authenticators
-2. Authenticators must be enabled (smart account feature)
-3. Authenticators must exist and not be removed
-4. Authenticators validate message types and signatures
-5. Composite authenticators (AllOf, AnyOf) work correctly
+File test này xác minh chức năng **Permissioned Keys (Smart Account Authenticators)** trong CLOB module. Smart accounts có thể có nhiều authenticators kiểm soát các operations nào có thể được thực hiện. Test đảm bảo rằng:
+1. Orders có thể được đặt với specific authenticators
+2. Authenticators phải được enable (smart account feature)
+3. Authenticators phải tồn tại và không bị xóa
+4. Authenticators validate message types và signatures
+5. Composite authenticators (AllOf, AnyOf) hoạt động đúng
 
 ---
 
 ## Test Function: TestPlaceOrder_PermissionedKeys_Failures
 
-### Test Case 1: Failure - Smart Account Not Enabled
+### Test Case 1: Thất bại - Smart Account Không được Enable
 
-### Input
-- **Smart Account:** Not enabled
+### Đầu vào
+- **Smart Account:** Không được enable
 - **Order:**
-  - Bob places order to buy 5 at price 40
-  - Authenticators: [0] specified
-- **Transaction:** Signed with Bob's private key
+  - Bob đặt order để mua 5 ở giá 40
+  - Authenticators: [0] được chỉ định
+- **Transaction:** Được ký với private key của Bob
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
 - **Error Code:** `ErrSmartAccountNotActive`
 - **Error Message:** "Smart account is not active"
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Feature Flag:** Smart account feature must be enabled.
-2. **Authenticators Invalid:** Cannot use authenticators if feature disabled.
-3. **Early Rejection:** CheckTx rejects transaction immediately.
+1. **Feature Flag:** Smart account feature phải được enable.
+2. **Authenticators Invalid:** Không thể sử dụng authenticators nếu feature disabled.
+3. **Early Rejection:** CheckTx từ chối transaction ngay lập tức.
 
 ---
 
-### Test Case 2: Failure - Authenticator Not Found
+### Test Case 2: Thất bại - Authenticator Không Tìm thấy
 
-### Input
-- **Smart Account:** Enabled
+### Đầu vào
+- **Smart Account:** Được enable
 - **Order:**
-  - Bob places order to buy 5 at price 40
-  - Authenticators: [0] specified
-- **State:** No authenticators added to Bob's account
+  - Bob đặt order để mua 5 ở giá 40
+  - Authenticators: [0] được chỉ định
+- **State:** Không có authenticators được thêm vào tài khoản của Bob
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
 - **Error Code:** `ErrAuthenticatorNotFound`
 - **Error Message:** "Authenticator not found"
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **No Authenticators:** Bob's account has no authenticators added.
-2. **Invalid Reference:** Authenticator ID 0 doesn't exist.
-3. **Validation:** System checks authenticator exists before use.
+1. **No Authenticators:** Tài khoản của Bob không có authenticators được thêm.
+2. **Invalid Reference:** Authenticator ID 0 không tồn tại.
+3. **Validation:** Hệ thống kiểm tra authenticator tồn tại trước khi sử dụng.
 
 ---
 
-### Test Case 3: Failure - Authenticator Was Removed
+### Test Case 3: Thất bại - Authenticator Đã bị Xóa
 
-### Input
-- **Smart Account:** Enabled
+### Đầu vào
+- **Smart Account:** Được enable
 - **Block 2:**
-  - Add authenticator: Bob adds AllOf authenticator (ID 0)
+  - Add authenticator: Bob thêm AllOf authenticator (ID 0)
 - **Block 4:**
-  - Remove authenticator: Bob removes authenticator ID 0
+  - Remove authenticator: Bob xóa authenticator ID 0
 - **Block 5:**
-  - Place order: Bob places order with authenticator [0]
+  - Place order: Bob đặt order với authenticator [0]
 
-### Output
+### Đầu ra
 - **Add Authenticator:** SUCCESS
 - **Remove Authenticator:** SUCCESS
-- **Place Order:** FAIL with error `ErrAuthenticatorNotFound`
+- **Place Order:** FAIL với lỗi `ErrAuthenticatorNotFound`
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Authenticator Removed:** Authenticator was removed in block 4.
-2. **No Longer Exists:** Authenticator ID 0 no longer exists.
-3. **Cannot Use:** Cannot use removed authenticator.
+1. **Authenticator Removed:** Authenticator được xóa trong block 4.
+2. **No Longer Exists:** Authenticator ID 0 không còn tồn tại.
+3. **Cannot Use:** Không thể sử dụng removed authenticator.
 
 ---
 
-### Test Case 4: Success - Authenticator Validates Message Type
+### Test Case 4: Thành công - Authenticator Validate Message Type
 
-### Input
-- **Smart Account:** Enabled
-- **Authenticator:** AllOf with:
-  - SignatureVerification (Bob's key)
-  - MessageFilter (allows only `/cosmos.bank.v1beta1.MsgSend`)
-- **Order:** Bob places order to buy 5 at price 40
-- **Authenticators:** [0] specified
+### Đầu vào
+- **Smart Account:** Được enable
+- **Authenticator:** AllOf với:
+  - SignatureVerification (key của Bob)
+  - MessageFilter (chỉ cho phép `/cosmos.bank.v1beta1.MsgSend`)
+- **Order:** Bob đặt order để mua 5 ở giá 40
+- **Authenticators:** [0] được chỉ định
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Error:** Authenticator doesn't allow CLOB order message type
+- **Error:** Authenticator không cho phép CLOB order message type
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Message Filter:** Authenticator only allows `MsgSend`.
-2. **Order Message:** Order uses `MsgPlaceOrder` (different type).
-3. **Filter Rejection:** Message filter rejects non-allowed message types.
+1. **Message Filter:** Authenticator chỉ cho phép `MsgSend`.
+2. **Order Message:** Order sử dụng `MsgPlaceOrder` (loại khác).
+3. **Filter Rejection:** Message filter từ chối non-allowed message types.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Permissioned Key Validation Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. CHECK SMART ACCOUNT ENABLED                               │
-│    - Verify smart account feature is enabled                  │
-│    - Reject if feature disabled                              │
+│ 1. KIỂM TRA SMART ACCOUNT ENABLED                           │
+│    - Xác minh smart account feature được enable            │
+│    - Từ chối nếu feature disabled                           │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. VALIDATE AUTHENTICATORS                                   │
-│    - Check authenticator IDs exist                           │
-│    - Verify authenticators not removed                       │
-│    - Reject if invalid                                        │
+│ 2. VALIDATE AUTHENTICATORS                                  │
+│    - Kiểm tra authenticator IDs tồn tại                     │
+│    - Xác minh authenticators không bị xóa                   │
+│    - Từ chối nếu invalid                                    │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. EXECUTE AUTHENTICATORS                                    │
-│    - For each authenticator:                                 │
-│      * SignatureVerification: Verify signature               │
-│      * MessageFilter: Check message type                     │
-│      * Composite (AllOf/AnyOf): Evaluate children            │
+│ 3. THỰC THI AUTHENTICATORS                                  │
+│    - Cho mỗi authenticator:                                 │
+│      * SignatureVerification: Xác minh signature           │
+│      * MessageFilter: Kiểm tra message type                 │
+│      * Composite (AllOf/AnyOf): Đánh giá children           │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 4. AUTHENTICATOR RESULT                                      │
-│    - AllOf: All children must pass                           │
-│    - AnyOf: At least one child must pass                     │
-│    - Reject if authentication fails                          │
+│ 4. AUTHENTICATOR RESULT                                     │
+│    - AllOf: Tất cả children phải pass                      │
+│    - AnyOf: Ít nhất một child phải pass                    │
+│    - Từ chối nếu authentication thất bại                    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ### Authenticator Types
 
 1. **SignatureVerification:**
-   - Verifies transaction signature
-   - Uses specified public key
-   - Must match signer
+   - Xác minh transaction signature
+   - Sử dụng specified public key
+   - Phải khớp với signer
 
 2. **MessageFilter:**
-   - Filters allowed message types
-   - Only specified message types allowed
-   - Rejects other message types
+   - Lọc allowed message types
+   - Chỉ specified message types được phép
+   - Từ chối các message types khác
 
 3. **AllOf (Composite):**
-   - All child authenticators must pass
+   - Tất cả child authenticators phải pass
    - Logical AND operation
-   - All conditions must be met
+   - Tất cả conditions phải được đáp ứng
 
 4. **AnyOf (Composite):**
-   - At least one child authenticator must pass
+   - Ít nhất một child authenticator phải pass
    - Logical OR operation
-   - Any condition can be met
+   - Bất kỳ condition nào có thể được đáp ứng
 
-### Key Points
+### Điểm quan trọng
 
 1. **Smart Account Feature:**
-   - Must be enabled to use authenticators
-   - Feature flag controls availability
-   - Disabled by default
+   - Phải được enable để sử dụng authenticators
+   - Feature flag kiểm soát availability
+   - Disabled theo mặc định
 
 2. **Authenticator Management:**
-   - Authenticators can be added
-   - Authenticators can be removed
-   - Removed authenticators cannot be used
+   - Authenticators có thể được thêm
+   - Authenticators có thể được xóa
+   - Removed authenticators không thể được sử dụng
 
 3. **Message Type Filtering:**
-   - Authenticators can restrict message types
-   - Only allowed message types pass filter
-   - Provides fine-grained access control
+   - Authenticators có thể giới hạn message types
+   - Chỉ allowed message types pass filter
+   - Cung cấp fine-grained access control
 
 4. **Composite Authenticators:**
-   - AllOf: All conditions must pass
-   - AnyOf: At least one condition must pass
-   - Can nest multiple levels
+   - AllOf: Tất cả conditions phải pass
+   - AnyOf: Ít nhất một condition phải pass
+   - Có thể nest nhiều levels
 
 5. **Validation Timing:**
-   - Checked at CheckTx
-   - Early rejection for invalid authenticators
-   - Clear error messages
+   - Được kiểm tra tại CheckTx
+   - Early rejection cho invalid authenticators
+   - Error messages rõ ràng
 
-6. **Security:**
-   - Multiple authenticators provide layered security
-   - Message filtering prevents unauthorized operations
-   - Signature verification ensures authorization
+6. **Bảo mật:**
+   - Nhiều authenticators cung cấp layered security
+   - Message filtering ngăn chặn unauthorized operations
+   - Signature verification đảm bảo authorization
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Access Control:** Authenticators provide fine-grained access control.
+1. **Access Control:** Authenticators cung cấp fine-grained access control.
 
-2. **Security:** Multiple authenticators add security layers.
+2. **Bảo mật:** Nhiều authenticators thêm security layers.
 
-3. **Flexibility:** Composite authenticators allow complex policies.
+3. **Flexibility:** Composite authenticators cho phép complex policies.
 
-4. **User Control:** Users can manage their authenticators.
+4. **User Control:** Users có thể quản lý authenticators của họ.
 
-5. **Message Filtering:** Prevents unauthorized message types.
-
+5. **Message Filtering:** Ngăn chặn unauthorized message types.

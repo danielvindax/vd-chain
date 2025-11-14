@@ -1,20 +1,20 @@
-# Test Documentation: Short-Term Orders E2E Tests
+# Tài liệu Test: Short-Term Orders E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies **Short-Term Order** functionality in the CLOB (Central Limit Order Book) module. Short-term orders are orders that expire at the end of the current block. The test ensures that:
-1. Orders can be placed on the order book
-2. Orders can be matched with existing orders
-3. Off-chain and on-chain messages are correctly emitted
-4. Order state is correctly tracked
+File test này xác minh chức năng **Short-Term Order** trong CLOB (Central Limit Order Book) module. Short-term orders là các orders expire ở cuối block hiện tại. Test đảm bảo rằng:
+1. Orders có thể được đặt trên order book
+2. Orders có thể được match với existing orders
+3. Off-chain và on-chain messages được emit đúng
+4. Order state được track đúng
 
 ---
 
 ## Test Function: TestPlaceOrder
 
-### Test Case 1: Success - Place Order on Order Book
+### Test Case 1: Thành công - Đặt Order trên Order Book
 
-### Input
+### Đầu vào
 - **Order:**
   - SubaccountId: Alice_Num0
   - ClobPairId: 0
@@ -23,68 +23,68 @@ This test file verifies **Short-Term Order** functionality in the CLOB (Central 
   - Subticks: 1,000,000 (price = 10)
   - GoodTilBlock: 20
 
-### Output
+### Đầu ra
 - **CheckTx:** SUCCESS
 - **Off-chain Messages:**
   - Order place message
-  - Order update message (with fill amount = 0)
+  - Order update message (với fill amount = 0)
 - **On-chain Messages:**
-  - Indexer block event in next block
+  - Indexer block event trong block tiếp theo
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Order Placement:** Order is successfully placed on the order book.
-2. **Off-chain Updates:** Indexer needs to be notified about new orders for off-chain systems.
-3. **On-chain Events:** Block events are emitted in the next block for on-chain tracking.
+1. **Order Placement:** Order được đặt thành công trên order book.
+2. **Off-chain Updates:** Indexer cần được thông báo về orders mới cho off-chain systems.
+3. **On-chain Events:** Block events được emit trong block tiếp theo cho on-chain tracking.
 
 ---
 
-### Test Case 2: Success - Match Order Fully
+### Test Case 2: Thành công - Match Order Đầy đủ
 
-### Input
+### Đầu vào
 - **Orders:**
-  - Alice: Buy 5 at price 10
-  - Bob: Sell 5 at price 10
+  - Alice: Mua 5 ở giá 10
+  - Bob: Bán 5 ở giá 10
 
-### Output
-- **CheckTx:** Both orders SUCCESS
-- **Orders Filled:** Both orders fully filled
+### Đầu ra
+- **CheckTx:** Cả hai orders SUCCESS
+- **Orders Filled:** Cả hai orders được fill đầy
 - **Off-chain Messages:**
-  - Order place messages for both orders
-  - Order update messages showing full fill
+  - Order place messages cho cả hai orders
+  - Order update messages hiển thị full fill
 - **On-chain Messages:**
-  - Subaccount update events for both Alice and Bob
-  - Positions updated correctly
+  - Subaccount update events cho cả Alice và Bob
+  - Positions được cập nhật đúng
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Order Matching:** When buy and sell orders match in price and quantity, they are fully filled.
-2. **Position Updates:** Both subaccounts' positions are updated after matching.
-3. **Event Emission:** Events are emitted for both maker and taker.
+1. **Order Matching:** Khi buy và sell orders match về giá và số lượng, chúng được fill đầy.
+2. **Position Updates:** Positions của cả hai subaccounts được cập nhật sau matching.
+3. **Event Emission:** Events được emit cho cả maker và taker.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Place Order Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. SUBMIT ORDER                                             │
-│    - Create MsgPlaceOrder                                   │
-│    - Sign transaction                                        │
+│    - Tạo MsgPlaceOrder                                       │
+│    - Ký transaction                                          │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 2. CHECKTX VALIDATION                                       │
-│    - Validate order format                                  │
-│    - Check collateralization                                │
-│    - Verify order parameters                                │
+│    - Validate order format                                   │
+│    - Kiểm tra collateralization                             │
+│    - Xác minh order parameters                               │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. ORDER PLACEMENT                                          │
-│    - Add order to order book                                 │
+│    - Thêm order vào order book                               │
 │    - Emit off-chain order place message                      │
 │    - Emit off-chain order update message                     │
 └─────────────────────────────────────────────────────────────┘
@@ -92,7 +92,7 @@ This test file verifies **Short-Term Order** functionality in the CLOB (Central 
 ┌─────────────────────────────────────────────────────────────┐
 │ 4. NEXT BLOCK                                               │
 │    - Emit on-chain indexer block event                       │
-│    - Update order state                                      │
+│    - Cập nhật order state                                    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -101,57 +101,56 @@ This test file verifies **Short-Term Order** functionality in the CLOB (Central 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. PLACE FIRST ORDER                                         │
-│    - Order added to order book                               │
+│    - Order được thêm vào order book                          │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 2. PLACE MATCHING ORDER                                      │
-│    - Order matches with existing order                       │
-│    - Both orders fully filled                                │
+│    - Order match với existing order                         │
+│    - Cả hai orders được fill đầy                            │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. EXECUTE TRADE                                            │
-│    - Update subaccount positions                             │
+│    - Cập nhật subaccount positions                          │
 │    - Emit subaccount update events                           │
-│    - Remove filled orders from book                          │
+│    - Xóa filled orders khỏi book                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Short-Term Orders:**
-   - Expire at the end of the current block
-   - GoodTilBlock specifies the block number when order expires
-   - Must be matched within the same block or they expire
+   - Expire ở cuối block hiện tại
+   - GoodTilBlock chỉ định block number khi order expire
+   - Phải được match trong cùng block hoặc chúng expire
 
 2. **Order Matching:**
-   - Orders match when price and quantity are compatible
-   - Maker-taker model: first order is maker, matching order is taker
-   - Both orders are removed from book after full match
+   - Orders match khi giá và số lượng tương thích
+   - Maker-taker model: order đầu tiên là maker, matching order là taker
+   - Cả hai orders được xóa khỏi book sau full match
 
 3. **Off-chain Messages:**
-   - Order place message: notifies indexer about new order
-   - Order update message: notifies indexer about fill amount
-   - Transaction hash included in message headers
+   - Order place message: thông báo indexer về order mới
+   - Order update message: thông báo indexer về fill amount
+   - Transaction hash được bao gồm trong message headers
 
 4. **On-chain Events:**
-   - Subaccount update events: track position changes
-   - Indexer block events: track block-level state changes
-   - Events emitted in next block after order placement
+   - Subaccount update events: theo dõi thay đổi positions
+   - Indexer block events: theo dõi block-level state changes
+   - Events được emit trong block tiếp theo sau order placement
 
 5. **State Tracking:**
-   - Order state tracked in keeper
-   - Fill amounts tracked per order
-   - Positions updated after matching
+   - Order state được track trong keeper
+   - Fill amounts được track theo từng order
+   - Positions được cập nhật sau matching
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Efficiency:** Short-term orders provide fast execution for immediate trading needs.
+1. **Efficiency:** Short-term orders cung cấp execution nhanh cho nhu cầu trading ngay lập tức.
 
-2. **Liquidity:** Encourages active trading by requiring immediate matching.
+2. **Liquidity:** Khuyến khích active trading bằng cách yêu cầu matching ngay lập tức.
 
-3. **State Management:** Orders expire automatically, preventing stale orders from cluttering the book.
+3. **State Management:** Orders expire tự động, ngăn chặn stale orders làm lộn xộn book.
 
-4. **Event Emission:** Both off-chain and on-chain events ensure complete state tracking.
-
+4. **Event Emission:** Cả off-chain và on-chain events đảm bảo complete state tracking.

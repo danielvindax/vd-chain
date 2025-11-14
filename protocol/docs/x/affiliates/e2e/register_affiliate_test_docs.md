@@ -1,152 +1,151 @@
-# Test Documentation: Affiliates Register E2E Tests
+# Tài liệu Test: Affiliates Register E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies **Affiliate Registration** functionality in the Affiliates module. Affiliates allow users to register referral relationships where a referee (user) can be associated with an affiliate (referrer). The test ensures that:
-1. Only the referee can register the affiliate relationship
-2. The affiliate cannot register themselves
-3. Unrelated addresses cannot register the relationship
-4. Signature validation works correctly
+File test này xác minh chức năng **Affiliate Registration** trong Affiliates module. Affiliates cho phép users đăng ký referral relationships nơi một referee (user) có thể được liên kết với một affiliate (referrer). Test đảm bảo rằng:
+1. Chỉ referee có thể đăng ký affiliate relationship
+2. Affiliate không thể đăng ký chính họ
+3. Các địa chỉ không liên quan không thể đăng ký relationship
+4. Signature validation hoạt động đúng
 
 ---
 
 ## Test Function: TestRegisterAffiliateInvalidSigner
 
-### Test Case 1: Success - Valid Signer (Referee)
+### Test Case 1: Thành công - Valid Signer (Referee)
 
-### Input
-- **Referee:** Bob's address
-- **Affiliate:** Alice's address
-- **Signer:** Bob's private key (referee)
+### Đầu vào
+- **Referee:** Địa chỉ của Bob
+- **Affiliate:** Địa chỉ của Alice
+- **Signer:** Private key của Bob (referee)
 - **Message:** `MsgRegisterAffiliate`
-  - Referee: Bob's address
-  - Affiliate: Alice's address
+  - Referee: Địa chỉ của Bob
+  - Affiliate: Địa chỉ của Alice
 
-### Output
+### Đầu ra
 - **CheckTx:** SUCCESS
-- **Transaction:** Accepted
-- **Relationship:** Affiliate relationship registered
+- **Transaction:** Được chấp nhận
+- **Relationship:** Affiliate relationship được đăng ký
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Referee Authorization:** Only the referee can register the affiliate relationship.
-2. **Self-Registration:** Referee must sign the transaction themselves.
-3. **Relationship Creation:** Creates a referral relationship between referee and affiliate.
+1. **Referee Authorization:** Chỉ referee có thể đăng ký affiliate relationship.
+2. **Self-Registration:** Referee phải ký transaction bằng chính họ.
+3. **Relationship Creation:** Tạo referral relationship giữa referee và affiliate.
 
 ---
 
-### Test Case 2: Failure - Invalid Signer (Affiliate)
+### Test Case 2: Thất bại - Invalid Signer (Affiliate)
 
-### Input
-- **Referee:** Bob's address
-- **Affiliate:** Alice's address
-- **Signer:** Alice's private key (affiliate, incorrect signer)
+### Đầu vào
+- **Referee:** Địa chỉ của Bob
+- **Affiliate:** Địa chỉ của Alice
+- **Signer:** Private key của Alice (affiliate, signer sai)
 - **Message:** `MsgRegisterAffiliate`
-  - Referee: Bob's address
-  - Affiliate: Alice's address
+  - Referee: Địa chỉ của Bob
+  - Affiliate: Địa chỉ của Alice
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
 - **Error:** "pubKey does not match signer address"
-- **Transaction:** Rejected
+- **Transaction:** Bị từ chối
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Authorization:** Only the referee can register the relationship.
-2. **Security:** Prevents affiliates from registering themselves.
-3. **Signature Validation:** System validates that signer matches referee address.
+1. **Authorization:** Chỉ referee có thể đăng ký relationship.
+2. **Bảo mật:** Ngăn chặn affiliates đăng ký chính họ.
+3. **Signature Validation:** Hệ thống validate rằng signer khớp với referee address.
 
 ---
 
-### Test Case 3: Failure - Invalid Signer (Non-Related Address)
+### Test Case 3: Thất bại - Invalid Signer (Non-Related Address)
 
-### Input
-- **Referee:** Bob's address
-- **Affiliate:** Alice's address
-- **Signer:** Carl's private key (unrelated address, incorrect signer)
+### Đầu vào
+- **Referee:** Địa chỉ của Bob
+- **Affiliate:** Địa chỉ của Alice
+- **Signer:** Private key của Carl (địa chỉ không liên quan, signer sai)
 - **Message:** `MsgRegisterAffiliate`
-  - Referee: Bob's address
-  - Affiliate: Alice's address
+  - Referee: Địa chỉ của Bob
+  - Affiliate: Địa chỉ của Alice
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
 - **Error:** "pubKey does not match signer address"
-- **Transaction:** Rejected
+- **Transaction:** Bị từ chối
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Authorization:** Only the referee can register the relationship.
-2. **Security:** Prevents third parties from registering relationships.
-3. **Signature Validation:** System validates that signer matches referee address.
+1. **Authorization:** Chỉ referee có thể đăng ký relationship.
+2. **Bảo mật:** Ngăn chặn bên thứ ba đăng ký relationships.
+3. **Signature Validation:** Hệ thống validate rằng signer khớp với referee address.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Affiliate Registration Flow
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. CREATE MESSAGE                                            │
+│ 1. TẠO MESSAGE                                               │
 │    - Referee address                                         │
 │    - Affiliate address                                       │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. SIGN TRANSACTION                                          │
-│    - Referee signs with their private key                   │
-│    - Signature included in transaction                       │
+│ 2. KÝ TRANSACTION                                            │
+│    - Referee ký với private key của họ                       │
+│    - Signature được bao gồm trong transaction                │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. CHECKTX VALIDATION                                        │
-│    - Validate signature matches referee address              │
-│    - Check if signer is referee                              │
+│    - Validate signature khớp với referee address            │
+│    - Kiểm tra nếu signer là referee                          │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 4. REGISTRATION                                              │
-│    - If valid: Register affiliate relationship              │
-│    - If invalid: Reject transaction                          │
+│ 4. ĐĂNG KÝ                                                   │
+│    - Nếu hợp lệ: Đăng ký affiliate relationship             │
+│    - Nếu không hợp lệ: Từ chối transaction                  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **Registration States:**
    ```
-   Not Registered → Registration Request → Validated → Registered / Rejected
+   Chưa Đăng ký → Yêu cầu Đăng ký → Validated → Đã Đăng ký / Bị Từ chối
    ```
 
 2. **Signer Validation:**
    ```
-   Transaction → Extract Signer → Compare with Referee → Authorized / Unauthorized
+   Transaction → Trích xuất Signer → So sánh với Referee → Authorized / Unauthorized
    ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Referee Authorization:**
-   - Only the referee can register the affiliate relationship
-   - Referee must sign the transaction
-   - Signature must match referee address
+   - Chỉ referee có thể đăng ký affiliate relationship
+   - Referee phải ký transaction
+   - Signature phải khớp với referee address
 
-2. **Security:**
-   - Affiliate cannot register themselves
-   - Third parties cannot register relationships
-   - Signature validation prevents unauthorized registrations
+2. **Bảo mật:**
+   - Affiliate không thể đăng ký chính họ
+   - Bên thứ ba không thể đăng ký relationships
+   - Signature validation ngăn chặn đăng ký trái phép
 
 3. **Relationship Creation:**
-   - Creates referral relationship between referee and affiliate
-   - Relationship can be used for rewards and tracking
-   - One-to-one relationship (one referee, one affiliate)
+   - Tạo referral relationship giữa referee và affiliate
+   - Relationship có thể được sử dụng cho rewards và tracking
+   - One-to-one relationship (một referee, một affiliate)
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **User Control:** Referee controls their own affiliate registration.
+1. **User Control:** Referee kiểm soát đăng ký affiliate của chính họ.
 
-2. **Security:** Signature validation prevents unauthorized registrations.
+2. **Bảo mật:** Signature validation ngăn chặn đăng ký trái phép.
 
-3. **Simplicity:** Simple one-to-one relationship model.
+3. **Simplicity:** Mô hình relationship one-to-one đơn giản.
 
-4. **Flexibility:** Allows users to choose their affiliate.
-
+4. **Flexibility:** Cho phép users chọn affiliate của họ.

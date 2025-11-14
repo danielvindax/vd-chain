@@ -1,12 +1,12 @@
-# Test Documentation: Withdrawal Gating E2E Tests
+# Tài liệu Test: Withdrawal Gating E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies **Withdrawal Gating** functionality in the CLOB module. When a subaccount has negative Total Net Collateral (TNC) and cannot be deleveraged, withdrawals and transfers from that market are blocked (gated) to protect the system. The test ensures that:
-1. Withdrawals are gated when negative TNC subaccounts exist
-2. Gating applies to isolated markets separately
-3. Gating blocks withdrawals for affected markets
-4. Gating unblocks when negative TNC resolved
+File test này xác minh chức năng **Withdrawal Gating** trong CLOB module. Khi một subaccount có Total Net Collateral (TNC) âm và không thể được deleverage, withdrawals và transfers từ market đó bị chặn (gated) để bảo vệ hệ thống. Test đảm bảo rằng:
+1. Withdrawals bị gated khi negative TNC subaccounts tồn tại
+2. Gating áp dụng cho isolated markets riêng biệt
+3. Gating chặn withdrawals cho affected markets
+4. Gating unblock khi negative TNC được giải quyết
 
 ---
 
@@ -14,118 +14,118 @@ This test file verifies **Withdrawal Gating** functionality in the CLOB module. 
 
 ### Test Case 1: Withdrawals Gated - Non-Overlapping Bankruptcy Prices
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Carl: 1 BTC Short, 49,999 USD (negative TNC, undercollateralized)
   - Dave: 1 BTC Long, 50,000 USD (short)
   - Dave_Num1: 10,000 USD
 - **Oracle Price:** $50,500 / BTC
-- **Liquidation Order:** Dave sells 0.25 BTC at $50,000
-- **Liquidation:** Attempted but deleveraging fails (non-overlapping bankruptcy prices)
-- **Withdrawal:** Dave_Num1 attempts to withdraw from BTC market
+- **Liquidation Order:** Dave bán 0.25 BTC ở $50,000
+- **Liquidation:** Cố gắng nhưng deleveraging thất bại (non-overlapping bankruptcy prices)
+- **Withdrawal:** Dave_Num1 cố gắng withdraw từ BTC market
 
-### Output
-- **Liquidation:** Fails (deleveraging cannot be performed)
-- **Carl State:** Still has negative TNC
-- **Withdrawals Gated:** BTC market withdrawals blocked
+### Đầu ra
+- **Liquidation:** Thất bại (deleveraging không thể được thực hiện)
+- **Carl State:** Vẫn có negative TNC
+- **Withdrawals Gated:** BTC market withdrawals bị chặn
 - **Error:** "WithdrawalsAndTransfersBlocked: failed to apply subaccount updates"
-- **Gated Perpetual:** BTC perpetual ID marked as gated
+- **Gated Perpetual:** BTC perpetual ID được đánh dấu là gated
 - **Negative TNC Seen At Block:** Block 4
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Negative TNC:** Carl has negative TNC (49,999 < 50,000 needed).
-2. **Deleveraging Fails:** Cannot deleverage because bankruptcy prices don't overlap.
-3. **System Protection:** Withdrawals gated to prevent further capital outflow.
-4. **Market Isolation:** Gating applies to specific perpetual/market.
+1. **Negative TNC:** Carl có negative TNC (49,999 < 50,000 cần).
+2. **Deleveraging Fails:** Không thể deleverage vì bankruptcy prices không overlap.
+3. **System Protection:** Withdrawals bị gated để ngăn chặn further capital outflow.
+4. **Market Isolation:** Gating áp dụng cho specific perpetual/market.
 
 ---
 
 ### Test Case 2: Withdrawals Gated - Isolated Market
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Carl: 1 ISO Short, 49 USD (negative TNC)
   - Dave: 1 ISO Long, 50 USD (short)
   - Alice: 1 ISO Long, 10,000 USD (isolated subaccount)
 - **Oracle Price:** $50.5 / ISO
-- **Liquidation:** Attempted but deleveraging fails
-- **Withdrawal:** Alice attempts to withdraw from ISO market
+- **Liquidation:** Cố gắng nhưng deleveraging thất bại
+- **Withdrawal:** Alice cố gắng withdraw từ ISO market
 
-### Output
-- **Withdrawals Gated:** ISO market withdrawals blocked for isolated subaccounts
-- **Gated Perpetual:** ISO perpetual ID marked as gated
+### Đầu ra
+- **Withdrawals Gated:** ISO market withdrawals bị chặn cho isolated subaccounts
+- **Gated Perpetual:** ISO perpetual ID được đánh dấu là gated
 - **Error:** "WithdrawalsAndTransfersBlocked"
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Isolated Market:** ISO is isolated market with separate collateral pool.
-2. **Isolated Subaccount:** Alice has isolated subaccount for ISO market.
-3. **Market-Specific Gating:** Gating applies only to ISO market for isolated subaccounts.
-4. **Protection:** Prevents capital outflow from isolated market when negative TNC exists.
+1. **Isolated Market:** ISO là isolated market với separate collateral pool.
+2. **Isolated Subaccount:** Alice có isolated subaccount cho ISO market.
+3. **Market-Specific Gating:** Gating chỉ áp dụng cho ISO market cho isolated subaccounts.
+4. **Protection:** Ngăn chặn capital outflow từ isolated market khi negative TNC tồn tại.
 
 ---
 
-### Test Case 3: Withdrawals Not Gated - Non-Isolated Subaccount
+### Test Case 3: Withdrawals Không Gated - Non-Isolated Subaccount
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Carl: 1 ISO Short, 49 USD (negative TNC)
   - Dave: 1 ISO Long, 50 USD (short)
   - Alice: 10,000 USD (non-isolated subaccount)
 - **Oracle Price:** $50.5 / ISO
-- **Liquidation:** Attempted but deleveraging fails
-- **Withdrawal:** Alice attempts to withdraw (not from ISO market)
+- **Liquidation:** Cố gắng nhưng deleveraging thất bại
+- **Withdrawal:** Alice cố gắng withdraw (không phải từ ISO market)
 
-### Output
-- **Withdrawals Not Gated:** Alice can withdraw (not from ISO market)
-- **Gated Perpetual:** ISO perpetual ID still marked as gated
-- **Selective Gating:** Only ISO market withdrawals blocked
+### Đầu ra
+- **Withdrawals Not Gated:** Alice có thể withdraw (không phải từ ISO market)
+- **Gated Perpetual:** ISO perpetual ID vẫn được đánh dấu là gated
+- **Selective Gating:** Chỉ ISO market withdrawals bị chặn
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Non-Isolated Subaccount:** Alice doesn't have ISO position.
-2. **Selective Gating:** Gating only affects withdrawals from gated market.
-3. **Other Markets:** Withdrawals from other markets still allowed.
+1. **Non-Isolated Subaccount:** Alice không có ISO position.
+2. **Selective Gating:** Gating chỉ ảnh hưởng withdrawals từ gated market.
+3. **Other Markets:** Withdrawals từ các markets khác vẫn được phép.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Withdrawal Gating Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. DETECT NEGATIVE TNC                                       │
-│    - Subaccount has TNC < 0                                  │
-│    - Liquidations daemon identifies negative TNC accounts    │
+│ 1. PHÁT HIỆN NEGATIVE TNC                                   │
+│    - Subaccount có TNC < 0                                  │
+│    - Liquidations daemon xác định negative TNC accounts      │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. ATTEMPT DELEVERAGING                                      │
-│    - Try to deleverage negative TNC account                  │
-│    - Check for overlapping bankruptcy prices                 │
+│ 2. CỐ GẮNG DELEVERAGING                                    │
+│    - Cố gắng deleverage negative TNC account                │
+│    - Kiểm tra overlapping bankruptcy prices                  │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. DELEVERAGING FAILS                                        │
-│    - Bankruptcy prices don't overlap                          │
-│    - Cannot close position                                   │
-│    - Negative TNC persists                                   │
+│ 3. DELEVERAGING THẤT BẠI                                    │
+│    - Bankruptcy prices không overlap                        │
+│    - Không thể đóng position                                │
+│    - Negative TNC vẫn tồn tại                               │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 4. GATE WITHDRAWALS                                          │
-│    - Mark perpetual as gated                                 │
-│    - Block withdrawals from gated market                      │
-│    - Record block when negative TNC seen                      │
+│ 4. GATE WITHDRAWALS                                        │
+│    - Đánh dấu perpetual là gated                            │
+│    - Chặn withdrawals từ gated market                       │
+│    - Ghi lại block khi negative TNC được thấy               │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 5. BLOCK WITHDRAWAL ATTEMPTS                                 │
-│    - Reject withdrawal transactions                          │
-│    - Return error: "WithdrawalsAndTransfersBlocked"          │
-│    - Apply to affected markets only                           │
+│ 5. CHẶN WITHDRAWAL ATTEMPTS                                │
+│    - Từ chối withdrawal transactions                       │
+│    - Trả về lỗi: "WithdrawalsAndTransfersBlocked"          │
+│    - Áp dụng cho affected markets only                       │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -133,61 +133,60 @@ This test file verifies **Withdrawal Gating** functionality in the CLOB module. 
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. RESOLVE NEGATIVE TNC                                      │
-│    - Position closed through deleveraging                    │
-│    - Or position closed through matching                     │
-│    - Or collateral added                                     │
+│ 1. GIẢI QUYẾT NEGATIVE TNC                                 │
+│    - Position đóng qua deleveraging                         │
+│    - Hoặc position đóng qua matching                        │
+│    - Hoặc collateral được thêm                              │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. UNGATE WITHDRAWALS                                        │
-│    - No more negative TNC accounts                           │
-│    - Remove gating from perpetual                            │
-│    - Allow withdrawals again                                 │
+│ 2. UNGATE WITHDRAWALS                                       │
+│    - Không còn negative TNC accounts                        │
+│    - Xóa gating từ perpetual                                │
+│    - Cho phép withdrawals lại                                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Negative TNC Detection:**
    - Subaccount TNC < 0
-   - Detected by liquidations daemon
-   - Recorded per perpetual/market
+   - Được phát hiện bởi liquidations daemon
+   - Được ghi lại per perpetual/market
 
 2. **Deleveraging Failure:**
-   - Bankruptcy prices don't overlap
-   - Cannot find counterparty to deleverage
-   - Negative TNC cannot be resolved
+   - Bankruptcy prices không overlap
+   - Không thể tìm counterparty để deleverage
+   - Negative TNC không thể được giải quyết
 
 3. **Gating Mechanism:**
-   - Perpetual marked as gated
-   - Withdrawals blocked for gated market
-   - Transfers also blocked
+   - Perpetual được đánh dấu là gated
+   - Withdrawals bị chặn cho gated market
+   - Transfers cũng bị chặn
 
 4. **Market Isolation:**
-   - Isolated markets gated separately
-   - Non-isolated subaccounts not affected by isolated market gating
-   - Cross-market gating possible
+   - Isolated markets được gated riêng biệt
+   - Non-isolated subaccounts không bị ảnh hưởng bởi isolated market gating
+   - Cross-market gating có thể xảy ra
 
 5. **Block Tracking:**
-   - Block when negative TNC first seen
-   - Used for gating duration tracking
-   - Helps identify persistent issues
+   - Block khi negative TNC được thấy lần đầu
+   - Được sử dụng cho gating duration tracking
+   - Giúp xác định persistent issues
 
 6. **Error Handling:**
-   - Clear error message: "WithdrawalsAndTransfersBlocked"
-   - Transaction rejected at CheckTx or DeliverTx
-   - State protected from capital outflow
+   - Error message rõ ràng: "WithdrawalsAndTransfersBlocked"
+   - Transaction bị từ chối tại CheckTx hoặc DeliverTx
+   - State được bảo vệ khỏi capital outflow
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **System Protection:** Prevents capital outflow when system is at risk.
+1. **System Protection:** Ngăn chặn capital outflow khi system đang gặp rủi ro.
 
-2. **Risk Containment:** Gating limits exposure to negative TNC accounts.
+2. **Risk Containment:** Gating giới hạn exposure đến negative TNC accounts.
 
-3. **Market Isolation:** Isolated markets protected separately.
+3. **Market Isolation:** Isolated markets được bảo vệ riêng biệt.
 
-4. **Fairness:** Only affects withdrawals from affected markets.
+4. **Fairness:** Chỉ ảnh hưởng withdrawals từ affected markets.
 
-5. **Transparency:** Clear error messages and block tracking.
-
+5. **Transparency:** Error messages rõ ràng và block tracking.

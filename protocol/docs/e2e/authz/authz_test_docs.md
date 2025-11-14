@@ -1,252 +1,252 @@
-# Test Documentation: Authorization Module
+# Tài liệu Test: Authorization Module
 
-## Overview
+## Tổng quan
 
-This test file verifies the **Authorization (Authz) Module** functionality. The authz module allows one account (granter) to grant permissions to another account (grantee) to execute certain messages on their behalf. This test ensures that:
-1. External messages (like `MsgSend`) can be granted and executed
-2. Internal messages cannot be granted or executed via authz
-3. App-injected messages are blocked
-4. Nested authz messages are blocked
-5. Unsupported messages are blocked
-6. Custom dYdX messages are blocked
+File test này xác minh chức năng **Authorization (Authz) Module**. Module authz cho phép một tài khoản (granter) cấp quyền cho tài khoản khác (grantee) để thực thi một số message thay mặt họ. Test này đảm bảo rằng:
+1. External messages (như `MsgSend`) có thể được cấp và thực thi
+2. Internal messages không thể được cấp hoặc thực thi qua authz
+3. App-injected messages bị chặn
+4. Nested authz messages bị chặn
+5. Unsupported messages bị chặn
+6. Custom dYdX messages bị chặn
 
 ---
 
 ## Test Function: TestAuthz
 
-### Test Case 1: Success - Alice Grants Permission to Bob to Send from Her Account
+### Test Case 1: Thành công - Alice cấp quyền cho Bob để gửi từ tài khoản của cô ấy
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Alice_Num0: 100,000 USD
   - Bob_Num0: 100,000 USD
 - **MsgGrant:**
   - Granter: Alice
   - Grantee: Bob
-  - Authorization: Generic authorization for `MsgSend`
+  - Authorization: Generic authorization cho `MsgSend`
 - **MsgExec:**
   - Grantee: Bob
-  - Message: `MsgSend` from Alice to Bob, amount: 1 USDC
+  - Message: `MsgSend` từ Alice đến Bob, số tiền: 1 USDC
 
-### Output
+### Đầu ra
 - **CheckTx:** SUCCESS
 - **DeliverTx:** SUCCESS
-- **Alice Balance:** Decreased by 1 USDC + fees (5 cents)
-- **Bob Balance:** Increased by 1 USDC - fees (5 cents)
+- **Số dư Alice:** Giảm 1 USDC + phí (5 cents)
+- **Số dư Bob:** Tăng 1 USDC - phí (5 cents)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **External Messages:** `MsgSend` is an external message that can be granted via authz.
-2. **Permission Grant:** Alice grants Bob permission to send tokens from her account.
-3. **Execution:** Bob successfully executes the send operation on behalf of Alice.
-4. **Fee Payment:** Each transaction (grant and exec) pays fees separately.
+1. **External Messages:** `MsgSend` là external message có thể được cấp qua authz.
+2. **Cấp quyền:** Alice cấp quyền cho Bob để gửi token từ tài khoản của cô ấy.
+3. **Thực thi:** Bob thực thi thành công thao tác gửi thay mặt Alice.
+4. **Thanh toán phí:** Mỗi giao dịch (grant và exec) trả phí riêng biệt.
 
 ---
 
-### Test Case 2: Failure - Bob Tries to Vote on Behalf of Alice Without Permission
+### Test Case 2: Thất bại - Bob cố gắng vote thay mặt Alice mà không có quyền
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Alice_Num0: 100,000 USD
   - Bob_Num0: 100,000 USD
-- **MsgGrant:** None
+- **MsgGrant:** Không có
 - **MsgExec:**
   - Grantee: Bob
-  - Message: `MsgVote` on behalf of Alice
+  - Message: `MsgVote` thay mặt Alice
 
-### Output
+### Đầu ra
 - **CheckTx:** SUCCESS
-- **DeliverTx:** FAIL with error `ErrNoAuthorizationFound`
+- **DeliverTx:** FAIL với lỗi `ErrNoAuthorizationFound`
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **No Permission:** Bob doesn't have permission to vote on behalf of Alice.
-2. **CheckTx Passes:** CheckTx doesn't validate authz permissions, only message format.
-3. **DeliverTx Fails:** Authz keeper validates permissions during DeliverTx and rejects.
+1. **Không có quyền:** Bob không có quyền vote thay mặt Alice.
+2. **CheckTx Pass:** CheckTx không validate authz permissions, chỉ validate format message.
+3. **DeliverTx Fail:** Authz keeper validate permissions trong DeliverTx và từ chối.
 
 ---
 
-### Test Case 3: Failure - Granting Permissions for Internal Messages Doesn't Allow Execution
+### Test Case 3: Thất bại - Cấp quyền cho Internal Messages không cho phép thực thi
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Alice_Num0: 100,000 USD
   - Bob_Num0: 100,000 USD
 - **MsgGrant:**
   - Granter: Alice
   - Grantee: Bob
-  - Authorization: Generic authorization for `MsgUpdateParams` (internal message)
+  - Authorization: Generic authorization cho `MsgUpdateParams` (internal message)
 - **MsgExec:**
   - Grantee: Bob
-  - Message: `MsgUpdateParams` with authority = gov module
+  - Message: `MsgUpdateParams` với authority = gov module
 
-### Output
+### Đầu ra
 - **CheckTx:** SUCCESS
-- **DeliverTx:** FAIL with error `ErrNoAuthorizationFound`
+- **DeliverTx:** FAIL với lỗi `ErrNoAuthorizationFound`
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Internal Messages:** Internal messages (like `MsgUpdateParams`) cannot be executed via authz.
-2. **Security:** This prevents unauthorized execution of privileged operations.
-3. **Grant Succeeds:** Grant is accepted, but execution is blocked.
+1. **Internal Messages:** Internal messages (như `MsgUpdateParams`) không thể được thực thi qua authz.
+2. **Bảo mật:** Điều này ngăn chặn thực thi trái phép các thao tác đặc quyền.
+3. **Grant thành công:** Grant được chấp nhận, nhưng thực thi bị chặn.
 
 ---
 
-### Test Case 4: Failure - Bob Tries to Update Gov Params (Authority = Gov)
+### Test Case 4: Thất bại - Bob cố gắng cập nhật Gov Params (Authority = Gov)
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Alice_Num0: 100,000 USD
   - Bob_Num0: 100,000 USD
-- **MsgGrant:** None
+- **MsgGrant:** Không có
 - **MsgExec:**
   - Grantee: Bob
-  - Message: `MsgUpdateParams` with authority = gov module
+  - Message: `MsgUpdateParams` với authority = gov module
 
-### Output
+### Đầu ra
 - **CheckTx:** SUCCESS
-- **DeliverTx:** FAIL with error `ErrNoAuthorizationFound`
+- **DeliverTx:** FAIL với lỗi `ErrNoAuthorizationFound`
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **No Permission:** Bob doesn't have permission to execute messages on behalf of gov module.
-2. **Internal Message:** Even if granted, internal messages cannot be executed via authz.
+1. **Không có quyền:** Bob không có quyền thực thi messages thay mặt gov module.
+2. **Internal Message:** Ngay cả khi được cấp, internal messages không thể được thực thi qua authz.
 
 ---
 
-### Test Case 5: Failure - Bob Tries to Update Gov Params (Authority = Bob)
+### Test Case 5: Thất bại - Bob cố gắng cập nhật Gov Params (Authority = Bob)
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Alice_Num0: 100,000 USD
   - Bob_Num0: 100,000 USD
-- **MsgGrant:** None
+- **MsgGrant:** Không có
 - **MsgExec:**
   - Grantee: Bob
-  - Message: `MsgUpdateParams` with authority = Bob
+  - Message: `MsgUpdateParams` với authority = Bob
 
-### Output
+### Đầu ra
 - **CheckTx:** SUCCESS
-- **DeliverTx:** FAIL with error `ErrInvalidSigner`
+- **DeliverTx:** FAIL với lỗi `ErrInvalidSigner`
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Invalid Authority:** Bob is not in the list of authorized signers for creating CLOB pairs.
-2. **Authority Check:** The message itself fails because Bob doesn't have the required authority.
-3. **Different Error:** This fails with `ErrInvalidSigner` instead of `ErrNoAuthorizationFound`.
+1. **Invalid Authority:** Bob không có trong danh sách authorized signers để tạo CLOB pairs.
+2. **Authority Check:** Message tự thất bại vì Bob không có authority cần thiết.
+3. **Lỗi khác:** Thất bại với `ErrInvalidSigner` thay vì `ErrNoAuthorizationFound`.
 
 ---
 
-### Test Case 6: Failure - Bob Tries to Propose Operations (App Injected)
+### Test Case 6: Thất bại - Bob cố gắng đề xuất Operations (App Injected)
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Alice_Num0: 100,000 USD
   - Bob_Num0: 100,000 USD
-- **MsgGrant:** None
+- **MsgGrant:** Không có
 - **MsgExec:**
   - Grantee: Bob
   - Message: `MsgProposedOperations`
 
-### Output
-- **CheckTx:** FAIL with error `ErrInvalidRequest`
-- **DeliverTx:** Not reached
+### Đầu ra
+- **CheckTx:** FAIL với lỗi `ErrInvalidRequest`
+- **DeliverTx:** Không đạt được
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **App-Injected Messages:** `MsgProposedOperations` is injected by the app, not submitted by users.
-2. **Ante Handler:** The ante handler rejects these messages at CheckTx.
-3. **Security:** Prevents users from submitting app-internal messages.
+1. **App-Injected Messages:** `MsgProposedOperations` được inject bởi app, không được submit bởi users.
+2. **Ante Handler:** Ante handler từ chối các messages này tại CheckTx.
+3. **Bảo mật:** Ngăn chặn users submit app-internal messages.
 
 ---
 
-### Test Case 7: Failure - Double Nested Authz Message
+### Test Case 7: Thất bại - Double Nested Authz Message
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Alice_Num0: 100,000 USD
   - Bob_Num0: 100,000 USD
-- **MsgGrant:** None
+- **MsgGrant:** Không có
 - **MsgExec:**
   - Grantee: Bob
-  - Message: Another `MsgExec` (nested)
+  - Message: Một `MsgExec` khác (nested)
 
-### Output
-- **CheckTx:** FAIL with error `ErrInvalidRequest`
-- **DeliverTx:** Not reached
+### Đầu ra
+- **CheckTx:** FAIL với lỗi `ErrInvalidRequest`
+- **DeliverTx:** Không đạt được
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Nested Authz:** Authz messages cannot be nested (wrapping another `MsgExec`).
-2. **Ante Handler:** The ante handler rejects nested authz messages at CheckTx.
-3. **Security:** Prevents complex nested authorization chains.
+1. **Nested Authz:** Authz messages không thể được nested (wrap một `MsgExec` khác).
+2. **Ante Handler:** Ante handler từ chối nested authz messages tại CheckTx.
+3. **Bảo mật:** Ngăn chặn chuỗi authorization phức tạp.
 
 ---
 
-### Test Case 8: Failure - Unsupported Transaction Type
+### Test Case 8: Thất bại - Unsupported Transaction Type
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Alice_Num0: 100,000 USD
   - Bob_Num0: 100,000 USD
-- **MsgGrant:** None
+- **MsgGrant:** Không có
 - **MsgExec:**
   - Grantee: Bob
-  - Message: `MsgUpdateParams` from ICA controller module (unsupported)
+  - Message: `MsgUpdateParams` từ ICA controller module (unsupported)
 
-### Output
-- **CheckTx:** FAIL with error `ErrInvalidRequest`
-- **DeliverTx:** Not reached
+### Đầu ra
+- **CheckTx:** FAIL với lỗi `ErrInvalidRequest`
+- **DeliverTx:** Không đạt được
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Unsupported Messages:** Some message types are not supported in authz.
-2. **Ante Handler:** The ante handler maintains a whitelist of supported messages.
-3. **Security:** Prevents execution of potentially dangerous or unsupported operations.
+1. **Unsupported Messages:** Một số loại message không được hỗ trợ trong authz.
+2. **Ante Handler:** Ante handler duy trì whitelist của các messages được hỗ trợ.
+3. **Bảo mật:** Ngăn chặn thực thi các thao tác nguy hiểm hoặc không được hỗ trợ.
 
 ---
 
-### Test Case 9: Failure - Bob Wraps dYdX Custom Messages
+### Test Case 9: Thất bại - Bob wrap dYdX Custom Messages
 
-### Input
+### Đầu vào
 - **Subaccounts:**
   - Alice_Num0: 100,000 USD
   - Bob_Num0: 100,000 USD
-- **MsgGrant:** None
+- **MsgGrant:** Không có
 - **MsgExec:**
   - Grantee: Bob
   - Message: `MsgPlaceOrder` (dYdX custom message)
 
-### Output
-- **CheckTx:** FAIL with error `ErrInvalidRequest`
-- **DeliverTx:** Not reached
+### Đầu ra
+- **CheckTx:** FAIL với lỗi `ErrInvalidRequest`
+- **DeliverTx:** Không đạt được
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Custom Messages:** dYdX custom messages (like `MsgPlaceOrder`) are not supported in authz.
-2. **Ante Handler:** The ante handler blocks custom dYdX messages.
-3. **Security:** Prevents unauthorized trading operations via authz.
+1. **Custom Messages:** dYdX custom messages (như `MsgPlaceOrder`) không được hỗ trợ trong authz.
+2. **Ante Handler:** Ante handler chặn custom dYdX messages.
+3. **Bảo mật:** Ngăn chặn thao tác trading trái phép qua authz.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Successful Authz Flow
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. GRANTER GRANTS PERMISSION                                │
-│    - Alice grants Bob permission to execute MsgSend         │
+│ 1. GRANTER CẤP QUYỀN                                       │
+│    - Alice cấp quyền cho Bob để thực thi MsgSend            │
 │    - CheckTx: SUCCESS                                        │
 │    - DeliverTx: SUCCESS                                       │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. GRANTEE EXECUTES MESSAGE                                  │
-│    - Bob executes MsgSend on behalf of Alice                 │
+│ 2. GRANTEE THỰC THI MESSAGE                                 │
+│    - Bob thực thi MsgSend thay mặt Alice                    │
 │    - CheckTx: SUCCESS                                        │
 │    - DeliverTx: SUCCESS                                       │
-│    - Transfer executed                                        │
+│    - Transfer được thực thi                                  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -254,16 +254,16 @@ This test file verifies the **Authorization (Authz) Module** functionality. The 
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. GRANTEE ATTEMPTS EXECUTION                                │
-│    - Bob tries to execute message without permission        │
-│    - CheckTx: SUCCESS (format valid)                        │
+│ 1. GRANTEE CỐ GẮNG THỰC THI                                 │
+│    - Bob cố gắng thực thi message mà không có quyền         │
+│    - CheckTx: SUCCESS (format hợp lệ)                       │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. DELIVERTX VALIDATION                                      │
-│    - Authz keeper checks for authorization                  │
-│    - No authorization found                                  │
-│    - DeliverTx: FAIL with ErrNoAuthorizationFound          │
+│ 2. DELIVERTX VALIDATION                                     │
+│    - Authz keeper kiểm tra authorization                    │
+│    - Không tìm thấy authorization                            │
+│    - DeliverTx: FAIL với ErrNoAuthorizationFound          │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -271,41 +271,41 @@ This test file verifies the **Authorization (Authz) Module** functionality. The 
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. GRANTEE ATTEMPTS EXECUTION                                │
-│    - Bob tries to execute blocked message type              │
-│    - Ante handler validates message type                     │
+│ 1. GRANTEE CỐ GẮNG THỰC THI                                 │
+│    - Bob cố gắng thực thi loại message bị chặn             │
+│    - Ante handler validate loại message                     │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. CHECKTX REJECTION                                         │
-│    - Message type not allowed in authz                       │
-│    - CheckTx: FAIL with ErrInvalidRequest                   │
-│    - DeliverTx: Not reached                                  │
+│ 2. CHECKTX REJECTION                                        │
+│    - Loại message không được phép trong authz               │
+│    - CheckTx: FAIL với ErrInvalidRequest                   │
+│    - DeliverTx: Không đạt được                                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **Authorization State:**
    ```
-   No Authorization → Authorization Granted → Authorization Used
+   Không có Authorization → Authorization được cấp → Authorization được sử dụng
    ```
 
 2. **Message Execution:**
    ```
-   CheckTx: Validates message format
-   DeliverTx: Validates authorization and executes
+   CheckTx: Validate format message
+   DeliverTx: Validate authorization và thực thi
    ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **External vs Internal Messages:**
-   - External messages (like `MsgSend`) can be granted and executed
-   - Internal messages (like `MsgUpdateParams`) cannot be executed via authz
+   - External messages (như `MsgSend`) có thể được cấp và thực thi
+   - Internal messages (như `MsgUpdateParams`) không thể được thực thi qua authz
 
 2. **Validation Points:**
-   - CheckTx: Validates message format and type
-   - DeliverTx: Validates authorization permissions
+   - CheckTx: Validate format và loại message
+   - DeliverTx: Validate authorization permissions
 
 3. **Blocked Message Types:**
    - App-injected messages (`MsgProposedOperations`)
@@ -314,22 +314,21 @@ This test file verifies the **Authorization (Authz) Module** functionality. The 
    - Custom dYdX messages (`MsgPlaceOrder`)
 
 4. **Fee Payment:**
-   - Each transaction (grant and exec) pays fees separately
-   - Granter pays fees for grant transaction
-   - Grantee pays fees for exec transaction
+   - Mỗi giao dịch (grant và exec) trả phí riêng biệt
+   - Granter trả phí cho giao dịch grant
+   - Grantee trả phí cho giao dịch exec
 
-5. **Security:**
-   - Only external, whitelisted messages can be executed via authz
-   - Internal and privileged operations are blocked
-   - Prevents unauthorized access to sensitive operations
+5. **Bảo mật:**
+   - Chỉ external, whitelisted messages có thể được thực thi qua authz
+   - Internal và privileged operations bị chặn
+   - Ngăn chặn truy cập trái phép vào các thao tác nhạy cảm
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Security:** Authz is limited to safe, external operations to prevent unauthorized access to privileged functions.
+1. **Bảo mật:** Authz bị giới hạn ở các thao tác external an toàn để ngăn chặn truy cập trái phép vào các chức năng đặc quyền.
 
-2. **Flexibility:** Allows users to delegate certain operations (like sending tokens) to other accounts.
+2. **Linh hoạt:** Cho phép users ủy quyền một số thao tác (như gửi token) cho các tài khoản khác.
 
-3. **Validation:** Multiple validation layers (ante handler, CheckTx, DeliverTx) ensure only allowed operations can be executed.
+3. **Validation:** Nhiều lớp validation (ante handler, CheckTx, DeliverTx) đảm bảo chỉ các thao tác được phép mới có thể được thực thi.
 
-4. **Blocking:** App-injected and custom messages are blocked to prevent abuse and maintain system integrity.
-
+4. **Blocking:** App-injected và custom messages bị chặn để ngăn chặn lạm dụng và duy trì tính toàn vẹn hệ thống.

@@ -1,18 +1,18 @@
-# Test Documentation: Fee Tiers Module Governance Proposals
+# Tài liệu Test: Fee Tiers Module Governance Proposals
 
-## Overview
+## Tổng quan
 
-This test file verifies governance proposal to **update Perpetual Fee Params** in Fee Tiers module. Fee tiers define the fee structure for perpetual trading based on trading volume and activity.
+File test này xác minh governance proposal để **cập nhật Perpetual Fee Params** trong Fee Tiers module. Fee tiers định nghĩa cấu trúc phí cho perpetual trading dựa trên trading volume và activity.
 
 ---
 
 ## Test Function: TestUpdateFeeTiersModuleParams
 
-### Test Case 1: Success - Update Perpetual Fee Params
+### Test Case 1: Thành công - Cập nhật Perpetual Fee Params
 
-### Input
+### Đầu vào
 - **Genesis State:**
-  - Fee tiers module has different params from proposal
+  - Fee tiers module có params khác với proposal
 - **Proposed Message:**
   - `MsgUpdatePerpetualFeeParams`:
     - Tiers:
@@ -20,7 +20,7 @@ This test file verifies governance proposal to **update Perpetual Fee Params** i
         - Name: "test_tier_0"
         - MakerFeePpm: 11_000
         - TakerFeePpm: 22_000
-        - No volume requirements (first tier)
+        - Không có volume requirements (tier đầu tiên)
       - Tier 1:
         - Name: "test_tier_1"
         - AbsoluteVolumeRequirement: 200_000
@@ -30,113 +30,113 @@ This test file verifies governance proposal to **update Perpetual Fee Params** i
         - TakerFeePpm: 2_000
     - Authority: gov module
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Fee Params:** Updated with new tier structure
+- **Fee Params:** Được cập nhật với cấu trúc tier mới
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Fee Tier Structure:** Fee tiers define different fee rates based on trading volume and activity.
-2. **First Tier:** The first tier (tier 0) must have no volume requirements - it's the default tier for all traders.
-3. **Volume Requirements:** Higher tiers require traders to meet volume thresholds to qualify for lower fees.
-4. **Maker/Taker Fees:** Different fees for makers (liquidity providers) and takers (liquidity consumers).
-5. **Governance Control:** Only governance has permission to update fee tiers.
+1. **Fee Tier Structure:** Fee tiers định nghĩa các mức phí khác nhau dựa trên trading volume và activity.
+2. **First Tier:** Tier đầu tiên (tier 0) phải không có volume requirements - đây là tier mặc định cho tất cả traders.
+3. **Volume Requirements:** Các tier cao hơn yêu cầu traders đáp ứng volume thresholds để đủ điều kiện cho phí thấp hơn.
+4. **Maker/Taker Fees:** Phí khác nhau cho makers (liquidity providers) và takers (liquidity consumers).
+5. **Governance Control:** Chỉ governance có quyền cập nhật fee tiers.
 
 ---
 
-### Test Case 2: Failure - No Tiers
+### Test Case 2: Thất bại - Không có Tiers
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdatePerpetualFeeParams` with Tiers = [] (empty array)
+  - `MsgUpdatePerpetualFeeParams` với Tiers = [] (mảng rỗng)
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Proposal:** Not submitted
+- **Proposal:** Không được submit
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Required Field:** At least one tier is required for fee structure.
-2. **Early Validation:** Validation at CheckTx to reject early.
-3. **Data Integrity:** Ensures fee tiers module always has valid tier structure.
+1. **Required Field:** Ít nhất một tier là bắt buộc cho cấu trúc phí.
+2. **Early Validation:** Validation tại CheckTx để từ chối sớm.
+3. **Data Integrity:** Đảm bảo fee tiers module luôn có cấu trúc tier hợp lệ.
 
 ---
 
-### Test Case 3: Failure - First Tier Has Non-Zero Volume Requirement
+### Test Case 3: Thất bại - Tier Đầu tiên Có Volume Requirement Khác Không
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdatePerpetualFeeParams` with:
+  - `MsgUpdatePerpetualFeeParams` với:
     - Tier 0:
-      - AbsoluteVolumeRequirement: 1 (non-zero - WRONG!)
+      - AbsoluteVolumeRequirement: 1 (khác không - SAI!)
       - MakerFeePpm: 1_000
       - TakerFeePpm: 2_000
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Proposal:** Not submitted
+- **Proposal:** Không được submit
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **First Tier Rule:** The first tier (tier 0) must have zero volume requirements because it's the default tier for all traders.
-2. **Logical Constraint:** If first tier has volume requirements, new traders cannot qualify for any tier.
-3. **Early Rejection:** Validation at CheckTx to prevent invalid configuration.
+1. **First Tier Rule:** Tier đầu tiên (tier 0) phải có volume requirements bằng không vì đây là tier mặc định cho tất cả traders.
+2. **Logical Constraint:** Nếu tier đầu tiên có volume requirements, traders mới không thể đủ điều kiện cho bất kỳ tier nào.
+3. **Early Rejection:** Validation tại CheckTx để ngăn chặn configuration không hợp lệ.
 
 ---
 
-### Test Case 4: Failure - Sum of Lowest Make Fee and Taker Fee is Negative
+### Test Case 4: Thất bại - Tổng của Maker Fee Thấp nhất và Taker Fee Thấp nhất là Âm
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdatePerpetualFeeParams` with:
+  - `MsgUpdatePerpetualFeeParams` với:
     - Tier 0:
-      - MakerFeePpm: -1_000 (negative - lowest maker fee)
+      - MakerFeePpm: -1_000 (âm - maker fee thấp nhất)
       - TakerFeePpm: 2_000
     - Tier 1:
       - MakerFeePpm: -888
-      - TakerFeePpm: 500 (lowest taker fee)
-    - Sum of lowest fees: -1_000 + 500 = -500 (negative)
+      - TakerFeePpm: 500 (taker fee thấp nhất)
+    - Tổng của fees thấp nhất: -1_000 + 500 = -500 (âm)
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Proposal:** Not submitted
+- **Proposal:** Không được submit
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Fee Validation:** The sum of the lowest maker fee and lowest taker fee across all tiers must be non-negative.
-2. **Economic Constraint:** Ensures the fee structure is economically viable - at least one combination of maker/taker fees should be non-negative.
-3. **Early Rejection:** Validation at CheckTx to prevent invalid fee structure.
+1. **Fee Validation:** Tổng của maker fee thấp nhất và taker fee thấp nhất trên tất cả tiers phải không âm.
+2. **Economic Constraint:** Đảm bảo cấu trúc phí khả thi về mặt kinh tế - ít nhất một kết hợp của maker/taker fees nên không âm.
+3. **Early Rejection:** Validation tại CheckTx để ngăn chặn cấu trúc phí không hợp lệ.
 
 ---
 
-### Test Case 5: Failure - Invalid Authority
+### Test Case 5: Thất bại - Invalid Authority
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgUpdatePerpetualFeeParams` with Authority = fee tiers module address (instead of gov module)
+  - `MsgUpdatePerpetualFeeParams` với Authority = địa chỉ fee tiers module (thay vì gov module)
 
-### Output
+### Đầu ra
 - **Proposal Submission:** FAIL
-- **Proposals:** No proposals created
+- **Proposals:** Không có proposals được tạo
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Authority Check:** Only governance module has permission to update fee tiers params.
-2. **Security:** Ensures only governance can change fee structure.
-3. **Early Rejection:** Validation at proposal submission time.
+1. **Authority Check:** Chỉ governance module có quyền cập nhật fee tiers params.
+2. **Bảo mật:** Đảm bảo chỉ governance có thể thay đổi cấu trúc phí.
+3. **Early Rejection:** Validation tại thời điểm proposal submission.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Update Perpetual Fee Params Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. VALIDATE INPUT                                            │
-│    - Tiers array not empty                                   │
-│    - First tier has zero volume requirements                 │
-│    - Sum of lowest maker fee + lowest taker fee >= 0        │
+│    - Tiers array không rỗng                                  │
+│    - Tier đầu tiên có volume requirements bằng không        │
+│    - Tổng của maker fee thấp nhất + taker fee thấp nhất >= 0 │
 │    - Authority = gov module                                  │
 └─────────────────────────────────────────────────────────────┘
                         ↓
@@ -147,58 +147,57 @@ This test file verifies governance proposal to **update Perpetual Fee Params** i
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. PROPOSAL EXECUTION                                        │
-│    - Update perpetual fee params                              │
-│    - Apply new tier structure                                │
+│    - Cập nhật perpetual fee params                            │
+│    - Áp dụng cấu trúc tier mới                                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **Fee Params Update:**
    ```
-   Old Tiers → New Tiers (UPDATE)
+   Tiers Cũ → Tiers Mới (UPDATE)
    ```
 
 2. **Tier Structure:**
    ```
-   Tier 0: No volume requirements (default tier)
-   Tier 1+: Volume requirements to qualify
+   Tier 0: Không có volume requirements (tier mặc định)
+   Tier 1+: Volume requirements để đủ điều kiện
    ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Tier Structure:**
-   - First tier (tier 0) must have zero volume requirements
-   - Higher tiers require volume thresholds
-   - Each tier has maker and taker fees
+   - Tier đầu tiên (tier 0) phải có volume requirements bằng không
+   - Các tier cao hơn yêu cầu volume thresholds
+   - Mỗi tier có maker và taker fees
 
 2. **Volume Requirements:**
-   - AbsoluteVolumeRequirement: Absolute trading volume threshold
-   - TotalVolumeShareRequirementPpm: Total volume share (PPM)
+   - AbsoluteVolumeRequirement: Ngưỡng trading volume tuyệt đối
+   - TotalVolumeShareRequirementPpm: Tổng volume share (PPM)
    - MakerVolumeShareRequirementPpm: Maker volume share (PPM)
 
 3. **Fee Validation:**
-   - Sum of lowest maker fee + lowest taker fee must be >= 0
-   - Ensures economically viable fee structure
-   - Validation at CheckTx
+   - Tổng của maker fee thấp nhất + taker fee thấp nhất phải >= 0
+   - Đảm bảo cấu trúc phí khả thi về mặt kinh tế
+   - Validation tại CheckTx
 
 4. **Authority:**
-   - Only governance module has permission to update
-   - Validation at proposal submission time
+   - Chỉ governance module có quyền cập nhật
+   - Validation tại thời điểm proposal submission
 
 5. **Atomic Execution:**
-   - If validation fails, entire proposal fails
-   - State is rolled back to before execution
+   - Nếu validation thất bại, toàn bộ proposal thất bại
+   - State được rollback về trước khi execution
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Governance Control:** Only governance has permission to change fee structure to ensure decentralization and fairness.
+1. **Governance Control:** Chỉ governance có quyền thay đổi cấu trúc phí để đảm bảo decentralization và công bằng.
 
-2. **Safety:** Validation ensures no invalid states (empty tiers, invalid first tier, negative fee sum).
+2. **An toàn:** Validation đảm bảo không có invalid states (empty tiers, invalid first tier, negative fee sum).
 
-3. **Flexibility:** Allows adjusting fee tiers when needed to optimize trading incentives.
+3. **Linh hoạt:** Cho phép điều chỉnh fee tiers khi cần để tối ưu trading incentives.
 
-4. **Economic Viability:** Fee validation ensures fee structure is economically sustainable.
+4. **Economic Viability:** Fee validation đảm bảo cấu trúc phí bền vững về mặt kinh tế.
 
-5. **User Experience:** First tier with no requirements ensures all traders can participate.
-
+5. **User Experience:** Tier đầu tiên không có requirements đảm bảo tất cả traders có thể tham gia.

@@ -1,197 +1,196 @@
-# Test Documentation: TWAP Orders E2E Tests
+# Tài liệu Test: TWAP Orders E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies **TWAP (Time-Weighted Average Price) Order** functionality in the CLOB module. TWAP orders split a large order into multiple smaller suborders executed over time at regular intervals. The test ensures that:
-1. TWAP orders are split into suborders based on duration and interval
-2. Suborders are placed at regular intervals
-3. Suborders use oracle price with price tolerance
-4. TWAP orders catch up if suborders expire unfilled
-5. Duplicate TWAP orders are rejected
+File test này xác minh chức năng **TWAP (Time-Weighted Average Price) Order** trong CLOB module. TWAP orders chia một large order thành nhiều smaller suborders được thực thi theo thời gian ở regular intervals. Test đảm bảo rằng:
+1. TWAP orders được chia thành suborders dựa trên duration và interval
+2. Suborders được đặt ở regular intervals
+3. Suborders sử dụng oracle price với price tolerance
+4. TWAP orders catch up nếu suborders expire unfilled
+5. Duplicate TWAP orders bị từ chối
 
 ---
 
 ## Test Function: TestTwapOrderPlacementAndCatchup
 
-### Test Case: Success - TWAP Order Placement and Suborder Execution
+### Test Case: Thành công - TWAP Order Placement và Suborder Execution
 
-### Input
+### Đầu vào
 - **TWAP Order:**
   - SubaccountId: Alice_Num0
   - Side: BUY
   - Quantums: 100,000,000,000 (10 BTC)
-  - Duration: 300 seconds (5 minutes)
-  - Interval: 60 seconds (1 minute)
+  - Duration: 300 giây (5 phút)
+  - Interval: 60 giây (1 phút)
   - PriceTolerance: 0% (market order)
-  - GoodTilBlockTime: 300 seconds from now
+  - GoodTilBlockTime: 300 giây từ bây giờ
 
-### Output
+### Đầu ra
 - **TWAP Order Placement:**
   - RemainingLegs: 4 (5 total - 1 triggered)
   - RemainingQuantums: 100,000,000,000
 - **First Suborder:**
   - Quantums: 20,000,000,000 (100B / 5 = 20B per leg)
   - Subticks: 200,000,000 ($20,000 oracle price)
-  - GoodTilBlockTime: 3 seconds from now
-  - Side: BUY (same as parent)
+  - GoodTilBlockTime: 3 giây từ bây giờ
+  - Side: BUY (giống parent)
 - **After 30 Seconds:**
-  - Suborder expired and removed
-  - TWAP order still has 4 remaining legs
+  - Suborder expired và được xóa
+  - TWAP order vẫn có 4 remaining legs
 - **After 60 Seconds Total:**
-  - Second suborder placed
+  - Second suborder được đặt
   - Quantums: 25,000,000,000 (100B / 4 = 25B, catching up)
-  - Subticks: 200,000,000 (same oracle price)
+  - Subticks: 200,000,000 (cùng oracle price)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Suborder Calculation:** Total quantums divided by number of legs.
+1. **Suborder Calculation:** Total quantums chia cho số lượng legs.
    - 5 legs: 100B / 5 = 20B per leg
-   - After 1 leg: 100B / 4 = 25B per leg (catchup)
-2. **Interval-Based:** Suborders placed at regular intervals (60 seconds).
-3. **Oracle Price:** Suborders use current oracle price.
-4. **Catchup Logic:** If suborder expires unfilled, next suborder gets larger size to catch up.
+   - Sau 1 leg: 100B / 4 = 25B per leg (catchup)
+2. **Interval-Based:** Suborders được đặt ở regular intervals (60 giây).
+3. **Oracle Price:** Suborders sử dụng current oracle price.
+4. **Catchup Logic:** Nếu suborder expire unfilled, next suborder có size lớn hơn để catch up.
 
 ---
 
 ## Test Function: TestDuplicateTWAPOrderPlacement
 
-### Test Case: Failure - Duplicate TWAP Order
+### Test Case: Thất bại - Duplicate TWAP Order
 
-### Input
+### Đầu vào
 - **Block 1:**
-  - Place TWAP order: Alice buys 100B quantums over 4 legs
+  - Đặt TWAP order: Alice mua 100B quantums qua 4 legs
 - **Block 2:**
-  - Attempt to place same TWAP order (same OrderId)
+  - Cố gắng đặt cùng TWAP order (cùng OrderId)
 
-### Output
+### Đầu ra
 - **First Order CheckTx:** SUCCESS
 - **Second Order CheckTx:** FAIL
 - **Error:** "A stateful order with this OrderId already exists"
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Duplicate Detection:** System detects duplicate OrderId.
-2. **Stateful Order:** TWAP orders are stateful orders.
-3. **Rejection:** Cannot place duplicate stateful order.
+1. **Duplicate Detection:** Hệ thống phát hiện duplicate OrderId.
+2. **Stateful Order:** TWAP orders là stateful orders.
+3. **Rejection:** Không thể đặt duplicate stateful order.
 
 ---
 
 ## Test Function: TestTWAPOrderWithMatchingOrders
 
-### Test Case: Success - TWAP Suborder Matches with Existing Order
+### Test Case: Thành công - TWAP Suborder Match với Existing Order
 
-### Input
-- **TWAP Order:** Alice buys 100B quantums over 4 legs
-- **Existing Order:** Bob sells matching quantity at compatible price
-- **Suborder:** First suborder placed and matches with Bob's order
+### Đầu vào
+- **TWAP Order:** Alice mua 100B quantums qua 4 legs
+- **Existing Order:** Bob bán matching quantity ở compatible price
+- **Suborder:** First suborder được đặt và match với order của Bob
 
-### Output
+### Đầu ra
 - **Suborder:** Fully filled
-- **TWAP Order:** Remaining quantums reduced
-- **Next Suborder:** Next suborder placed at next interval
+- **TWAP Order:** Remaining quantums giảm
+- **Next Suborder:** Next suborder được đặt ở next interval
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Suborder Matching:** TWAP suborders can match like regular orders.
-2. **Fill Tracking:** Fills reduce remaining quantums in TWAP order.
-3. **Continued Execution:** TWAP order continues placing suborders until complete.
+1. **Suborder Matching:** TWAP suborders có thể match như regular orders.
+2. **Fill Tracking:** Fills giảm remaining quantums trong TWAP order.
+3. **Continued Execution:** TWAP order tiếp tục đặt suborders cho đến khi hoàn thành.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### TWAP Order Execution Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. PLACE TWAP ORDER                                         │
-│    - Specify total quantums, duration, interval              │
-│    - Calculate number of legs = duration / interval          │
-│    - Store TWAP order in state                               │
+│ 1. ĐẶT TWAP ORDER                                          │
+│    - Chỉ định total quantums, duration, interval            │
+│    - Tính số lượng legs = duration / interval                │
+│    - Lưu TWAP order trong state                              │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. PLACE FIRST SUBORDER                                      │
-│    - Calculate suborder size = total / num_legs              │
-│    - Get current oracle price                                │
-│    - Apply price tolerance                                   │
-│    - Place suborder on order book                            │
-│    - Schedule next suborder trigger                          │
+│ 2. ĐẶT FIRST SUBORDER                                       │
+│    - Tính suborder size = total / num_legs                  │
+│    - Lấy current oracle price                               │
+│    - Áp dụng price tolerance                                │
+│    - Đặt suborder trên order book                            │
+│    - Lên lịch next suborder trigger                          │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. SUBORDER EXECUTION                                        │
-│    - Suborder can match with existing orders                  │
-│    - If filled: Update remaining quantums                     │
-│    - If expired: Remove and catch up                         │
+│ 3. SUBORDER EXECUTION                                       │
+│    - Suborder có thể match với existing orders               │
+│    - Nếu filled: Cập nhật remaining quantums                  │
+│    - Nếu expired: Xóa và catch up                            │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 4. TRIGGER NEXT SUBORDER                                     │
-│    - At next interval time                                   │
-│    - Calculate catchup size if previous expired              │
-│    - Place next suborder                                     │
-│    - Repeat until all legs executed                          │
+│ 4. TRIGGER NEXT SUBORDER                                    │
+│    - Tại next interval time                                  │
+│    - Tính catchup size nếu previous expired                 │
+│    - Đặt next suborder                                       │
+│    - Lặp lại cho đến khi tất cả legs được thực thi           │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ### Catchup Logic
 
 ```
-If previous suborder expired unfilled:
-  Remaining quantums = original remaining - 0 (nothing filled)
+Nếu previous suborder expired unfilled:
+  Remaining quantums = original remaining - 0 (không có gì filled)
   Remaining legs = original legs - 1
   Next suborder size = remaining quantums / remaining legs
   
-Example:
+Ví dụ:
   Original: 100B quantums, 5 legs
   First suborder: 20B (expires unfilled)
   Catchup: 100B / 4 = 25B per remaining leg
 ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **TWAP Parameters:**
-   - Duration: Total time to execute order
-   - Interval: Time between suborders
-   - PriceTolerance: Maximum price deviation from oracle
-   - Number of legs = duration / interval
+   - Duration: Tổng thời gian để thực thi order
+   - Interval: Thời gian giữa các suborders
+   - PriceTolerance: Maximum price deviation từ oracle
+   - Số lượng legs = duration / interval
 
 2. **Suborder Calculation:**
    - Initial: total_quantums / num_legs
    - Catchup: remaining_quantums / remaining_legs
-   - Ensures all quantums executed by end of duration
+   - Đảm bảo tất cả quantums được thực thi đến cuối duration
 
 3. **Oracle Price:**
-   - Suborders use current oracle price
-   - Price tolerance allows deviation
+   - Suborders sử dụng current oracle price
+   - Price tolerance cho phép deviation
    - Market orders: tolerance = 0
 
 4. **Suborder Lifecycle:**
-   - Placed at interval time
-   - Can match with existing orders
-   - Expires if not filled by GoodTilBlockTime
-   - Removed and next suborder catches up
+   - Được đặt tại interval time
+   - Có thể match với existing orders
+   - Expire nếu không fill bởi GoodTilBlockTime
+   - Được xóa và next suborder catch up
 
 5. **State Tracking:**
-   - TWAP order placement tracked in state
-   - Remaining legs and quantums tracked
-   - Trigger times scheduled for next suborders
+   - TWAP order placement được track trong state
+   - Remaining legs và quantums được track
+   - Trigger times được lên lịch cho next suborders
 
 6. **Duplicate Prevention:**
-   - Cannot place duplicate TWAP order
-   - Same OrderId rejected
-   - Prevents accidental duplicate execution
+   - Không thể đặt duplicate TWAP order
+   - Cùng OrderId bị từ chối
+   - Ngăn chặn accidental duplicate execution
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Price Impact Reduction:** Splitting large orders reduces market impact.
+1. **Price Impact Reduction:** Chia large orders giảm market impact.
 
-2. **Time Distribution:** Executes order over time for better average price.
+2. **Time Distribution:** Thực thi order theo thời gian cho better average price.
 
-3. **Flexibility:** Configurable duration and interval for different strategies.
+3. **Flexibility:** Configurable duration và interval cho các strategies khác nhau.
 
-4. **Catchup Logic:** Ensures order completes even if some suborders expire.
+4. **Catchup Logic:** Đảm bảo order hoàn thành ngay cả khi một số suborders expire.
 
-5. **Oracle Integration:** Uses oracle price for fair execution.
-
+5. **Oracle Integration:** Sử dụng oracle price cho fair execution.

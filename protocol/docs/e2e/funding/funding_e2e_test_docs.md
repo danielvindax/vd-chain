@@ -1,209 +1,208 @@
-# Test Documentation: Funding E2E Tests
+# Tài liệu Test: Funding E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies the **Funding Mechanism** for perpetual markets. Funding is a periodic payment between long and short positions based on the premium (difference between mark price and index price). The test ensures that:
-1. Funding premiums are calculated correctly based on order book impact prices
-2. Funding index is updated correctly based on premiums
-3. Funding settlements are calculated and applied correctly to subaccounts
-4. Funding rate clamping works when premiums exceed limits
+File test này xác minh **Funding Mechanism** cho perpetual markets. Funding là khoản thanh toán định kỳ giữa long và short positions dựa trên premium (chênh lệch giữa mark price và index price). Test đảm bảo rằng:
+1. Funding premiums được tính toán đúng dựa trên order book impact prices
+2. Funding index được cập nhật đúng dựa trên premiums
+3. Funding settlements được tính toán và áp dụng đúng cho subaccounts
+4. Funding rate clamping hoạt động khi premiums vượt quá giới hạn
 
 ---
 
 ## Test Function: TestFunding
 
-### Test Case 1: Index Price Below Impact Bid, Positive Funding, Longs Pay Shorts
+### Test Case 1: Index Price dưới Impact Bid, Positive Funding, Longs trả Shorts
 
-### Input
+### Đầu vào
 - **Orders:**
-  - Unmatched orders to generate funding premiums:
-    - Bob: Sell 2 BTC at 28,005 (impact ask)
-    - Alice: Buy 2 BTC at 28,000 (impact bid)
-  - Matched orders to set up positions:
-    - Bob: Sell 1 BTC at 28,003 (matched)
-    - Alice: Buy 0.8 BTC at 28,003 (matched)
-    - Carl: Buy 0.2 BTC at 28,003 (matched)
+  - Unmatched orders để tạo funding premiums:
+    - Bob: Bán 2 BTC ở 28,005 (impact ask)
+    - Alice: Mua 2 BTC ở 28,000 (impact bid)
+  - Matched orders để thiết lập positions:
+    - Bob: Bán 1 BTC ở 28,003 (matched)
+    - Alice: Mua 0.8 BTC ở 28,003 (matched)
+    - Carl: Mua 0.2 BTC ở 28,003 (matched)
 - **Initial Index Price:** 28,002
-- **Index Price for Premium:** 27,960 (below impact bid)
+- **Index Price for Premium:** 27,960 (dưới impact bid)
 - **Oracle Price for Funding Index:** 27,000
 
-### Output
+### Đầu ra
 - **Funding Premiums:** ~1,430 ppm (0.143%)
 - **Funding Index:** 482
 - **Settlements:**
-  - Alice (long 0.8 BTC): Pays $3.856
-  - Bob (short 1 BTC): Receives $4.82
-  - Carl (long 0.2 BTC): Pays $0.964
+  - Alice (long 0.8 BTC): Trả $3.856
+  - Bob (short 1 BTC): Nhận $4.82
+  - Carl (long 0.2 BTC): Trả $0.964
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Premium Calculation:** When index price (27,960) is below impact bid (28,000), premium is positive.
+1. **Premium Calculation:** Khi index price (27,960) dưới impact bid (28,000), premium là dương.
    - Premium = (28,000 / 27,960) - 1 ≈ 0.00143 (0.143%)
-2. **Longs Pay Shorts:** Positive premium means longs pay shorts.
-3. **Funding Index:** Calculated from premium samples over funding epoch.
-4. **Settlement:** Applied when subaccount receives transfer, based on funding index difference.
+2. **Longs Pay Shorts:** Premium dương có nghĩa longs trả shorts.
+3. **Funding Index:** Được tính từ premium samples trong funding epoch.
+4. **Settlement:** Được áp dụng khi subaccount nhận transfer, dựa trên chênh lệch funding index.
 
 ---
 
-### Test Case 2: Index Price Above Impact Ask, Negative Funding, Final Funding Rate Clamped
+### Test Case 2: Index Price trên Impact Ask, Negative Funding, Final Funding Rate Clamped
 
-### Input
-- **Orders:** Same as Test Case 1
+### Đầu vào
+- **Orders:** Giống Test Case 1
 - **Initial Index Price:** 28,002
-- **Index Price for Premium:** 34,000 (above impact ask)
+- **Index Price for Premium:** 34,000 (trên impact ask)
 - **Oracle Price for Funding Index:** 33,500
 
-### Output
-- **Funding Premiums:** -176,323 ppm (-17.6%, but clamped)
-- **Funding Index:** -50,250 (clamped to -12% based on margin requirements)
+### Đầu ra
+- **Funding Premiums:** -176,323 ppm (-17.6%, nhưng bị clamped)
+- **Funding Index:** -50,250 (clamped đến -12% dựa trên margin requirements)
 - **Settlements:**
-  - Alice (long 0.8 BTC): Receives $402 (shorts pay longs)
-  - Bob (short 1 BTC): Pays $502.5
-  - Carl (long 0.2 BTC): Receives $100.5
+  - Alice (long 0.8 BTC): Nhận $402 (shorts trả longs)
+  - Bob (short 1 BTC): Trả $502.5
+  - Carl (long 0.2 BTC): Nhận $100.5
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Premium Calculation:** When index price (34,000) is above impact ask (28,005), premium is negative.
+1. **Premium Calculation:** Khi index price (34,000) trên impact ask (28,005), premium là âm.
    - Premium = (28,005 / 34,000) - 1 ≈ -0.176 (-17.6%)
-2. **Funding Rate Clamp:** Funding rate is clamped to prevent excessive payments.
+2. **Funding Rate Clamp:** Funding rate bị clamped để ngăn chặn thanh toán quá mức.
    - Clamp = premium_rate_clamp_factor × (initial_margin - maintenance_margin)
    - Clamp = 600% × (5% - 3%) = 12% = 120,000 ppm
-3. **Shorts Pay Longs:** Negative premium means shorts pay longs (after clamping).
-4. **Settlement:** Applied with clamped funding rate.
+3. **Shorts Pay Longs:** Premium âm có nghĩa shorts trả longs (sau khi clamped).
+4. **Settlement:** Được áp dụng với funding rate bị clamped.
 
 ---
 
-### Test Case 3: Index Price Between Impact Bid and Ask, Zero Funding
+### Test Case 3: Index Price giữa Impact Bid và Ask, Zero Funding
 
-### Input
-- **Orders:** Same as Test Case 1
+### Đầu vào
+- **Orders:** Giống Test Case 1
 - **Initial Index Price:** 28,002
-- **Index Price for Premium:** 28,003 (between impact bid 28,000 and ask 28,005)
+- **Index Price for Premium:** 28,003 (giữa impact bid 28,000 và ask 28,005)
 - **Oracle Price for Funding Index:** 27,500
 
-### Output
-- **Funding Premiums:** None (zero)
+### Đầu ra
+- **Funding Premiums:** Không có (zero)
 - **Funding Index:** 0
 - **Settlements:**
   - Alice: $0
   - Bob: $0
   - Carl: $0
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Zero Premium:** When index price is between impact bid and ask, premium is zero.
-2. **No Funding:** No funding payments when premium is zero.
-3. **Funding Index:** Remains unchanged (starts at 0, stays at 0).
+1. **Zero Premium:** Khi index price ở giữa impact bid và ask, premium là zero.
+2. **No Funding:** Không có funding payments khi premium là zero.
+3. **Funding Index:** Không thay đổi (bắt đầu ở 0, vẫn ở 0).
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Funding Calculation Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. PLACE ORDERS                                              │
-│    - Place unmatched orders to set impact prices             │
-│    - Place matched orders to open positions                  │
-│    - Update initial index price                               │
+│ 1. ĐẶT ORDERS                                               │
+│    - Đặt unmatched orders để set impact prices              │
+│    - Đặt matched orders để mở positions                     │
+│    - Cập nhật initial index price                            │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. FUNDING SAMPLE EPOCHS                                     │
-│    - Advance to funding tick epoch                            │
-│    - Update index price for premium calculation               │
-│    - Collect premium samples (60 samples per funding tick)   │
+│ 2. FUNDING SAMPLE EPOCHS                                    │
+│    - Tiến đến funding tick epoch                            │
+│    - Cập nhật index price cho premium calculation           │
+│    - Thu thập premium samples (60 samples mỗi funding tick) │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. CALCULATE FUNDING PREMIUMS                                │
-│    - Calculate premium = (impact_price / index_price) - 1    │
-│    - If index < impact_bid: positive premium (longs pay)     │
-│    - If index > impact_ask: negative premium (shorts pay)    │
-│    - If index between bid/ask: zero premium                  │
+│ 3. TÍNH TOÁN FUNDING PREMIUMS                               │
+│    - Tính premium = (impact_price / index_price) - 1        │
+│    - Nếu index < impact_bid: positive premium (longs trả)    │
+│    - Nếu index > impact_ask: negative premium (shorts trả)  │
+│    - Nếu index giữa bid/ask: zero premium                   │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 4. UPDATE FUNDING INDEX                                      │
-│    - Calculate funding index from premium samples            │
-│    - Apply funding rate clamp if needed                      │
-│    - Update perpetual funding index                           │
+│ 4. CẬP NHẬT FUNDING INDEX                                   │
+│    - Tính funding index từ premium samples                   │
+│    - Áp dụng funding rate clamp nếu cần                      │
+│    - Cập nhật perpetual funding index                        │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 5. SETTLE FUNDING                                            │
-│    - When subaccount receives transfer                       │
-│    - Calculate settlement = (funding_index - position_index) × size │
-│    - Apply settlement to subaccount balance                  │
+│ 5. SETTLE FUNDING                                           │
+│    - Khi subaccount nhận transfer                            │
+│    - Tính settlement = (funding_index - position_index) × size │
+│    - Áp dụng settlement vào subaccount balance              │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **Premium Calculation:**
    ```
    Index < Impact Bid → Positive Premium → Longs Pay Shorts
    Index > Impact Ask → Negative Premium → Shorts Pay Longs
-   Index Between → Zero Premium → No Funding
+   Index Giữa → Zero Premium → No Funding
    ```
 
 2. **Funding Index:**
    ```
    Initial: 0
-   After Epoch: Updated based on premium samples
-   Clamped: If premium exceeds margin-based limit
+   Sau Epoch: Cập nhật dựa trên premium samples
+   Clamped: Nếu premium vượt quá giới hạn dựa trên margin
    ```
 
 3. **Settlement:**
    ```
-   Position Opened: Funding Index = 0
-   After Funding: Funding Index Updated
-   On Transfer: Settlement = (New Index - Old Index) × Size
+   Position Mở: Funding Index = 0
+   Sau Funding: Funding Index Cập nhật
+   Khi Transfer: Settlement = (New Index - Old Index) × Size
    ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Impact Prices:**
-   - Impact bid: Best bid price from order book
-   - Impact ask: Best ask price from order book
-   - Used to calculate premium when index price is outside range
+   - Impact bid: Giá bid tốt nhất từ order book
+   - Impact ask: Giá ask tốt nhất từ order book
+   - Được sử dụng để tính premium khi index price nằm ngoài phạm vi
 
 2. **Premium Calculation:**
    - Premium = (Impact Price / Index Price) - 1
-   - Positive: Longs pay shorts
-   - Negative: Shorts pay longs
-   - Zero: No funding
+   - Positive: Longs trả shorts
+   - Negative: Shorts trả longs
+   - Zero: Không có funding
 
 3. **Funding Rate Clamp:**
-   - Prevents excessive funding payments
-   - Based on margin requirements
-   - Formula: clamp_factor × (initial_margin - maintenance_margin)
+   - Ngăn chặn funding payments quá mức
+   - Dựa trên margin requirements
+   - Công thức: clamp_factor × (initial_margin - maintenance_margin)
 
 4. **Funding Index:**
-   - Tracks cumulative funding over time
-   - Updated at each funding tick
-   - Used to calculate settlement when position is closed or transferred
+   - Theo dõi cumulative funding theo thời gian
+   - Được cập nhật tại mỗi funding tick
+   - Được sử dụng để tính settlement khi position được đóng hoặc transfer
 
 5. **Settlement:**
-   - Calculated when subaccount receives transfer
+   - Được tính khi subaccount nhận transfer
    - Settlement = (Current Funding Index - Position Funding Index) × Position Size
-   - Applied to subaccount balance
+   - Được áp dụng vào subaccount balance
 
 6. **Premium Samples:**
-   - 60 samples collected per funding tick epoch
-   - Samples used to calculate average premium
-   - Premium samples reset at start of new funding tick epoch
+   - 60 samples được thu thập mỗi funding tick epoch
+   - Samples được sử dụng để tính average premium
+   - Premium samples reset khi bắt đầu funding tick epoch mới
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Fairness:** Funding ensures long and short positions are balanced by transferring value based on premium.
+1. **Công bằng:** Funding đảm bảo long và short positions được cân bằng bằng cách chuyển giá trị dựa trên premium.
 
-2. **Price Discovery:** Premium reflects the difference between mark price (order book) and index price (oracle).
+2. **Price Discovery:** Premium phản ánh sự khác biệt giữa mark price (order book) và index price (oracle).
 
-3. **Safety:** Funding rate clamping prevents excessive payments that could cause liquidations.
+3. **An toàn:** Funding rate clamping ngăn chặn thanh toán quá mức có thể gây ra liquidations.
 
-4. **Efficiency:** Funding index allows efficient settlement calculation without recalculating all historical premiums.
+4. **Hiệu quả:** Funding index cho phép tính toán settlement hiệu quả mà không cần tính lại tất cả historical premiums.
 
-5. **Transparency:** Premium samples are collected over time to ensure fair and accurate funding calculation.
-
+5. **Minh bạch:** Premium samples được thu thập theo thời gian để đảm bảo tính toán funding công bằng và chính xác.

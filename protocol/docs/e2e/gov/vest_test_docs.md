@@ -1,21 +1,21 @@
-# Test Documentation: Vest Entry Governance Proposals
+# Tài liệu Test: Vest Entry Governance Proposals
 
-## Overview
+## Tổng quan
 
-This test file verifies the **Vest Entries** (entries managing vesting tokens) management functionality through governance proposals. The test includes:
-1. **Set Vest Entry:** Create or update vest entry
-2. **Delete Vest Entry:** Delete vest entry
+File test này xác minh chức năng quản lý **Vest Entries** (entries quản lý vesting tokens) thông qua governance proposals. Test bao gồm:
+1. **Set Vest Entry:** Tạo hoặc cập nhật vest entry
+2. **Delete Vest Entry:** Xóa vest entry
 
-Vest entries manage vesting tokens from treasury account to vester account according to a time schedule.
+Vest entries quản lý vesting tokens từ treasury account đến vester account theo lịch trình thời gian.
 
 ---
 
 ## Test Function: TestSetVestEntry_Success
 
-### Test Case 1: Success - Create a New Vest Entry
+### Test Case 1: Thành công - Tạo Vest Entry Mới
 
-### Input
-- **Genesis State:** No vest entries
+### Đầu vào
+- **Genesis State:** Không có vest entries
 - **Proposed Message:**
   - `MsgSetVestEntry`:
     - VesterAccount: "random_vester"
@@ -25,328 +25,328 @@ Vest entries manage vesting tokens from treasury account to vester account accor
     - EndTime: 2024-10-01 00:00:00 UTC
     - Authority: gov module address
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Vest Entry:** Created in state with above information
-- **State:** Vest entry can be queried and used
+- **Vest Entry:** Được tạo trong state với thông tin trên
+- **State:** Vest entry có thể được query và sử dụng
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Create Operation:** When vest entry doesn't exist, `MsgSetVestEntry` will create new.
-2. **Governance Authority:** Only governance module has permission to create vest entries.
-3. **Time Range:** StartTime < EndTime ensures valid vesting period.
+1. **Create Operation:** Khi vest entry không tồn tại, `MsgSetVestEntry` sẽ tạo mới.
+2. **Governance Authority:** Chỉ governance module có quyền tạo vest entries.
+3. **Time Range:** StartTime < EndTime đảm bảo vesting period hợp lệ.
 
 ---
 
-### Test Case 2: Success - Update an Existing Vest Entry
+### Test Case 2: Thành công - Cập nhật Vest Entry Hiện có
 
-### Input
-- **Genesis State:** Has vest entry with VesterAccount = "random_vester"
+### Đầu vào
+- **Genesis State:** Có vest entry với VesterAccount = "random_vester"
 - **Proposed Message:**
-  - `MsgSetVestEntry` with same VesterAccount but different information:
-    - TreasuryAccount: "random_treasury" (new)
-    - Denom: "avdtn" (new)
-    - StartTime: 2023-10-02 (new)
-    - EndTime: 2024-10-01 (new)
+  - `MsgSetVestEntry` với cùng VesterAccount nhưng thông tin khác:
+    - TreasuryAccount: "random_treasury" (mới)
+    - Denom: "avdtn" (mới)
+    - StartTime: 2023-10-02 (mới)
+    - EndTime: 2024-10-01 (mới)
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Vest Entry:** Updated with new information
-- **Old Entry:** Overwritten by new entry
+- **Vest Entry:** Được cập nhật với thông tin mới
+- **Old Entry:** Bị ghi đè bởi entry mới
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Update Operation:** When vest entry already exists, `MsgSetVestEntry` will update instead of creating new.
-2. **Idempotency:** Can update multiple times with same VesterAccount.
-3. **Flexibility:** Allows changing treasury, denom, or time range.
+1. **Update Operation:** Khi vest entry đã tồn tại, `MsgSetVestEntry` sẽ cập nhật thay vì tạo mới.
+2. **Idempotency:** Có thể cập nhật nhiều lần với cùng VesterAccount.
+3. **Flexibility:** Cho phép thay đổi treasury, denom, hoặc time range.
 
 ---
 
-### Test Case 3: Success - Create Two New Vest Entries
+### Test Case 3: Thành công - Tạo Hai Vest Entries Mới
 
-### Input
-- **Genesis State:** No vest entries
+### Đầu vào
+- **Genesis State:** Không có vest entries
 - **Proposed Messages:**
-  1. `MsgSetVestEntry` for "random_vester"
-  2. `MsgSetVestEntry` for "random_vester_2"
+  1. `MsgSetVestEntry` cho "random_vester"
+  2. `MsgSetVestEntry` cho "random_vester_2"
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Vest Entries:** Both entries created successfully
-- **State:** Both can be queried independently
+- **Vest Entries:** Cả hai entries được tạo thành công
+- **State:** Cả hai có thể được query độc lập
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Batch Creation:** One proposal can create multiple vest entries at once.
-2. **Independent Entries:** Each entry is independent, doesn't affect others.
-3. **Efficiency:** Allows setting up multiple vesting schedules in one proposal.
+1. **Batch Creation:** Một proposal có thể tạo nhiều vest entries cùng lúc.
+2. **Independent Entries:** Mỗi entry độc lập, không ảnh hưởng đến nhau.
+3. **Efficiency:** Cho phép thiết lập nhiều vesting schedules trong một proposal.
 
 ---
 
-### Test Case 4: Success - Create and Then Update a Vest Entry
+### Test Case 4: Thành công - Tạo và Sau đó Cập nhật Vest Entry
 
-### Input
-- **Genesis State:** No vest entries
+### Đầu vào
+- **Genesis State:** Không có vest entries
 - **Proposed Messages:**
-  1. `MsgSetVestEntry` creates entry for "random_vester"
-  2. `MsgSetVestEntry` updates entry for "random_vester" (same proposal)
+  1. `MsgSetVestEntry` tạo entry cho "random_vester"
+  2. `MsgSetVestEntry` cập nhật entry cho "random_vester" (cùng proposal)
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Vest Entry:** Only last entry (from message 2) is saved
-- **State:** Entry updated with information from message 2
+- **Vest Entry:** Chỉ entry cuối (từ message 2) được lưu
+- **State:** Entry được cập nhật với thông tin từ message 2
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Sequential Execution:** Messages are executed in order within proposal.
-2. **Last Write Wins:** Message 2 overwrites message 1 because same VesterAccount.
-3. **Use Case:** Allows adjusting information within the same proposal.
+1. **Sequential Execution:** Messages được thực thi theo thứ tự trong proposal.
+2. **Last Write Wins:** Message 2 ghi đè message 1 vì cùng VesterAccount.
+3. **Use Case:** Cho phép điều chỉnh thông tin trong cùng proposal.
 
 ---
 
-### Test Case 5: Success - Update a Vest Entry Twice
+### Test Case 5: Thành công - Cập nhật Vest Entry Hai Lần
 
-### Input
-- **Genesis State:** Has vest entry with VesterAccount = "random_vester"
+### Đầu vào
+- **Genesis State:** Có vest entry với VesterAccount = "random_vester"
 - **Proposed Messages:**
-  1. `MsgSetVestEntry` updates entry first time
-  2. `MsgSetVestEntry` updates entry second time (same proposal)
+  1. `MsgSetVestEntry` cập nhật entry lần đầu
+  2. `MsgSetVestEntry` cập nhật entry lần hai (cùng proposal)
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Vest Entry:** Entry updated twice, final result is from message 2
+- **Vest Entry:** Entry được cập nhật hai lần, kết quả cuối từ message 2
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Multiple Updates:** Can update same entry multiple times in one proposal.
-2. **Final State:** Only final state is kept.
-3. **Flexibility:** Allows fine-tuning vesting parameters.
+1. **Multiple Updates:** Có thể cập nhật cùng entry nhiều lần trong một proposal.
+2. **Final State:** Chỉ trạng thái cuối được giữ lại.
+3. **Flexibility:** Cho phép tinh chỉnh vesting parameters.
 
 ---
 
 ## Test Function: TestSetVestEntry_Failure
 
-### Test Case 1: Failure - Vester Account is Empty
+### Test Case 1: Thất bại - Vester Account Rỗng
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgSetVestEntry` with VesterAccount = "" (empty string)
+  - `MsgSetVestEntry` với VesterAccount = "" (chuỗi rỗng)
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Proposal:** Not submitted
-- **State:** No change
+- **Proposal:** Không được submit
+- **State:** Không thay đổi
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Validation:** VesterAccount cannot be empty because it's the key to identify entry.
-2. **Early Rejection:** Validation occurs at CheckTx, no need to wait for proposal execution.
-3. **Data Integrity:** Ensures all entries have valid identifier.
+1. **Validation:** VesterAccount không thể rỗng vì đây là key để xác định entry.
+2. **Early Rejection:** Validation xảy ra tại CheckTx, không cần chờ proposal execution.
+3. **Data Integrity:** Đảm bảo tất cả entries có identifier hợp lệ.
 
 ---
 
-### Test Case 2: Failure - Treasury Account is Empty
+### Test Case 2: Thất bại - Treasury Account Rỗng
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgSetVestEntry` with TreasuryAccount = "" (empty string)
+  - `MsgSetVestEntry` với TreasuryAccount = "" (chuỗi rỗng)
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Proposal:** Not submitted
+- **Proposal:** Không được submit
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Required Field:** TreasuryAccount is required because it's the source of tokens to vest.
-2. **Validation:** Empty treasury account is invalid for vesting operation.
+1. **Required Field:** TreasuryAccount là bắt buộc vì đây là nguồn tokens để vest.
+2. **Validation:** Treasury account rỗng không hợp lệ cho vesting operation.
 
 ---
 
-### Test Case 3: Failure - Start Time After End Time
+### Test Case 3: Thất bại - Start Time Sau End Time
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgSetVestEntry` with:
-    - StartTime: 2024-10-01 (after)
-    - EndTime: 2023-10-02 (before)
+  - `MsgSetVestEntry` với:
+    - StartTime: 2024-10-01 (sau)
+    - EndTime: 2023-10-02 (trước)
 
-### Output
+### Đầu ra
 - **CheckTx:** FAIL
-- **Proposal:** Not submitted
+- **Proposal:** Không được submit
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Logical Validation:** StartTime must be < EndTime for valid vesting period.
-2. **Time Logic:** Cannot have vesting period with start time after end time.
+1. **Logical Validation:** StartTime phải < EndTime cho vesting period hợp lệ.
+2. **Time Logic:** Không thể có vesting period với start time sau end time.
 
 ---
 
-### Test Case 4: Failure - Invalid Authority
+### Test Case 4: Thất bại - Invalid Authority
 
-### Input
+### Đầu vào
 - **Proposed Message:**
-  - `MsgSetVestEntry` with Authority = Bob's address (not gov module)
+  - `MsgSetVestEntry` với Authority = địa chỉ của Bob (không phải gov module)
 
-### Output
+### Đầu ra
 - **Proposal Submission:** FAIL
-- **Proposals:** No proposals created
+- **Proposals:** Không có proposals được tạo
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Authority Check:** Only governance module has permission to set vest entries.
-2. **Security:** Ensures only governance can manage vesting schedules.
-3. **Early Rejection:** Validation at proposal submission time.
+1. **Authority Check:** Chỉ governance module có quyền set vest entries.
+2. **Bảo mật:** Đảm bảo chỉ governance có thể quản lý vesting schedules.
+3. **Early Rejection:** Validation tại thời điểm proposal submission.
 
 ---
 
-### Test Case 5: Failure - One Message Fails Causes Rollback
+### Test Case 5: Thất bại - Một Message Thất bại Gây Rollback
 
-### Input
+### Đầu vào
 - **Proposed Messages:**
-  1. `MsgSetVestEntry` valid for "random_vester"
-  2. `MsgSetVestEntry` with invalid authority for "random_vester"
+  1. `MsgSetVestEntry` hợp lệ cho "random_vester"
+  2. `MsgSetVestEntry` với invalid authority cho "random_vester"
 
-### Output
-- **Proposal Submission:** FAIL (due to message 2)
-- **State:** No entries created (including message 1)
+### Đầu ra
+- **Proposal Submission:** FAIL (do message 2)
+- **State:** Không có entries được tạo (bao gồm message 1)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Atomic Execution:** If one message fails, entire proposal fails.
-2. **Rollback:** State is rolled back to before proposal execution.
-3. **Consistency:** Ensures no partial state.
+1. **Atomic Execution:** Nếu một message thất bại, toàn bộ proposal thất bại.
+2. **Rollback:** State được rollback về trước khi proposal execution.
+3. **Consistency:** Đảm bảo không có partial state.
 
 ---
 
 ## Test Function: TestDeleteVestEntry_Success
 
-### Test Case 1: Success - Delete One Vest Entry
+### Test Case 1: Thành công - Xóa Một Vest Entry
 
-### Input
-- **Genesis State:** Has vest entry with VesterAccount = "random_vester"
+### Đầu vào
+- **Genesis State:** Có vest entry với VesterAccount = "random_vester"
 - **Proposed Message:**
-  - `MsgDeleteVestEntry` with VesterAccount = "random_vester"
+  - `MsgDeleteVestEntry` với VesterAccount = "random_vester"
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Vest Entry:** Removed from state
-- **Query:** Cannot query entry (returns error)
+- **Vest Entry:** Được xóa khỏi state
+- **Query:** Không thể query entry (trả về lỗi)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Delete Operation:** `MsgDeleteVestEntry` removes entry from state.
-2. **Cleanup:** After deletion, entry no longer exists in state.
-3. **Governance Control:** Only governance has permission to delete entries.
+1. **Delete Operation:** `MsgDeleteVestEntry` xóa entry khỏi state.
+2. **Cleanup:** Sau khi xóa, entry không còn tồn tại trong state.
+3. **Governance Control:** Chỉ governance có quyền xóa entries.
 
 ---
 
-### Test Case 2: Success - Delete Two Vest Entries
+### Test Case 2: Thành công - Xóa Hai Vest Entries
 
-### Input
-- **Genesis State:** Has 2 vest entries
+### Đầu vào
+- **Genesis State:** Có 2 vest entries
 - **Proposed Messages:**
-  1. `MsgDeleteVestEntry` for entry 1
-  2. `MsgDeleteVestEntry` for entry 2
+  1. `MsgDeleteVestEntry` cho entry 1
+  2. `MsgDeleteVestEntry` cho entry 2
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Vest Entries:** Both deleted
+- **Vest Entries:** Cả hai đều được xóa
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Batch Deletion:** One proposal can delete multiple entries.
-2. **Independent Operations:** Each deletion is independent.
+1. **Batch Deletion:** Một proposal có thể xóa nhiều entries.
+2. **Independent Operations:** Mỗi deletion độc lập.
 
 ---
 
 ## Test Function: TestDeleteVestEntry_Failure
 
-### Test Case 1: Failure - Vest Entry Does Not Exist
+### Test Case 1: Thất bại - Vest Entry Không Tồn tại
 
-### Input
-- **Genesis State:** No vest entries
+### Đầu vào
+- **Genesis State:** Không có vest entries
 - **Proposed Message:**
-  - `MsgDeleteVestEntry` for "random_vester" (does not exist)
+  - `MsgDeleteVestEntry` cho "random_vester" (không tồn tại)
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_FAILED`
-- **State:** No change
+- **State:** Không thay đổi
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Existence Check:** Cannot delete entry that doesn't exist.
-2. **Error Handling:** Proposal fails but doesn't crash system.
-3. **State Protection:** State unaffected when deleting non-existent entry.
+1. **Existence Check:** Không thể xóa entry không tồn tại.
+2. **Error Handling:** Proposal thất bại nhưng không làm crash system.
+3. **State Protection:** State không bị ảnh hưởng khi xóa entry không tồn tại.
 
 ---
 
-### Test Case 2: Failure - Delete the Same Vest Entry Twice
+### Test Case 2: Thất bại - Xóa Cùng Vest Entry Hai Lần
 
-### Input
-- **Genesis State:** Has 1 vest entry
+### Đầu vào
+- **Genesis State:** Có 1 vest entry
 - **Proposed Messages:**
-  1. `MsgDeleteVestEntry` for entry (succeeds)
-  2. `MsgDeleteVestEntry` for same entry (fails because already deleted)
+  1. `MsgDeleteVestEntry` cho entry (thành công)
+  2. `MsgDeleteVestEntry` cho cùng entry (thất bại vì đã xóa)
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_FAILED`
-- **State:** Entry still deleted (from message 1), but proposal fails due to message 2
+- **State:** Entry vẫn bị xóa (từ message 1), nhưng proposal thất bại do message 2
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Sequential Execution:** Message 1 succeeds, message 2 fails.
-2. **Atomic Failure:** When message 2 fails, entire proposal fails and state rolls back.
-3. **State Consistency:** Entry is not deleted because proposal failed.
+1. **Sequential Execution:** Message 1 thành công, message 2 thất bại.
+2. **Atomic Failure:** Khi message 2 thất bại, toàn bộ proposal thất bại và state rollback.
+3. **State Consistency:** Entry không bị xóa vì proposal thất bại.
 
 ---
 
-### Test Case 3: Failure - Second Entry to Delete Does Not Exist
+### Test Case 3: Thất bại - Entry Thứ Hai để Xóa Không Tồn tại
 
-### Input
-- **Genesis State:** Has 1 vest entry ("random_vester")
+### Đầu vào
+- **Genesis State:** Có 1 vest entry ("random_vester")
 - **Proposed Messages:**
-  1. `MsgDeleteVestEntry` for "random_vester" (exists)
-  2. `MsgDeleteVestEntry` for "random_vester_2" (does not exist)
+  1. `MsgDeleteVestEntry` cho "random_vester" (tồn tại)
+  2. `MsgDeleteVestEntry` cho "random_vester_2" (không tồn tại)
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_FAILED`
-- **State:** No change (rollback)
+- **State:** Không thay đổi (rollback)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Partial Failure:** Message 1 succeeds but message 2 fails.
-2. **Rollback:** Entire proposal fails and state rolls back.
-3. **Consistency:** Ensures no partial deletion.
+1. **Partial Failure:** Message 1 thành công nhưng message 2 thất bại.
+2. **Rollback:** Toàn bộ proposal thất bại và state rollback.
+3. **Consistency:** Đảm bảo không có partial deletion.
 
 ---
 
-### Test Case 4: Failure - Invalid Authority
+### Test Case 4: Thất bại - Invalid Authority
 
-### Input
-- **Genesis State:** Has vest entry
+### Đầu vào
+- **Genesis State:** Có vest entry
 - **Proposed Message:**
-  - `MsgDeleteVestEntry` with Authority = Bob's address (not gov)
+  - `MsgDeleteVestEntry` với Authority = địa chỉ của Bob (không phải gov)
 
-### Output
+### Đầu ra
 - **Proposal Submission:** FAIL
-- **State:** No change
+- **State:** Không thay đổi
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Authority Validation:** Only governance module has permission to delete entries.
-2. **Security:** Ensures only governance can manage vesting.
+1. **Authority Validation:** Chỉ governance module có quyền xóa entries.
+2. **Bảo mật:** Đảm bảo chỉ governance có thể quản lý vesting.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Set Vest Entry Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. VALIDATE INPUT                                            │
-│    - VesterAccount not empty                                 │
-│    - TreasuryAccount not empty                               │
+│    - VesterAccount không rỗng                                │
+│    - TreasuryAccount không rỗng                             │
 │    - StartTime < EndTime                                     │
 │    - Authority = gov module                                  │
 └─────────────────────────────────────────────────────────────┘
@@ -359,16 +359,16 @@ Vest entries manage vesting tokens from treasury account to vester account accor
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. PROPOSAL EXECUTION                                        │
-│    - Check if vest entry exists                               │
-│    - If exists: UPDATE                                       │
-│    - If not exists: CREATE                                   │
-│    - Store in state                                          │
+│    - Kiểm tra vest entry tồn tại                              │
+│    - Nếu tồn tại: UPDATE                                     │
+│    - Nếu không tồn tại: CREATE                               │
+│    - Lưu trong state                                          │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 4. VERIFY STATE                                              │
 │    - Query vest entry                                        │
-│    - Verify information is correct                           │
+│    - Xác minh thông tin đúng                                 │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -377,7 +377,7 @@ Vest entries manage vesting tokens from treasury account to vester account accor
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. VALIDATE INPUT                                            │
-│    - VesterAccount not empty                                 │
+│    - VesterAccount không rỗng                                │
 │    - Authority = gov module                                  │
 └─────────────────────────────────────────────────────────────┘
                         ↓
@@ -388,64 +388,64 @@ Vest entries manage vesting tokens from treasury account to vester account accor
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. PROPOSAL EXECUTION                                        │
-│    - Check if vest entry exists                               │
-│    - If exists: DELETE                                       │
-│    - If not exists: FAIL                                     │
+│    - Kiểm tra vest entry tồn tại                              │
+│    - Nếu tồn tại: DELETE                                     │
+│    - Nếu không tồn tại: FAIL                                 │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 4. VERIFY STATE                                              │
-│    - Query vest entry → Should return error                  │
-│    - Verify entry no longer in state                          │
+│    - Query vest entry → Nên trả về lỗi                        │
+│    - Xác minh entry không còn trong state                     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **Vest Entry State:**
    ```
-   Does not exist → Exists (CREATE)
-   Exists → Updated (UPDATE)
-   Exists → Does not exist (DELETE)
+   Không tồn tại → Tồn tại (CREATE)
+   Tồn tại → Được cập nhật (UPDATE)
+   Tồn tại → Không tồn tại (DELETE)
    ```
 
 2. **Proposal Status:**
    ```
-   SUBMITTED → PASSED (if all messages succeed)
-   SUBMITTED → FAILED (if any message fails)
+   SUBMITTED → PASSED (nếu tất cả messages thành công)
+   SUBMITTED → FAILED (nếu bất kỳ message nào thất bại)
    ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Idempotency:** 
-   - `SetVestEntry` can be called multiple times with same VesterAccount
-   - `DeleteVestEntry` only succeeds if entry exists
+   - `SetVestEntry` có thể được gọi nhiều lần với cùng VesterAccount
+   - `DeleteVestEntry` chỉ thành công nếu entry tồn tại
 
 2. **Atomic Execution:**
-   - If one message fails, entire proposal fails
-   - State is rolled back to before proposal execution
+   - Nếu một message thất bại, toàn bộ proposal thất bại
+   - State được rollback về trước khi proposal execution
 
 3. **Authority:**
-   - Only governance module has permission to set/delete vest entries
-   - Validation occurs at both submission and execution time
+   - Chỉ governance module có quyền set/delete vest entries
+   - Validation xảy ra tại cả submission và execution time
 
 4. **Validation:**
-   - VesterAccount and TreasuryAccount cannot be empty
-   - StartTime must be < EndTime
-   - Entry must exist to delete
+   - VesterAccount và TreasuryAccount không thể rỗng
+   - StartTime phải < EndTime
+   - Entry phải tồn tại để xóa
 
 5. **Batch Operations:**
-   - One proposal can contain multiple messages
-   - All messages must succeed for proposal to pass
+   - Một proposal có thể chứa nhiều messages
+   - Tất cả messages phải thành công để proposal pass
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Governance Control:** Only governance has permission to manage vesting schedules to ensure decentralization and security.
+1. **Governance Control:** Chỉ governance có quyền quản lý vesting schedules để đảm bảo decentralization và bảo mật.
 
-2. **Flexibility:** Allows updating vest entries to adjust vesting schedules when needed.
+2. **Flexibility:** Cho phép cập nhật vest entries để điều chỉnh vesting schedules khi cần.
 
-3. **Safety:** Validation ensures data integrity and prevents invalid states.
+3. **Safety:** Validation đảm bảo tính toàn vẹn dữ liệu và ngăn chặn invalid states.
 
-4. **Atomic Operations:** Ensures state consistency - no partial updates.
+4. **Atomic Operations:** Đảm bảo tính nhất quán state - không có partial updates.
 
-5. **Error Handling:** Clear error messages and proper rollback when errors occur.
+5. **Error Handling:** Thông báo lỗi rõ ràng và rollback đúng cách khi có lỗi xảy ra.

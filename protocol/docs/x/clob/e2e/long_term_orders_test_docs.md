@@ -1,125 +1,125 @@
-# Test Documentation: Long-Term Orders E2E Tests
+# Tài liệu Test: Long-Term Orders E2E Tests
 
-## Overview
+## Tổng quan
 
-This test file verifies **Long-Term Order** functionality in the CLOB module. Long-term orders are orders that persist across multiple blocks until they are filled, cancelled, or expire. The test ensures that:
-1. Long-term orders can be placed and persist across blocks
-2. Long-term orders can be cancelled
-3. Order cancellation and placement in same block is handled correctly
-4. Fully filled orders cannot be cancelled
+File test này xác minh chức năng **Long-Term Order** trong CLOB module. Long-term orders là các orders tồn tại qua nhiều blocks cho đến khi được fill, hủy, hoặc expire. Test đảm bảo rằng:
+1. Long-term orders có thể được đặt và tồn tại qua blocks
+2. Long-term orders có thể được hủy
+3. Order cancellation và placement trong cùng block được xử lý đúng
+4. Fully filled orders không thể được hủy
 
 ---
 
 ## Test Function: TestPlaceOrder_StatefulCancelFollowedByPlaceInSameBlockErrorsInCheckTx
 
-### Test Case: Failure - Cancel and Place Same Order in Same Block
+### Test Case: Thất bại - Hủy và Đặt Cùng Order trong Cùng Block
 
-### Input
+### Đầu vào
 - **Block 2:**
-  - Place long-term order: Alice buys 5 at price 10
+  - Đặt long-term order: Alice mua 5 ở giá 10
 - **Block 3:**
-  - Cancel the long-term order
-  - Attempt to place the same order again
+  - Hủy long-term order
+  - Cố gắng đặt cùng order lại
 
-### Output
+### Đầu ra
 - **Cancel CheckTx:** SUCCESS
-- **Place CheckTx:** FAIL with error "An uncommitted stateful order cancellation with this OrderId already exists"
-- **Final State:** Order cancelled, new order not placed
+- **Place CheckTx:** FAIL với lỗi "An uncommitted stateful order cancellation with this OrderId already exists"
+- **Final State:** Order bị hủy, order mới không được đặt
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Uncommitted Cancellation:** When an order is cancelled in the same block, the cancellation is uncommitted.
-2. **Conflict Detection:** System detects conflict between cancellation and placement of same order.
-3. **Early Rejection:** CheckTx rejects the placement to prevent invalid state.
+1. **Uncommitted Cancellation:** Khi một order bị hủy trong cùng block, cancellation là uncommitted.
+2. **Conflict Detection:** Hệ thống phát hiện conflict giữa cancellation và placement của cùng order.
+3. **Early Rejection:** CheckTx từ chối placement để ngăn chặn invalid state.
 
 ---
 
 ## Test Function: TestCancelFullyFilledStatefulOrderInSameBlockItIsFilled
 
-### Test Case: Failure - Cancel Fully Filled Order
+### Test Case: Thất bại - Hủy Fully Filled Order
 
-### Input
+### Đầu vào
 - **Block 2:**
-  - Place long-term order: Alice buys 5 at price 10
+  - Đặt long-term order: Alice mua 5 ở giá 10
 - **Block 3:**
-  - Place matching order: Bob sells 5 at price 10 (fully fills Alice's order)
-  - Attempt to cancel Alice's order
+  - Đặt matching order: Bob bán 5 ở giá 10 (fill đầy order của Alice)
+  - Cố gắng hủy order của Alice
 
-### Output
+### Đầu ra
 - **Match CheckTx:** SUCCESS
 - **Cancel CheckTx:** SUCCESS
-- **DeliverTx:** Cancel transaction FAILS with error `ErrStatefulOrderCancellationFailedForAlreadyRemovedOrder`
-- **Final State:** Order fully filled, cancellation fails
+- **DeliverTx:** Cancel transaction THẤT BẠI với lỗi `ErrStatefulOrderCancellationFailedForAlreadyRemovedOrder`
+- **Final State:** Order được fill đầy, cancellation thất bại
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Order Filled First:** Matching order fills the long-term order before cancellation executes.
-2. **Cancellation Fails:** Cannot cancel an order that has already been removed (filled).
-3. **Transaction Ordering:** DeliverTx processes transactions in order, so fill happens before cancellation.
+1. **Order Filled First:** Matching order fill long-term order trước khi cancellation thực thi.
+2. **Cancellation Fails:** Không thể hủy một order đã được xóa (filled).
+3. **Transaction Ordering:** DeliverTx xử lý transactions theo thứ tự, vì vậy fill xảy ra trước cancellation.
 
 ---
 
 ## Test Function: TestCancelStatefulOrder
 
-### Test Case 1: Success - Cancel Order in Same Block
+### Test Case 1: Thành công - Hủy Order trong Cùng Block
 
-### Input
+### Đầu vào
 - **Block 2:**
-  - Place long-term order
-  - Cancel the same order
+  - Đặt long-term order
+  - Hủy cùng order
 
-### Output
+### Đầu ra
 - **Both CheckTx:** SUCCESS
-- **Final State:** Order does not exist in state
+- **Final State:** Order không tồn tại trong state
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Same Block Cancellation:** Order can be cancelled in the same block it's placed.
-2. **State Cleanup:** Order is removed from state immediately.
+1. **Same Block Cancellation:** Order có thể được hủy trong cùng block nó được đặt.
+2. **State Cleanup:** Order được xóa khỏi state ngay lập tức.
 
 ---
 
-### Test Case 2: Success - Cancel Order in Future Block
+### Test Case 2: Thành công - Hủy Order trong Block Tương lai
 
-### Input
+### Đầu vào
 - **Block 2:**
-  - Place long-term order
+  - Đặt long-term order
 - **Block 3:**
-  - Cancel the order
+  - Hủy order
 
-### Output
+### Đầu ra
 - **Place CheckTx:** SUCCESS
 - **Cancel CheckTx:** SUCCESS
-- **Final State:** Order removed from state
+- **Final State:** Order được xóa khỏi state
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Persistent Orders:** Long-term orders persist across blocks.
-2. **Future Cancellation:** Orders can be cancelled in any future block before expiration.
+1. **Persistent Orders:** Long-term orders tồn tại qua blocks.
+2. **Future Cancellation:** Orders có thể được hủy trong bất kỳ block tương lai nào trước khi expire.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Long-Term Order Lifecycle
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. PLACE ORDER                                              │
-│    - Order placed on order book                              │
-│    - Order persists in state                                 │
+│ 1. ĐẶT ORDER                                                │
+│    - Order được đặt trên order book                         │
+│    - Order tồn tại trong state                               │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. ORDER PERSISTS                                            │
-│    - Order remains on book across blocks                     │
-│    - Can be matched at any time                              │
-│    - Can be cancelled at any time                            │
+│ 2. ORDER TỒN TẠI                                            │
+│    - Order vẫn trên book qua blocks                          │
+│    - Có thể được match bất cứ lúc nào                        │
+│    - Có thể được hủy bất cứ lúc nào                          │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. ORDER TERMINATION                                         │
-│    - Option A: Fully filled → Removed                        │
+│    - Option A: Fully filled → Removed                       │
 │    - Option B: Cancelled → Removed                           │
 │    - Option C: Expired → Removed                             │
 └─────────────────────────────────────────────────────────────┘
@@ -130,58 +130,57 @@ This test file verifies **Long-Term Order** functionality in the CLOB module. Lo
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. SUBMIT CANCELLATION                                       │
-│    - Create MsgCancelOrderStateful                            │
-│    - Specify order ID and good til block time                │
+│    - Tạo MsgCancelOrderStateful                              │
+│    - Chỉ định order ID và good til block time               │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 2. CHECKTX VALIDATION                                        │
-│    - Verify order exists in state                            │
-│    - Check cancellation parameters                           │
+│    - Xác minh order tồn tại trong state                      │
+│    - Kiểm tra cancellation parameters                        │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
 │ 3. DELIVERTX EXECUTION                                       │
-│    - Verify order still exists (not filled)                  │
-│    - Remove order from state                                 │
+│    - Xác minh order vẫn tồn tại (chưa fill)                  │
+│    - Xóa order khỏi state                                    │
 │    - Emit order removal events                               │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Key Points
+### Điểm quan trọng
 
 1. **Long-Term Orders:**
-   - Persist across multiple blocks
-   - GoodTilBlockTime specifies expiration time
-   - Can be matched, cancelled, or expire
+   - Tồn tại qua nhiều blocks
+   - GoodTilBlockTime chỉ định expiration time
+   - Có thể được match, hủy, hoặc expire
 
 2. **Cancellation:**
-   - Can cancel in same block or future blocks
-   - Cannot cancel if order already filled
-   - Cannot cancel if order doesn't exist
+   - Có thể hủy trong cùng block hoặc blocks tương lai
+   - Không thể hủy nếu order đã fill
+   - Không thể hủy nếu order không tồn tại
 
 3. **Conflict Detection:**
-   - System detects conflicts between cancellation and placement
-   - CheckTx rejects conflicting operations early
-   - Prevents invalid state
+   - Hệ thống phát hiện conflicts giữa cancellation và placement
+   - CheckTx từ chối conflicting operations sớm
+   - Ngăn chặn invalid state
 
 4. **State Management:**
-   - Orders tracked in keeper state
-   - Cancellation removes order from state
-   - Fill removes order from state
+   - Orders được track trong keeper state
+   - Cancellation xóa order khỏi state
+   - Fill xóa order khỏi state
 
 5. **Transaction Ordering:**
-   - DeliverTx processes transactions in order
-   - First transaction to modify order wins
-   - Later conflicting transactions fail
+   - DeliverTx xử lý transactions theo thứ tự
+   - Transaction đầu tiên modify order thắng
+   - Các transactions conflicting sau đó thất bại
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Flexibility:** Long-term orders allow users to set orders that persist until filled or cancelled.
+1. **Flexibility:** Long-term orders cho phép users đặt orders tồn tại cho đến khi fill hoặc hủy.
 
-2. **Safety:** Conflict detection prevents invalid state from cancellation/placement conflicts.
+2. **Safety:** Conflict detection ngăn chặn invalid state từ cancellation/placement conflicts.
 
-3. **Efficiency:** Early rejection at CheckTx prevents wasted computation.
+3. **Efficiency:** Early rejection tại CheckTx ngăn chặn wasted computation.
 
-4. **Consistency:** Transaction ordering ensures deterministic state updates.
-
+4. **Consistency:** Transaction ordering đảm bảo deterministic state updates.

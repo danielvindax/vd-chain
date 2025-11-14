@@ -1,291 +1,291 @@
-# Test Documentation: Add New Market Proposal
+# Tài liệu Test: Add New Market Proposal
 
-## Overview
+## Tổng quan
 
-This test file verifies the **add new market** functionality through governance proposals. The test ensures that when creating a new market, the system will:
-1. Create Oracle Market (price feed)
-2. Create Perpetual contract
-3. Create CLOB Pair with INITIALIZING status
-4. Use DelayMessage to transition CLOB Pair to ACTIVE after a number of blocks
-5. Enable market in market map
+File test này xác minh chức năng **add new market** thông qua governance proposals. Test đảm bảo rằng khi tạo một market mới, hệ thống sẽ:
+1. Tạo Oracle Market (price feed)
+2. Tạo Perpetual contract
+3. Tạo CLOB Pair với trạng thái INITIALIZING
+4. Sử dụng DelayMessage để chuyển CLOB Pair sang ACTIVE sau một số block
+5. Enable market trong market map
 
 ---
 
-## Test Case 1: Success with 4 Standard Messages (Delay Blocks = 10)
+## Test Case 1: Thành công với 4 Standard Messages (Delay Blocks = 10)
 
-### Input
+### Đầu vào
 - **Proposed Messages:**
-  1. `MsgCreateOracleMarket`: Create market param with ID = 1001
-  2. `MsgCreatePerpetual`: Create perpetual with ID = 1001
-  3. `MsgCreateClobPair`: Create CLOB pair with ID = 1001, status = INITIALIZING
-  4. `MsgDelayMessage`: Delay message to update CLOB pair to ACTIVE after 10 blocks
-- **Market Map:** Market initially disabled in market map
+  1. `MsgCreateOracleMarket`: Tạo market param với ID = 1001
+  2. `MsgCreatePerpetual`: Tạo perpetual với ID = 1001
+  3. `MsgCreateClobPair`: Tạo CLOB pair với ID = 1001, status = INITIALIZING
+  4. `MsgDelayMessage`: Delay message để cập nhật CLOB pair sang ACTIVE sau 10 blocks
+- **Market Map:** Market ban đầu bị disabled trong market map
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **Market Param:** Created with ID = 1001
-- **Market Price:** Initialized with price = 0
-- **Perpetual:** Created with ID = 1001
+- **Market Param:** Được tạo với ID = 1001
+- **Market Price:** Được khởi tạo với price = 0
+- **Perpetual:** Được tạo với ID = 1001
 - **ClobPair:** 
-  - Initially: status = INITIALIZING
-  - After 10 blocks: status = ACTIVE
-- **Market Map:** Market enabled after CLOB pair transitions to ACTIVE
+  - Ban đầu: status = INITIALIZING
+  - Sau 10 blocks: status = ACTIVE
+- **Market Map:** Market được enable sau khi CLOB pair chuyển sang ACTIVE
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Message Order is Critical:** Messages must be executed in order:
-   - Oracle Market first (needed for price feed)
-   - Perpetual next (needed for CLOB pair)
-   - CLOB Pair after (depends on perpetual)
-   - DelayMessage last (to activate CLOB pair)
+1. **Thứ tự Message là Quan trọng:** Messages phải được thực thi theo thứ tự:
+   - Oracle Market trước (cần cho price feed)
+   - Perpetual tiếp theo (cần cho CLOB pair)
+   - CLOB Pair sau (phụ thuộc vào perpetual)
+   - DelayMessage cuối (để kích hoạt CLOB pair)
 
-2. **Delay Blocks = 10:** CLOB pair is not activated immediately but must wait 10 blocks to ensure:
-   - All dependencies are fully set up
-   - Oracle has time to update price
-   - System has time to validate state
+2. **Delay Blocks = 10:** CLOB pair không được kích hoạt ngay lập tức mà phải chờ 10 blocks để đảm bảo:
+   - Tất cả dependencies được thiết lập đầy đủ
+   - Oracle có thời gian cập nhật price
+   - Hệ thống có thời gian validate state
 
-3. **Market Map Integration:** Market must be enabled in market map to allow trading, which only happens after CLOB pair transitions to ACTIVE.
+3. **Market Map Integration:** Market phải được enable trong market map để cho phép trading, điều này chỉ xảy ra sau khi CLOB pair chuyển sang ACTIVE.
 
 ---
 
-## Test Case 2: Success with Delay Blocks = 1
+## Test Case 2: Thành công với Delay Blocks = 1
 
-### Input
-- **Proposed Messages:** Same as Test Case 1
-- **Delay Blocks:** 1 (instead of 10)
+### Đầu vào
+- **Proposed Messages:** Giống Test Case 1
+- **Delay Blocks:** 1 (thay vì 10)
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **ClobPair:** Transitions to ACTIVE after 1 block
+- **ClobPair:** Chuyển sang ACTIVE sau 1 block
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Minimum Delay:** This test ensures delay blocks can be 1 (minimum), not necessarily 10.
-2. **Fast Activation:** Some cases may need to activate market faster, delay = 1 allows this.
+1. **Minimum Delay:** Test này đảm bảo delay blocks có thể là 1 (tối thiểu), không nhất thiết phải là 10.
+2. **Fast Activation:** Một số trường hợp có thể cần kích hoạt market nhanh hơn, delay = 1 cho phép điều này.
 
 ---
 
-## Test Case 3: Success with Delay Blocks = 0
+## Test Case 3: Thành công với Delay Blocks = 0
 
-### Input
-- **Proposed Messages:** Same as Test Case 1
-- **Delay Blocks:** 0 (no delay)
+### Đầu vào
+- **Proposed Messages:** Giống Test Case 1
+- **Delay Blocks:** 0 (không delay)
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_PASSED`
-- **ClobPair:** No delay, but still needs to be activated through delay message mechanism
+- **ClobPair:** Không delay, nhưng vẫn cần được kích hoạt thông qua cơ chế delay message
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Zero Delay:** This test ensures delay = 0 is also supported, meaning message can be executed immediately in the next block.
-2. **Edge Case:** This is an edge case to ensure system handles delay = 0 correctly.
+1. **Zero Delay:** Test này đảm bảo delay = 0 cũng được hỗ trợ, có nghĩa message có thể được thực thi ngay lập tức trong block tiếp theo.
+2. **Edge Case:** Đây là edge case để đảm bảo hệ thống xử lý delay = 0 đúng cách.
 
 ---
 
-## Test Case 4: Success with Delayed UpdateClobPair Message Failure
+## Test Case 4: Thành công với Delayed UpdateClobPair Message Thất bại
 
-### Input
+### Đầu vào
 - **Proposed Messages:**
   1. `MsgCreateOracleMarket`: ID = 1001
   2. `MsgCreatePerpetual`: ID = 1001
   3. `MsgCreateClobPair`: ID = 1001
-  4. `MsgDelayMessage`: Contains `MsgUpdateClobPair` with ClobPairId = 9999 (does not exist)
+  4. `MsgDelayMessage`: Chứa `MsgUpdateClobPair` với ClobPairId = 9999 (không tồn tại)
 - **Delay Blocks:** 10
 
-### Output
-- **Proposal Status:** `PROPOSAL_STATUS_PASSED` (proposal still passes because other messages succeeded)
-- **ClobPair:** Still at INITIALIZING status (not updated because delayed message failed)
-- **Market Map:** Market still disabled
+### Đầu ra
+- **Proposal Status:** `PROPOSAL_STATUS_PASSED` (proposal vẫn pass vì các messages khác thành công)
+- **ClobPair:** Vẫn ở trạng thái INITIALIZING (không được cập nhật vì delayed message thất bại)
+- **Market Map:** Market vẫn disabled
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Delayed Message Failure:** When delayed message fails, it doesn't fail the entire proposal because proposal has already been executed successfully.
-2. **Partial Success:** Other messages (create market, perpetual, clob pair) still succeed, only delayed update message fails.
-3. **State Consistency:** ClobPair remains at INITIALIZING, unaffected by failed delayed message.
+1. **Delayed Message Failure:** Khi delayed message thất bại, nó không làm thất bại toàn bộ proposal vì proposal đã được thực thi thành công.
+2. **Partial Success:** Các messages khác (tạo market, perpetual, clob pair) vẫn thành công, chỉ delayed update message thất bại.
+3. **State Consistency:** ClobPair vẫn ở INITIALIZING, không bị ảnh hưởng bởi delayed message thất bại.
 
 ---
 
-## Test Case 5: Fail - Incorrectly Ordered Messages
+## Test Case 5: Thất bại - Messages được Sắp xếp Sai Thứ tự
 
-### Input
-- **Proposed Messages (Wrong Order):**
+### Đầu vào
+- **Proposed Messages (Thứ tự Sai):**
   1. `MsgCreateOracleMarket`: ID = 1001
-  2. `MsgCreateClobPair`: ID = 1001 (before creating perpetual - WRONG!)
+  2. `MsgCreateClobPair`: ID = 1001 (trước khi tạo perpetual - SAI!)
   3. `MsgCreatePerpetual`: ID = 1001
-  4. `MsgDelayMessage`: Update CLOB pair
+  4. `MsgDelayMessage`: Cập nhật CLOB pair
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_FAILED`
-- **State:** Nothing created (full rollback)
+- **State:** Không có gì được tạo (full rollback)
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Dependency Order:** CLOB Pair depends on Perpetual, so Perpetual must be created first.
-2. **Atomic Execution:** Proposal execution is atomic - if one message fails, entire proposal fails and state is rolled back.
-3. **Validation:** System validates dependencies and rejects if order is wrong.
+1. **Dependency Order:** CLOB Pair phụ thuộc vào Perpetual, vì vậy Perpetual phải được tạo trước.
+2. **Atomic Execution:** Thực thi proposal là atomic - nếu một message thất bại, toàn bộ proposal thất bại và state được rollback.
+3. **Validation:** Hệ thống validate dependencies và từ chối nếu thứ tự sai.
 
 ---
 
-## Test Case 6: Fail - Existing Objects
+## Test Case 6: Thất bại - Objects Đã Tồn tại
 
-### Input
+### Đầu vào
 - **Proposed Messages:**
-  1. `MsgCreateOracleMarket`: ID = 5 (already exists in genesis)
-  2. `MsgCreatePerpetual`: ID = 5 (already exists)
-  3. `MsgCreateClobPair`: ID = 5 (already exists)
-  4. `MsgDelayMessage`: Update CLOB pair
+  1. `MsgCreateOracleMarket`: ID = 5 (đã tồn tại trong genesis)
+  2. `MsgCreatePerpetual`: ID = 5 (đã tồn tại)
+  3. `MsgCreateClobPair`: ID = 5 (đã tồn tại)
+  4. `MsgDelayMessage`: Cập nhật CLOB pair
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_FAILED`
-- **State:** Nothing new created
+- **State:** Không có gì mới được tạo
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Idempotency:** Cannot create objects with IDs that already exist.
-2. **Error Handling:** System detects conflict and rejects proposal.
-3. **State Protection:** Ensures no duplicate IDs in the system.
-
----
-
-## Test Case 7: Fail - Invalid Signer (Proposal Submission)
-
-### Input
-- **Proposed Messages:**
-  1. `MsgCreateOracleMarket`: Authority = CLOB module address (WRONG! Must be gov module)
-  2. `MsgCreatePerpetual`: Authority = gov module (correct)
-  3. `MsgCreateClobPair`: Authority = gov module (correct)
-  4. `MsgDelayMessage`: Authority = gov module (correct)
-
-### Output
-- **Proposal Submission:** FAIL (cannot submit)
-- **Proposals:** No proposals created
-
-### Why It Runs This Way?
-
-1. **Authority Validation:** Each message must have correct authority:
-   - `MsgCreateOracleMarket` must have authority = gov module
-   - Validation occurs at proposal submission time
-2. **Early Rejection:** Proposal is rejected immediately when submitted, no need to wait for execution.
-3. **Security:** Ensures only correct authority can create objects.
+1. **Idempotency:** Không thể tạo objects với IDs đã tồn tại.
+2. **Error Handling:** Hệ thống phát hiện conflict và từ chối proposal.
+3. **State Protection:** Đảm bảo không có duplicate IDs trong hệ thống.
 
 ---
 
-## Test Case 8: Fail - Invalid Signer on MsgDelayMessage
+## Test Case 7: Thất bại - Invalid Signer (Proposal Submission)
 
-### Input
+### Đầu vào
 - **Proposed Messages:**
-  1. `MsgCreateOracleMarket`: Authority = gov module (correct)
-  2. `MsgCreatePerpetual`: Authority = gov module (correct)
-  3. `MsgCreateClobPair`: Authority = gov module (correct)
+  1. `MsgCreateOracleMarket`: Authority = CLOB module address (SAI! Phải là gov module)
+  2. `MsgCreatePerpetual`: Authority = gov module (đúng)
+  3. `MsgCreateClobPair`: Authority = gov module (đúng)
+  4. `MsgDelayMessage`: Authority = gov module (đúng)
+
+### Đầu ra
+- **Proposal Submission:** FAIL (không thể submit)
+- **Proposals:** Không có proposals được tạo
+
+### Tại sao chạy theo cách này?
+
+1. **Authority Validation:** Mỗi message phải có authority đúng:
+   - `MsgCreateOracleMarket` phải có authority = gov module
+   - Validation xảy ra tại thời điểm proposal submission
+2. **Early Rejection:** Proposal bị từ chối ngay khi submit, không cần chờ execution.
+3. **Bảo mật:** Đảm bảo chỉ authority đúng mới có thể tạo objects.
+
+---
+
+## Test Case 8: Thất bại - Invalid Signer trên MsgDelayMessage
+
+### Đầu vào
+- **Proposed Messages:**
+  1. `MsgCreateOracleMarket`: Authority = gov module (đúng)
+  2. `MsgCreatePerpetual`: Authority = gov module (đúng)
+  3. `MsgCreateClobPair`: Authority = gov module (đúng)
   4. `MsgDelayMessage`: 
-     - Authority = gov module (correct)
-     - But wrapped message (`MsgUpdateClobPair`) has authority = gov module (WRONG! Must be delaymsg module)
+     - Authority = gov module (đúng)
+     - Nhưng wrapped message (`MsgUpdateClobPair`) có authority = gov module (SAI! Phải là delaymsg module)
 
-### Output
+### Đầu ra
 - **Proposal Status:** `PROPOSAL_STATUS_FAILED`
-- **State:** Market, Perpetual, CLOB Pair created but proposal fails when executing delayed message
+- **State:** Market, Perpetual, CLOB Pair được tạo nhưng proposal thất bại khi thực thi delayed message
 
-### Why It Runs This Way?
+### Tại sao chạy theo cách này?
 
-1. **Nested Authority:** `MsgDelayMessage` contains another message (`MsgUpdateClobPair`), and that message also has its own authority.
-2. **Delayed Validation:** Authority of wrapped message is only validated when delayed message is executed, not when proposal is submitted.
-3. **Partial State:** Previous messages executed successfully, but delayed message failure causes proposal to fail.
+1. **Nested Authority:** `MsgDelayMessage` chứa một message khác (`MsgUpdateClobPair`), và message đó cũng có authority riêng của nó.
+2. **Delayed Validation:** Authority của wrapped message chỉ được validate khi delayed message được thực thi, không phải khi proposal được submit.
+3. **Partial State:** Các messages trước đó thực thi thành công, nhưng delayed message thất bại làm proposal thất bại.
 
 ---
 
-## Flow Summary
+## Tóm tắt Flow
 
 ### Add New Market Process
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ 1. INITIALIZE GENESIS STATE                                  │
-│    - Market map with market disabled                         │
-│    - No market/perpetual/clob pair with new ID               │
+│ 1. KHỞI TẠO GENESIS STATE                                   │
+│    - Market map với market disabled                          │
+│    - Không có market/perpetual/clob pair với ID mới         │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 2. SUBMIT GOVERNANCE PROPOSAL                                │
-│    - Validate authority of all messages                      │
-│    - Validate message order                                  │
-│    - Validate no duplicate IDs                                │
+│ 2. SUBMIT GOVERNANCE PROPOSAL                               │
+│    - Validate authority của tất cả messages                 │
+│    - Validate thứ tự message                                │
+│    - Validate không có duplicate IDs                        │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 3. PROPOSAL EXECUTION (If Submit Successful)                 │
-│    a. Execute MsgCreateOracleMarket                          │
-│       → Create MarketParam and MarketPrice (price = 0)       │
-│    b. Execute MsgCreatePerpetual                              │
-│       → Create Perpetual contract                            │
-│    c. Execute MsgCreateClobPair                               │
-│       → Create CLOB Pair with INITIALIZING status            │
-│    d. Execute MsgDelayMessage                                │
-│       → Schedule MsgUpdateClobPair to execute after N blocks  │
+│ 3. PROPOSAL EXECUTION (Nếu Submit Thành công)                │
+│    a. Thực thi MsgCreateOracleMarket                        │
+│       → Tạo MarketParam và MarketPrice (price = 0)          │
+│    b. Thực thi MsgCreatePerpetual                            │
+│       → Tạo Perpetual contract                             │
+│    c. Thực thi MsgCreateClobPair                             │
+│       → Tạo CLOB Pair với trạng thái INITIALIZING            │
+│    d. Thực thi MsgDelayMessage                              │
+│       → Lên lịch MsgUpdateClobPair thực thi sau N blocks      │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 4. DELAYED MESSAGE EXECUTION                                 │
-│    - After N blocks (0, 1, or 10), delayed message executes │
-│    - Validate authority of wrapped message                   │
-│    - Update CLOB Pair status: INITIALIZING → ACTIVE          │
-│    - Enable market in market map                             │
+│ 4. DELAYED MESSAGE EXECUTION                                │
+│    - Sau N blocks (0, 1, hoặc 10), delayed message thực thi │
+│    - Validate authority của wrapped message                 │
+│    - Cập nhật CLOB Pair status: INITIALIZING → ACTIVE       │
+│    - Enable market trong market map                         │
 └─────────────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ 5. TRADING ENABLED                                           │
-│    - After CLOB Pair = ACTIVE and market enabled             │
-│    - Users can place orders (but need oracle price > 0)       │
+│ 5. TRADING ENABLED                                          │
+│    - Sau khi CLOB Pair = ACTIVE và market enabled           │
+│    - Users có thể đặt orders (nhưng cần oracle price > 0)   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Important States
+### Trạng thái quan trọng
 
 1. **CLOB Pair Status Transition:**
    ```
-   Does not exist → INITIALIZING → ACTIVE
+   Không tồn tại → INITIALIZING → ACTIVE
    ```
 
 2. **Market Map State:**
    ```
-   Disabled → Enabled (when CLOB Pair = ACTIVE)
+   Disabled → Enabled (khi CLOB Pair = ACTIVE)
    ```
 
 3. **Oracle Price:**
    ```
-   Does not exist → 0 (initialized) → Actual price (from oracle)
+   Không tồn tại → 0 (khởi tạo) → Giá thực tế (từ oracle)
    ```
 
-### Key Points
+### Điểm quan trọng
 
-1. **Message Order:** Message order is CRITICAL:
+1. **Thứ tự Message:** Thứ tự message là QUAN TRỌNG:
    - Oracle Market → Perpetual → CLOB Pair → DelayMessage
-   - Wrong order will cause proposal to fail
+   - Thứ tự sai sẽ làm proposal thất bại
 
 2. **Authority:**
    - Proposal messages: Authority = gov module
    - Delayed UpdateClobPair: Authority = delaymsg module
-   - Validation occurs at both submission and execution time
+   - Validation xảy ra tại cả submission và execution time
 
 3. **Delay Blocks:**
-   - Can be 0, 1, or any number
-   - Allows system time to setup before activation
+   - Có thể là 0, 1, hoặc bất kỳ số nào
+   - Cho phép hệ thống có thời gian setup trước khi kích hoạt
 
 4. **Atomic Execution:**
-   - If one message fails, entire proposal fails
-   - State is rolled back to before proposal execution
+   - Nếu một message thất bại, toàn bộ proposal thất bại
+   - State được rollback về trước khi proposal execution
 
 5. **Market Map Integration:**
-   - Market must be enabled in market map for trading
-   - Only enabled after CLOB Pair = ACTIVE
+   - Market phải được enable trong market map để trading
+   - Chỉ được enable sau khi CLOB Pair = ACTIVE
 
-### Design Rationale
+### Lý do thiết kế
 
-1. **Safety:** Delay mechanism ensures market is not activated immediately, allowing validation and setup.
+1. **An toàn:** Cơ chế delay đảm bảo market không được kích hoạt ngay lập tức, cho phép validation và setup.
 
-2. **Dependency Management:** Message order ensures dependencies are created correctly.
+2. **Quản lý Dependencies:** Thứ tự message đảm bảo dependencies được tạo đúng cách.
 
-3. **Flexibility:** Delay blocks can be adjusted as needed.
+3. **Linh hoạt:** Delay blocks có thể được điều chỉnh khi cần.
 
-4. **Error Handling:** Atomic execution ensures state consistency - no partial state.
+4. **Xử lý Lỗi:** Atomic execution đảm bảo tính nhất quán state - không có partial state.
 
-5. **Integration:** Market map integration ensures market can be discovered and traded.
+5. **Tích hợp:** Tích hợp market map đảm bảo market có thể được khám phá và trade.
