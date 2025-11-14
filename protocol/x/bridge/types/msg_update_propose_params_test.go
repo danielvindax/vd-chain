@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dydxprotocol/v4-chain/protocol/x/bridge/types"
+	"github.com/danielvindax/vd-chain/protocol/x/bridge/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -68,7 +68,7 @@ func TestMsgUpdateProposeParams_ValidateBasic(t *testing.T) {
 		},
 		"Failure: invalid authority": {
 			msg: types.MsgUpdateProposeParams{
-				Authority: "dydx1abc",
+				Authority: "vindax1abc",
 			},
 			expectedErr: types.ErrInvalidAuthority.Error(),
 		},

@@ -6,10 +6,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/keys/secp256k1"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/authenticator"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/authenticator"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/types"
 )
 
 func (s *KeeperTestSuite) TestMsgServer_AddAuthenticator() {
@@ -126,7 +126,7 @@ func (s *KeeperTestSuite) TestMsgServer_SetActiveState() {
 	s.Require().Error(err)
 	s.Require().Equal(
 		err.Error(),
-		"dydx1jns2dl6u55vy72g7r76l6cse7kmlj4me87xj2j is not recognized as a valid authority "+
+		"vindax1jns2dl6u55vy72g7r76l6cse7kmlj4me8wl6rd is not recognized as a valid authority "+
 			"for setting smart account active state: unauthorized",
 	)
 

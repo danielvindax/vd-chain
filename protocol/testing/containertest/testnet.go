@@ -9,11 +9,11 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/hd"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/price_function/testexchange"
-	pricefeed "github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/types"
-	"github.com/dydxprotocol/v4-chain/protocol/testing/version"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	pricefeed_testutil "github.com/dydxprotocol/v4-chain/protocol/testutil/pricefeed"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/price_function/testexchange"
+	pricefeed "github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/types"
+	"github.com/danielvindax/vd-chain/protocol/testing/version"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	pricefeed_testutil "github.com/danielvindax/vd-chain/protocol/testutil/pricefeed"
 	"github.com/ory/dockertest/v3"
 	"github.com/ory/dockertest/v3/docker"
 )
@@ -163,9 +163,9 @@ func (t *Testnet) cleanupExistingResources() {
 func (t *Testnet) initializeNode(moniker string) (*Node, error) {
 	var entrypointCommand string
 	if t.isPreupgradeGenesis {
-		entrypointCommand = "/dydxprotocol/preupgrade_entrypoint.sh"
+		entrypointCommand = "/vindax/preupgrade_entrypoint.sh"
 	} else {
-		entrypointCommand = "dydxprotocold"
+		entrypointCommand = "vindaxd"
 	}
 
 	// Generate dynamic persistent peers using the unique ID
@@ -179,7 +179,7 @@ func (t *Testnet) initializeNode(moniker string) (*Node, error) {
 	resource, err := t.pool.RunWithOptions(
 		&dockertest.RunOptions{
 			Name:       fmt.Sprintf("testnet-local-%s-%s", moniker, t.uniqueId),
-			Repository: "dydxprotocol-container-test",
+			Repository: "vindax-container-test",
 			Tag:        "",
 			NetworkID:  t.network.Network.ID,
 			ExposedPorts: []string{
@@ -190,15 +190,15 @@ func (t *Testnet) initializeNode(moniker string) (*Node, error) {
 				entrypointCommand,
 				"start",
 				"--home",
-				fmt.Sprintf("/dydxprotocol/chain/.%s", moniker),
+				fmt.Sprintf("/vindax/chain/.%s", moniker),
 				"--p2p.persistent_peers",
 				persistentPeers,
 				"--bridge-daemon-eth-rpc-endpoint",
 				"https://eth-sepolia.g.alchemy.com/v2/demo",
 			},
 			Env: []string{
-				"DAEMON_NAME=dydxprotocold",
-				fmt.Sprintf("DAEMON_HOME=/dydxprotocol/chain/.%s", moniker),
+				"DAEMON_NAME=vindaxd",
+				fmt.Sprintf("DAEMON_HOME=/vindax/chain/.%s", moniker),
 				fmt.Sprintf("UPGRADE_TO_VERSION=%s", version.CurrentVersion),
 			},
 			ExtraHosts: []string{

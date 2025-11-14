@@ -164,7 +164,7 @@
     "delegator_starting_infos": [],
     "validator_slash_events": []
   },
-  "dydxaccountplus": {
+  "vindaxaccountplus": {
     "accounts": [],
     "params": {
       "is_smart_account_active": true
@@ -410,8 +410,8 @@
       }
     },
     "params": {
-      "admin": "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky",
-      "market_authorities": ["dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky"]
+      "admin": "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm",
+      "market_authorities": ["vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm"]
     }
   },
   "prices": {
@@ -467,7 +467,7 @@
   },
   "revshare": {
     "params": {
-      "address": "dydx17xpfvakm2amg962yls6f84z3kell8c5leqdyt2",
+      "address": "vindax17xpfvakm2amg962yls6f84z3kell8c5les5vz4",
       "revenue_share_ppm": 0,
       "valid_days": 0
     }
@@ -475,7 +475,7 @@
   "rewards": {
     "params": {
       "treasury_account": "rewards_treasury",
-      "denom": "adv4tnt",
+      "denom": "avdtn",
       "denom_exponent": -18,
       "market_id": 1,
       "fee_multiplier_ppm": 990000
@@ -541,7 +541,7 @@
       "activation_threshold_quote_quantums": "1000000000"
     },
     "operator_params": {
-      "operator": "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky",
+      "operator": "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm",
       "metadata": {
         "name": "Governance",
         "description": "Governance Module Account"
@@ -556,14 +556,14 @@
   "vest": {
     "vest_entries": [
       {
-        "denom": "adv4tnt",
+        "denom": "avdtn",
         "end_time": "2025-01-01T00:00:00Z",
         "start_time": "2023-01-01T00:00:00Z",
         "treasury_account": "community_treasury",
         "vester_account": "community_vester"
       },
       {
-        "denom": "adv4tnt",
+        "denom": "avdtn",
         "end_time": "2025-01-01T00:00:00Z",
         "start_time": "2023-01-01T00:00:00Z",
         "treasury_account": "rewards_treasury",

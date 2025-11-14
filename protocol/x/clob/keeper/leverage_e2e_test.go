@@ -5,13 +5,13 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	assettypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	sendingtypes "github.com/dydxprotocol/v4-chain/protocol/x/sending/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	assettypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	sendingtypes "github.com/danielvindax/vd-chain/protocol/x/sending/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 	"github.com/stretchr/testify/require"
 )
 

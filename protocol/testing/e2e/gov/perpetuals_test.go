@@ -9,21 +9,21 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	govtypesv1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	lttest "github.com/danielvindax/vd-chain/protocol/testutil/liquidity_tier"
+	pricestest "github.com/danielvindax/vd-chain/protocol/testutil/prices"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 	slinkytypes "github.com/dydxprotocol/slinky/pkg/types"
 	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	lttest "github.com/dydxprotocol/v4-chain/protocol/testutil/liquidity_tier"
-	pricestest "github.com/dydxprotocol/v4-chain/protocol/testutil/prices"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
 	"github.com/stretchr/testify/require"
 )
 
 var (
 	TEST_PERPETUAL_PARAMS = perptypes.PerpetualParams{
 		Id:                0,
-		Ticker:            "BTC-ADV4TNT",
+		Ticker:            "BTC-AVDTN",
 		MarketId:          123,
 		AtomicResolution:  -8,
 		DefaultFundingPpm: 545,
@@ -168,7 +168,7 @@ func TestUpdatePerpetualsParams(t *testing.T) {
 				Authority: authtypes.NewModuleAddress(govtypes.ModuleName).String(),
 				PerpetualParams: perptypes.PerpetualParams{
 					Id:                TEST_PERPETUAL_PARAMS.Id,
-					Ticker:            "BTC-DV4TNT",
+					Ticker:            "BTC-VDTN",
 					MarketId:          4,
 					AtomicResolution:  TEST_PERPETUAL_PARAMS.AtomicResolution,
 					DefaultFundingPpm: 500,
@@ -202,7 +202,7 @@ func TestUpdatePerpetualsParams(t *testing.T) {
 				Authority: authtypes.NewModuleAddress(govtypes.ModuleName).String(),
 				PerpetualParams: perptypes.PerpetualParams{
 					Id:                TEST_PERPETUAL_PARAMS.Id,
-					Ticker:            "BTC-DV4TNT",
+					Ticker:            "BTC-VDTN",
 					MarketId:          4,
 					AtomicResolution:  TEST_PERPETUAL_PARAMS.AtomicResolution,
 					DefaultFundingPpm: 1_000_001,
@@ -219,7 +219,7 @@ func TestUpdatePerpetualsParams(t *testing.T) {
 				Authority: authtypes.NewModuleAddress(perptypes.ModuleName).String(),
 				PerpetualParams: perptypes.PerpetualParams{
 					Id:                TEST_PERPETUAL_PARAMS.Id,
-					Ticker:            "BTC-DV4TNT",
+					Ticker:            "BTC-VDTN",
 					MarketId:          4,
 					AtomicResolution:  TEST_PERPETUAL_PARAMS.AtomicResolution,
 					DefaultFundingPpm: 500,
@@ -236,7 +236,7 @@ func TestUpdatePerpetualsParams(t *testing.T) {
 				Authority: authtypes.NewModuleAddress(govtypes.ModuleName).String(),
 				PerpetualParams: perptypes.PerpetualParams{
 					Id:                TEST_PERPETUAL_PARAMS.Id,
-					Ticker:            "BTC-DV4TNT",
+					Ticker:            "BTC-VDTN",
 					MarketId:          4,
 					AtomicResolution:  TEST_PERPETUAL_PARAMS.AtomicResolution,
 					DefaultFundingPpm: 500,
@@ -253,7 +253,7 @@ func TestUpdatePerpetualsParams(t *testing.T) {
 				Authority: authtypes.NewModuleAddress(govtypes.ModuleName).String(),
 				PerpetualParams: perptypes.PerpetualParams{
 					Id:                TEST_PERPETUAL_PARAMS.Id,
-					Ticker:            "BTC-DV4TNT",
+					Ticker:            "BTC-VDTN",
 					MarketId:          5, // market id 5 does not exist.
 					AtomicResolution:  TEST_PERPETUAL_PARAMS.AtomicResolution,
 					DefaultFundingPpm: 500,

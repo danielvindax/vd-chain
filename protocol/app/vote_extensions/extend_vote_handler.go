@@ -9,8 +9,8 @@ import (
 	cometabci "github.com/cometbft/cometbft/abci/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/dydxprotocol/v4-chain/protocol/app/process"
-	prices "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	"github.com/danielvindax/vd-chain/protocol/app/process"
+	prices "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 )
 
 // ExtendVoteHandler is a wrapper around the Slinky ExtendVoteHandler. This wrapper is responsible for
@@ -40,7 +40,7 @@ func (n NoopPriceApplier) GetPricesForValidator(_ sdk.ConsAddress) map[slinkytyp
 //  4. Calling the Slinky ExtendVoteHandler to handle the rest of ExtendVote
 //
 // See:
-// https://github.com/dydxprotocol/slinky/blob/a5b1d3d3a2723e4746b5d588c512d7cc052dc0ff/abci/ve/vote_extension.go#L77
+// https://github.com/vindax/slinky/blob/a5b1d3d3a2723e4746b5d588c512d7cc052dc0ff/abci/ve/vote_extension.go#L77
 // for the Slinky ExtendVoteHandler logic.
 func (e *ExtendVoteHandler) ExtendVoteHandler() sdk.ExtendVoteHandler {
 	return func(ctx sdk.Context, req *cometabci.RequestExtendVote) (resp *cometabci.ResponseExtendVote, err error) {

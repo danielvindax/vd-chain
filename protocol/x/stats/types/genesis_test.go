@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dydxprotocol/v4-chain/protocol/x/stats/types"
+	"github.com/danielvindax/vd-chain/protocol/x/stats/types"
 	"github.com/stretchr/testify/require"
 )
 

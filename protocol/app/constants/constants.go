@@ -1,7 +1,7 @@
 package constants
 
 const (
-	AppName       = "dydxprotocol"
+	AppName       = "vindax"
 	AppDaemonName = AppName + "d"
 	ServiceName   = "validator"
 )

@@ -7,9 +7,9 @@ import (
 	sdkmath "cosmossdk.io/math"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	libeth "github.com/dydxprotocol/v4-chain/protocol/lib/eth"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	bridgetypes "github.com/dydxprotocol/v4-chain/protocol/x/bridge/types"
+	libeth "github.com/danielvindax/vd-chain/protocol/lib/eth"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	bridgetypes "github.com/danielvindax/vd-chain/protocol/x/bridge/types"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	ethcoretypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/require"
@@ -117,14 +117,14 @@ func TestBridgeLogToEvent(t *testing.T) {
 	}{
 		"Success: event ID 0": {
 			inputLog:   constants.EthLog_Event0,
-			inputDenom: "adv4tnt",
+			inputDenom: "avdtn",
 			expectedEvent: bridgetypes.BridgeEvent{
 				Id: 0,
 				Coin: sdk.NewCoin(
-					"adv4tnt",
+					"avdtn",
 					sdkmath.NewInt(12345),
 				),
-				Address:        "dydx1qqgzqvzq2ps8pqys5zcvp58q7rluextx92xhln",
+				Address:        "vindax1qqgzqvzq2ps8pqys5zcvp58q7rluextx96llkv",
 				EthBlockHeight: 3872013,
 			},
 		},
@@ -138,7 +138,7 @@ func TestBridgeLogToEvent(t *testing.T) {
 					sdkmath.NewInt(55),
 				),
 				// address shorter than 20 bytes is padded with zeros.
-				Address:        "dydx1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq66wm82",
+				Address:        "vindax1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq62hnw4",
 				EthBlockHeight: 3969937,
 			},
 		},
@@ -152,7 +152,7 @@ func TestBridgeLogToEvent(t *testing.T) {
 					sdkmath.NewInt(777),
 				),
 				// 32 bytes * 8 bits / 5 bits = 51.2 characters ~ 52 bech32 characters
-				Address:        "dydx1qqgzqvzq2ps8pqys5zcvp58q7rluextxzy3rx3z4vemc3xgq42as94fpcv",
+				Address:        "vindax1qqgzqvzq2ps8pqys5zcvp58q7rluextxzy3rx3z4vemc3xgq42asv39trk",
 				EthBlockHeight: 4139345,
 			},
 		},
@@ -167,21 +167,21 @@ func TestBridgeLogToEvent(t *testing.T) {
 				),
 				// address data is 62 bytes but we take the first 32 bytes only.
 				// 32 bytes * 8 bits / 5 bits ~ 52 bech32 characters
-				Address:        "dydx124n92ej4ve2kv4tx24n92ej4ve2kv4tx24n92ej4ve2kv4tx24nq8exmjh",
+				Address:        "vindax124n92ej4ve2kv4tx24n92ej4ve2kv4tx24n92ej4ve2kv4tx24nqwa23fd",
 				EthBlockHeight: 4139348,
 			},
 		},
 		"Success: event ID 4": {
 			inputLog:   constants.EthLog_Event4,
-			inputDenom: "adv4tnt",
+			inputDenom: "avdtn",
 			expectedEvent: bridgetypes.BridgeEvent{
 				Id: 4,
 				Coin: sdk.NewCoin(
-					"adv4tnt",
+					"avdtn",
 					sdkmath.NewInt(1234123443214321),
 				),
 				// address shorter than 20 bytes is padded with zeros.
-				Address:        "dydx1zg6pydqqqqqqqqqqqqqqqqqqqqqqqqqqm0r5ra",
+				Address:        "vindax1zg6pydqqqqqqqqqqqqqqqqqqqqqqqqqqml6u2z",
 				EthBlockHeight: 4139349,
 			},
 		},

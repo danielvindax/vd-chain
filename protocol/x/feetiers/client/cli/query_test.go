@@ -10,9 +10,9 @@ import (
 	clitestutil "github.com/cosmos/cosmos-sdk/testutil/cli"
 	"github.com/stretchr/testify/require"
 
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/network"
-	"github.com/dydxprotocol/v4-chain/protocol/x/feetiers/client/cli"
-	"github.com/dydxprotocol/v4-chain/protocol/x/feetiers/types"
+	"github.com/danielvindax/vd-chain/protocol/testutil/network"
+	"github.com/danielvindax/vd-chain/protocol/x/feetiers/client/cli"
+	"github.com/danielvindax/vd-chain/protocol/x/feetiers/types"
 )
 
 // Prevent strconv unused error
@@ -59,7 +59,7 @@ func TestQueryUserFeeTier(t *testing.T) {
 	out, err := clitestutil.ExecTestCLICmd(
 		ctx,
 		cli.CmdQueryUserFeeTier(),
-		[]string{"dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4"},
+		[]string{"vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642"},
 	)
 
 	require.NoError(t, err)

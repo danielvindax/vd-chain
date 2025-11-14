@@ -4,8 +4,8 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/app/msgs"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/app/msgs"
+	"github.com/danielvindax/vd-chain/protocol/lib"
 	"github.com/stretchr/testify/require"
 )
 
@@ -20,9 +20,6 @@ func TestUnsupportedMsgSamples_Key(t *testing.T) {
 		"/cosmos.gov.v1beta1.MsgSubmitProposal",
 		"/cosmos.gov.v1beta1.MsgSubmitProposalResponse",
 
-		"/dydxprotocol.vault.MsgSetVaultQuotingParams",
-		"/dydxprotocol.vault.MsgUpdateParams",
-
 		// ICA Controller messages
 		"/ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccount",
 		"/ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccountResponse",
@@ -30,6 +27,9 @@ func TestUnsupportedMsgSamples_Key(t *testing.T) {
 		"/ibc.applications.interchain_accounts.controller.v1.MsgSendTxResponse",
 		"/ibc.applications.interchain_accounts.controller.v1.MsgUpdateParams",
 		"/ibc.applications.interchain_accounts.controller.v1.MsgUpdateParamsResponse",
+
+		"/vindax.vault.MsgSetVaultQuotingParams",
+		"/vindax.vault.MsgUpdateParams",
 	}
 
 	require.Equal(t, expectedMsgs, lib.GetSortedKeys[sort.StringSlice](msgs.UnsupportedMsgSamples))

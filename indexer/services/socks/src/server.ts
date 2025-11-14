@@ -1,13 +1,14 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express, { Express } from 'express';
-import expressRequestId from 'express-request-id';
+// import expressRequestId from 'express-request-id';
 import nocache from 'nocache';
 import responseTime from 'response-time';
 
 import RequestLogger from './middlewares/request-logger';
 import resBodyCapture from './middlewares/res-body-capture';
 
+const expressRequestId = require('express-request-id');
 export default function server(): Express {
   const app = express();
 

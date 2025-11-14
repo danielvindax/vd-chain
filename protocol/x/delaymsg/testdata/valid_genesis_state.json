@@ -3,8 +3,8 @@
     {
       "id": 1,
       "msg": {
-        "@type": "/dydxprotocol.bridge.MsgCompleteBridge",
-        "authority": "dydx1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5zx6tr",
+        "@type": "/vindax.bridge.MsgCompleteBridge",
+        "authority": "vindax1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5jljzu",
         "event": {
           "id": 1,
           "coin": {

@@ -4,8 +4,8 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/app/msgs"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/app/msgs"
+	"github.com/danielvindax/vd-chain/protocol/lib"
 	"github.com/stretchr/testify/require"
 )
 
@@ -65,126 +65,6 @@ func TestInternalMsgSamples_Gov_Key(t *testing.T) {
 		"/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
 		"/cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse",
 
-		// accountplus
-		"/dydxprotocol.accountplus.MsgSetActiveState",
-		"/dydxprotocol.accountplus.MsgSetActiveStateResponse",
-
-		// affiliates
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateOverrides",
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateOverridesResponse",
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateParameters",
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateParametersResponse",
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateTiers",
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateTiersResponse",
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateWhitelist",
-		"/dydxprotocol.affiliates.MsgUpdateAffiliateWhitelistResponse",
-
-		// blocktime
-		"/dydxprotocol.blocktime.MsgUpdateDowntimeParams",
-		"/dydxprotocol.blocktime.MsgUpdateDowntimeParamsResponse",
-		"/dydxprotocol.blocktime.MsgUpdateSynchronyParams",
-		"/dydxprotocol.blocktime.MsgUpdateSynchronyParamsResponse",
-
-		// bridge
-		"/dydxprotocol.bridge.MsgCompleteBridge",
-		"/dydxprotocol.bridge.MsgCompleteBridgeResponse",
-		"/dydxprotocol.bridge.MsgUpdateEventParams",
-		"/dydxprotocol.bridge.MsgUpdateEventParamsResponse",
-		"/dydxprotocol.bridge.MsgUpdateProposeParams",
-		"/dydxprotocol.bridge.MsgUpdateProposeParamsResponse",
-		"/dydxprotocol.bridge.MsgUpdateSafetyParams",
-		"/dydxprotocol.bridge.MsgUpdateSafetyParamsResponse",
-
-		// clob
-		"/dydxprotocol.clob.MsgCreateClobPair",
-		"/dydxprotocol.clob.MsgCreateClobPairResponse",
-		"/dydxprotocol.clob.MsgUpdateBlockRateLimitConfiguration",
-		"/dydxprotocol.clob.MsgUpdateBlockRateLimitConfigurationResponse",
-		"/dydxprotocol.clob.MsgUpdateClobPair",
-		"/dydxprotocol.clob.MsgUpdateClobPairResponse",
-		"/dydxprotocol.clob.MsgUpdateEquityTierLimitConfiguration",
-		"/dydxprotocol.clob.MsgUpdateEquityTierLimitConfigurationResponse",
-		"/dydxprotocol.clob.MsgUpdateLiquidationsConfig",
-		"/dydxprotocol.clob.MsgUpdateLiquidationsConfigResponse",
-
-		// delaymsg
-		"/dydxprotocol.delaymsg.MsgDelayMessage",
-		"/dydxprotocol.delaymsg.MsgDelayMessageResponse",
-
-		// feetiers
-		"/dydxprotocol.feetiers.MsgSetMarketFeeDiscountParams",
-		"/dydxprotocol.feetiers.MsgSetMarketFeeDiscountParamsResponse",
-		"/dydxprotocol.feetiers.MsgSetStakingTiers",
-		"/dydxprotocol.feetiers.MsgSetStakingTiersResponse",
-		"/dydxprotocol.feetiers.MsgUpdatePerpetualFeeParams",
-		"/dydxprotocol.feetiers.MsgUpdatePerpetualFeeParamsResponse",
-
-		// govplus
-		"/dydxprotocol.govplus.MsgSlashValidator",
-		"/dydxprotocol.govplus.MsgSlashValidatorResponse",
-
-		// listing
-		"/dydxprotocol.listing.MsgSetListingVaultDepositParams",
-		"/dydxprotocol.listing.MsgSetListingVaultDepositParamsResponse",
-		"/dydxprotocol.listing.MsgSetMarketsHardCap",
-		"/dydxprotocol.listing.MsgSetMarketsHardCapResponse",
-		"/dydxprotocol.listing.MsgUpgradeIsolatedPerpetualToCross",
-		"/dydxprotocol.listing.MsgUpgradeIsolatedPerpetualToCrossResponse",
-
-		// perpeutals
-		"/dydxprotocol.perpetuals.MsgCreatePerpetual",
-		"/dydxprotocol.perpetuals.MsgCreatePerpetualResponse",
-		"/dydxprotocol.perpetuals.MsgSetLiquidityTier",
-		"/dydxprotocol.perpetuals.MsgSetLiquidityTierResponse",
-		"/dydxprotocol.perpetuals.MsgUpdateParams",
-		"/dydxprotocol.perpetuals.MsgUpdateParamsResponse",
-		"/dydxprotocol.perpetuals.MsgUpdatePerpetualParams",
-		"/dydxprotocol.perpetuals.MsgUpdatePerpetualParamsResponse",
-
-		// prices
-		"/dydxprotocol.prices.MsgCreateOracleMarket",
-		"/dydxprotocol.prices.MsgCreateOracleMarketResponse",
-		"/dydxprotocol.prices.MsgUpdateMarketParam",
-		"/dydxprotocol.prices.MsgUpdateMarketParamResponse",
-
-		// ratelimit
-		"/dydxprotocol.ratelimit.MsgSetLimitParams",
-		"/dydxprotocol.ratelimit.MsgSetLimitParamsResponse",
-
-		// revshare
-		"/dydxprotocol.revshare.MsgSetMarketMapperRevShareDetailsForMarket",
-		"/dydxprotocol.revshare.MsgSetMarketMapperRevShareDetailsForMarketResponse",
-		"/dydxprotocol.revshare.MsgSetMarketMapperRevenueShare",
-		"/dydxprotocol.revshare.MsgSetMarketMapperRevenueShareResponse",
-		"/dydxprotocol.revshare.MsgSetOrderRouterRevShare",
-		"/dydxprotocol.revshare.MsgSetOrderRouterRevShareResponse",
-		"/dydxprotocol.revshare.MsgUpdateUnconditionalRevShareConfig",
-		"/dydxprotocol.revshare.MsgUpdateUnconditionalRevShareConfigResponse",
-
-		// rewards
-		"/dydxprotocol.rewards.MsgUpdateParams",
-		"/dydxprotocol.rewards.MsgUpdateParamsResponse",
-
-		// sending
-		"/dydxprotocol.sending.MsgSendFromModuleToAccount",
-		"/dydxprotocol.sending.MsgSendFromModuleToAccountResponse",
-
-		// stats
-		"/dydxprotocol.stats.MsgUpdateParams",
-		"/dydxprotocol.stats.MsgUpdateParamsResponse",
-
-		// vault
-		"/dydxprotocol.vault.MsgUnlockShares",
-		"/dydxprotocol.vault.MsgUnlockSharesResponse",
-		"/dydxprotocol.vault.MsgUpdateOperatorParams",
-		"/dydxprotocol.vault.MsgUpdateOperatorParamsResponse",
-
-		// vest
-		"/dydxprotocol.vest.MsgDeleteVestEntry",
-		"/dydxprotocol.vest.MsgDeleteVestEntryResponse",
-		"/dydxprotocol.vest.MsgSetVestEntry",
-		"/dydxprotocol.vest.MsgSetVestEntryResponse",
-
 		// ibc
 		"/ibc.applications.interchain_accounts.host.v1.MsgUpdateParams",
 		"/ibc.applications.interchain_accounts.host.v1.MsgUpdateParamsResponse",
@@ -194,6 +74,126 @@ func TestInternalMsgSamples_Gov_Key(t *testing.T) {
 		"/ibc.core.client.v1.MsgUpdateParamsResponse",
 		"/ibc.core.connection.v1.MsgUpdateParams",
 		"/ibc.core.connection.v1.MsgUpdateParamsResponse",
+
+		// accountplus
+		"/vindax.accountplus.MsgSetActiveState",
+		"/vindax.accountplus.MsgSetActiveStateResponse",
+
+		// affiliates
+		"/vindax.affiliates.MsgUpdateAffiliateOverrides",
+		"/vindax.affiliates.MsgUpdateAffiliateOverridesResponse",
+		"/vindax.affiliates.MsgUpdateAffiliateParameters",
+		"/vindax.affiliates.MsgUpdateAffiliateParametersResponse",
+		"/vindax.affiliates.MsgUpdateAffiliateTiers",
+		"/vindax.affiliates.MsgUpdateAffiliateTiersResponse",
+		"/vindax.affiliates.MsgUpdateAffiliateWhitelist",
+		"/vindax.affiliates.MsgUpdateAffiliateWhitelistResponse",
+
+		// blocktime
+		"/vindax.blocktime.MsgUpdateDowntimeParams",
+		"/vindax.blocktime.MsgUpdateDowntimeParamsResponse",
+		"/vindax.blocktime.MsgUpdateSynchronyParams",
+		"/vindax.blocktime.MsgUpdateSynchronyParamsResponse",
+
+		// bridge
+		"/vindax.bridge.MsgCompleteBridge",
+		"/vindax.bridge.MsgCompleteBridgeResponse",
+		"/vindax.bridge.MsgUpdateEventParams",
+		"/vindax.bridge.MsgUpdateEventParamsResponse",
+		"/vindax.bridge.MsgUpdateProposeParams",
+		"/vindax.bridge.MsgUpdateProposeParamsResponse",
+		"/vindax.bridge.MsgUpdateSafetyParams",
+		"/vindax.bridge.MsgUpdateSafetyParamsResponse",
+
+		// clob
+		"/vindax.clob.MsgCreateClobPair",
+		"/vindax.clob.MsgCreateClobPairResponse",
+		"/vindax.clob.MsgUpdateBlockRateLimitConfiguration",
+		"/vindax.clob.MsgUpdateBlockRateLimitConfigurationResponse",
+		"/vindax.clob.MsgUpdateClobPair",
+		"/vindax.clob.MsgUpdateClobPairResponse",
+		"/vindax.clob.MsgUpdateEquityTierLimitConfiguration",
+		"/vindax.clob.MsgUpdateEquityTierLimitConfigurationResponse",
+		"/vindax.clob.MsgUpdateLiquidationsConfig",
+		"/vindax.clob.MsgUpdateLiquidationsConfigResponse",
+
+		// delaymsg
+		"/vindax.delaymsg.MsgDelayMessage",
+		"/vindax.delaymsg.MsgDelayMessageResponse",
+
+		// feetiers
+		"/vindax.feetiers.MsgSetMarketFeeDiscountParams",
+		"/vindax.feetiers.MsgSetMarketFeeDiscountParamsResponse",
+		"/vindax.feetiers.MsgSetStakingTiers",
+		"/vindax.feetiers.MsgSetStakingTiersResponse",
+		"/vindax.feetiers.MsgUpdatePerpetualFeeParams",
+		"/vindax.feetiers.MsgUpdatePerpetualFeeParamsResponse",
+
+		// govplus
+		"/vindax.govplus.MsgSlashValidator",
+		"/vindax.govplus.MsgSlashValidatorResponse",
+
+		// listing
+		"/vindax.listing.MsgSetListingVaultDepositParams",
+		"/vindax.listing.MsgSetListingVaultDepositParamsResponse",
+		"/vindax.listing.MsgSetMarketsHardCap",
+		"/vindax.listing.MsgSetMarketsHardCapResponse",
+		"/vindax.listing.MsgUpgradeIsolatedPerpetualToCross",
+		"/vindax.listing.MsgUpgradeIsolatedPerpetualToCrossResponse",
+
+		// perpeutals
+		"/vindax.perpetuals.MsgCreatePerpetual",
+		"/vindax.perpetuals.MsgCreatePerpetualResponse",
+		"/vindax.perpetuals.MsgSetLiquidityTier",
+		"/vindax.perpetuals.MsgSetLiquidityTierResponse",
+		"/vindax.perpetuals.MsgUpdateParams",
+		"/vindax.perpetuals.MsgUpdateParamsResponse",
+		"/vindax.perpetuals.MsgUpdatePerpetualParams",
+		"/vindax.perpetuals.MsgUpdatePerpetualParamsResponse",
+
+		// prices
+		"/vindax.prices.MsgCreateOracleMarket",
+		"/vindax.prices.MsgCreateOracleMarketResponse",
+		"/vindax.prices.MsgUpdateMarketParam",
+		"/vindax.prices.MsgUpdateMarketParamResponse",
+
+		// ratelimit
+		"/vindax.ratelimit.MsgSetLimitParams",
+		"/vindax.ratelimit.MsgSetLimitParamsResponse",
+
+		// revshare
+		"/vindax.revshare.MsgSetMarketMapperRevShareDetailsForMarket",
+		"/vindax.revshare.MsgSetMarketMapperRevShareDetailsForMarketResponse",
+		"/vindax.revshare.MsgSetMarketMapperRevenueShare",
+		"/vindax.revshare.MsgSetMarketMapperRevenueShareResponse",
+		"/vindax.revshare.MsgSetOrderRouterRevShare",
+		"/vindax.revshare.MsgSetOrderRouterRevShareResponse",
+		"/vindax.revshare.MsgUpdateUnconditionalRevShareConfig",
+		"/vindax.revshare.MsgUpdateUnconditionalRevShareConfigResponse",
+
+		// rewards
+		"/vindax.rewards.MsgUpdateParams",
+		"/vindax.rewards.MsgUpdateParamsResponse",
+
+		// sending
+		"/vindax.sending.MsgSendFromModuleToAccount",
+		"/vindax.sending.MsgSendFromModuleToAccountResponse",
+
+		// stats
+		"/vindax.stats.MsgUpdateParams",
+		"/vindax.stats.MsgUpdateParamsResponse",
+
+		// vault
+		"/vindax.vault.MsgUnlockShares",
+		"/vindax.vault.MsgUnlockSharesResponse",
+		"/vindax.vault.MsgUpdateOperatorParams",
+		"/vindax.vault.MsgUpdateOperatorParamsResponse",
+
+		// vest
+		"/vindax.vest.MsgDeleteVestEntry",
+		"/vindax.vest.MsgDeleteVestEntryResponse",
+		"/vindax.vest.MsgSetVestEntry",
+		"/vindax.vest.MsgSetVestEntryResponse",
 	}
 
 	require.Equal(t, expectedMsgs, lib.GetSortedKeys[sort.StringSlice](msgs.InternalMsgSamplesGovAuth))

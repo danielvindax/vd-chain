@@ -1,14 +1,14 @@
 package constants
 
 // This is a copy of the localnet genesis.json. This can be retrieved from the localnet docker container path:
-// /dydxprotocol/chain/.alice/config/genesis.json
+// /vindax/chain/.alice/config/genesis.json
 // Disable linter for exchange config.
 //
 //nolint:all
 const GenesisState = `{
-  "genesis_time": "2023-07-10T19:23:15.891430637Z",
-  "chain_id": "localdydxprotocol",
   "initial_height": "1",
+  "genesis_time": "2023-07-10T19:23:15.891430637Z",
+  "chain_id": "dydx-sample-1",
   "consensus_params": {
     "block": {
       "max_bytes": "22020096",
@@ -28,8 +28,8 @@ const GenesisState = `{
       "app": "0"
     }
   },
-  "app_hash": "",
   "app_state": {
+    "affiliates": {},
     "assets": {
       "assets": [
         {
@@ -43,52 +43,51 @@ const GenesisState = `{
         }
       ]
     },
-    "affiliates": {},
     "auth": {
-      "params": {
-        "max_memo_characters": "256",
-        "tx_sig_limit": "7",
-        "tx_size_cost_per_byte": "10",
-        "sig_verify_cost_ed25519": "590",
-        "sig_verify_cost_secp256k1": "1000"
-      },
       "accounts": [
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4",
+          "address": "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642",
           "pub_key": null,
           "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "dydx10fx7sy6ywd5senxae9dwytf8jxek3t2gcen2vs",
+          "address": "vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90",
           "pub_key": null,
           "account_number": "1",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "dydx1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wvmh70",
+          "address": "vindax1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wuzlhs",
           "pub_key": null,
           "account_number": "2",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "dydx1wau5mja7j7zdavtfq9lu7ejef05hm6ffenlcsn",
+          "address": "vindax1wau5mja7j7zdavtfq9lu7ejef05hm6fferxsev",
           "pub_key": null,
           "account_number": "3",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "dydx1nzuttarf5k2j0nug5yzhr6p74t9avehn9hlh8m",
+          "address": "vindax10ehz9v9ncpnj8hfwlsxhcg97zv5ag5w3sgac4k",
           "pub_key": null,
           "account_number": "4",
           "sequence": "0"
         }
-      ]
+      ],
+      "params": {
+        "max_memo_characters": "256",
+        "sig_verify_cost_ed25519": "590",
+        "sig_verify_cost_secp256k1": "1000",
+        "tx_sig_limit": "7",
+        "tx_size_cost_per_byte": "10"
+      }
     },
     "bank": {
       "params": {
@@ -97,10 +96,10 @@ const GenesisState = `{
       },
       "balances": [
         {
-          "address": "dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4",
+          "address": "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642",
           "coins": [
             {
-              "denom": "adv4tnt",
+              "denom": "avdtn",
               "amount": "1000000000000000000000000"
             },
             {
@@ -110,10 +109,10 @@ const GenesisState = `{
           ]
         },
         {
-          "address": "dydx1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wvmh70",
+          "address": "vindax1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wuzlhs",
           "coins": [
             {
-              "denom": "adv4tnt",
+              "denom": "avdtn",
               "amount": "1000000000000000000000000"
             },
             {
@@ -123,7 +122,7 @@ const GenesisState = `{
           ]
         },
         {
-          "address": "dydx1v88c3xv9xyv3eetdx0tvcmq7ung3dywp5upwc6",
+          "address": "vindax1v88c3xv9xyv3eetdx0tvcmq7ung3dywp5vcx39",
           "coins": [
             {
               "denom": "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5",
@@ -132,10 +131,10 @@ const GenesisState = `{
           ]
         },
         {
-          "address": "dydx1wau5mja7j7zdavtfq9lu7ejef05hm6ffenlcsn",
+          "address": "vindax1wau5mja7j7zdavtfq9lu7ejef05hm6fferxsev",
           "coins": [
             {
-              "denom": "adv4tnt",
+              "denom": "avdtn",
               "amount": "1000000000000000000000000"
             },
             {
@@ -145,10 +144,10 @@ const GenesisState = `{
           ]
         },
         {
-          "address": "dydx10fx7sy6ywd5senxae9dwytf8jxek3t2gcen2vs",
+          "address": "vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90",
           "coins": [
             {
-              "denom": "adv4tnt",
+              "denom": "avdtn",
               "amount": "1000000000000000000000000"
             },
             {
@@ -158,10 +157,10 @@ const GenesisState = `{
           ]
         },
         {
-          "address": "dydx1nzuttarf5k2j0nug5yzhr6p74t9avehn9hlh8m",
+          "address": "vindax10ehz9v9ncpnj8hfwlsxhcg97zv5ag5w3sgac4k",
           "coins": [
             {
-              "denom": "adv4tnt",
+              "denom": "avdtn",
               "amount": "100000000000"
             },
             {
@@ -171,10 +170,10 @@ const GenesisState = `{
           ]
         },
         {
-          "address": "dydx1zlefkpe3g0vvm9a4h0jf9000lmqutlh9jwjnsv",
+          "address": "vindax1zlefkpe3g0vvm9a4h0jf9000lmqutlh9j7tmen",
           "coins": [
             {
-              "denom": "adv4tnt",
+              "denom": "avdtn",
               "amount": "1000000000"
             }
           ]
@@ -331,16 +330,17 @@ const GenesisState = `{
     "crisis": {
       "constant_fee": {
         "amount": "1000",
-        "denom": "adv4tnt"
+        "denom": "avdtn"
       }
     },
     "delaymsg": {
       "delayed_messages": [
         {
+          "block_height": 6480000,
           "id": 0,
           "msg": {
-            "@type": "/dydxprotocol.feetiers.MsgUpdatePerpetualFeeParams",
-            "authority": "dydx1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5zx6tr",
+            "@type": "/vindax.feetiers.MsgUpdatePerpetualFeeParams",
+            "authority": "vindax1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5jljzu",
             "params": {
               "tiers": [
                 {
@@ -417,8 +417,7 @@ const GenesisState = `{
                 }
               ]
             }
-          },
-          "block_height": "6480000"
+          }
         }
       ],
       "next_delayed_message_id": 1
@@ -442,13 +441,13 @@ const GenesisState = `{
       "validator_historical_rewards": [],
       "validator_slash_events": []
     },
-    "dydxaccountplus": {
+    "vindaxaccountplus": {
       "accounts": [],
+      "authenticator_data": [],
+      "next_authenticator_id": "0",
       "params": {
         "is_smart_account_active": true
-      },
-      "next_authenticator_id": "0",
-      "authenticator_data": []
+      }
     },
     "epochs": {
       "epoch_info_list": [
@@ -583,14 +582,14 @@ const GenesisState = `{
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4",
-                "validator_address": "dydxvaloper199tqg4wdlnu4qjlxchpd7seg454937hjxg9yhy",
+                "delegator_address": "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642",
+                "validator_address": "vindaxvaloper199tqg4wdlnu4qjlxchpd7seg454937hjrywlqt",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "YiARx8259Z+fGFUxQLrz/5FU2RYRT6f5yzvt7D7CrQM="
                 },
                 "value": {
-                  "denom": "adv4tnt",
+                  "denom": "avdtn",
                   "amount": "500000000000000000000000"
                 }
               }
@@ -624,7 +623,7 @@ const GenesisState = `{
             "tip": null
           },
           "signatures": [
-            "KqBNRNfXrxYaU2585ycZI2BOvJrUrvZWVugMr9d09gxcDSPGqdjleJWFFwO+Hbhj58uZ4wNOplv9e0SxPwZ0KQ=="
+            "XnWtzJEPkrGuO/3LE4OrtpdQoNRzohXywZpP2CfRiOoycGhb7aKhU55aK819EmUkWIqqDJYzez9brSXFk6yPTQ=="
           ]
         },
         {
@@ -645,14 +644,14 @@ const GenesisState = `{
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wvmh70",
-                "validator_address": "dydxvaloper1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9tjdp47",
+                "delegator_address": "vindax1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wuzlhs",
+                "validator_address": "vindaxvaloper1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9w7x6z3",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "ytLfs1W6E2I41iteKC/YwjyZ/51+CAYCHYxmRHiBeY4="
                 },
                 "value": {
-                  "denom": "adv4tnt",
+                  "denom": "avdtn",
                   "amount": "500000000000000000000000"
                 }
               }
@@ -686,7 +685,7 @@ const GenesisState = `{
             "tip": null
           },
           "signatures": [
-            "QcK0WTKaXjsPPsALhn7jLJ/hhmhww+1ucTy4VZE9cJlivPcurFr1k4kfP1/M0ppqEWa9mksjIeVQhOHXTOBG/Q=="
+            "rxbuOvPR4RGnHOUYw/BbsqZykVHY9PDDPFK5OEbzt9xYXdjnjKo16zmvoKBBoafyXS1v0Df+jR8BEh0XxnCWHw=="
           ]
         },
         {
@@ -707,14 +706,14 @@ const GenesisState = `{
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1wau5mja7j7zdavtfq9lu7ejef05hm6ffenlcsn",
-                "validator_address": "dydxvaloper1wau5mja7j7zdavtfq9lu7ejef05hm6ffudfwmz",
+                "delegator_address": "vindax1wau5mja7j7zdavtfq9lu7ejef05hm6fferxsev",
+                "validator_address": "vindaxvaloper1wau5mja7j7zdavtfq9lu7ejef05hm6ffepz4vd",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "yG29kRfZ/hgAE1I7uWjbKQJJL4/gX/05XBnfB+m196A="
                 },
                 "value": {
-                  "denom": "adv4tnt",
+                  "denom": "avdtn",
                   "amount": "500000000000000000000000"
                 }
               }
@@ -748,7 +747,7 @@ const GenesisState = `{
             "tip": null
           },
           "signatures": [
-            "jpCPNmoS5CHqbDXwFX5FYO7J5g7kSi5ZkxVkXEkgajJOZgu9nVTXavPFZ2t5w+UDzgWbtDxLJ1GqdM+kNFIWaA=="
+            "09qr+Juqe004pruv65UPuKEMVE004xLrDPiVvTMmcJgy5yWjrEzp/YxvBfb0t+I09foNZzQHvG60Qii6v+tZUw=="
           ]
         },
         {
@@ -769,14 +768,14 @@ const GenesisState = `{
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx10fx7sy6ywd5senxae9dwytf8jxek3t2gcen2vs",
-                "validator_address": "dydxvaloper10fx7sy6ywd5senxae9dwytf8jxek3t2ga89u8p",
+                "delegator_address": "vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90",
+                "validator_address": "vindaxvaloper10fx7sy6ywd5senxae9dwytf8jxek3t2gctw8sw",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "+P8YiogqqQY+iD96yEa9OJx6EgieU95u9eR3pzxfDp0="
                 },
                 "value": {
-                  "denom": "adv4tnt",
+                  "denom": "avdtn",
                   "amount": "500000000000000000000000"
                 }
               }
@@ -810,7 +809,7 @@ const GenesisState = `{
             "tip": null
           },
           "signatures": [
-            "SAhIiKZUWVy8tI0uDanDo9IP2ZCh2ZltV2yY2Y6umqgax34GxbU1BbrAxXxPrrhEa+IFqXJEWpocVsGo++gjuQ=="
+            "6dqbBr+Me/nL9qLmY0WO3jtFNPpbH+f3AKxtTvyPeqMXPfBdUdnhQsGQI6++d8lM/6xS7lMvikRMGHb8FsHZsQ=="
           ]
         }
       ]
@@ -825,7 +824,7 @@ const GenesisState = `{
         "min_deposit": [
           {
             "amount": "10000000",
-            "denom": "adv4tnt"
+            "denom": "avdtn"
           }
         ],
         "min_initial_deposit_ratio": "0.000000000000000000",
@@ -833,13 +832,13 @@ const GenesisState = `{
         "quorum": "0.334000000000000000",
         "threshold": "0.500000000000000000",
         "veto_threshold": "0.334000000000000000",
-		"min_deposit_ratio": "0.010000000000000000",
+		  "min_deposit_ratio": "0.010000000000000000",
         "expedited_voting_period": "86400s",
         "expedited_threshold": "0.750000000000000000",
         "expedited_min_deposit": [
           {
             "amount": "50000000",
-            "denom": "adv4tnt"
+            "denom": "avdtn"
           }
         ],
         "voting_period": "172800s"
@@ -849,7 +848,7 @@ const GenesisState = `{
       "votes": []
     },
     "govplus": {},
-    "ibc": {
+    "ibc":  {
       "channel_genesis": {
         "ack_sequences": [],
         "acknowledgements": [],
@@ -888,8 +887,8 @@ const GenesisState = `{
         "main_vault_deposit_amount": "0",
         "num_blocks_to_lock_shares": 2592000
       }
-	},
-    "perpetuals": {
+    },
+      "perpetuals": {
       "liquidity_tiers": [
         {
           "id": 0,
@@ -980,7 +979,7 @@ const GenesisState = `{
             "liquidity_tier": 0,
             "market_id": 1,
             "ticker": "ETH-USD",
-		"market_type": 1
+		    "market_type": 1
           }
         }
       ]
@@ -3960,8 +3959,8 @@ const GenesisState = `{
         }
       },
       "params": {
-        "admin": "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky",
-        "market_authorities": ["dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky"]
+        "admin": "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm",
+        "market_authorities": ["vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm"]
       }
     },
     "prices": {
@@ -4399,22 +4398,6 @@ const GenesisState = `{
         }
       ]
     },
-    "revshare": {
-      "params": {
-        "address": "dydx17xpfvakm2amg962yls6f84z3kell8c5leqdyt2",
-        "revenue_share_ppm": 0,
-        "valid_days": 0
-      }
-  	},
-    "rewards": {
-      "params": {
-        "treasury_account":"rewards_treasury",
-        "denom":"adv4tnt",
-        "denom_exponent":-18,
-        "market_id":1,
-        "fee_multiplier_ppm":990000
-      }
-    },
     "ratelimit": {
       "limit_params_list": [
         {
@@ -4434,6 +4417,22 @@ const GenesisState = `{
         }
       ]
     },
+    "revshare": {
+      "params": {
+        "address": "vindax17xpfvakm2amg962yls6f84z3kell8c5les5vz4",
+        "revenue_share_ppm": 0,
+        "valid_days": 0
+      }
+    },
+    "rewards": {
+      "params": {
+        "denom": "avdtn",
+        "denom_exponent": -18,
+        "fee_multiplier_ppm": 990000,
+        "market_id": 1,
+        "treasury_account": "rewards_treasury"
+      }
+    },
     "sending": {},
     "slashing": {
       "missed_blocks": [],
@@ -4452,7 +4451,7 @@ const GenesisState = `{
       "last_total_power": "0",
       "last_validator_powers": [],
       "params": {
-        "bond_denom": "adv4tnt",
+        "bond_denom": "avdtn",
         "historical_entries": 10000,
         "max_entries": 7,
         "max_validators": 100,
@@ -4480,7 +4479,7 @@ const GenesisState = `{
           ],
           "id": {
             "number": 0,
-            "owner": "dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4"
+            "owner": "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642"
           },
           "margin_enabled": true
         },
@@ -4494,7 +4493,7 @@ const GenesisState = `{
           ],
           "id": {
             "number": 0,
-            "owner": "dydx10fx7sy6ywd5senxae9dwytf8jxek3t2gcen2vs"
+            "owner": "vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90"
           },
           "margin_enabled": true
         },
@@ -4508,7 +4507,7 @@ const GenesisState = `{
           ],
           "id": {
             "number": 0,
-            "owner": "dydx1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wvmh70"
+            "owner": "vindax1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wuzlhs"
           },
           "margin_enabled": true
         },
@@ -4522,7 +4521,7 @@ const GenesisState = `{
           ],
           "id": {
             "number": 0,
-            "owner": "dydx1wau5mja7j7zdavtfq9lu7ejef05hm6ffenlcsn"
+            "owner": "vindax1wau5mja7j7zdavtfq9lu7ejef05hm6fferxsev"
           },
           "margin_enabled": true
         },
@@ -4536,7 +4535,7 @@ const GenesisState = `{
           ],
           "id": {
             "number": 0,
-            "owner": "dydx1nzuttarf5k2j0nug5yzhr6p74t9avehn9hlh8m"
+            "owner": "vindax10ehz9v9ncpnj8hfwlsxhcg97zv5ag5w3sgac4k"
           },
           "margin_enabled": true
         }
@@ -4563,11 +4562,11 @@ const GenesisState = `{
         "activation_threshold_quote_quantums": "1000000000"
       },
       "operator_params": {
-        "operator": "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky",
         "metadata": {
-          "name": "Governance",
-          "description": "Governance Module Account"
-        }
+          "description": "Governance Module Account",
+          "name": "Governance"
+        },
+        "operator": "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm"
       },
       "owner_shares": [],
       "total_shares": {
@@ -4578,14 +4577,14 @@ const GenesisState = `{
     "vest": {
       "vest_entries": [
         {
-          "denom": "adv4tnt",
+          "denom": "avdtn",
           "end_time": "2025-01-01T00:00:00Z",
           "start_time": "2023-01-01T00:00:00Z",
           "treasury_account": "community_treasury",
           "vester_account": "community_vester"
         },
         {
-          "denom": "adv4tnt",
+          "denom": "avdtn",
           "end_time": "2025-01-01T00:00:00Z",
           "start_time": "2023-01-01T00:00:00Z",
           "treasury_account": "rewards_treasury",

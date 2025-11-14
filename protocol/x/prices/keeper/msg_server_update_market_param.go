@@ -4,14 +4,14 @@ import (
 	"context"
 
 	"github.com/cosmos/cosmos-sdk/telemetry"
-	pricefeedmetrics "github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/metrics"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/metrics"
+	pricefeedmetrics "github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/metrics"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib/metrics"
 	gometrics "github.com/hashicorp/go-metrics"
 
 	errorsmod "cosmossdk.io/errors"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	"github.com/danielvindax/vd-chain/protocol/x/prices/types"
 )
 
 func (k msgServer) UpdateMarketParam(

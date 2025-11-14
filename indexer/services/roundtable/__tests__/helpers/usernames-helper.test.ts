@@ -4,15 +4,15 @@ import {
 
 const addresses = [
   'dydx1gf4xlnpulkyex74asxxhg9ye05r28cxdd69s9u',
-  'dydx10fx7sy6ywd5senxae9dwytf8jxek3t2gcen2vs',
-  'dydx1wau5mja7j7zdavtfq9lu7ejef05hm6ffenlcsn',
+  'vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90',
+  'vindax1wau5mja7j7zdavtfq9lu7ejef05hm6fferxsev',
   'dydx1df84hz7y0dd3mrqcv3vrhw9wdttelul8edqmvp',
   'dydx16h7p7f4dysrgtzptxx2gtpt5d8t834g9dj830z',
   'dydx15u9tppy5e2pdndvlrvafxqhuurj9mnpdstzj6z',
   'dydx1q54yvrslnu0xp4drpde6f4e0k2ap9efss5hpsd',
   'dydx1n88uc38xhjgxzw9nwre4ep2c8ga4fjxc565lnf',
   'dydx1n88uc38xhjgxzw9nwre4ep2c8ga4fjxc575lnf',
-  'dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4',
+  'vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642',
   'dydx1c05rgh22wg5pmaufnj8z77kla8fgrgkrth6hlj',
   'dydx1qvsqtewdxqdpj5gnkl8usqz3yplpkgs52wv4fy',
 ];

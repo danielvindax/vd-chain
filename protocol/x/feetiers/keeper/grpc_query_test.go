@@ -9,11 +9,11 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/x/feetiers/types"
-	stattypes "github.com/dydxprotocol/v4-chain/protocol/x/stats/types"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/x/feetiers/types"
+	stattypes "github.com/danielvindax/vd-chain/protocol/x/stats/types"
 )
 
 func TestParams(t *testing.T) {
@@ -63,7 +63,7 @@ func TestUserFeeTier(t *testing.T) {
 	}{
 		"Success": {
 			req: &types.QueryUserFeeTierRequest{
-				User: "dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4",
+				User: "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642",
 			},
 			res: &types.QueryUserFeeTierResponse{
 				Index: 0,

@@ -3,8 +3,8 @@ package types_test
 import (
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/x/bridge/types"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/x/bridge/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -58,7 +58,7 @@ func TestMsgUpdateEventParams_ValidateBasic(t *testing.T) {
 		},
 		"Failure: invalid authority": {
 			msg: types.MsgUpdateEventParams{
-				Authority: "dydx1abc",
+				Authority: "vindax1abc",
 			},
 			expectedErr: types.ErrInvalidAuthority.Error(),
 		},

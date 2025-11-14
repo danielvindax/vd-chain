@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	v1 "github.com/dydxprotocol/v4-chain/protocol/indexer/protocol/v1"
-	v1types "github.com/dydxprotocol/v4-chain/protocol/indexer/protocol/v1/types"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
-	vaulttypes "github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	v1 "github.com/danielvindax/vd-chain/protocol/indexer/protocol/v1"
+	v1types "github.com/danielvindax/vd-chain/protocol/indexer/protocol/v1/types"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
+	vaulttypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
 	"github.com/stretchr/testify/require"
 )
 

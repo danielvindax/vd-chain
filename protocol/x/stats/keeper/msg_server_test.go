@@ -6,9 +6,9 @@ import (
 
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/x/stats/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/stats/types"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/x/stats/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/stats/types"
 	"github.com/stretchr/testify/require"
 )
 

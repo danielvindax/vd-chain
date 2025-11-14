@@ -5,8 +5,8 @@ import (
 
 	abci "github.com/cometbft/cometbft/abci/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/x/sending/types"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/x/sending/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -21,7 +21,7 @@ func TestNewCreateTransferEvent(t *testing.T) {
 	require.Equal(t, event.Attributes, []abci.EventAttribute{
 		{
 			Key:   types.AttributeKeySender,
-			Value: "dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4",
+			Value: "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642",
 		},
 		{
 			Key:   types.AttributeKeySenderNumber,
@@ -29,7 +29,7 @@ func TestNewCreateTransferEvent(t *testing.T) {
 		},
 		{
 			Key:   types.AttributeKeyRecipient,
-			Value: "dydx10fx7sy6ywd5senxae9dwytf8jxek3t2gcen2vs",
+			Value: "vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90",
 		},
 		{
 			Key:   types.AttributeKeyRecipientNumber,
@@ -57,11 +57,11 @@ func TestNewDepositToSubaccountEvent(t *testing.T) {
 	require.Equal(t, event.Attributes, []abci.EventAttribute{
 		{
 			Key:   types.AttributeKeySender,
-			Value: "dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4",
+			Value: "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642",
 		},
 		{
 			Key:   types.AttributeKeyRecipient,
-			Value: "dydx10fx7sy6ywd5senxae9dwytf8jxek3t2gcen2vs",
+			Value: "vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90",
 		},
 		{
 			Key:   types.AttributeKeyRecipientNumber,
@@ -89,7 +89,7 @@ func TestNewWithdrawFromSubaccountEvent(t *testing.T) {
 	require.Equal(t, event.Attributes, []abci.EventAttribute{
 		{
 			Key:   types.AttributeKeySender,
-			Value: "dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4",
+			Value: "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642",
 		},
 		{
 			Key:   types.AttributeKeySenderNumber,
@@ -97,7 +97,7 @@ func TestNewWithdrawFromSubaccountEvent(t *testing.T) {
 		},
 		{
 			Key:   types.AttributeKeyRecipient,
-			Value: "dydx10fx7sy6ywd5senxae9dwytf8jxek3t2gcen2vs",
+			Value: "vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90",
 		},
 		{
 			Key:   types.AttributeKeyAssetId,

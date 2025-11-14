@@ -1,6 +1,6 @@
 {
   "app_hash": null,
-  "app_name": "dydxprotocold",
+  "app_name": "vindaxd",
   "app_state": {
     "affiliates": {
       "affiliate_parameters": {
@@ -67,7 +67,7 @@
     "bank": {
       "balances": [
         {
-          "address": "dydx1zlefkpe3g0vvm9a4h0jf9000lmqutlh9jwjnsv",
+          "address": "vindax1zlefkpe3g0vvm9a4h0jf9000lmqutlh9j7tmen",
           "coins": [
             {
               "amount": "1000000000000000000000000000",
@@ -591,8 +591,8 @@
           "block_height": 6912000,
           "id": 0,
           "msg": {
-            "@type": "/dydxprotocol.feetiers.MsgUpdatePerpetualFeeParams",
-            "authority": "dydx1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5zx6tr",
+            "@type": "/vindax.feetiers.MsgUpdatePerpetualFeeParams",
+            "authority": "vindax1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5jljzu",
             "params": {
               "tiers": [
                 {
@@ -3089,9 +3089,9 @@
         }
       },
       "params": {
-        "admin": "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky",
+        "admin": "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm",
         "market_authorities": [
-          "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky"
+          "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm"
         ]
       }
     },
@@ -3991,7 +3991,7 @@
     },
     "revshare": {
       "params": {
-        "address": "dydx17xpfvakm2amg962yls6f84z3kell8c5leqdyt2",
+        "address": "vindax17xpfvakm2amg962yls6f84z3kell8c5les5vz4",
         "revenue_share_ppm": 0,
         "valid_days": 0
       }
@@ -4069,11 +4069,11 @@
           "description": "Governance Module Account",
           "name": "Governance"
         },
-        "operator": "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky"
+        "operator": "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm"
       },
       "owner_shares": [
         {
-          "owner": "dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4",
+          "owner": "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642",
           "shares": {
             "num_shares": "0"
           }

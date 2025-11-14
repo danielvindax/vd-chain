@@ -5,24 +5,24 @@ set -eo pipefail
 
 source "./genesis.sh"
 
-CHAIN_ID="dydxprotocol-testnet"
-
+CHAIN_ID="vindax-testnet"
+ 
 # Define mnemonics for all validators.
 MNEMONICS=(
 	# alice
-	# Consensus Address: dydxvalcons1zf9csp5ygq95cqyxh48w3qkuckmpealrw2ug4d
+	# Consensus Address: vindaxvalcons1zf9csp5ygq95cqyxh48w3qkuckmpealrw2ug4d
 	"merge panther lobster crazy road hollow amused security before critic about cliff exhibit cause coyote talent happy where lion river tobacco option coconut small"
 
 	# bob
-	# Consensus Address: dydxvalcons1s7wykslt83kayxuaktep9fw8qxe5n73ucftkh4
+	# Consensus Address: vindaxvalcons1s7wykslt83kayxuaktep9fw8qxe5n73ucftkh4
 	"color habit donor nurse dinosaur stable wonder process post perfect raven gold census inside worth inquiry mammal panic olive toss shadow strong name drum"
 
 	# carl
-	# Consensus Address: dydxvalcons1vy0nrh7l4rtezrsakaadz4mngwlpdmhy64h0ls
+	# Consensus Address: vindaxvalcons1vy0nrh7l4rtezrsakaadz4mngwlpdmhy64h0ls
 	"school artefact ghost shop exchange slender letter debris dose window alarm hurt whale tiger find found island what engine ketchup globe obtain glory manage"
 
 	# dave
-	# Consensus Address: dydxvalcons1stjspktkshgcsv8sneqk2vs2ws0nw2wr272vtt
+	# Consensus Address: vindaxvalcons1stjspktkshgcsv8sneqk2vs2ws0nw2wr272vtt
 	"switch boring kiss cash lizard coconut romance hurry sniff bus accident zone chest height merit elevator furnace eagle fetch quit toward steak mystery nest"
 )
 
@@ -57,7 +57,7 @@ NODE_KEYS=(
 )
 
 # Define monikers for each validator. These are made up strings and can be anything.
-# This also controls in which directory the validator's home will be located. i.e. `/dydxprotocol/chain/.alice`
+# This also controls in which directory the validator's home will be located. i.e. `/vindax/chain/.alice`
 MONIKERS=(
 	"alice"
 	"bob"
@@ -67,26 +67,26 @@ MONIKERS=(
 
 # Define all test accounts for the chain.
 TEST_ACCOUNTS=(
-	"dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4" # alice
-	"dydx10fx7sy6ywd5senxae9dwytf8jxek3t2gcen2vs" # bob
-	"dydx1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wvmh70" # carl
-	"dydx1wau5mja7j7zdavtfq9lu7ejef05hm6ffenlcsn" # dave
+	"vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642" # alice
+	"vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90" # bob
+	"vindax1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wuzlhs" # carl
+	"vindax1wau5mja7j7zdavtfq9lu7ejef05hm6fferxsev" # dave
 )
 
 FAUCET_ACCOUNTS=(
-	"dydx1nzuttarf5k2j0nug5yzhr6p74t9avehn9hlh8m" # main faucet
-	"dydx10du0qegtt73ynv5ctenh565qha27ptzr6dz8c3" # backup #1
-	"dydx1axstmx84qtv0avhjwek46v6tcmyc8agu03nafv" # backup #2
+	"vindax10ehz9v9ncpnj8hfwlsxhcg97zv5ag5w3sgac4k" # main faucet
+	"vindax1xwuqhwkfjj3kw8u57f0svz4e76jwyvuwz7amnk" # backup #1
+	"vindax1869wx5me74erz2e57assrs6vrgxa6q6syenhny" # backup #2
 )
 
 # Addresses of vaults.
 # Can use ../scripts/vault/get_vault.go to generate a vault's address.
 VAULT_ACCOUNTS=(
-	"dydx1c0m5x87llaunl5sgv3q5vd7j5uha26d2q2r2q0" # BTC vault
-	"dydx14rplxdyycc6wxmgl8fggppgq4774l70zt6phkw" # ETH vault
-	"dydx190te44zcctdgk0qmqtenve2m00g3r2dn7ntd72" # LINK vault
-	"dydx1a83cjn83vqh5ss2vccg6uuaeky7947xldp9r2e" # POL vault
-	"dydx1nkz8xcar6sxedw0yva6jzjplw7hfg6pp6e7h0l" # CRV vault
+	"vindax1c0m5x87llaunl5sgv3q5vd7j5uha26d2q66zfs" # BTC vault
+	"vindax14rplxdyycc6wxmgl8fggppgq4774l70zt2cll3" # ETH vault
+	"vindax190te44zcctdgk0qmqtenve2m00g3r2dn7rj9h4" # LINK vault
+	"vindax1a83cjn83vqh5ss2vccg6uuaeky7947xld3utrx" # POL vault
+	"vindax1nkz8xcar6sxedw0yva6jzjplw7hfg6pp6f8lxq" # CRV vault
 )
 # Number of each vault above, which for CLOB vaults is the ID of the clob pair it quotes on.
 VAULT_NUMBERS=(
@@ -110,9 +110,9 @@ create_validators() {
 	for i in "${!FULL_NODE_KEYS[@]}"; do
 		FULL_NODE_HOME_DIR="$HOME/chain/.full-node-$i"
 		FULL_NODE_CONFIG_DIR="$FULL_NODE_HOME_DIR/config"
-		dydxprotocold init "full-node" -o --chain-id=$CHAIN_ID --home "$FULL_NODE_HOME_DIR"
+		vindaxd init "full-node" -o --chain-id=$CHAIN_ID --home "$FULL_NODE_HOME_DIR"
 
-		# Note: `dydxprotocold init` non-deterministically creates `node_id.json` for each validator.
+		# Note: `vindaxd init` non-deterministically creates `node_id.json` for each validator.
 		# This is inconvenient for persistent peering during testing in Terraform configuration as the `node_id`
 		# would change with every build of this container.
 		#
@@ -132,12 +132,12 @@ create_validators() {
 		VAL_CONFIG_DIR="$VAL_HOME_DIR/config"
 
 		# Initialize the chain and validator files.
-		dydxprotocold init "${MONIKERS[$i]}" -o --chain-id=$CHAIN_ID --home "$VAL_HOME_DIR"
+		vindaxd init "${MONIKERS[$i]}" -o --chain-id=$CHAIN_ID --home "$VAL_HOME_DIR"
 
 		# Overwrite the randomly generated `priv_validator_key.json` with a key generated deterministically from the mnemonic.
-		dydxprotocold tendermint gen-priv-key --home "$VAL_HOME_DIR" --mnemonic "${MNEMONICS[$i]}"
+		vindaxd tendermint gen-priv-key --home "$VAL_HOME_DIR" --mnemonic "${MNEMONICS[$i]}"
 
-		# Note: `dydxprotocold init` non-deterministically creates `node_id.json` for each validator.
+		# Note: `vindaxd init` non-deterministically creates `node_id.json` for each validator.
 		# This is inconvenient for persistent peering during testing in Terraform configuration as the `node_id`
 		# would change with every build of this container.
 		#
@@ -147,23 +147,23 @@ create_validators() {
 
 		edit_config "$VAL_CONFIG_DIR"
 
-		echo "${MNEMONICS[$i]}" | dydxprotocold keys add "${MONIKERS[$i]}" --recover --keyring-backend=test --home "$VAL_HOME_DIR"
+		echo "${MNEMONICS[$i]}" | vindaxd keys add "${MONIKERS[$i]}" --recover --keyring-backend=test --home "$VAL_HOME_DIR"
 
-		# Using "*" as a subscript results in a single arg: "dydx1... dydx1... dydx1..."
-		# Using "@" as a subscript results in separate args: "dydx1..." "dydx1..." "dydx1..."
+		# Using "*" as a subscript results in a single arg: "vindax1... vindax1... vindax1..."
+		# Using "@" as a subscript results in separate args: "vindax1..." "vindax1..." "vindax1..."
 		# Note: `edit_genesis` must be called before `add-genesis-account`.
 		edit_genesis "$VAL_CONFIG_DIR" "${TEST_ACCOUNTS[*]}" "${FAUCET_ACCOUNTS[*]}" "${VAULT_ACCOUNTS[*]}" "${VAULT_NUMBERS[*]}" "" "" "" ""
 		update_genesis_use_test_volatile_market "$VAL_CONFIG_DIR"
 		update_genesis_complete_bridge_delay "$VAL_CONFIG_DIR" "600"
 
 		for acct in "${TEST_ACCOUNTS[@]}"; do
-			dydxprotocold add-genesis-account "$acct" 100000000000000000$USDC_DENOM,$TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE$NATIVE_TOKEN --home "$VAL_HOME_DIR"
+			vindaxd add-genesis-account "$acct" 100000000000000000$USDC_DENOM,$TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE$NATIVE_TOKEN --home "$VAL_HOME_DIR"
 		done
 		for acct in "${FAUCET_ACCOUNTS[@]}"; do
-			dydxprotocold add-genesis-account "$acct" 900000000000000000$USDC_DENOM,$TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE$NATIVE_TOKEN --home "$VAL_HOME_DIR"
+			vindaxd add-genesis-account "$acct" 900000000000000000$USDC_DENOM,$TESTNET_VALIDATOR_NATIVE_TOKEN_BALANCE$NATIVE_TOKEN --home "$VAL_HOME_DIR"
 		done
 
-		dydxprotocold gentx "${MONIKERS[$i]}" $TESTNET_VALIDATOR_SELF_DELEGATE_AMOUNT$NATIVE_TOKEN --moniker="${MONIKERS[$i]}" --keyring-backend=test --chain-id=$CHAIN_ID --home "$VAL_HOME_DIR"
+		vindaxd gentx "${MONIKERS[$i]}" $TESTNET_VALIDATOR_SELF_DELEGATE_AMOUNT$NATIVE_TOKEN --moniker="${MONIKERS[$i]}" --keyring-backend=test --chain-id=$CHAIN_ID --home "$VAL_HOME_DIR"
 
 		# Copy the gentx to a shared directory.
 		cp -a "$VAL_CONFIG_DIR/gentx/." /tmp/gentx
@@ -178,7 +178,7 @@ create_validators() {
 	cp -r /tmp/gentx "$FIRST_VAL_CONFIG_DIR"
 
 	# Build the final genesis.json file that all validators and the full-nodes will use.
-	dydxprotocold collect-gentxs --home "$FIRST_VAL_HOME_DIR"
+	vindaxd collect-gentxs --home "$FIRST_VAL_HOME_DIR"
 
 	# Copy this genesis file to each of the other validators
 	for i in "${!MONIKERS[@]}"; do
@@ -205,18 +205,18 @@ create_validators() {
 setup_cosmovisor() {
 	for i in "${!FULL_NODE_KEYS[@]}"; do
 		FULL_NODE_HOME_DIR="$HOME/chain/.full-node-$i"
-		export DAEMON_NAME=dydxprotocold
+		export DAEMON_NAME=vindaxd
 		export DAEMON_HOME="$HOME/chain/.full-node-$i"
 
-		cosmovisor init /bin/dydxprotocold
+		cosmovisor init /bin/vindaxd
 	done
 
 	for i in "${!MONIKERS[@]}"; do
 		VAL_HOME_DIR="$HOME/chain/.${MONIKERS[$i]}"
-		export DAEMON_NAME=dydxprotocold
+		export DAEMON_NAME=vindaxd
 		export DAEMON_HOME="$HOME/chain/.${MONIKERS[$i]}"
 
-		cosmovisor init /bin/dydxprotocold
+		cosmovisor init /bin/vindaxd
 	done
 }
 

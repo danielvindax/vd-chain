@@ -1,8 +1,8 @@
 package events
 
 import (
-	v1 "github.com/dydxprotocol/v4-chain/protocol/indexer/protocol/v1"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
+	v1 "github.com/danielvindax/vd-chain/protocol/indexer/protocol/v1"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
 )
 
 // NewUpdatePerpetualEvent creates a UpdatePerpetualEventV3 representing

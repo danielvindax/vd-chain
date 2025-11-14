@@ -7,13 +7,13 @@ import (
 	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	"github.com/dydxprotocol/v4-chain/protocol/x/affiliates/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/affiliates/types"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	"github.com/danielvindax/vd-chain/protocol/x/affiliates/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/affiliates/types"
 	"github.com/stretchr/testify/require"
 
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	constants "github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	constants "github.com/danielvindax/vd-chain/protocol/testutil/constants"
 )
 
 func TestAffiliateInfo(t *testing.T) {

@@ -34,14 +34,14 @@ jobs:
         run: make distclean build-reproducible
       - name: Rename Binaries
         run: |
-          mv ./build/dydxprotocold:linux-arm64 ./build/dydxprotocold-${{ env.VERSION }}-linux-arm64
-          mv ./build/dydxprotocold:linux-amd64 ./build/dydxprotocold-${{ env.VERSION }}-linux-amd64
+          mv ./build/vdxprotocold:linux-arm64 ./build/vdxprotocold-${{ env.VERSION }}-linux-arm64
+          mv ./build/vdxprotocold:linux-amd64 ./build/vdxprotocold-${{ env.VERSION }}-linux-amd64
       - name: Compress binaries
         run: |
-          tar -cvzf dydxprotocold-${{ env.VERSION }}-linux-arm64.tar.gz \
-            ./build/dydxprotocold-${{ env.VERSION }}-linux-arm64
-          tar -cvzf dydxprotocold-${{ env.VERSION }}-linux-amd64.tar.gz \
-            ./build/dydxprotocold-${{ env.VERSION }}-linux-amd64
+          tar -cvzf vdxprotocold-${{ env.VERSION }}-linux-arm64.tar.gz \
+            ./build/vdxprotocold-${{ env.VERSION }}-linux-arm64
+          tar -cvzf vdxprotocold-${{ env.VERSION }}-linux-amd64.tar.gz \
+            ./build/vdxprotocold-${{ env.VERSION }}-linux-amd64
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -60,8 +60,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: protocol/dydxprotocold-${{ env.VERSION }}-linux-amd64.tar.gz
-          asset_name: dydxprotocold-${{ env.VERSION }}-linux-amd64.tar.gz
+          asset_path: protocol/vdxprotocold-${{ env.VERSION }}-linux-amd64.tar.gz
+          asset_name: vdxprotocold-${{ env.VERSION }}-linux-amd64.tar.gz
           asset_content_type: application/gzip
       - name: Upload linux-arm64 tar.gz
         uses: actions/upload-release-asset@v1
@@ -69,17 +69,17 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: protocol/dydxprotocold-${{ env.VERSION }}-linux-arm64.tar.gz
-          asset_name: dydxprotocold-${{ env.VERSION }}-linux-arm64.tar.gz
+          asset_path: protocol/vdxprotocold-${{ env.VERSION }}-linux-arm64.tar.gz
+          asset_name: vdxprotocold-${{ env.VERSION }}-linux-arm64.tar.gz
           asset_content_type: application/gzip
           # TODO(DEC-1743): add build report and binary check sums
 
-  v4-proto-py-release:
+  proto-py-release:
     runs-on: ubuntu-latest
     environment: release
     defaults:
       run:
-        working-directory: ./v4-proto-py
+        working-directory: ./proto-py
 
     steps:
       - name: Check out repository code
@@ -100,9 +100,9 @@ jobs:
       - name: Install Requirements
         run: pip install -r requirements-publish.txt
 
-      - name: Generate v4-proto-py
+      - name: Generate proto-py
         working-directory: ./ # Move to parent folder
-        run: make v4-proto-py-gen
+        run: make proto-py-gen
 
       - name: Set Env from Tag (remove 'v' prefix)
         run: echo "VERSION=$(echo ${GITHUB_REF#refs/tags/protocol/v} | tr '-' '.')" >> $GITHUB_ENV
@@ -122,11 +122,11 @@ jobs:
         run: |
           twine upload --verbose -r pypi dist/*
 
-  v4-proto-js-release:
+  proto-js-release:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./v4-proto-js
+        working-directory: ./proto-js
 
     steps:
       - name: Check out repository code

@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/daemons/pricefeed/exchange_config"
+	"github.com/danielvindax/vd-chain/protocol/testutil/daemons/pricefeed/exchange_config"
 
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/constants/exchange_common"
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/types"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/constants/exchange_common"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/types"
 )
 
 const (

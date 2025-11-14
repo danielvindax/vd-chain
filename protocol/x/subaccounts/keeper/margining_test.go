@@ -4,12 +4,12 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	perp_testutil "github.com/dydxprotocol/v4-chain/protocol/testutil/perpetuals"
-	testutil "github.com/dydxprotocol/v4-chain/protocol/testutil/util"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	perp_testutil "github.com/danielvindax/vd-chain/protocol/testutil/perpetuals"
+	testutil "github.com/danielvindax/vd-chain/protocol/testutil/util"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	"github.com/danielvindax/vd-chain/protocol/x/subaccounts/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 	"github.com/stretchr/testify/require"
 )
 

@@ -2,13 +2,13 @@ package keeper_test
 
 import (
 	"context"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib"
 	"testing"
 
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
 
-	"github.com/dydxprotocol/v4-chain/protocol/x/rewards/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/rewards/types"
+	"github.com/danielvindax/vd-chain/protocol/x/rewards/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/rewards/types"
 	"github.com/stretchr/testify/require"
 )
 

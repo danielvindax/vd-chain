@@ -3,9 +3,9 @@ package constants
 import (
 	"math/big"
 
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	testutil "github.com/dydxprotocol/v4-chain/protocol/testutil/util"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	testutil "github.com/danielvindax/vd-chain/protocol/testutil/util"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 )
 
 var (
@@ -703,9 +703,9 @@ var (
 			),
 		},
 	}
-	Dave_Num1_1BTC_Long_49501USD_Short = satypes.Subaccount{
+	Dave_Num1_1BTC_Long_49502USD_Short = satypes.Subaccount{
 		Id:             &Dave_Num1,
-		AssetPositions: testutil.CreateUsdcAssetPositions(big.NewInt(-49_501_000_000)), // -$49,501
+		AssetPositions: testutil.CreateUsdcAssetPositions(big.NewInt(-49_502_000_000)), // -$49,502
 		PerpetualPositions: []*satypes.PerpetualPosition{
 			testutil.CreateSinglePerpetualPosition(
 				0,

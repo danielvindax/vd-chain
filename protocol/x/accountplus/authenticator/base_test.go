@@ -14,12 +14,12 @@ import (
 	authtx "github.com/cosmos/cosmos-sdk/x/auth/tx"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/cosmos/cosmos-sdk/x/bank/testutil"
-	"github.com/dydxprotocol/v4-chain/protocol/app"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	testtx "github.com/dydxprotocol/v4-chain/protocol/testutil/tx"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/authenticator"
-	smartaccounttypes "github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types"
+	"github.com/danielvindax/vd-chain/protocol/app"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	testtx "github.com/danielvindax/vd-chain/protocol/testutil/tx"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/authenticator"
+	smartaccounttypes "github.com/danielvindax/vd-chain/protocol/x/accountplus/types"
 	"github.com/stretchr/testify/suite"
 )
 

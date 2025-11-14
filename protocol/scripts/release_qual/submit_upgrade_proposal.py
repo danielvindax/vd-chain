@@ -124,7 +124,7 @@ def main():
     print("\nProceeding with upgrade proposal...")
 
     # Get current block height
-    result = run_cmd(["dydxprotocold", "status"], node=node)
+    result = run_cmd(["vindaxd", "status"], node=node)
     if result:
         try:
             status = json.loads(result)
@@ -143,7 +143,7 @@ def main():
     proposal = {
         "messages": [{
             "@type": "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
-            "authority": "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky",
+            "authority": "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm",
             "plan": {
                 "name": upgrade_name,
                 "height": str(upgrade_height),
@@ -151,7 +151,7 @@ def main():
             }
         }],
         "metadata": "",
-        "deposit": "20000000adv4tnt",
+        "deposit": "20000000avdtn",
         "title": f"Software Upgrade to {upgrade_name}",
         "summary": f"Upgrade the chain to {upgrade_name}"
     }
@@ -163,13 +163,13 @@ def main():
 
     # Submit proposal
     cmd = [
-        "dydxprotocold", "tx", "gov", "submit-proposal", "proposal.json",
+        "vindaxd", "tx", "gov", "submit-proposal", "proposal.json",
         "--from", "alice",
         "--chain-id", chain_id,
         "--yes",
         "--broadcast-mode", "sync",
         "--gas", "auto",
-        "--fees", "5000000000000000adv4tnt",
+        "--fees", "5000000000000000avdtn",
         "--keyring-backend", "test"
     ]
 
@@ -186,7 +186,7 @@ def main():
     time.sleep(5)
 
     # Get proposal ID
-    result = run_cmd(["dydxprotocold", "query", "gov", "proposals", "--output", "json"], node=node)
+    result = run_cmd(["vindaxd", "query", "gov", "proposals", "--output", "json"], node=node)
     if not result:
         os.remove("proposal.json")
         sys.exit(1)
@@ -199,12 +199,12 @@ def main():
     print(f"Voting with {len(VALIDATORS)} validators...")
     for voter in VALIDATORS:
         cmd = [
-            "dydxprotocold", "tx", "gov", "vote", str(proposal_id), "yes",
+            "vindaxd", "tx", "gov", "vote", str(proposal_id), "yes",
             "--from", voter,
             "--chain-id", chain_id,
             "--yes",
             "--gas", "auto",
-            "--fees", "5000000000000000adv4tnt",
+            "--fees", "5000000000000000avdtn",
             "--keyring-backend", "test"
         ]
         result = run_cmd(cmd, node=node)
@@ -227,7 +227,7 @@ def main():
 
     # Check status
     cmd = [
-        "dydxprotocold", "query", "gov", "proposal",
+        "vindaxd", "query", "gov", "proposal",
         str(proposal_id), "--output", "json"
     ]
     result = run_cmd(cmd, node=node)

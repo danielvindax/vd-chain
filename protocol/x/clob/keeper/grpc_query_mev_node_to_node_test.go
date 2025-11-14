@@ -7,13 +7,13 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	keepertest "github.com/dydxprotocol/v4-chain/protocol/testutil/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/memclob"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/perpetuals"
-	"github.com/dydxprotocol/v4-chain/protocol/x/prices"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	keepertest "github.com/danielvindax/vd-chain/protocol/testutil/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/memclob"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	"github.com/danielvindax/vd-chain/protocol/x/perpetuals"
+	"github.com/danielvindax/vd-chain/protocol/x/prices"
 )
 
 func TestMevNodeToNodeCalculation(t *testing.T) {

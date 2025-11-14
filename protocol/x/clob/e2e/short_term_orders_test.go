@@ -8,21 +8,21 @@ import (
 	"github.com/stretchr/testify/require"
 	"golang.org/x/exp/slices"
 
-	"github.com/dydxprotocol/v4-chain/protocol/indexer"
-	indexerevents "github.com/dydxprotocol/v4-chain/protocol/indexer/events"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/indexer_manager"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/msgsender"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/off_chain_updates"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	clobtestutils "github.com/dydxprotocol/v4-chain/protocol/testutil/clob"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	testmsgs "github.com/dydxprotocol/v4-chain/protocol/testutil/msgs"
-	testtx "github.com/dydxprotocol/v4-chain/protocol/testutil/tx"
-	testutil "github.com/dydxprotocol/v4-chain/protocol/testutil/util"
-	assettypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/indexer"
+	indexerevents "github.com/danielvindax/vd-chain/protocol/indexer/events"
+	"github.com/danielvindax/vd-chain/protocol/indexer/indexer_manager"
+	"github.com/danielvindax/vd-chain/protocol/indexer/msgsender"
+	"github.com/danielvindax/vd-chain/protocol/indexer/off_chain_updates"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	clobtestutils "github.com/danielvindax/vd-chain/protocol/testutil/clob"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	testmsgs "github.com/danielvindax/vd-chain/protocol/testutil/msgs"
+	testtx "github.com/danielvindax/vd-chain/protocol/testutil/tx"
+	testutil "github.com/danielvindax/vd-chain/protocol/testutil/util"
+	assettypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 )
 
 func TestPlaceOrder(t *testing.T) {
@@ -728,9 +728,11 @@ func TestShortTermOrderReplacements(t *testing.T) {
 						PlaceOrder_Alice_Num0_Id0_Clob0_Buy5_Price10_GTB20,
 					},
 					orderIdsExpectations: map[clobtypes.OrderId]orderIdExpectations{
-						PlaceOrder_Alice_Num0_Id0_Clob0_Buy6_Price10_GTB20.Order.OrderId: {
+						// When GTB is equal, replacement is allowed if new order hash > existing order hash.
+						// Buy5 has a larger hash than Buy6, so Buy5 replaces Buy6.
+						PlaceOrder_Alice_Num0_Id0_Clob0_Buy5_Price10_GTB20.Order.OrderId: {
 							shouldExistOnMemclob: true,
-							expectedOrder:        PlaceOrder_Alice_Num0_Id0_Clob0_Buy6_Price10_GTB20.Order,
+							expectedOrder:        PlaceOrder_Alice_Num0_Id0_Clob0_Buy5_Price10_GTB20.Order,
 						},
 					},
 				},

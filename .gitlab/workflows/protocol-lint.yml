@@ -1,0 +1,44 @@
+stages:
+  - lint
+
+# Always run pipeline on any push or merge request
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_PIPELINE_SOURCE == "push"
+    - when: always
+
+# --- Job 1: validate-yaml ---
+validate_yaml:
+  stage: lint
+  image: python:3.11
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - protocol/**/*
+  before_script:
+    - pip install --no-cache-dir yamllint
+    - cd protocol
+  script:
+    - yamllint .golangci.yml .github/workflows/**.yml buf.work.yaml
+
+# --- Job 2: golangci-lint ---
+golangci_lint:
+  stage: lint
+  image: golang:1.25   # custom image with Go, make, golangci-lint, etc.
+  cache:
+    key: "go-modules"
+    policy: pull-push
+    paths:
+      - /go/pkg/mod
+      - /root/.cache/go-build
+      - /root/.cache/golangci-lint
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - protocol/**/*
+  before_script:
+    - cd protocol
+  script:
+    - go env
+    - make lint

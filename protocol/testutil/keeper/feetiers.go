@@ -2,17 +2,17 @@ package keeper
 
 import (
 	dbm "github.com/cosmos/cosmos-db"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
 
 	storetypes "cosmossdk.io/store/types"
 	"github.com/cosmos/cosmos-sdk/codec"
-	affiliateskeeper "github.com/dydxprotocol/v4-chain/protocol/x/affiliates/keeper"
-	delaymsgtypes "github.com/dydxprotocol/v4-chain/protocol/x/delaymsg/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/feetiers/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/feetiers/types"
-	statskeeper "github.com/dydxprotocol/v4-chain/protocol/x/stats/keeper"
-	vaultkeeper "github.com/dydxprotocol/v4-chain/protocol/x/vault/keeper"
+	affiliateskeeper "github.com/danielvindax/vd-chain/protocol/x/affiliates/keeper"
+	delaymsgtypes "github.com/danielvindax/vd-chain/protocol/x/delaymsg/types"
+	"github.com/danielvindax/vd-chain/protocol/x/feetiers/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/feetiers/types"
+	statskeeper "github.com/danielvindax/vd-chain/protocol/x/stats/keeper"
+	vaultkeeper "github.com/danielvindax/vd-chain/protocol/x/vault/keeper"
 )
 
 func createFeeTiersKeeper(

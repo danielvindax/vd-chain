@@ -1,14 +1,14 @@
 package types
 
 import (
+	"github.com/danielvindax/vd-chain/protocol/indexer/msgsender"
 	mapset "github.com/deckarep/golang-set/v2"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/msgsender"
 )
 
 type OffchainUpdateMessageType int
 
 // Enum used to track the types of messages, should correspond to the types of messages defined in
-// https://github.com/dydxprotocol/v4-proto/blob/main/dydxprotocol/indexer/off_chain_updates/off_chain_updates.proto
+// https://github.com/vindax/v4-proto/blob/main/vindax/indexer/off_chain_updates/off_chain_updates.proto
 const (
 	PlaceMessageType OffchainUpdateMessageType = iota
 	RemoveMessageType

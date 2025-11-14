@@ -3,10 +3,10 @@ package marketmap_test
 import (
 	"testing"
 
+	"github.com/danielvindax/vd-chain/protocol/lib/marketmap"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 	slinkytypes "github.com/dydxprotocol/slinky/pkg/types"
 	marketmaptypes "github.com/dydxprotocol/slinky/x/marketmap/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/marketmap"
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
 	"github.com/stretchr/testify/require"
 )
 

@@ -171,6 +171,11 @@ func BigDivCeil(a *big.Int, b *big.Int) *big.Int {
 		result.Add(result, big.NewInt(1))
 	}
 
+	// Normalize zero values to ensure abs is nil instead of empty
+	if result.Sign() == 0 {
+		return big.NewInt(0)
+	}
+
 	return result
 }
 

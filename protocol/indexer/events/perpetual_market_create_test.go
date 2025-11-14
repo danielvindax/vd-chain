@@ -3,9 +3,9 @@ package events
 import (
 	"testing"
 
-	v1types "github.com/dydxprotocol/v4-chain/protocol/indexer/protocol/v1/types"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
+	v1types "github.com/danielvindax/vd-chain/protocol/indexer/protocol/v1/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
 
 	"github.com/stretchr/testify/require"
 )

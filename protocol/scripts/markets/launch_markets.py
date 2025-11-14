@@ -14,15 +14,15 @@ import json
 from typing import Dict, Any, List
 import time
 
-alice_address = "dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4"
-bob_address = "dydx10fx7sy6ywd5senxae9dwytf8jxek3t2gcen2vs"
+alice_address = "vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642"
+bob_address = "vindax10fx7sy6ywd5senxae9dwytf8jxek3t2gcf2z90"
 mainnet_node = "https://dydx-ops-rpc.kingnodes.com:443"
 mainnet_chain = "dydx-mainnet-1"
 PROPOSAL_STATUS_PASSED = 3
 
 def get_proposal_id(node, chain):
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "query",
         "gov",
         "proposals",
@@ -37,7 +37,7 @@ def get_proposal_id(node, chain):
 def vote_for(node, chain, proposal_id, person):
     print("voting as " + person)
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "tx",
         "gov",
         "vote",
@@ -47,7 +47,7 @@ def vote_for(node, chain, proposal_id, person):
         "--node=" + node,
         "--chain-id=" + chain,
         "--keyring-backend=test",
-        "--fees=5000000000000000adv4tnt",
+        "--fees=5000000000000000avdtn",
         "--yes"
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)
@@ -58,7 +58,7 @@ def make_alice_authority(node, chain):
     print("Making alice an authority")
     # Check first to see if alice is already an authority
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "query",
         "marketmap",
         "params",
@@ -77,16 +77,16 @@ def make_alice_authority(node, chain):
     with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as tmp_file:
         authority_proposal = {
             "title": "Make alice an authority for launching new markets",
-            "deposit": "10000000000000000000000adv4tnt", 
+            "deposit": "10000000000000000000000avdtn", 
             "summary": "Make alice an authority for launching new markets",
             "messages": [
                 {
                     "@type": "/slinky.marketmap.v1.MsgParams",
-                    "authority": "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky",
+                    "authority": "vindax1vlthgax23ca9syk7xgaz347xmf4nunefwppm9c",
                     "params": {
-                        "admin": "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky",
+                        "admin": "vindax1vlthgax23ca9syk7xgaz347xmf4nunefwppm9c",
                         "market_authorities": [
-                            "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky",
+                            "vindax1vlthgax23ca9syk7xgaz347xmf4nunefwppm9c",
                             alice_address
                         ]
                     }
@@ -97,14 +97,14 @@ def make_alice_authority(node, chain):
         tmp_file_path = tmp_file.name
     print("submitting proposal for alice to be an authority")
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "tx",
         "gov",
         "submit-proposal",
         tmp_file_path,
         "--from=alice",
         "--gas=auto", 
-        "--fees=10000000000000000000000adv4tnt",
+        "--fees=10000000000000000000000avdtn",
         "--node=" + node,
         "--chain-id=" + chain,
         "--keyring-backend=test", 
@@ -129,7 +129,7 @@ def make_alice_authority(node, chain):
     time.sleep(120)
     # check if the proposal passed
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "query",
         "gov",
         "proposal",
@@ -170,7 +170,7 @@ def load_yml(file_path) -> Dict[str, Any]:
 def sync_market_map(temp_dir: str, node, chain):
     # Query mainnet market map and testing env market map.
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "query",
         "marketmap",
         "market-map",
@@ -182,7 +182,7 @@ def sync_market_map(temp_dir: str, node, chain):
         subprocess.run(cmd, stdout=f)
         
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "query",
         "marketmap", 
         "market-map",
@@ -230,7 +230,7 @@ def main():
                         # Execute the marketmap create-markets command
                         print(f"Adding {name} to market map")
                         cmd = [
-                            "dydxprotocold",
+                            "vindaxd",
                             "tx",
                             "marketmap",
                             "create-markets",
@@ -239,7 +239,7 @@ def main():
                             "--chain-id=dydxprotocol-testnet", 
                             "--from=alice",
                             "--keyring-backend=test",
-                            "--fees=5000000000000000adv4tnt", 
+                            "--fees=5000000000000000avdtn", 
                             "--yes"
                         ]
                         
@@ -256,7 +256,7 @@ def main():
                         print("Launching market: ", market_data['marketmap']['ticker']['currency_pair']['Base'] + '-' + market_data['marketmap']['ticker']['currency_pair']['Quote'])
                         
                         cmd = [
-                            "dydxprotocold",
+                            "vindaxd",
                             "tx", 
                             "listing",
                             "create-market",
@@ -266,7 +266,7 @@ def main():
                             "--node=https://validator.v4staging.dydx.exchange:443",
                             "--chain-id=dydxprotocol-testnet",
                             "--keyring-backend=test",
-                            "--fees=11270250000000000adv4tnt",
+                            "--fees=11270250000000000avdtn",
                             "--gas=auto",
                             "--yes"
                         ]

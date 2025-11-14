@@ -3,12 +3,12 @@ package memclob
 import (
 	"testing"
 
-	clobtest "github.com/dydxprotocol/v4-chain/protocol/testutil/clob"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	testutil_memclob "github.com/dydxprotocol/v4-chain/protocol/testutil/memclob"
-	sdktest "github.com/dydxprotocol/v4-chain/protocol/testutil/sdk"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	clobtest "github.com/danielvindax/vd-chain/protocol/testutil/clob"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	testutil_memclob "github.com/danielvindax/vd-chain/protocol/testutil/memclob"
+	sdktest "github.com/danielvindax/vd-chain/protocol/testutil/sdk"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 )
 
 func TestPlaceOrder_LongTerm(t *testing.T) {

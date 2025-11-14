@@ -1,7 +1,7 @@
 package types
 
 import (
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
 )
 
 // GetVaultClobOrderClientId returns the client ID for a CLOB order where

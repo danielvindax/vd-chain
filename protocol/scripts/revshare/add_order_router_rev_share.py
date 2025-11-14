@@ -31,7 +31,7 @@ PROPOSAL_STATUS_PASSED = 3
 def vote_for(node, chain, proposal_id, person):
     print("voting as " + person)
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "tx",
         "gov",
         "vote",
@@ -41,7 +41,7 @@ def vote_for(node, chain, proposal_id, person):
         "--node=" + node,
         "--chain-id=" + chain,
         "--keyring-backend=test",
-        "--fees=5000000000000000adv4tnt",
+        "--fees=5000000000000000avdtn",
         "--yes"
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)
@@ -71,7 +71,7 @@ def load_yml(file_path) -> Dict[str, Any]:
 
 def get_proposal_id(node, chain):
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "query",
         "gov",
         "proposals",
@@ -99,15 +99,15 @@ def main():
                 order_router_rev_share_msg = {
                     "messages": [
                         {
-                        "@type": "/dydxprotocol.revshare.MsgSetOrderRouterRevShare",
-                        "authority": "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky",
+                        "@type": "/vindax.revshare.MsgSetOrderRouterRevShare",
+                        "authority": "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm",
                         "order_router_rev_share": {
                             "address": args.order_router_addr,
                             "sharePpm": args.order_router_ppm,
                         }
                         }
                     ],
-                    "deposit": "10000000000000000000000adv4tnt",
+                    "deposit": "10000000000000000000000avdtn",
                     "metadata": "",
                     "title": "Add order router rev share for " + args.order_router_addr,
                     "summary": "Add order router rev share for " + args.order_router_addr
@@ -116,14 +116,14 @@ def main():
                 tmp_file_path = tmp_file.name
             print("submitting proposal for order router rev share")
             cmd = [
-                "dydxprotocold",
+                "vindaxd",
                 "tx",
                 "gov",
                 "submit-proposal",
                 tmp_file_path,
                 "--from=alice",
                 "--gas=auto", 
-                "--fees=10000000000000000000000adv4tnt",
+                "--fees=10000000000000000000000avdtn",
                 "--node=" + args.node,
                 "--chain-id=" + args.chain_id,
                 "--keyring-backend=test", 
@@ -148,7 +148,7 @@ def main():
             time.sleep(120)
             # check if the proposal passed
             cmd = [
-                "dydxprotocold",
+                "vindaxd",
                 "query",
                 "gov",
                 "proposal",

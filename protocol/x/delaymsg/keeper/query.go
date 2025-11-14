@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/dydxprotocol/v4-chain/protocol/x/delaymsg/types"
+	"github.com/danielvindax/vd-chain/protocol/x/delaymsg/types"
 )
 
 var _ types.QueryServer = Keeper{}

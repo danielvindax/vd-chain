@@ -4,10 +4,10 @@ import (
 	"fmt"
 
 	"github.com/cosmos/gogoproto/proto"
-	ocutypes "github.com/dydxprotocol/v4-chain/protocol/indexer/off_chain_updates/types"
-	v1types "github.com/dydxprotocol/v4-chain/protocol/indexer/protocol/v1/types"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	ocutypes "github.com/danielvindax/vd-chain/protocol/indexer/off_chain_updates/types"
+	v1types "github.com/danielvindax/vd-chain/protocol/indexer/protocol/v1/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 )
 
 // GetOffchainUpdatesV1 unmarshals messages in offchain updates to OffchainUpdateV1.

@@ -4,17 +4,17 @@ import (
 	"errors"
 	"testing"
 
-	daemontypes "github.com/dydxprotocol/v4-chain/protocol/daemons/types"
+	daemontypes "github.com/danielvindax/vd-chain/protocol/daemons/types"
 
 	"cosmossdk.io/math"
-	pricefeed_cosntants "github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/daemons/pricefeed"
+	pricefeed_cosntants "github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/constants"
+	"github.com/danielvindax/vd-chain/protocol/testutil/daemons/pricefeed"
 
 	"cosmossdk.io/log"
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )

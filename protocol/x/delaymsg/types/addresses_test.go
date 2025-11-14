@@ -1,11 +1,11 @@
 package types_test
 
 import (
-	"github.com/dydxprotocol/v4-chain/protocol/x/delaymsg/types"
+	"github.com/danielvindax/vd-chain/protocol/x/delaymsg/types"
 	"github.com/stretchr/testify/require"
 	"testing"
 )
 
 func TestModuleAddress(t *testing.T) {
-	require.Equal(t, "dydx1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5zx6tr", types.ModuleAddress.String())
+	require.Equal(t, "vindax1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5jljzu", types.ModuleAddress.String())
 }

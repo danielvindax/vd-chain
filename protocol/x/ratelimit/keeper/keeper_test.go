@@ -11,20 +11,20 @@ import (
 	cometbfttypes "github.com/cometbft/cometbft/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	big_testutil "github.com/dydxprotocol/v4-chain/protocol/testutil/big"
-	blocktimetypes "github.com/dydxprotocol/v4-chain/protocol/x/blocktime/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/ratelimit/types"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	big_testutil "github.com/danielvindax/vd-chain/protocol/testutil/big"
+	blocktimetypes "github.com/danielvindax/vd-chain/protocol/x/blocktime/types"
+	"github.com/danielvindax/vd-chain/protocol/x/ratelimit/types"
 	"github.com/stretchr/testify/require"
 )
 
 const (
 	testDenom    = "ibc/xxx"
 	testDenom2   = "testdenom2"
-	testAddress1 = "dydx16h7p7f4dysrgtzptxx2gtpt5d8t834g9dj830z"
-	testAddress2 = "dydx168pjt8rkru35239fsqvz7rzgeclakp49zx3aum"
-	testAddress3 = "dydx1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wvmh70"
+	testAddress1 = "vindax16h7p7f4dysrgtzptxx2gtpt5d8t834g9dz7exa"
+	testAddress2 = "vindax168pjt8rkru35239fsqvz7rzgeclakp49zkg44y"
+	testAddress3 = "vindax1fjg6zp6vv8t9wvy4lps03r5l4g7tkjw9wuzlhs"
 )
 
 func TestSetGetDenomCapacity(t *testing.T) {

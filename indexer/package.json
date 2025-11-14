@@ -7,7 +7,7 @@
     "services/*"
   ],
   "scripts": {
-    "build:all": "pnpm recursive run build --workspace-concurrency=Infinity",
+    "build:all": "pnpm recursive run --workspace-concurrency=Infinity build",
     "build:prod:all": "pnpm recursive run build:prod",
     "build:watch:all": "pnpm run --parallel build:watch",
     "lint:all": "pnpm run --parallel lint",
@@ -20,9 +20,13 @@
   "author": "",
   "license": "AGPL-3.0",
   "dependencies": {
-    "@milahu/patch-package": "6.4.14"
+    "@milahu/patch-package": "6.4.14",
+    "bignumber.js": "^9.3.1"
   },
   "devDependencies": {
+    "@types/bignumber.js": "^5.0.4",
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^18.19.31",
     "@types/ws": "8.5.10"
   },
   "packageManager": "pnpm@10.12.4+sha1.88a0ccfe72d6345dede50dc9d6158400be2420eb"

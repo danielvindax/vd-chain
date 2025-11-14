@@ -5,21 +5,21 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/liquidation/api"
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
+	"github.com/danielvindax/vd-chain/protocol/daemons/liquidation/api"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
 
 	"github.com/cometbft/cometbft/types"
 
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	clobtest "github.com/dydxprotocol/v4-chain/protocol/testutil/clob"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	testutil "github.com/dydxprotocol/v4-chain/protocol/testutil/util"
-	assettypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	feetiertypes "github.com/dydxprotocol/v4-chain/protocol/x/feetiers/types"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	prices "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	clobtest "github.com/danielvindax/vd-chain/protocol/testutil/clob"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	testutil "github.com/danielvindax/vd-chain/protocol/testutil/util"
+	assettypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	feetiertypes "github.com/danielvindax/vd-chain/protocol/x/feetiers/types"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	prices "github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -482,7 +482,7 @@ func TestLiquidationConfig(t *testing.T) {
 				// Carl_Num0 is irrelevant to the test, but is used to seed the insurance fund.
 				constants.Carl_Num0_1BTC_Short_100000USD,
 				constants.Dave_Num0_1BTC_Long_49501USD_Short,
-				constants.Dave_Num1_1BTC_Long_49501USD_Short,
+				constants.Dave_Num1_1BTC_Long_49502USD_Short,
 			},
 
 			placedMatchableOrders: []clobtypes.MatchableOrder{

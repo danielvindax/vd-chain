@@ -8,9 +8,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	affiliatekeeper "github.com/dydxprotocol/v4-chain/protocol/x/affiliates/keeper"
-	affiliatetypes "github.com/dydxprotocol/v4-chain/protocol/x/affiliates/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	affiliatekeeper "github.com/danielvindax/vd-chain/protocol/x/affiliates/keeper"
+	affiliatetypes "github.com/danielvindax/vd-chain/protocol/x/affiliates/types"
 )
 
 func setDefaultAffiliateTiersForSlidingAffiliates(ctx sdk.Context, affiliateKeeper affiliatekeeper.Keeper) {

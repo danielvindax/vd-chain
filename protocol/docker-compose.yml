@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  dydxprotocold0:
-    image: local:dydxprotocol
+  vindaxd0:
+    image: local:vindax
     entrypoint:
       - cosmovisor
       - run
@@ -12,9 +12,9 @@ services:
       # Change to `debug` for more verbose log-level.
       - info
       - --home
-      - /dydxprotocol/chain/.alice
+      - /vindax/chain/.alice
       - --p2p.persistent_peers
-      - "17e5e45691f0d01449c84fd4ae87279578cdd7ec@dydxprotocold0:26656,b69182310be02559483e42c77b7b104352713166@dydxprotocold1:26656,47539956aaa8e624e0f1d926040e54908ad0eb44@dydxprotocold2:26656,5882428984d83b03d0c907c1f0af343534987052@dydxprotocold3:26656"
+      - "17e5e45691f0d01449c84fd4ae87279578cdd7ec@vindaxd0:26656,b69182310be02559483e42c77b7b104352713166@vindaxd1:26656,47539956aaa8e624e0f1d926040e54908ad0eb44@vindaxd2:26656,5882428984d83b03d0c907c1f0af343534987052@vindaxd3:26656"
       - --bridge-daemon-eth-rpc-endpoint
       - "${ETH_RPC_ENDPOINT}"
       - --dd-error-tracking-format
@@ -23,21 +23,28 @@ services:
       - "4294967295" # Effectively disable the daemon monitor because bridge daemon is flaky in localnet.
       - --grpc-streaming-enabled
       - "true"
+      # Enable Kafka publishing to indexer Kafka inside Docker network
+      # - --indexer-kafka-conn-str
+      # - kafka:9092
+      # - --indexer-kafka-max-retry
+      # - "5"
     environment:
       # See https://docs.datadoghq.com/profiler/enabling/go/ for DD_ specific environment variables
       - DD_ENV=localnet_${USER}
       - DD_AGENT_HOST=datadog-agent
-      - DAEMON_HOME=/dydxprotocol/chain/.alice
+      - DAEMON_HOME=/vindax/chain/.alice
     volumes:
-      - ./localnet/dydxprotocol0:/dydxprotocol/chain/.alice/data
+      - ./localnet/vindax0:/vindax/chain/.alice/data
     ports:
       - "26657:26657"
       - "9090:9090"
       - "9092:9092" # full node streaming
       - "1317:1317"
-
-  dydxprotocold1:
-    image: local:dydxprotocol
+    networks:
+      - default
+      - indexer_default
+  vindaxd1:
+    image: local:vindax  
     entrypoint:
        - cosmovisor
        - run
@@ -45,9 +52,9 @@ services:
        - --log_level
        - error
        - --home
-       - /dydxprotocol/chain/.bob
+       - /vindax/chain/.bob
        - --p2p.persistent_peers
-       - "17e5e45691f0d01449c84fd4ae87279578cdd7ec@dydxprotocold0:26656,b69182310be02559483e42c77b7b104352713166@dydxprotocold1:26656,47539956aaa8e624e0f1d926040e54908ad0eb44@dydxprotocold2:26656,5882428984d83b03d0c907c1f0af343534987052@dydxprotocold3:26656"
+       - "17e5e45691f0d01449c84fd4ae87279578cdd7ec@vindaxd0:26656,b69182310be02559483e42c77b7b104352713166@vindaxd1:26656,47539956aaa8e624e0f1d926040e54908ad0eb44@vindaxd2:26656,5882428984d83b03d0c907c1f0af343534987052@vindaxd3:26656"
        - --bridge-daemon-eth-rpc-endpoint
        - "${ETH_RPC_ENDPOINT}"
        - --dd-error-tracking-format
@@ -58,14 +65,14 @@ services:
       # See https://docs.datadoghq.com/profiler/enabling/go/ for DD_ specific environment variables
       - DD_ENV=localnet_${USER}
       - DD_AGENT_HOST=datadog-agent
-      - DAEMON_HOME=/dydxprotocol/chain/.bob
+      - DAEMON_HOME=/vindax/chain/.bob
     volumes:
-      - ./localnet/dydxprotocol1:/dydxprotocol/chain/.bob/data
+      - ./localnet/vindax1:/vindax/chain/.bob/data
     ports:
       - "26658:26657"
 
-  dydxprotocold2:
-    image: local:dydxprotocol
+  vindaxd2:
+    image: local:vindax
     entrypoint:
        - cosmovisor
        - run
@@ -73,9 +80,9 @@ services:
        - --log_level
        - error
        - --home
-       - /dydxprotocol/chain/.carl
+       - /vindax/chain/.carl
        - --p2p.persistent_peers
-       - "17e5e45691f0d01449c84fd4ae87279578cdd7ec@dydxprotocold0:26656,b69182310be02559483e42c77b7b104352713166@dydxprotocold1:26656,47539956aaa8e624e0f1d926040e54908ad0eb44@dydxprotocold2:26656,5882428984d83b03d0c907c1f0af343534987052@dydxprotocold3:26656"
+       - "17e5e45691f0d01449c84fd4ae87279578cdd7ec@vindaxd0:26656,b69182310be02559483e42c77b7b104352713166@vindaxd1:26656,47539956aaa8e624e0f1d926040e54908ad0eb44@vindaxd2:26656,5882428984d83b03d0c907c1f0af343534987052@vindaxd3:26656"
        - --bridge-daemon-eth-rpc-endpoint
        - "${ETH_RPC_ENDPOINT}"
        - --dd-error-tracking-format
@@ -86,12 +93,12 @@ services:
       # See https://docs.datadoghq.com/profiler/enabling/go/ for DD_ specific environment variables
       - DD_ENV=localnet_${USER}
       - DD_AGENT_HOST=datadog-agent
-      - DAEMON_HOME=/dydxprotocol/chain/.carl
+      - DAEMON_HOME=/vindax/chain/.carl
     volumes:
-      - ./localnet/dydxprotocol2:/dydxprotocol/chain/.carl/data
+      - ./localnet/vindax2:/vindax/chain/.carl/data
 
-  dydxprotocold3:
-    image: local:dydxprotocol
+  vindaxd3:
+    image: local:vindax
     entrypoint:
        - cosmovisor
        - run
@@ -99,9 +106,9 @@ services:
        - --log_level
        - error
        - --home
-       - /dydxprotocol/chain/.dave
+       - /vindax/chain/.dave
        - --p2p.persistent_peers
-       - "17e5e45691f0d01449c84fd4ae87279578cdd7ec@dydxprotocold0:26656,b69182310be02559483e42c77b7b104352713166@dydxprotocold1:26656,47539956aaa8e624e0f1d926040e54908ad0eb44@dydxprotocold2:26656,5882428984d83b03d0c907c1f0af343534987052@dydxprotocold3:26656"
+       - "17e5e45691f0d01449c84fd4ae87279578cdd7ec@vindaxd0:26656,b69182310be02559483e42c77b7b104352713166@vindaxd1:26656,47539956aaa8e624e0f1d926040e54908ad0eb44@vindaxd2:26656,5882428984d83b03d0c907c1f0af343534987052@vindaxd3:26656"
        - --bridge-daemon-eth-rpc-endpoint
        - "${ETH_RPC_ENDPOINT}"
        - --dd-error-tracking-format
@@ -112,25 +119,19 @@ services:
       # See https://docs.datadoghq.com/profiler/enabling/go/ for DD_ specific environment variables
       - DD_ENV=localnet_${USER}
       - DD_AGENT_HOST=datadog-agent
-      - DAEMON_HOME=/dydxprotocol/chain/.dave
+      - DAEMON_HOME=/vindax/chain/.dave
     volumes:
-      - ./localnet/dydxprotocol3:/dydxprotocol/chain/.dave/data
+      - ./localnet/vindax3:/vindax/chain/.dave/data
   slinky0:
-    image: ghcr.io/skip-mev/slinky-sidecar:v1.1.0
-    entrypoint: >
-      sh -c "slinky --marketmap-provider dydx_migration_api --oracle-config /etc/slinky/oracle.json --log-std-out-level error"
-    environment:
-      - SLINKY_CONFIG_PROVIDERS_RAYDIUM_API_API_ENDPOINTS_0_URL=${RAYDIUM_URL}
-      - SLINKY_CONFIG_PROVIDERS_UNISWAPV3_API-BASE_API_ENDPOINTS_0_URL=${UNISWAPV3_BASE_URL}
-      - SLINKY_CONFIG_PROVIDERS_UNISWAPV3_API-ETHEREUM_API_ENDPOINTS_0_URL=${UNISWAPV3_ETHEREUM_URL}
-      - SLINKY_CONFIG_PROVIDERS_RAYDIUM_API_API_INTERVAL=${PROVIDER_NODE_QUERY_INTERVAL}
-      - SLINKY_CONFIG_PROVIDERS_UNISWAPV3_API-BASE_API_INTERVAL=${PROVIDER_NODE_QUERY_INTERVAL}
-      - SLINKY_CONFIG_PROVIDERS_UNISWAPV3_API-ETHEREUM_API_INTERVAL=${PROVIDER_NODE_QUERY_INTERVAL}
-    volumes:
-      - ./contrib/slinky:/etc/slinky
+    image: ghcr.io/vindax/slinky-sidecar:v1.3.3
+    entrypoint: [
+      "slinky",
+      "--market-map-endpoint", "vindaxd0:9090",
+    ]
     ports:
       - "8080:8080"
       - "8002:8002" # metrics
+
   prometheus:
     image: prom/prometheus:latest
     volumes:
@@ -149,3 +150,7 @@ services:
     ports:
       - "8125:8215"
       - "8126:8126"
+
+networks:
+  indexer_default:
+    external: true

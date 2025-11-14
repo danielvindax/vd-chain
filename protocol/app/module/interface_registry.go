@@ -77,39 +77,39 @@ func NewInterfaceRegistry(addrPrefix string, valAddrPrefix string) (types.Interf
 			// https://github.com/cosmos/cosmos-sdk/issues/18722 is fixed, replace this with the cosmos.msg.v1.signing
 			// annotation on the protos.
 			CustomGetSigners: map[protoreflect.FullName]signing.GetSignersFunc{
-				"dydxprotocol.clob.MsgBatchCancel": getLegacyMsgSignerFn(
+				"vindax.clob.MsgBatchCancel": getLegacyMsgSignerFn(
 					[]string{"subaccount_id", "owner"},
 				),
-				"dydxprotocol.clob.MsgCancelOrder": getLegacyMsgSignerFn(
+				"vindax.clob.MsgCancelOrder": getLegacyMsgSignerFn(
 					[]string{"order_id", "subaccount_id", "owner"},
 				),
-				"dydxprotocol.clob.MsgPlaceOrder": getLegacyMsgSignerFn(
+				"vindax.clob.MsgPlaceOrder": getLegacyMsgSignerFn(
 					[]string{"order", "order_id", "subaccount_id", "owner"},
 				),
-				"dydxprotocol.sending.MsgCreateTransfer": getLegacyMsgSignerFn(
+				"vindax.sending.MsgCreateTransfer": getLegacyMsgSignerFn(
 					[]string{"transfer", "sender", "owner"},
 				),
-				"dydxprotocol.sending.MsgWithdrawFromSubaccount": getLegacyMsgSignerFn(
+				"vindax.sending.MsgWithdrawFromSubaccount": getLegacyMsgSignerFn(
 					[]string{"sender", "owner"},
 				),
-				"dydxprotocol.vault.MsgDepositToMegavault": getLegacyMsgSignerFn(
+				"vindax.vault.MsgDepositToMegavault": getLegacyMsgSignerFn(
 					[]string{"subaccount_id", "owner"},
 				),
-				"dydxprotocol.vault.MsgWithdrawFromMegavault": getLegacyMsgSignerFn(
+				"vindax.vault.MsgWithdrawFromMegavault": getLegacyMsgSignerFn(
 					[]string{"subaccount_id", "owner"},
 				),
-				"dydxprotocol.clob.MsgUpdateLeverage": getLegacyMsgSignerFn(
+				"vindax.clob.MsgUpdateLeverage": getLegacyMsgSignerFn(
 					[]string{"subaccount_id", "owner"},
 				),
-				"dydxprotocol.listing.MsgCreateMarketPermissionless": getLegacyMsgSignerFn(
+				"vindax.listing.MsgCreateMarketPermissionless": getLegacyMsgSignerFn(
 					[]string{"subaccount_id", "owner"},
 				),
 
 				// App injected messages have no signers.
-				"dydxprotocol.bridge.MsgAcknowledgeBridges":  noSigners,
-				"dydxprotocol.clob.MsgProposedOperations":    noSigners,
-				"dydxprotocol.perpetuals.MsgAddPremiumVotes": noSigners,
-				"dydxprotocol.prices.MsgUpdateMarketPrices":  noSigners,
+				"vindax.bridge.MsgAcknowledgeBridges":  noSigners,
+				"vindax.clob.MsgProposedOperations":    noSigners,
+				"vindax.perpetuals.MsgAddPremiumVotes": noSigners,
+				"vindax.prices.MsgUpdateMarketPrices":  noSigners,
 			},
 		},
 	})

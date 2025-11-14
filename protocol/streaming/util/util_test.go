@@ -7,11 +7,11 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	ocutypes "github.com/dydxprotocol/v4-chain/protocol/indexer/off_chain_updates/types"
-	pv1types "github.com/dydxprotocol/v4-chain/protocol/indexer/protocol/v1/types"
-	stypes "github.com/dydxprotocol/v4-chain/protocol/indexer/shared/types"
-	"github.com/dydxprotocol/v4-chain/protocol/streaming/util"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	ocutypes "github.com/danielvindax/vd-chain/protocol/indexer/off_chain_updates/types"
+	pv1types "github.com/danielvindax/vd-chain/protocol/indexer/protocol/v1/types"
+	stypes "github.com/danielvindax/vd-chain/protocol/indexer/shared/types"
+	"github.com/danielvindax/vd-chain/protocol/streaming/util"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 )
 
 func _ToPtr[V any](v V) *V {
@@ -20,11 +20,11 @@ func _ToPtr[V any](v V) *V {
 
 func TestGetOffChainUpdateV1SubaccountId(t *testing.T) {
 	indexerSubaccountId := pv1types.IndexerSubaccountId{
-		Owner:  "dydx1gm0w9nymewm9z4u7wtyw6auru562xkhtftk80p",
+		Owner:  "vindax1gm0w9nymewm9z4u7wtyw6auru562xkhtftk80p",
 		Number: uint32(1337),
 	}
 	subaccountId := satypes.SubaccountId{
-		Owner:  "dydx1gm0w9nymewm9z4u7wtyw6auru562xkhtftk80p",
+		Owner:  "vindax1gm0w9nymewm9z4u7wtyw6auru562xkhtftk80p",
 		Number: uint32(1337),
 	}
 	orderId := pv1types.IndexerOrderId{

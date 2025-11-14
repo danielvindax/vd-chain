@@ -73,14 +73,14 @@ export const invalidTicker: string = 'INVALID-INVALID';
 export const dydxChain: string = 'dydx';
 export const defaultAddress: string = 'dydx1n88uc38xhjgxzw9nwre4ep2c8ga4fjxc565lnf';
 export const defaultAddress2: string = 'dydx1n88uc38xhjgxzw9nwre4ep2c8ga4fjxc575lnf';
-export const defaultAddress3: string = 'dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4';
+export const defaultAddress3: string = 'vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642';
 export const blockedAddress: string = 'dydx1f9k5qldwmqrnwy8hcgp4fw6heuvszt35egvtx2';
 // Vault address for vault id 0 was generated using
 // script protocol/scripts/vault/get_vault.go
-export const vaultAddress: string = 'dydx1c0m5x87llaunl5sgv3q5vd7j5uha26d2q2r2q0';
+export const vaultAddress: string = 'vindax1c0m5x87llaunl5sgv3q5vd7j5uha26d2q66zfs';
 
 // ============== Subaccounts ==============
-export const defaultWalletAddress: string = 'dydx199tqg4wdlnu4qjlxchpd7seg454937hjrknju4';
+export const defaultWalletAddress: string = 'vindax199tqg4wdlnu4qjlxchpd7seg454937hjrx2642';
 
 export const defaultSubaccount: SubaccountCreateObject = {
   address: defaultAddress,

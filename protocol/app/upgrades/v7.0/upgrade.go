@@ -5,19 +5,19 @@ import (
 	"fmt"
 	"math/big"
 
-	listingtypes "github.com/dydxprotocol/v4-chain/protocol/x/listing/types"
+	listingtypes "github.com/danielvindax/vd-chain/protocol/x/listing/types"
 
 	upgradetypes "cosmossdk.io/x/upgrade/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/slinky"
-	listingkeeper "github.com/dydxprotocol/v4-chain/protocol/x/listing/keeper"
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
-	vaultkeeper "github.com/dydxprotocol/v4-chain/protocol/x/vault/keeper"
-	vaulttypes "github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/lib/slinky"
+	listingkeeper "github.com/danielvindax/vd-chain/protocol/x/listing/keeper"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	vaultkeeper "github.com/danielvindax/vd-chain/protocol/x/vault/keeper"
+	vaulttypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
 )
 
 const (
@@ -83,7 +83,7 @@ func initializeModuleAccs(ctx sdk.Context, ak authkeeper.AccountKeeper) {
 
 		// Account has not been initialized at all. Initialize it as module.
 		// Implementation taken from
-		// https://github.com/dydxprotocol/cosmos-sdk/blob/bdf96fdd/x/auth/keeper/keeper.go#L213
+		// https://github.com/vindax/cosmos-sdk/blob/bdf96fdd/x/auth/keeper/keeper.go#L213
 		newModuleAccount := authtypes.NewEmptyModuleAccount(modAccName, perms...)
 		maccI := (ak.NewAccount(ctx, newModuleAccount)).(sdk.ModuleAccountI) // this set the account number
 		ak.SetModuleAccount(ctx, maccI)

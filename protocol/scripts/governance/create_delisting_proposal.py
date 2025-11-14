@@ -18,7 +18,7 @@ def main():
 
     proposal = {
         "title": "Delist " + ", ".join(TICKERS_TO_DELIST) + " and disable them in the marketmap",
-        "deposit":"2000000000000000000000adydx"
+        "deposit":"2000000000000000000000avindax"
     }
     proposal["summary"] = proposal["title"]
     proposal_messages = []
@@ -29,8 +29,8 @@ def main():
     for ticker in TICKERS_TO_DELIST:
         # Create clob delisting proposal message
         clob_delisting_message = {}
-        clob_delisting_message["@type"] = "/dydxprotocol.clob.MsgUpdateClobPair"
-        clob_delisting_message["authority"] = "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky"
+        clob_delisting_message["@type"] = "/vindax.clob.MsgUpdateClobPair"
+        clob_delisting_message["authority"] = "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm"
 
         perpetual_id = ticker_to_perpetual_id[ticker]
         clob_pair = perpetual_id_to_clob_pair[perpetual_id]
@@ -48,7 +48,7 @@ def main():
     # Create marketmap disable proposal message
     marketmap_disable_message = {}
     marketmap_disable_message["@type"] = "/slinky.marketmap.v1.MsgUpdateMarkets"
-    marketmap_disable_message["authority"] = "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky"
+    marketmap_disable_message["authority"] = "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm"
     marketmap_disable_message["update_markets"] = update_markets_message
     proposal_messages.append(marketmap_disable_message)
 

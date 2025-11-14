@@ -1,8 +1,8 @@
 package prices_test
 
 import (
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/prices"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/types"
+	"github.com/danielvindax/vd-chain/protocol/lib/prices"
 	"github.com/stretchr/testify/require"
 	"testing"
 )

@@ -31,7 +31,7 @@
   "dependencies": {
     "@dydxprotocol-indexer/base": "workspace:^0.0.1",
     "@dydxprotocol-indexer/postgres": "workspace:^0.0.1",
-    "@types/node": "^24.1.0",
+    "@types/node": "^18.19.31",
     "dotenv-flow": "^3.2.0",
     "firebase-admin": "^12.4.0"
   }

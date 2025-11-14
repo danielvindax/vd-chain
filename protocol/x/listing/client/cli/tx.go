@@ -5,12 +5,12 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 
 	"github.com/spf13/cobra"
 
 	"github.com/cosmos/cosmos-sdk/client"
-	"github.com/dydxprotocol/v4-chain/protocol/x/listing/types"
+	"github.com/danielvindax/vd-chain/protocol/x/listing/types"
 )
 
 // GetTxCmd returns the transaction commands for this module.

@@ -1,14 +1,14 @@
-FROM dydxprotocol-base
+FROM vindax-base
 
 RUN apk add --no-cache bash jq aws-cli
 RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 
-COPY ./testing/version/. /dydxprotocol/
-COPY ./testing/mainnet/. /dydxprotocol/
+COPY ./testing/version/. /vindax/
+COPY ./testing/mainnet/. /vindax/
 
-ENV HOME /dydxprotocol
+ENV HOME /vindax
 WORKDIR $HOME
 
-RUN /dydxprotocol/mainnet.sh
+RUN /vindax/mainnet.sh
 
-ENTRYPOINT ["/dydxprotocol/start.sh"]
+ENTRYPOINT ["/vindax/start.sh"]

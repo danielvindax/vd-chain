@@ -7,12 +7,12 @@ import (
 
 	errorsmod "cosmossdk.io/errors"
 
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	sdktest "github.com/dydxprotocol/v4-chain/protocol/testutil/sdk"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	pricestypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	sdktest "github.com/danielvindax/vd-chain/protocol/testutil/sdk"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	pricestypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -279,8 +279,8 @@ func TestGetPremiumPrice(t *testing.T) {
 						ClobPairId:   0,
 					},
 					Side:         types.Order_SIDE_BUY,
-					Quantums:     10_000_000_000, // 0.1 BTC
-					Subticks:     99_995_000,     // $9_999.5
+					Quantums:     10_000_000_000, // 1 BTC
+					Subticks:     99_990_000,     // $9_999
 					GoodTilOneof: &types.Order_GoodTilBlock{GoodTilBlock: 1},
 				},
 				&types.Order{
@@ -291,7 +291,7 @@ func TestGetPremiumPrice(t *testing.T) {
 					},
 					Side:         types.Order_SIDE_BUY,
 					Quantums:     10_000_000_000, // 1 BTC
-					Subticks:     99_990_000,     // $9_999
+					Subticks:     99_995_000,     // $9_999.5
 					GoodTilOneof: &types.Order_GoodTilBlock{GoodTilBlock: 1},
 				},
 			},

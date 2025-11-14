@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/dydxprotocol/v4-chain/protocol/app"
+	"github.com/danielvindax/vd-chain/protocol/app"
 
 	comethttp "github.com/cometbft/cometbft/rpc/client/http"
 	"github.com/cosmos/cosmos-sdk/client"
@@ -16,8 +16,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 	gogogrpc "github.com/cosmos/gogoproto/grpc"
 	"github.com/cosmos/gogoproto/proto"
-	"github.com/dydxprotocol/v4-chain/protocol/cmd/dydxprotocold/cmd"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/cmd/vindaxd/cmd"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
 	"github.com/ory/dockertest/v3"
 	"github.com/spf13/pflag"
 	"google.golang.org/grpc"
@@ -116,11 +116,11 @@ func (n *Node) getContextForBroadcastTx(signer string) (*client.Context, *pflag.
 	if err := flags.Set("from", signer); err != nil {
 		return nil, nil, err
 	}
-	if err := flags.Set("chain-id", "localdydxprotocol"); err != nil {
+	if err := flags.Set("chain-id", "localvindax"); err != nil {
 		return nil, nil, err
 	}
 
-	// NB: In `cmd/dydxprotocol/root.go` this step is done before ReadFromClientConfig, but here we choose to
+	// NB: In `cmd/vindax/root.go` this step is done before ReadFromClientConfig, but here we choose to
 	// do it second because ReadPersistentCommandFlags sets the node address we configured in flags.
 	// If we were to do it in reverse, ReadFromClientConfig would overwrite the node address.
 	initClientCtx, err := client.ReadPersistentCommandFlags(initClientCtx, flags)

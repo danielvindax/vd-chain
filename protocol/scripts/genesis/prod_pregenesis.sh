@@ -7,30 +7,30 @@ set -eo pipefail
 #
 # example usage:
 # $ make build
-# $ ./scripts/genesis/prod_pregenesis.sh ./build/dydxprotocold
+# $ ./scripts/genesis/prod_pregenesis.sh ./build/vindaxd
 
 # Check for missing required arguments
 if [ -z "$1" ]; then
-  echo "Error: Missing required argument DYDX_BINARY."
-  echo "Usage: $0 <DYDX_BINARY> [-s|--SEED_FAUCET_USDC]"
+  echo "Error: Missing required argument VIDAX_BINARY."
+  echo "Usage: $0 <VIDAX_BINARY> [-s|--SEED_FAUCET_USDC]"
   exit 1
 fi
 
 # Capture the required argument
-DYDX_BINARY="$1"
+VIDAX_BINARY="$1"
 
 source "./testing/genesis.sh"
 
 TMP_CHAIN_DIR="/tmp/prod-chain"
 TMP_EXCHANGE_CONFIG_JSON_DIR="/tmp/prod-exchange_config"
 BRIDGE_MODACC_BALANCE="1$NINE_ZEROS$EIGHTEEN_ZEROS" # 1e27
-BRIDGE_MODACC_ADDR="dydx1zlefkpe3g0vvm9a4h0jf9000lmqutlh9jwjnsv"
+BRIDGE_MODACC_ADDR="vindax1zlefkpe3g0vvm9a4h0jf9000lmqutlh9j7tmen"
 
 # TODO(GENESIS): Update below values before running this script. Sample values are shown.
 ################## Start of required values to be updated ##################
-CHAIN_ID="dydx-sample-1"
+CHAIN_ID="vindax-sample-1"
 # Base denomination of the native token. Usually comes with a prefix "u-", "a-" to indicate unit.
-NATIVE_TOKEN="asample"
+NATIVE_TOKEN="avdtn"
 # Denomination of the native token in whole coins.
 NATIVE_TOKEN_WHOLE_COIN="sample" 
 # Human readable name of token.
@@ -159,10 +159,10 @@ function overwrite_genesis_production() {
 }
 
 create_pregenesis_file() {
-	VAL_HOME_DIR="$TMP_CHAIN_DIR/.dydxprotocol"
+	VAL_HOME_DIR="$TMP_CHAIN_DIR/.vindax"
 	VAL_CONFIG_DIR="$VAL_HOME_DIR/config"
 	# This initializes the $VAL_HOME_DIR folder.
-	$DYDX_BINARY init "test-moniker" -o --chain-id=$CHAIN_ID --home "$VAL_HOME_DIR"
+	$VIDAX_BINARY init "test-moniker" -o --chain-id=$CHAIN_ID --home "$VAL_HOME_DIR"
 
 	# Create temporary directory for exchange config jsons.
 	echo "Copying exchange config jsons to $TMP_EXCHANGE_CONFIG_JSON_DIR"

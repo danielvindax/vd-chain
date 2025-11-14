@@ -5,7 +5,7 @@ import (
 	"math/rand"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/margin"
+	"github.com/danielvindax/vd-chain/protocol/lib/margin"
 )
 
 type SubaccountsKeeper interface {

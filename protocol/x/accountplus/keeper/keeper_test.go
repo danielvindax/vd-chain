@@ -10,10 +10,10 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/authenticator"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/testutils"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/authenticator"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/testutils"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/types"
 )
 
 // TODO: add explicit unit tests for Get and Set funcs
@@ -395,7 +395,7 @@ func (s *KeeperTestSuite) TestAddAuthenticator_ComplexNestedStructures() {
 		},
 		{
 			Type:   "MessageFilter",
-			Config: []byte("/dydxprotocol.clob.MsgPlaceOrder"),
+			Config: []byte("/vindax.clob.MsgPlaceOrder"),
 		},
 	}
 	allOfBytes, err := json.Marshal(allOfConfig)
@@ -419,7 +419,7 @@ func (s *KeeperTestSuite) TestAddAuthenticator_ComplexNestedStructures() {
 		},
 		{
 			Type:   "MessageFilter",
-			Config: []byte("/dydxprotocol.clob.MsgPlaceOrder"),
+			Config: []byte("/vindax.clob.MsgPlaceOrder"),
 		},
 	}
 	innerAllOfBytes, err := json.Marshal(innerAllOfConfig)
@@ -557,7 +557,7 @@ func (s *KeeperTestSuite) createNestedAllOfConfig() []byte {
 		},
 		{
 			Type:   "MessageFilter",
-			Config: []byte("/dydxprotocol.clob.MsgPlaceOrder"),
+			Config: []byte("/vindax.clob.MsgPlaceOrder"),
 		},
 	}
 	innerConfigBytes, err := json.Marshal(innerConfig)
@@ -592,7 +592,7 @@ func (s *KeeperTestSuite) createNestedAnyOfConfig() []byte {
 		},
 		{
 			Type:   "MessageFilter",
-			Config: []byte("/dydxprotocol.clob.MsgPlaceOrder"),
+			Config: []byte("/vindax.clob.MsgPlaceOrder"),
 		},
 	}
 	innerConfigBytes, err := json.Marshal(innerConfig)

@@ -9,15 +9,15 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/cosmos/gogoproto/proto"
-	indexerevents "github.com/dydxprotocol/v4-chain/protocol/indexer/events"
-	"github.com/dydxprotocol/v4-chain/protocol/indexer/indexer_manager"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	keepertest "github.com/dydxprotocol/v4-chain/protocol/testutil/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/affiliates/keeper"
-	"github.com/dydxprotocol/v4-chain/protocol/x/affiliates/types"
-	statskeeper "github.com/dydxprotocol/v4-chain/protocol/x/stats/keeper"
-	statstypes "github.com/dydxprotocol/v4-chain/protocol/x/stats/types"
+	indexerevents "github.com/danielvindax/vd-chain/protocol/indexer/events"
+	"github.com/danielvindax/vd-chain/protocol/indexer/indexer_manager"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	keepertest "github.com/danielvindax/vd-chain/protocol/testutil/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/affiliates/keeper"
+	"github.com/danielvindax/vd-chain/protocol/x/affiliates/types"
+	statskeeper "github.com/danielvindax/vd-chain/protocol/x/stats/keeper"
+	statstypes "github.com/danielvindax/vd-chain/protocol/x/stats/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -485,7 +485,7 @@ func TestSetAffiliateWhitelist(t *testing.T) {
 					{
 						Addresses: []string{
 							constants.AliceAccAddress.String(),
-							"dydxvaloper1et2kxktzr6tav65uhrxsyr8gx82xvan6gl78xd",
+							"vindaxvaloper1et2kxktzr6tav65uhrxsyr8gx82xvan6gl78xd",
 						},
 						TakerFeeSharePpm: 500_000, // 50%
 					},

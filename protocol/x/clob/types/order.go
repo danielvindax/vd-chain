@@ -9,8 +9,8 @@ import (
 	"time"
 
 	proto "github.com/cosmos/gogoproto/proto"
-	"github.com/dydxprotocol/v4-chain/protocol/lib/metrics"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/lib/metrics"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 	gometrics "github.com/hashicorp/go-metrics"
 )
 

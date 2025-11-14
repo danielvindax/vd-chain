@@ -5,12 +5,12 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/dtypes"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	testutildelaymsg "github.com/dydxprotocol/v4-chain/protocol/testutil/delaymsg"
-	"github.com/dydxprotocol/v4-chain/protocol/x/vault/keeper"
-	vaulttypes "github.com/dydxprotocol/v4-chain/protocol/x/vault/types"
+	"github.com/danielvindax/vd-chain/protocol/dtypes"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	testutildelaymsg "github.com/danielvindax/vd-chain/protocol/testutil/delaymsg"
+	"github.com/danielvindax/vd-chain/protocol/x/vault/keeper"
+	vaulttypes "github.com/danielvindax/vd-chain/protocol/x/vault/types"
 	"github.com/stretchr/testify/require"
 )
 

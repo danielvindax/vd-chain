@@ -4,7 +4,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/lib"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/lib"
 )
 
 // CircuitBreakerDecorator routes transactions through appropriate ante handlers based on

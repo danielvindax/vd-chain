@@ -6,13 +6,13 @@ import (
 	"testing"
 
 	"github.com/cosmos/cosmos-sdk/telemetry"
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
-	clobtest "github.com/dydxprotocol/v4-chain/protocol/testutil/clob"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	testutil_memclob "github.com/dydxprotocol/v4-chain/protocol/testutil/memclob"
-	sdktest "github.com/dydxprotocol/v4-chain/protocol/testutil/sdk"
-	"github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
+	clobtest "github.com/danielvindax/vd-chain/protocol/testutil/clob"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	testutil_memclob "github.com/danielvindax/vd-chain/protocol/testutil/memclob"
+	sdktest "github.com/danielvindax/vd-chain/protocol/testutil/sdk"
+	"github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 )
@@ -238,20 +238,20 @@ func TestPlaceOrder_AddOrderToOrderbook(t *testing.T) {
 		},
 		"Replacing an order fails if OrderHash is less than existing order but GoodTilBlock is the same": {
 			existingOrders: []types.MatchableOrder{
-				&constants.Order_Alice_Num0_Id0_Clob0_Buy5_Price10_GTB20,
+				&constants.Order_Alice_Num0_Id0_Clob0_Buy6_Price10_GTB20,
 			},
 
-			order: constants.Order_Alice_Num0_Id0_Clob0_Buy6_Price10_GTB20,
+			order: constants.Order_Alice_Num0_Id0_Clob0_Buy5_Price10_GTB20,
 
 			expectedErr:            types.ErrInvalidReplacement,
 			expectedToReplaceOrder: false,
 		},
 		"Replacing an order succeeds if OrderHash is greater than existing order but GoodTilBlock is the same": {
 			existingOrders: []types.MatchableOrder{
-				&constants.Order_Alice_Num0_Id0_Clob0_Buy6_Price10_GTB20,
+				&constants.Order_Alice_Num0_Id0_Clob0_Buy5_Price10_GTB20,
 			},
 
-			order: constants.Order_Alice_Num0_Id0_Clob0_Buy5_Price10_GTB20,
+			order: constants.Order_Alice_Num0_Id0_Clob0_Buy6_Price10_GTB20,
 
 			collateralizationCheck: satypes.Success,
 			expectedOrderStatus:    types.Success,

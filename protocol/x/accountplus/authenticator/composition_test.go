@@ -15,11 +15,11 @@ import (
 
 	storetypes "cosmossdk.io/store/types"
 
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/authenticator"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/testutils"
-	"github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/authenticator"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/lib"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/testutils"
+	"github.com/danielvindax/vd-chain/protocol/x/accountplus/types"
 )
 
 type AggregatedAuthenticatorsTest struct {

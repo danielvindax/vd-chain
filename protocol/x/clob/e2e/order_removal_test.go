@@ -7,17 +7,17 @@ import (
 
 	abcitypes "github.com/cometbft/cometbft/abci/types"
 	sdktypes "github.com/cosmos/cosmos-sdk/types"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	clobtestutils "github.com/dydxprotocol/v4-chain/protocol/testutil/clob"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/encoding"
-	testtx "github.com/dydxprotocol/v4-chain/protocol/testutil/tx"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	feetiertypes "github.com/dydxprotocol/v4-chain/protocol/x/feetiers/types"
-	perptypes "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/types"
-	prices "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
-	sendingtypes "github.com/dydxprotocol/v4-chain/protocol/x/sending/types"
-	satypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	clobtestutils "github.com/danielvindax/vd-chain/protocol/testutil/clob"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	"github.com/danielvindax/vd-chain/protocol/testutil/encoding"
+	testtx "github.com/danielvindax/vd-chain/protocol/testutil/tx"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	feetiertypes "github.com/danielvindax/vd-chain/protocol/x/feetiers/types"
+	perptypes "github.com/danielvindax/vd-chain/protocol/x/perpetuals/types"
+	prices "github.com/danielvindax/vd-chain/protocol/x/prices/types"
+	sendingtypes "github.com/danielvindax/vd-chain/protocol/x/sending/types"
+	satypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -290,7 +290,7 @@ func TestConditionalOrderRemoval(t *testing.T) {
 					tApp.App,
 					testapp.MustMakeCheckTxOptions{
 						AccAddressForSigning: tc.withdrawal.Sender.Owner,
-						Gas:                  100_000,
+						Gas:                  200_000,
 						FeeAmt:               constants.TestFeeCoins_5Cents,
 					},
 					tc.withdrawal,
@@ -780,7 +780,7 @@ func TestOrderRemoval(t *testing.T) {
 					tApp.App,
 					testapp.MustMakeCheckTxOptions{
 						AccAddressForSigning: tc.withdrawal.Sender.Owner,
-						Gas:                  100_000,
+						Gas:                  200_000,
 						FeeAmt:               constants.TestFeeCoins_5Cents,
 					},
 					tc.withdrawal,

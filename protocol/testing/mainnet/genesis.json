@@ -49,217 +49,217 @@
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "0",
-          "address": "dydx10cmpk9tf430rfhkz8nvzcrq7vng5qvpkm8jkj3",
+          "address": "vindax10cmpk9tf430rfhkz8nvzcrq7vng5qvpkm8jkj3",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "1",
-          "address": "dydx140l6y2gp3gxvay6qtn70re7z2s0gn57z9qaqxk",
+          "address": "vindax140l6y2gp3gxvay6qtn70re7z2s0gn57z9qaqxk",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "2",
-          "address": "dydx15wphegl8esn7r2rgj9j3xf870v78lxg8phy9w9",
+          "address": "vindax15wphegl8esn7r2rgj9j3xf870v78lxg8phy9w9",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "3",
-          "address": "dydx160n4rwm854v06ppkly2pt0zc9rpwlm5y0kyjtc",
+          "address": "vindax160n4rwm854v06ppkly2pt0zc9rpwlm5y0kyjtc",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "4",
-          "address": "dydx168la65zj2868vqxyd3zrvaz3vhm85430dxy4q2",
+          "address": "vindax168la65zj2868vqxyd3zrvaz3vhm85430dxy4q2",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "5",
-          "address": "dydx16pj5gljqnqs0ajxakccfjhu05yczp9870tkh0z",
+          "address": "vindax16pj5gljqnqs0ajxakccfjhu05yczp9870tkh0z",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "6",
-          "address": "dydx199fjq4rnfvz24cktl8cervx8h8e90ruk5644xz",
+          "address": "vindax199fjq4rnfvz24cktl8cervx8h8e90ruk5644xz",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "7",
-          "address": "dydx1a9lm6t9qalz53jrp0q6p50q2cxeqnwshse78q6",
+          "address": "vindax1a9lm6t9qalz53jrp0q6p50q2cxeqnwshse78q6",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "8",
-          "address": "dydx1d9e68e7glce5pehh8qk0gcx9l06tjeh0kr5eg7",
+          "address": "vindax1d9e68e7glce5pehh8qk0gcx9l06tjeh0kr5eg7",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "9",
-          "address": "dydx1dm25afltds6v8te6m2lt6p0t3m4ygah32qhgtz",
+          "address": "vindax1dm25afltds6v8te6m2lt6p0t3m4ygah32qhgtz",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "10",
-          "address": "dydx1et3h08wt6y9h0zjkp6jxpr42hm58avcd9mcppt",
+          "address": "vindax1et3h08wt6y9h0zjkp6jxpr42hm58avcd9mcppt",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "11",
-          "address": "dydx1fs0t34g628xdqc8alfefnadq2x3qawt8de3dka",
+          "address": "vindax1fs0t34g628xdqc8alfefnadq2x3qawt8de3dka",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "12",
-          "address": "dydx1gffkd68xcnfpzcsplf0fsuetxkysunudlrneyl",
+          "address": "vindax1gffkd68xcnfpzcsplf0fsuetxkysunudlrneyl",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "13",
-          "address": "dydx1j4ljutnh66r55a29jydgca7pfmhd40e3kpwlky",
+          "address": "vindax1j4ljutnh66r55a29jydgca7pfmhd40e3kpwlky",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "14",
-          "address": "dydx1jvct2ck9hptwyzrr0umfvwxed7n9nhhj2sldxc",
+          "address": "vindax1jvct2ck9hptwyzrr0umfvwxed7n9nhhj2sldxc",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "15",
-          "address": "dydx1kmt4qun5wj6qays8hpkp3ea2anvq3m70slllnw",
+          "address": "vindax1kmt4qun5wj6qays8hpkp3ea2anvq3m70slllnw",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "16",
-          "address": "dydx1ml44cenapnawcn4xy3w36jce0rg78dm8cv6j2z",
+          "address": "vindax1ml44cenapnawcn4xy3w36jce0rg78dm8cv6j2z",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "17",
-          "address": "dydx1mwhwf9rqh64ktr8t8xnz37nhg7vvy42ea2vy9g",
+          "address": "vindax1mwhwf9rqh64ktr8t8xnz37nhg7vvy42ea2vy9g",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "18",
-          "address": "dydx1n56zk7kmv40g5zrz5psx7yysa0gk86mfhk7d8h",
+          "address": "vindax1n56zk7kmv40g5zrz5psx7yysa0gk86mfhk7d8h",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "19",
-          "address": "dydx1ql40pjftdwl6qtmgk0fn0r02spvss96ekrjj63",
+          "address": "vindax1ql40pjftdwl6qtmgk0fn0r02spvss96ekrjj63",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "20",
-          "address": "dydx1s7zqmy708qhy4m7j3vrmydj2d0zr4wdfqznqt7",
+          "address": "vindax1s7zqmy708qhy4m7j3vrmydj2d0zr4wdfqznqt7",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "21",
-          "address": "dydx1t7dum0wcdk9c0ly6fhd5mxcavg6plhw7wgqgwl",
+          "address": "vindax1t7dum0wcdk9c0ly6fhd5mxcavg6plhw7wgqgwl",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "22",
-          "address": "dydx1thl5syhmscgnj7whdyrydw3w6vy80044mlmz2n",
+          "address": "vindax1thl5syhmscgnj7whdyrydw3w6vy80044mlmz2n",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "23",
-          "address": "dydx1vl5ty47uwpfv4mcutwv4zam09mvvvdgy2m9e59",
+          "address": "vindax1vl5ty47uwpfv4mcutwv4zam09mvvvdgy2m9e59",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "24",
-          "address": "dydx1x20lytyf6zkcrv5edpkfkn8sz578qg5suyy80q",
+          "address": "vindax1x20lytyf6zkcrv5edpkfkn8sz578qg5suyy80q",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "25",
-          "address": "dydx1xwk95hxuude0zz4syvymlkrhjmjkqga79cvcpj",
+          "address": "vindax1xwk95hxuude0zz4syvymlkrhjmjkqga79cvcpj",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "26",
-          "address": "dydx1y29mkku4zqz8phrxc8zgu7jfnw504leqgs65fe",
+          "address": "vindax1y29mkku4zqz8phrxc8zgu7jfnw504leqgs65fe",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "27",
-          "address": "dydx1y66c5c7zpcqxqgqec9ttutuwu60qkzav22h3ue",
+          "address": "vindax1y66c5c7zpcqxqgqec9ttutuwu60qkzav22h3ue",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "28",
-          "address": "dydx1y6ncfxx8x9sqec97pehjw0k32slw63852paygz",
+          "address": "vindax1y6ncfxx8x9sqec97pehjw0k32slw63852paygz",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "29",
-          "address": "dydx1z0sjs7vr8s7gy7je3dzyn8hngdkdd9g305mzns",
+          "address": "vindax1z0sjs7vr8s7gy7je3dzyn8hngdkdd9g305mzns",
           "pub_key": null,
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "30",
-          "address": "dydx1z29qzgp9pxt69462mk26gyc82k2sdxg2crwr9d",
+          "address": "vindax1z29qzgp9pxt69462mk26gyc82k2sdxg2crwr9d",
           "pub_key": null,
           "sequence": "0"
         }
@@ -272,7 +272,7 @@
       },
       "balances": [
         {
-          "address": "dydx1zlefkpe3g0vvm9a4h0jf9000lmqutlh9jwjnsv",
+          "address": "vindax1zlefkpe3g0vvm9a4h0jf9000lmqutlh9j7tmen",
           "coins": [
             {
               "denom": "adydx",
@@ -281,7 +281,7 @@
           ]
         },
         {
-          "address": "dydx10cmpk9tf430rfhkz8nvzcrq7vng5qvpkm8jkj3",
+          "address": "vindax10cmpk9tf430rfhkz8nvzcrq7vng5qvpkm8jkj3",
           "coins": [
             {
               "amount": "10000000000000000000",
@@ -290,7 +290,7 @@
           ]
         },
         {
-          "address": "dydx140l6y2gp3gxvay6qtn70re7z2s0gn57z9qaqxk",
+          "address": "vindax140l6y2gp3gxvay6qtn70re7z2s0gn57z9qaqxk",
           "coins": [
             {
               "amount": "1000000000000000000000",
@@ -299,7 +299,7 @@
           ]
         },
         {
-          "address": "dydx15wphegl8esn7r2rgj9j3xf870v78lxg8phy9w9",
+          "address": "vindax15wphegl8esn7r2rgj9j3xf870v78lxg8phy9w9",
           "coins": [
             {
               "amount": "1000000000000000000000",
@@ -308,7 +308,7 @@
           ]
         },
         {
-          "address": "dydx160n4rwm854v06ppkly2pt0zc9rpwlm5y0kyjtc",
+          "address": "vindax160n4rwm854v06ppkly2pt0zc9rpwlm5y0kyjtc",
           "coins": [
             {
               "amount": "1014680000000000000000",
@@ -317,7 +317,7 @@
           ]
         },
         {
-          "address": "dydx168la65zj2868vqxyd3zrvaz3vhm85430dxy4q2",
+          "address": "vindax168la65zj2868vqxyd3zrvaz3vhm85430dxy4q2",
           "coins": [
             {
               "amount": "101000000000000000000",
@@ -326,7 +326,7 @@
           ]
         },
         {
-          "address": "dydx16pj5gljqnqs0ajxakccfjhu05yczp9870tkh0z",
+          "address": "vindax16pj5gljqnqs0ajxakccfjhu05yczp9870tkh0z",
           "coins": [
             {
               "amount": "1005000000000000000000",
@@ -335,7 +335,7 @@
           ]
         },
         {
-          "address": "dydx199fjq4rnfvz24cktl8cervx8h8e90ruk5644xz",
+          "address": "vindax199fjq4rnfvz24cktl8cervx8h8e90ruk5644xz",
           "coins": [
             {
               "amount": "3007034560000000000000",
@@ -344,7 +344,7 @@
           ]
         },
         {
-          "address": "dydx1a9lm6t9qalz53jrp0q6p50q2cxeqnwshse78q6",
+          "address": "vindax1a9lm6t9qalz53jrp0q6p50q2cxeqnwshse78q6",
           "coins": [
             {
               "amount": "1000000000000000000000",
@@ -353,7 +353,7 @@
           ]
         },
         {
-          "address": "dydx1d9e68e7glce5pehh8qk0gcx9l06tjeh0kr5eg7",
+          "address": "vindax1d9e68e7glce5pehh8qk0gcx9l06tjeh0kr5eg7",
           "coins": [
             {
               "amount": "1010000000000000000000",
@@ -362,7 +362,7 @@
           ]
         },
         {
-          "address": "dydx1dm25afltds6v8te6m2lt6p0t3m4ygah32qhgtz",
+          "address": "vindax1dm25afltds6v8te6m2lt6p0t3m4ygah32qhgtz",
           "coins": [
             {
               "amount": "1000000000000000000000",
@@ -371,7 +371,7 @@
           ]
         },
         {
-          "address": "dydx1et3h08wt6y9h0zjkp6jxpr42hm58avcd9mcppt",
+          "address": "vindax1et3h08wt6y9h0zjkp6jxpr42hm58avcd9mcppt",
           "coins": [
             {
               "amount": "1050000000000000000000",
@@ -380,7 +380,7 @@
           ]
         },
         {
-          "address": "dydx1fs0t34g628xdqc8alfefnadq2x3qawt8de3dka",
+          "address": "vindax1fs0t34g628xdqc8alfefnadq2x3qawt8de3dka",
           "coins": [
             {
               "amount": "1000000000000000000000",
@@ -389,7 +389,7 @@
           ]
         },
         {
-          "address": "dydx1gffkd68xcnfpzcsplf0fsuetxkysunudlrneyl",
+          "address": "vindax1gffkd68xcnfpzcsplf0fsuetxkysunudlrneyl",
           "coins": [
             {
               "amount": "1020000000000000000000",
@@ -398,7 +398,7 @@
           ]
         },
         {
-          "address": "dydx1j4ljutnh66r55a29jydgca7pfmhd40e3kpwlky",
+          "address": "vindax1j4ljutnh66r55a29jydgca7pfmhd40e3kpwlky",
           "coins": [
             {
               "amount": "1097000000000000000000",
@@ -407,7 +407,7 @@
           ]
         },
         {
-          "address": "dydx1jvct2ck9hptwyzrr0umfvwxed7n9nhhj2sldxc",
+          "address": "vindax1jvct2ck9hptwyzrr0umfvwxed7n9nhhj2sldxc",
           "coins": [
             {
               "amount": "1017419090000000000000",
@@ -416,7 +416,7 @@
           ]
         },
         {
-          "address": "dydx1kmt4qun5wj6qays8hpkp3ea2anvq3m70slllnw",
+          "address": "vindax1kmt4qun5wj6qays8hpkp3ea2anvq3m70slllnw",
           "coins": [
             {
               "amount": "1001193743470000000000",
@@ -425,7 +425,7 @@
           ]
         },
         {
-          "address": "dydx1ml44cenapnawcn4xy3w36jce0rg78dm8cv6j2z",
+          "address": "vindax1ml44cenapnawcn4xy3w36jce0rg78dm8cv6j2z",
           "coins": [
             {
               "amount": "1029000000000000000000",
@@ -434,7 +434,7 @@
           ]
         },
         {
-          "address": "dydx1mwhwf9rqh64ktr8t8xnz37nhg7vvy42ea2vy9g",
+          "address": "vindax1mwhwf9rqh64ktr8t8xnz37nhg7vvy42ea2vy9g",
           "coins": [
             {
               "amount": "1000000000000000000000",
@@ -443,7 +443,7 @@
           ]
         },
         {
-          "address": "dydx1n56zk7kmv40g5zrz5psx7yysa0gk86mfhk7d8h",
+          "address": "vindax1n56zk7kmv40g5zrz5psx7yysa0gk86mfhk7d8h",
           "coins": [
             {
               "amount": "1000000000000000000000",
@@ -452,7 +452,7 @@
           ]
         },
         {
-          "address": "dydx1ql40pjftdwl6qtmgk0fn0r02spvss96ekrjj63",
+          "address": "vindax1ql40pjftdwl6qtmgk0fn0r02spvss96ekrjj63",
           "coins": [
             {
               "amount": "1010000000000000000000",
@@ -461,7 +461,7 @@
           ]
         },
         {
-          "address": "dydx1s7zqmy708qhy4m7j3vrmydj2d0zr4wdfqznqt7",
+          "address": "vindax1s7zqmy708qhy4m7j3vrmydj2d0zr4wdfqznqt7",
           "coins": [
             {
               "amount": "1001000000000000000000",
@@ -470,7 +470,7 @@
           ]
         },
         {
-          "address": "dydx1t7dum0wcdk9c0ly6fhd5mxcavg6plhw7wgqgwl",
+          "address": "vindax1t7dum0wcdk9c0ly6fhd5mxcavg6plhw7wgqgwl",
           "coins": [
             {
               "amount": "1062510000000000000000",
@@ -479,7 +479,7 @@
           ]
         },
         {
-          "address": "dydx1thl5syhmscgnj7whdyrydw3w6vy80044mlmz2n",
+          "address": "vindax1thl5syhmscgnj7whdyrydw3w6vy80044mlmz2n",
           "coins": [
             {
               "amount": "1010000000000000000000",
@@ -488,7 +488,7 @@
           ]
         },
         {
-          "address": "dydx1vl5ty47uwpfv4mcutwv4zam09mvvvdgy2m9e59",
+          "address": "vindax1vl5ty47uwpfv4mcutwv4zam09mvvvdgy2m9e59",
           "coins": [
             {
               "amount": "2000000000000000000000",
@@ -497,7 +497,7 @@
           ]
         },
         {
-          "address": "dydx1x20lytyf6zkcrv5edpkfkn8sz578qg5suyy80q",
+          "address": "vindax1x20lytyf6zkcrv5edpkfkn8sz578qg5suyy80q",
           "coins": [
             {
               "amount": "1025000000000000000000",
@@ -506,7 +506,7 @@
           ]
         },
         {
-          "address": "dydx1xwk95hxuude0zz4syvymlkrhjmjkqga79cvcpj",
+          "address": "vindax1xwk95hxuude0zz4syvymlkrhjmjkqga79cvcpj",
           "coins": [
             {
               "amount": "2500000000000000000000",
@@ -515,7 +515,7 @@
           ]
         },
         {
-          "address": "dydx1y29mkku4zqz8phrxc8zgu7jfnw504leqgs65fe",
+          "address": "vindax1y29mkku4zqz8phrxc8zgu7jfnw504leqgs65fe",
           "coins": [
             {
               "amount": "1010000000000000000000",
@@ -524,7 +524,7 @@
           ]
         },
         {
-          "address": "dydx1y66c5c7zpcqxqgqec9ttutuwu60qkzav22h3ue",
+          "address": "vindax1y66c5c7zpcqxqgqec9ttutuwu60qkzav22h3ue",
           "coins": [
             {
               "amount": "22000000000000000000",
@@ -533,7 +533,7 @@
           ]
         },
         {
-          "address": "dydx1y6ncfxx8x9sqec97pehjw0k32slw63852paygz",
+          "address": "vindax1y6ncfxx8x9sqec97pehjw0k32slw63852paygz",
           "coins": [
             {
               "amount": "1073350000000000000000",
@@ -542,7 +542,7 @@
           ]
         },
         {
-          "address": "dydx1z0sjs7vr8s7gy7je3dzyn8hngdkdd9g305mzns",
+          "address": "vindax1z0sjs7vr8s7gy7je3dzyn8hngdkdd9g305mzns",
           "coins": [
             {
               "amount": "1000000000000000000000",
@@ -551,7 +551,7 @@
           ]
         },
         {
-          "address": "dydx1z29qzgp9pxt69462mk26gyc82k2sdxg2crwr9d",
+          "address": "vindax1z29qzgp9pxt69462mk26gyc82k2sdxg2crwr9d",
           "coins": [
             {
               "amount": "1000000000000000000000",
@@ -1053,8 +1053,8 @@
         {
           "id": 0,
           "msg": {
-            "@type": "/dydxprotocol.feetiers.MsgUpdatePerpetualFeeParams",
-            "authority": "dydx1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5zx6tr",
+            "@type": "/vindax.feetiers.MsgUpdatePerpetualFeeParams",
+            "authority": "vindax1mkkvp26dngu6n8rmalaxyp3gwkjuzztq5zx6tr",
             "params": {
               "tiers": [
                 {
@@ -1292,8 +1292,8 @@
                   "max_change_rate": "0.011800000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1x20lytyf6zkcrv5edpkfkn8sz578qg5suyy80q",
-                "validator_address": "dydxvaloper1x20lytyf6zkcrv5edpkfkn8sz578qg5se6j3y3",
+                "delegator_address": "vindax1x20lytyf6zkcrv5edpkfkn8sz578qg5suyy80q",
+                "validator_address": "vindaxvaloper1x20lytyf6zkcrv5edpkfkn8sz578qg5se6j3y3",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "pbwo8slAWwe1PusAW9Clv3wAWyv3XFxu6kwij4h5Qoc="
@@ -1387,8 +1387,8 @@
                   "max_change_rate": "0.050000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx140l6y2gp3gxvay6qtn70re7z2s0gn57z9qaqxk",
-                "validator_address": "dydxvaloper140l6y2gp3gxvay6qtn70re7z2s0gn57zq7tkd8",
+                "delegator_address": "vindax140l6y2gp3gxvay6qtn70re7z2s0gn57z9qaqxk",
+                "validator_address": "vindaxvaloper140l6y2gp3gxvay6qtn70re7z2s0gn57zq7tkd8",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "4DC89DondjJWjxIFg9onQsyfDhh3fwvR8BZOfMc50p0="
@@ -1449,8 +1449,8 @@
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1et3h08wt6y9h0zjkp6jxpr42hm58avcd9mcppt",
-                "validator_address": "dydxvaloper1et3h08wt6y9h0zjkp6jxpr42hm58avcdq9wh26",
+                "delegator_address": "vindax1et3h08wt6y9h0zjkp6jxpr42hm58avcd9mcppt",
+                "validator_address": "vindaxvaloper1et3h08wt6y9h0zjkp6jxpr42hm58avcdq9wh26",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "tZncSItm41b/dusuVu381yLdgsTP3mdi+noA/KlTEOQ="
@@ -1511,8 +1511,8 @@
                   "max_change_rate": "0.100000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1s7zqmy708qhy4m7j3vrmydj2d0zr4wdfqznqt7",
-                "validator_address": "dydxvaloper1s7zqmy708qhy4m7j3vrmydj2d0zr4wdf9u9kq0",
+                "delegator_address": "vindax1s7zqmy708qhy4m7j3vrmydj2d0zr4wdfqznqt7",
+                "validator_address": "vindaxvaloper1s7zqmy708qhy4m7j3vrmydj2d0zr4wdf9u9kq0",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "6HgkkTAXwQzxpaQ2kcpXW/f/9FFh9Rtd4YbZD/bVKIA="
@@ -1573,8 +1573,8 @@
                   "max_change_rate": "0.200000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1vl5ty47uwpfv4mcutwv4zam09mvvvdgy2m9e59",
-                "validator_address": "dydxvaloper1vl5ty47uwpfv4mcutwv4zam09mvvvdgy09n0l5",
+                "delegator_address": "vindax1vl5ty47uwpfv4mcutwv4zam09mvvvdgy2m9e59",
+                "validator_address": "vindaxvaloper1vl5ty47uwpfv4mcutwv4zam09mvvvdgy09n0l5",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "d3WYzVkIfkbnZ8IEGlnJVGS8fGOh2dw0aNmUsDOosfk="
@@ -1635,8 +1635,8 @@
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1y6ncfxx8x9sqec97pehjw0k32slw63852paygz",
-                "validator_address": "dydxvaloper1y6ncfxx8x9sqec97pehjw0k32slw63850ltjrn",
+                "delegator_address": "vindax1y6ncfxx8x9sqec97pehjw0k32slw63852paygz",
+                "validator_address": "vindaxvaloper1y6ncfxx8x9sqec97pehjw0k32slw63850ltjrn",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "swcYGa9+GhGY8HxA7efeAALLpozwZa6Hm9drRLSdTdA="
@@ -1697,8 +1697,8 @@
                   "max_change_rate": "0.100000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1z0sjs7vr8s7gy7je3dzyn8hngdkdd9g305mzns",
-                "validator_address": "dydxvaloper1z0sjs7vr8s7gy7je3dzyn8hngdkdd9g322d5cp",
+                "delegator_address": "vindax1z0sjs7vr8s7gy7je3dzyn8hngdkdd9g305mzns",
+                "validator_address": "vindaxvaloper1z0sjs7vr8s7gy7je3dzyn8hngdkdd9g322d5cp",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "aWGOGoEOHcXJ5LvGSvhgFECylj6laiOkbU3sa2BWY+U="
@@ -1759,8 +1759,8 @@
                   "max_change_rate": "0.100000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx160n4rwm854v06ppkly2pt0zc9rpwlm5y0kyjtc",
-                "validator_address": "dydxvaloper160n4rwm854v06ppkly2pt0zc9rpwlm5y2gjyqf",
+                "delegator_address": "vindax160n4rwm854v06ppkly2pt0zc9rpwlm5y0kyjtc",
+                "validator_address": "vindaxvaloper160n4rwm854v06ppkly2pt0zc9rpwlm5y2gjyqf",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "PJCi8Cl7imY8k+Ln+zuQS3gx2s4SEgIXUuI1CicZfIE="
@@ -1821,8 +1821,8 @@
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1dm25afltds6v8te6m2lt6p0t3m4ygah32qhgtz",
-                "validator_address": "dydxvaloper1dm25afltds6v8te6m2lt6p0t3m4ygah307p7qn",
+                "delegator_address": "vindax1dm25afltds6v8te6m2lt6p0t3m4ygah32qhgtz",
+                "validator_address": "vindaxvaloper1dm25afltds6v8te6m2lt6p0t3m4ygah307p7qn",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "lOwIdDpqPFznqglnEQgPzQkvErqJOuZCXZDN3I2tTxc="
@@ -1883,8 +1883,8 @@
                   "max_change_rate": "1.000000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1d9e68e7glce5pehh8qk0gcx9l06tjeh0kr5eg7",
-                "validator_address": "dydxvaloper1d9e68e7glce5pehh8qk0gcx9l06tjeh0naz0r0",
+                "delegator_address": "vindax1d9e68e7glce5pehh8qk0gcx9l06tjeh0kr5eg7",
+                "validator_address": "vindaxvaloper1d9e68e7glce5pehh8qk0gcx9l06tjeh0naz0r0",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "TqU2qTkfcMxjboBLq+tZGfSdgo6EI8ElvxtwjGsffXQ="
@@ -1945,8 +1945,8 @@
                   "max_change_rate": "0.100000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1t7dum0wcdk9c0ly6fhd5mxcavg6plhw7wgqgwl",
-                "validator_address": "dydxvaloper1t7dum0wcdk9c0ly6fhd5mxcavg6plhw7tkk79w",
+                "delegator_address": "vindax1t7dum0wcdk9c0ly6fhd5mxcavg6plhw7wgqgwl",
+                "validator_address": "vindaxvaloper1t7dum0wcdk9c0ly6fhd5mxcavg6plhw7tkk79w",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "WEr1+Qgi6ytFzKoeyN8MC5tE6RLFjsq+IUK7vjXhJhQ="
@@ -2007,8 +2007,8 @@
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1jvct2ck9hptwyzrr0umfvwxed7n9nhhj2sldxc",
-                "validator_address": "dydxvaloper1jvct2ck9hptwyzrr0umfvwxed7n9nhhj0wfmdf",
+                "delegator_address": "vindax1jvct2ck9hptwyzrr0umfvwxed7n9nhhj2sldxc",
+                "validator_address": "vindaxvaloper1jvct2ck9hptwyzrr0umfvwxed7n9nhhj0wfmdf",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "ysMkRxzJGrKR1+HmUK+odH2alhl6RnyaQOrsBBc6HTs="
@@ -2069,8 +2069,8 @@
                   "max_change_rate": "0.020000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1fs0t34g628xdqc8alfefnadq2x3qawt8de3dka",
-                "validator_address": "dydxvaloper1fs0t34g628xdqc8alfefnadq2x3qawt8g88mav",
+                "delegator_address": "vindax1fs0t34g628xdqc8alfefnadq2x3qawt8de3dka",
+                "validator_address": "vindaxvaloper1fs0t34g628xdqc8alfefnadq2x3qawt8g88mav",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "/Hr2Z+1HilwMMRW4UijlskqZDZpuyR+ZLSusgDjx0w4="
@@ -2131,8 +2131,8 @@
                   "max_change_rate": "0.050000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1z29qzgp9pxt69462mk26gyc82k2sdxg2crwr9d",
-                "validator_address": "dydxvaloper1z29qzgp9pxt69462mk26gyc82k2sdxg2aac4wu",
+                "delegator_address": "vindax1z29qzgp9pxt69462mk26gyc82k2sdxg2crwr9d",
+                "validator_address": "vindaxvaloper1z29qzgp9pxt69462mk26gyc82k2sdxg2aac4wu",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "OCj6oBVksE9HRznYgS8L1LzArjFS5wQDVOXzN89gVzU="
@@ -2193,8 +2193,8 @@
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1xwk95hxuude0zz4syvymlkrhjmjkqga79cvcpj",
-                "validator_address": "dydxvaloper1xwk95hxuude0zz4syvymlkrhjmjkqga7qx6w2r",
+                "delegator_address": "vindax1xwk95hxuude0zz4syvymlkrhjmjkqga79cvcpj",
+                "validator_address": "vindaxvaloper1xwk95hxuude0zz4syvymlkrhjmjkqga7qx6w2r",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "uL7nrdnecEVSswbO7Kw5CEXUs53ojlJZ6sym0aJ3UTw="
@@ -2255,8 +2255,8 @@
                   "max_change_rate": "0.100000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1a9lm6t9qalz53jrp0q6p50q2cxeqnwshse78q6",
-                "validator_address": "dydxvaloper1a9lm6t9qalz53jrp0q6p50q2cxeqnwsh48g3tt",
+                "delegator_address": "vindax1a9lm6t9qalz53jrp0q6p50q2cxeqnwshse78q6",
+                "validator_address": "vindaxvaloper1a9lm6t9qalz53jrp0q6p50q2cxeqnwsh48g3tt",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "rcavwIYg7liXz6jKYMLrm8xH69ZScJv0SZtYhnuxpZ0="
@@ -2317,8 +2317,8 @@
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1thl5syhmscgnj7whdyrydw3w6vy80044mlmz2n",
-                "validator_address": "dydxvaloper1thl5syhmscgnj7whdyrydw3w6vy800447pd5pz",
+                "delegator_address": "vindax1thl5syhmscgnj7whdyrydw3w6vy80044mlmz2n",
+                "validator_address": "vindaxvaloper1thl5syhmscgnj7whdyrydw3w6vy800447pd5pz",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "dJ47RswI/RVuyFxUsriu8IqC8g1etWgzwuNbeRDc8tY="
@@ -2379,8 +2379,8 @@
                   "max_change_rate": "0.100000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx16pj5gljqnqs0ajxakccfjhu05yczp9870tkh0z",
-                "validator_address": "dydxvaloper16pj5gljqnqs0ajxakccfjhu05yczp98724qpyn",
+                "delegator_address": "vindax16pj5gljqnqs0ajxakccfjhu05yczp9870tkh0z",
+                "validator_address": "vindaxvaloper16pj5gljqnqs0ajxakccfjhu05yczp98724qpyn",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "RiG+qVNjTpM9+cf/CY41/10V6olurA8DXQRVTstscBg="
@@ -2441,8 +2441,8 @@
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx199fjq4rnfvz24cktl8cervx8h8e90ruk5644xz",
-                "validator_address": "dydxvaloper199fjq4rnfvz24cktl8cervx8h8e90ruk3yrrdn",
+                "delegator_address": "vindax199fjq4rnfvz24cktl8cervx8h8e90ruk5644xz",
+                "validator_address": "vindaxvaloper199fjq4rnfvz24cktl8cervx8h8e90ruk3yrrdn",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "yqB1r277yd5hrLFA9YroItvUQuioSk8oiVuD9LinsfI="
@@ -2503,8 +2503,8 @@
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx15wphegl8esn7r2rgj9j3xf870v78lxg8phy9w9",
-                "validator_address": "dydxvaloper15wphegl8esn7r2rgj9j3xf870v78lxg8yfjn95",
+                "delegator_address": "vindax15wphegl8esn7r2rgj9j3xf870v78lxg8phy9w9",
+                "validator_address": "vindaxvaloper15wphegl8esn7r2rgj9j3xf870v78lxg8yfjn95",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "tnUR+TEq4U9rYtBZDoA3KpnceusklhUttZSQkkPjRss="
@@ -2565,8 +2565,8 @@
                   "max_change_rate": "0.100000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1mwhwf9rqh64ktr8t8xnz37nhg7vvy42ea2vy9g",
-                "validator_address": "dydxvaloper1mwhwf9rqh64ktr8t8xnz37nhg7vvy42ec56jwe",
+                "delegator_address": "vindax1mwhwf9rqh64ktr8t8xnz37nhg7vvy42ea2vy9g",
+                "validator_address": "vindaxvaloper1mwhwf9rqh64ktr8t8xnz37nhg7vvy42ec56jwe",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "c4bIJbj0ik/umWTbdo71IqM+1X4vjg9340ki9L+tSkQ="
@@ -2627,8 +2627,8 @@
                   "max_change_rate": "0.100000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1j4ljutnh66r55a29jydgca7pfmhd40e3kpwlky",
-                "validator_address": "dydxvaloper1j4ljutnh66r55a29jydgca7pfmhd40e3nlcfa4",
+                "delegator_address": "vindax1j4ljutnh66r55a29jydgca7pfmhd40e3kpwlky",
+                "validator_address": "vindaxvaloper199tqg4wdlnu4qjlxchpd7seg454937hjrywlqt",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "SkRnjuEBbhFYRFcLEaV0UKQz0i71PtZBBn1pzqKuQvU="
@@ -2689,8 +2689,8 @@
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1ml44cenapnawcn4xy3w36jce0rg78dm8cv6j2z",
-                "validator_address": "dydxvaloper1ml44cenapnawcn4xy3w36jce0rg78dm8ajvypn",
+                "delegator_address": "vindax1ml44cenapnawcn4xy3w36jce0rg78dm8cv6j2z",
+                "validator_address": "vindaxvaloper1ml44cenapnawcn4xy3w36jce0rg78dm8ajvypn",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "QSL9Ur6z2BCDShhyaLHeONUJqxgDXiwIV71Du3f0Ats="
@@ -2751,8 +2751,8 @@
                   "max_change_rate": "0.050000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1kmt4qun5wj6qays8hpkp3ea2anvq3m70slllnw",
-                "validator_address": "dydxvaloper1kmt4qun5wj6qays8hpkp3ea2anvq3m704pffcl",
+                "delegator_address": "vindax1kmt4qun5wj6qays8hpkp3ea2anvq3m70slllnw",
+                "validator_address": "vindaxvaloper1kmt4qun5wj6qays8hpkp3ea2anvq3m704pffcl",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "zGXN++C+w3i/BVeFBajW5UuBQFQJyhF2YLWizlrazno="
@@ -2813,8 +2813,8 @@
                   "max_change_rate": "0.100000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "dydx1n56zk7kmv40g5zrz5psx7yysa0gk86mfhk7d8h",
-                "validator_address": "dydxvaloper1n56zk7kmv40g5zrz5psx7yysa0gk86mfjggmvx",
+                "delegator_address": "vindax1n56zk7kmv40g5zrz5psx7yysa0gk86mfhk7d8h",
+                "validator_address": "vindaxvaloper1n56zk7kmv40g5zrz5psx7yysa0gk86mfjggmvx",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
                   "key": "pl9UuZSnOuuH4edrsrA7i8YFUovephjlGsuQ4bO1MdA="

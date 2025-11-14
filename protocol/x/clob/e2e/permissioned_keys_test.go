@@ -10,13 +10,13 @@ import (
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	testapp "github.com/dydxprotocol/v4-chain/protocol/testutil/app"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	testtx "github.com/dydxprotocol/v4-chain/protocol/testutil/tx"
-	aptypes "github.com/dydxprotocol/v4-chain/protocol/x/accountplus/types"
-	assettypes "github.com/dydxprotocol/v4-chain/protocol/x/assets/types"
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
-	sendingtypes "github.com/dydxprotocol/v4-chain/protocol/x/sending/types"
+	testapp "github.com/danielvindax/vd-chain/protocol/testutil/app"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	testtx "github.com/danielvindax/vd-chain/protocol/testutil/tx"
+	aptypes "github.com/danielvindax/vd-chain/protocol/x/accountplus/types"
+	assettypes "github.com/danielvindax/vd-chain/protocol/x/assets/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
+	sendingtypes "github.com/danielvindax/vd-chain/protocol/x/sending/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -764,7 +764,7 @@ func TestPlaceOrder_PermissionedKeys_Success(t *testing.T) {
 		},
 		{
 			Type:   "MessageFilter",
-			Config: []byte("/dydxprotocol.clob.MsgPlaceOrder"),
+			Config: []byte("/vindax.clob.MsgPlaceOrder"),
 		},
 		{
 			Type:   "ClobPairIdFilter",

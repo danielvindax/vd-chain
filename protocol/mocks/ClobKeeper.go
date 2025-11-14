@@ -5,17 +5,17 @@ package mocks
 import (
 	big "math/big"
 
-	affiliatestypes "github.com/dydxprotocol/v4-chain/protocol/x/affiliates/types"
+	affiliatestypes "github.com/danielvindax/vd-chain/protocol/x/affiliates/types"
 
-	clobtypes "github.com/dydxprotocol/v4-chain/protocol/x/clob/types"
+	clobtypes "github.com/danielvindax/vd-chain/protocol/x/clob/types"
 
-	indexer_manager "github.com/dydxprotocol/v4-chain/protocol/indexer/indexer_manager"
+	indexer_manager "github.com/danielvindax/vd-chain/protocol/indexer/indexer_manager"
 
 	log "cosmossdk.io/log"
 
 	mock "github.com/stretchr/testify/mock"
 
-	subaccountstypes "github.com/dydxprotocol/v4-chain/protocol/x/subaccounts/types"
+	subaccountstypes "github.com/danielvindax/vd-chain/protocol/x/subaccounts/types"
 
 	types "github.com/cosmos/cosmos-sdk/types"
 )

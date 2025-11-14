@@ -1,8 +1,8 @@
 package gate
 
 import (
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/constants/exchange_common"
-	"github.com/dydxprotocol/v4-chain/protocol/daemons/pricefeed/client/types"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/constants/exchange_common"
+	"github.com/danielvindax/vd-chain/protocol/daemons/pricefeed/client/types"
 )
 
 var (

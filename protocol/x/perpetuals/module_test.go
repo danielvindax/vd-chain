@@ -8,23 +8,23 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/app/module"
+	"github.com/danielvindax/vd-chain/protocol/app/module"
 
-	pricetypes "github.com/dydxprotocol/v4-chain/protocol/x/prices/types"
+	pricetypes "github.com/danielvindax/vd-chain/protocol/x/prices/types"
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/dydxprotocol/v4-chain/protocol/mocks"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/constants"
-	testutil_json "github.com/dydxprotocol/v4-chain/protocol/testutil/json"
-	keepertest "github.com/dydxprotocol/v4-chain/protocol/testutil/keeper"
-	epochs_keeper "github.com/dydxprotocol/v4-chain/protocol/x/epochs/keeper"
-	epoch_types "github.com/dydxprotocol/v4-chain/protocol/x/epochs/types"
-	"github.com/dydxprotocol/v4-chain/protocol/x/perpetuals"
-	perpetuals_keeper "github.com/dydxprotocol/v4-chain/protocol/x/perpetuals/keeper"
-	prices_keeper "github.com/dydxprotocol/v4-chain/protocol/x/prices/keeper"
+	"github.com/danielvindax/vd-chain/protocol/mocks"
+	"github.com/danielvindax/vd-chain/protocol/testutil/constants"
+	testutil_json "github.com/danielvindax/vd-chain/protocol/testutil/json"
+	keepertest "github.com/danielvindax/vd-chain/protocol/testutil/keeper"
+	epochs_keeper "github.com/danielvindax/vd-chain/protocol/x/epochs/keeper"
+	epoch_types "github.com/danielvindax/vd-chain/protocol/x/epochs/types"
+	"github.com/danielvindax/vd-chain/protocol/x/perpetuals"
+	perpetuals_keeper "github.com/danielvindax/vd-chain/protocol/x/perpetuals/keeper"
+	prices_keeper "github.com/danielvindax/vd-chain/protocol/x/prices/keeper"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
@@ -178,21 +178,21 @@ func TestAppModuleBasic_RegisterGRPCGatewayRoutes(t *testing.T) {
 
 	// Expect AllPerpetuals route registered
 	recorder := httptest.NewRecorder()
-	req, err := http.NewRequest("GET", "/dydxprotocol/perpetuals/perpetual", nil)
+	req, err := http.NewRequest("GET", "/vindax/perpetuals/perpetual", nil)
 	require.NoError(t, err)
 	router.ServeHTTP(recorder, req)
 	require.Contains(t, recorder.Body.String(), "no RPC client is defined in offline mode")
 
 	// Expect Markets route registered
 	recorder = httptest.NewRecorder()
-	req, err = http.NewRequest("GET", "/dydxprotocol/perpetuals/perpetual/0", nil)
+	req, err = http.NewRequest("GET", "/vindax/perpetuals/perpetual/0", nil)
 	require.NoError(t, err)
 	router.ServeHTTP(recorder, req)
 	require.Contains(t, recorder.Body.String(), "no RPC client is defined in offline mode")
 
 	// Expect unexpected route not registered
 	recorder = httptest.NewRecorder()
-	req, err = http.NewRequest("GET", "/dydxprotocol/perpetuals/foo/bar/baz", nil)
+	req, err = http.NewRequest("GET", "/vindax/perpetuals/foo/bar/baz", nil)
 	require.NoError(t, err)
 	router.ServeHTTP(recorder, req)
 	require.Equal(t, 404, recorder.Code)

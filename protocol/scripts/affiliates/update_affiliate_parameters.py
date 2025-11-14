@@ -31,7 +31,7 @@ PROPOSAL_STATUS_PASSED = 3
 def vote_for(node, chain, proposal_id, person):
     print("voting as " + person)
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "tx",
         "gov",
         "vote",
@@ -41,7 +41,7 @@ def vote_for(node, chain, proposal_id, person):
         "--node=" + node,
         "--chain-id=" + chain,
         "--keyring-backend=test",
-        "--fees=5000000000000000adv4tnt",
+        "--fees=5000000000000000avdtn",
         "--yes"
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)
@@ -71,7 +71,7 @@ def load_yml(file_path) -> Dict[str, Any]:
 
 def get_proposal_id(node, chain):
     cmd = [
-        "dydxprotocold",
+        "vindaxd",
         "query",
         "gov",
         "proposals",
@@ -100,8 +100,8 @@ def main():
                 affiliate_parameters_msg = {
                     "messages": [
                         {
-                            "@type": "/dydxprotocol.affiliates.MsgUpdateAffiliateParameters",
-                            "authority": "dydx10d07y265gmmuvt4z0w9aw880jnsr700jnmapky",
+                            "@type": "/vindax.affiliates.MsgUpdateAffiliateParameters",
+                            "authority": "vindax10d07y265gmmuvt4z0w9aw880jnsr700jntyflm",
                             "affiliate_parameters": {
                                 "maximum_30d_commission_per_referred_quote_quantums": int(args.max_30d_commission),
                                 "referee_minimum_fee_tier_idx": int(args.referee_min_fee_tier),
@@ -109,7 +109,7 @@ def main():
                             }
 			            }
                     ],
-                    "deposit": "10000000000000000000000adv4tnt",
+                    "deposit": "10000000000000000000000avdtn",
                     "metadata": "",
                     "title": "Update affiliate parameters",
                     "summary": f"Update affiliate parameters: max_30d_commission={args.max_30d_commission}, referee_min_fee_tier={args.referee_min_fee_tier}, max_30d_revenue={args.max_30d_revenue}"
@@ -119,14 +119,14 @@ def main():
                 tmp_file_path = tmp_file.name
             print("submitting proposal for affiliate parameters update")
             cmd = [
-                "dydxprotocold",
+                "vindaxd",
                 "tx",
                 "gov",
                 "submit-proposal",
                 tmp_file_path,
                 "--from=alice",
                 "--gas=auto", 
-                "--fees=10000000000000000000000adv4tnt",
+                "--fees=10000000000000000000000avdtn",
                 "--node=" + args.node,
                 "--chain-id=" + args.chain_id,
                 "--keyring-backend=test", 
@@ -151,7 +151,7 @@ def main():
             time.sleep(120)
             # check if the proposal passed
             cmd = [
-                "dydxprotocold",
+                "vindaxd",
                 "query",
                 "gov",
                 "proposal",

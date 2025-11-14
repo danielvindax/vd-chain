@@ -10,30 +10,30 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authsigning "github.com/cosmos/cosmos-sdk/x/auth/signing"
 
-	"github.com/dydxprotocol/v4-chain/protocol/app/msgs"
-	"github.com/dydxprotocol/v4-chain/protocol/lib"
-	"github.com/dydxprotocol/v4-chain/protocol/testutil/encoding"
-	testmsgs "github.com/dydxprotocol/v4-chain/protocol/testutil/msgs"
+	"github.com/danielvindax/vd-chain/protocol/app/msgs"
+	"github.com/danielvindax/vd-chain/protocol/lib"
+	"github.com/danielvindax/vd-chain/protocol/testutil/encoding"
+	testmsgs "github.com/danielvindax/vd-chain/protocol/testutil/msgs"
 	"github.com/stretchr/testify/require"
 )
 
 func TestAppInjectedMsgSamples_Key(t *testing.T) {
 	expectedMsgs := []string{
 		// bridge
-		"/dydxprotocol.bridge.MsgAcknowledgeBridges",
-		"/dydxprotocol.bridge.MsgAcknowledgeBridgesResponse",
+		"/vindax.bridge.MsgAcknowledgeBridges",
+		"/vindax.bridge.MsgAcknowledgeBridgesResponse",
 
 		// clob
-		"/dydxprotocol.clob.MsgProposedOperations",
-		"/dydxprotocol.clob.MsgProposedOperationsResponse",
+		"/vindax.clob.MsgProposedOperations",
+		"/vindax.clob.MsgProposedOperationsResponse",
 
 		// perpetuals
-		"/dydxprotocol.perpetuals.MsgAddPremiumVotes",
-		"/dydxprotocol.perpetuals.MsgAddPremiumVotesResponse",
+		"/vindax.perpetuals.MsgAddPremiumVotes",
+		"/vindax.perpetuals.MsgAddPremiumVotesResponse",
 
 		// prices
-		"/dydxprotocol.prices.MsgUpdateMarketPrices",
-		"/dydxprotocol.prices.MsgUpdateMarketPricesResponse",
+		"/vindax.prices.MsgUpdateMarketPrices",
+		"/vindax.prices.MsgUpdateMarketPricesResponse",
 	}
 
 	require.Equal(t, expectedMsgs, lib.GetSortedKeys[sort.StringSlice](msgs.AppInjectedMsgSamples))
