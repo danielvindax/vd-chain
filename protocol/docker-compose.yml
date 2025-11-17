@@ -123,14 +123,13 @@ services:
     volumes:
       - ./localnet/vindax3:/vindax/chain/.dave/data
   slinky0:
-    image: ghcr.io/vindax/slinky-sidecar:v1.3.3
+    image: ghcr.io/dydxprotocol/slinky-sidecar:v1.3.3
     entrypoint: [
       "slinky",
       "--market-map-endpoint", "vindaxd0:9090",
     ]
     ports:
-      - "8080:8080"
-      - "8002:8002" # metrics
+      - "8888:8080"
 
   prometheus:
     image: prom/prometheus:latest

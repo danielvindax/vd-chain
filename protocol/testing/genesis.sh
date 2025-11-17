@@ -392,6 +392,629 @@ function edit_genesis() {
 	dasel put -t int -f "$GENESIS" '.app_state.perpetuals.perpetuals.[17].params.liquidity_tier' -v '2'
 	dasel put -t int -f "$GENESIS" '.app_state.perpetuals.perpetuals.[17].params.market_type' -v '1'
 
+	# Update MarketMap module.
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map' -v "{}"
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets' -v "{}"
+
+    # Marketmap: BTC-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD.ticker.currency_pair.Base' -v 'BTC'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD.ticker.decimals' -v '5'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "BTCUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "BTCUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "BTC-USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD.provider_configs.[]' -v '{"name": "huobi_ws", "off_chain_ticker": "btcusdt", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "XXBTZUSD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "BTC-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BTC/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "BTC-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: ETH-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD.ticker.currency_pair.Base' -v 'ETH'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD.ticker.decimals' -v '6'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD.ticker.enabled' -v 'true'
+
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "ETHUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "ETHUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "ETH-USD"}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD.provider_configs.[]' -v '{"name": "huobi_ws", "off_chain_ticker": "ethusdt", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "XETHZUSD"}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "ETH-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ETH/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "ETH-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+    # Marketmap: LINK-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LINK/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LINK/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LINK/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.LINK/USD.ticker.currency_pair.Base' -v 'LINK'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.LINK/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.LINK/USD.ticker.decimals' -v '9'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.LINK/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.LINK/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LINK/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "LINKUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LINK/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "LINKUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LINK/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "LINK-USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LINK/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "LINKUSD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LINK/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "LINK-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LINK/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "LINK-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: POL-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.POL/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.POL/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.POL/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.POL/USD.ticker.currency_pair.Base' -v 'POL'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.POL/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.POL/USD.ticker.decimals' -v '10'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.POL/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.POL/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.POL/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "POLUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.POL/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "POLUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.POL/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "POL-USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.POL/USD.provider_configs.[]' -v '{"name": "crypto_dot_com_ws", "off_chain_ticker": "POL_USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.POL/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "POL-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: CRV-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.CRV/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.CRV/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.CRV/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.CRV/USD.ticker.currency_pair.Base' -v 'CRV'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.CRV/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.CRV/USD.ticker.decimals' -v '10'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.CRV/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.CRV/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.CRV/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "CRVUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.CRV/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "CRV-USD"}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.CRV/USD.provider_configs.[]' -v '{"name": "gate_ws", "off_chain_ticker": "CRV_USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.CRV/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "CRVUSD"}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.CRV/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "CRV-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.CRV/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "CRV-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+    # Marketmap: SOL-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD.ticker.currency_pair.Base' -v 'SOL'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD.ticker.decimals' -v '8'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "SOLUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "SOLUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "SOL-USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD.provider_configs.[]' -v '{"name": "huobi_ws", "off_chain_ticker": "solusdt", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "SOLUSD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "SOL-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.SOL/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "SOL-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: ADA-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.ticker.currency_pair.Base' -v 'ADA'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.ticker.decimals' -v '10'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "ADAUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "ADAUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "ADA-USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.provider_configs.[]' -v '{"name": "gate_ws", "off_chain_ticker": "ADA_USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.provider_configs.[]' -v '{"name": "huobi_ws", "off_chain_ticker": "adausdt", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "ADAUSD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "ADA-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ADA/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "ADA-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: AVAX-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.ticker.currency_pair.Base' -v 'AVAX'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.ticker.decimals' -v '8'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.ticker.enabled' -v 'true'
+
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "AVAXUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "AVAXUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "AVAX-USD"}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.provider_configs.[]' -v '{"name": "gate_ws", "off_chain_ticker": "AVAX_USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.provider_configs.[]' -v '{"name": "huobi_ws", "off_chain_ticker": "avaxusdt", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "AVAXUSD"}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "AVAX-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.AVAX/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "AVAX-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: FIL-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.FIL/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.FIL/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.FIL/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.FIL/USD.ticker.currency_pair.Base' -v 'FIL'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.FIL/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.FIL/USD.ticker.decimals' -v '9'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.FIL/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.FIL/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.FIL/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "FILUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.FIL/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "FIL-USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.FIL/USD.provider_configs.[]' -v '{"name": "gate_ws", "off_chain_ticker": "FIL_USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.FIL/USD.provider_configs.[]' -v '{"name": "huobi_ws", "off_chain_ticker": "filusdt", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.FIL/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "FILUSD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.FIL/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "FIL-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: LTC-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD.ticker.currency_pair.Base' -v 'LTC'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD.ticker.decimals' -v '8'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "LTCUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "LTCUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "LTC-USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD.provider_configs.[]' -v '{"name": "huobi_ws", "off_chain_ticker": "ltcusdt", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "XLTCZUSD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "LTC-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.LTC/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "LTC-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: DOGE-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.ticker.currency_pair.Base' -v 'DOGE'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.ticker.decimals' -v '11'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "DOGEUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "DOGEUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "DOGE-USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.provider_configs.[]' -v '{"name": "gate_ws", "off_chain_ticker": "DOGE_USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.provider_configs.[]' -v '{"name": "huobi_ws", "off_chain_ticker": "dogeusdt", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "XDGUSD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "DOGE-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOGE/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "DOGE-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: ATOM-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD.ticker.currency_pair.Base' -v 'ATOM'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD.ticker.decimals' -v '9'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "ATOMUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "ATOMUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "ATOM-USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD.provider_configs.[]' -v '{"name": "gate_ws", "off_chain_ticker": "ATOM_USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "ATOMUSD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "ATOM-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.ATOM/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "ATOM-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: DOT-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD.ticker.currency_pair.Base' -v 'DOT'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD.ticker.decimals' -v '9'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "DOTUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "DOTUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "DOT-USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD.provider_configs.[]' -v '{"name": "gate_ws", "off_chain_ticker": "DOT_USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "DOTUSD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "DOT-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.DOT/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "DOT-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: UNI-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD.ticker.currency_pair.Base' -v 'UNI'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD.ticker.decimals' -v '9'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "UNIUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "UNIUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "UNI-USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD.provider_configs.[]' -v '{"name": "gate_ws", "off_chain_ticker": "UNI_USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "UNIUSD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "UNI-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.UNI/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "UNI-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: BCH-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.ticker.currency_pair.Base' -v 'BCH'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.ticker.decimals' -v '7'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.ticker.enabled' -v 'true'
+
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "BCHUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "BCHUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "BCH-USD"}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.provider_configs.[]' -v '{"name": "gate_ws", "off_chain_ticker": "BCH_USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.provider_configs.[]' -v '{"name": "huobi_ws", "off_chain_ticker": "bchusdt", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "BCHUSD"}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "BCH-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+	dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.BCH/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "BCH-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: TRX-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD.ticker.currency_pair.Base' -v 'TRX'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD.ticker.decimals' -v '11'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "TRXUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "TRXUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD.provider_configs.[]' -v '{"name": "gate_ws", "off_chain_ticker": "TRX_USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD.provider_configs.[]' -v '{"name": "huobi_ws", "off_chain_ticker": "trxusdt", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "TRXUSD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "TRX-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.TRX/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "TRX-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: NEAR-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.NEAR/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.NEAR/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.NEAR/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.NEAR/USD.ticker.currency_pair.Base' -v 'NEAR'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.NEAR/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.NEAR/USD.ticker.decimals' -v '9'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.NEAR/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.NEAR/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.NEAR/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "NEARUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.NEAR/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "NEAR-USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.NEAR/USD.provider_configs.[]' -v '{"name": "gate_ws", "off_chain_ticker": "NEAR_USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.NEAR/USD.provider_configs.[]' -v '{"name": "huobi_ws", "off_chain_ticker": "nearusdt", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.NEAR/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "NEAR-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.NEAR/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "NEAR-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+
+    # Marketmap: MKR-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker.currency_pair.Base' -v 'MKR'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker.decimals' -v '6'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.ticker.enabled' -v 'false'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "MKRUSDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "MKR-USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "MKRUSD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "MKR-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.MKR/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "MKR-USDT", "normalize_by_pair": {"Base": "USDT", "Quote": "USD"}}'
+
+    # Marketmap: TEST-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.TEST/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.TEST/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.TEST/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.TEST/USD.ticker.currency_pair.Base' -v 'TEST'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.TEST/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.TEST/USD.ticker.decimals' -v '5'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.TEST/USD.ticker.min_provider_count' -v '1'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.TEST/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.TEST/USD.provider_configs.[]' -v '{"name": "volatile-exchange-provider", "off_chain_ticker": "TEST-USD"}'
+
+
+    # Marketmap: USDT-USD
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD' -v "{}"
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD.ticker' -v "{}" 
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD.ticker.currency_pair' -v "{}"
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD.ticker.currency_pair.Base' -v 'USDT'
+    dasel put -t string -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD.ticker.currency_pair.Quote' -v 'USD'
+
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD.ticker.decimals' -v '9'
+    dasel put -t int -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD.ticker.min_provider_count' -v '3'
+    dasel put -t bool -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD.ticker.enabled' -v 'true'
+
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD.provider_configs.[]' -v '{"name": "binance_ws", "off_chain_ticker": "USDCUSDT", "invert": true}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD.provider_configs.[]' -v '{"name": "bybit_ws", "off_chain_ticker": "USDCUSDT", "invert": true}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD.provider_configs.[]' -v '{"name": "coinbase_ws", "off_chain_ticker": "USDT-USD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD.provider_configs.[]' -v '{"name": "huobi_ws", "off_chain_ticker": "ethusdt", "normalize_by_pair": {"Base": "ETH", "Quote": "USD"}, "invert": true}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD.provider_configs.[]' -v '{"name": "kraken_api", "off_chain_ticker": "USDTZUSD"}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD.provider_configs.[]' -v '{"name": "kucoin_ws", "off_chain_ticker": "BTC-USDT", "normalize_by_pair": {"Base": "BTC", "Quote": "USD"}, "invert": true}'
+    dasel put -t json -f "$GENESIS" '.app_state.marketmap.market_map.markets.USDT/USD.provider_configs.[]' -v '{"name": "okx_ws", "off_chain_ticker": "USDC-USDT", "invert": true}'
+
+	# Update prices module.
+	# Market: BTC-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params' -v "[]"
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices' -v "[]"
+
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[0].pair' -v 'BTC-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[0].id' -v '0'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[0].exponent' -v '-5'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[0].min_price_change_ppm' -v '1000' # 0.1%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[0].id' -v '0'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[0].exponent' -v '-5'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[0].price' -v '2868819524'          # $28,688 = 1 BTC.
+
+	# Market: ETH-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[1].pair' -v 'ETH-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[1].id' -v '1'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[1].exponent' -v '-6'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[1].min_price_change_ppm' -v '1000' # 0.1%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[1].id' -v '1'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[1].exponent' -v '-6'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[1].price' -v '1811985252'          # $1,812 = 1 ETH.
+
+	# Market: LINK-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[2].pair' -v 'LINK-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[2].id' -v '2'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[2].exponent' -v '-9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[2].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[2].id' -v '2'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[2].exponent' -v '-9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[2].price' -v '7204646989'          # $7.205 = 1 LINK.
+
+	# Market: POL-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[3].pair' -v 'POL-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[3].id' -v '3'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[3].exponent' -v '-10'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[3].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[3].id' -v '3'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[3].exponent' -v '-10'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[3].price' -v '3703925550'          # $0.370 = 1 POL.
+
+	# Market: CRV-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[4].pair' -v 'CRV-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[4].id' -v '4'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[4].exponent' -v '-10'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[4].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[4].id' -v '4'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[4].exponent' -v '-10'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[4].price' -v '6029316660'          # $0.6029 = 1 CRV.
+
+	# Market: SOL-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[5].pair' -v 'SOL-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[5].id' -v '5'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[5].exponent' -v '-8'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[5].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[5].id' -v '5'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[5].exponent' -v '-8'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[5].price' -v '2350695125'          # $23.51 = 1 SOL.
+
+	# Market: ADA-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[6].pair' -v 'ADA-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[6].id' -v '6'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[6].exponent' -v '-10'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[6].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[6].id' -v '6'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[6].exponent' -v '-10'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[6].price' -v '2918831290'          # $0.2919 = 1 ADA.
+
+	# Market: AVAX-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[7].pair' -v 'AVAX-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[7].id' -v '7'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[7].exponent' -v '-8'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[7].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[7].id' -v '7'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[7].exponent' -v '-8'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[7].price' -v '1223293720'          # $12.23 = 1 AVAX.
+
+	# Market: FIL-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[8].pair' -v 'FIL-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[8].id' -v '8'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[8].exponent' -v '-9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[8].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[8].id' -v '8'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[8].exponent' -v '-9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[8].price' -v '4050336602'          # $4.050 = 1 FIL.
+
+	# Market: LTC-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[9].pair' -v 'LTC-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[9].id' -v '9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[9].exponent' -v '-8'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[9].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[9].id' -v '9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[9].exponent' -v '-8'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[9].price' -v '8193604950'          # $81.93 = 1 LTC.
+
+	# Market: DOGE-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[10].pair' -v 'DOGE-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[10].id' -v '10'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[10].exponent' -v '-11'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[10].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[10].id' -v '10'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[10].exponent' -v '-11'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[10].price' -v '7320836895'          # $0.07321 = 1 DOGE.
+
+	# Market: ATOM-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[11].pair' -v 'ATOM-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[11].id' -v '11'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[11].exponent' -v '-9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[11].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[11].id' -v '11'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[11].exponent' -v '-9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[11].price' -v '8433494428'          # $8.433 = 1 ATOM.
+
+	# Market: DOT-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[12].pair' -v 'DOT-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[12].id' -v '12'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[12].exponent' -v '-9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[12].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[12].id' -v '12'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[12].exponent' -v '-9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[12].price' -v '4937186533'          # $4.937 = 1 DOT.
+
+	# Market: UNI-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[13].pair' -v 'UNI-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[13].id' -v '13'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[13].exponent' -v '-9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[13].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[13].id' -v '13'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[13].exponent' -v '-9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[13].price' -v '5852293356'          # $5.852 = 1 UNI.
+
+	# Market: BCH-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[14].pair' -v 'BCH-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[14].id' -v '14'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[14].exponent' -v '-7'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[14].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[14].id' -v '14'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[14].exponent' -v '-7'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[14].price' -v '2255676327'          # $225.6 = 1 BCH.
+
+	# Market: TRX-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[15].pair' -v 'TRX-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[15].id' -v '15'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[15].exponent' -v '-11'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[15].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[15].id' -v '15'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[15].exponent' -v '-11'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[15].price' -v '7795369902'          # $0.07795 = 1 TRX.
+
+	# Market: NEAR-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[16].pair' -v 'NEAR-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[16].id' -v '16'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[16].exponent' -v '-9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[16].min_price_change_ppm' -v '2500' # 0.25%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[16].id' -v '16'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[16].exponent' -v '-9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[16].price' -v '1312325536'          # $1.312 = 1 NEAR.
+
+	# Market: MKR-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[17].pair' -v 'MKR-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[17].id' -v '17'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[17].exponent' -v '-6'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[17].min_price_change_ppm' -v '4000' # 0.4%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[17].id' -v '17'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[17].exponent' -v '-6'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[17].price' -v '1199517382'          # $1,200 = 1 MKR.
+
+	# Market: USDT-USD
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
+	dasel put -t string -f "$GENESIS" '.app_state.prices.market_params.[18].pair' -v 'USDT-USD'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[18].id' -v '1000000'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[18].exponent' -v '-9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_params.[18].min_price_change_ppm' -v '1000'  # 0.100%
+	dasel put -t json -f "$GENESIS" '.app_state.prices.market_prices.[]' -v "{}"
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[18].id' -v '1000000'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[18].exponent' -v '-9'
+	dasel put -t int -f "$GENESIS" '.app_state.prices.market_prices.[18].price' -v '1000000000'          # $1 = 1 USDT.
+
 	# Initialize bridge module account balance as total native token supply.
 	bridge_module_account_balance=$TOTAL_NATIVE_TOKEN_SUPPLY
 	total_accounts_quote_balance=0
@@ -833,7 +1456,7 @@ function update_genesis_use_test_exchange() {
 # Modify the genesis file to add test volatile market. Market TEST-USD will be added as market 33.
 function update_genesis_use_test_volatile_market() {
 	GENESIS=$1/genesis.json
-	TEST_USD_MARKET_ID=33
+	TEST_USD_MARKET_ID=18
 
 	# Market: TEST-USD
 	dasel put -t json -f "$GENESIS" '.app_state.prices.market_params.[]' -v "{}"
