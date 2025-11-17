@@ -1,0 +1,78 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'local-indexer'
+    environment: 'local'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+# Load alert rules
+rule_files:
+  - '/etc/prometheus/alerts/*.yml'
+
+scrape_configs:
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Redis Exporter
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis_exporter:9121']
+        labels:
+          service: 'redis'
+
+  # Postgres Exporter
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres_exporter:9187']
+        labels:
+          service: 'postgres'
+
+  # Comlink service (metrics on same port as API)
+  - job_name: 'comlink'
+    static_configs:
+      - targets: ['comlink:3002']
+        labels:
+          service: 'comlink'
+          instance: 'comlink-1'
+
+  # Socks service (metrics on separate port)
+  - job_name: 'socks'
+    static_configs:
+      - targets: ['socks:9104']
+        labels:
+          service: 'socks'
+          instance: 'socks-1'
+
+  # Ender service (metrics on separate port)
+  - job_name: 'ender'
+    static_configs:
+      - targets: ['ender:9101']
+        labels:
+          service: 'ender'
+          instance: 'ender-1'
+
+  # Vulcan service (metrics on separate port)
+  - job_name: 'vulcan'
+    static_configs:
+      - targets: ['vulcan:9102']
+        labels:
+          service: 'vulcan'
+          instance: 'vulcan-1'
+
+  # Roundtable service (metrics on separate port)
+  - job_name: 'roundtable'
+    static_configs:
+      - targets: ['roundtable:9103']
+        labels:
+          service: 'roundtable'
+          instance: 'roundtable-1'
+

@@ -13,6 +13,7 @@ import {
   connect as connectToRedis,
   redisClient,
 } from './helpers/redis/redis-controller';
+import { createMetricsServer } from './metrics';
 
 async function startKafka(): Promise<void> {
   logger.info({
@@ -54,6 +55,10 @@ process.on('SIGTERM', async () => {
 
 async function start(): Promise<void> {
   startBugsnag();
+  
+  // Start metrics server on port 9101
+  createMetricsServer('ender', 9101);
+  
   logger.info({
     at: 'index#start',
     message: `Connecting to redis: ${config.REDIS_URL}`,

@@ -12,6 +12,7 @@ import {
 import { Wss } from './helpers/wss';
 import { MessageForwarder } from './lib/message-forwarder';
 import { Subscriptions } from './lib/subscription';
+import { createMetricsServer } from './metrics';
 import Server from './server';
 import { Index } from './websocket';
 
@@ -46,6 +47,9 @@ async function start(): Promise<void> {
   });
 
   startBugsnag();
+  
+  // Start metrics server on port 9104
+  createMetricsServer('socks', 9104);
 
   logger.info({
     at: 'index#start',

@@ -1,0 +1,197 @@
+{
+  "dashboard": {
+    "title": "Metrics & Logs Correlation",
+    "tags": ["metrics", "logs", "correlation"],
+    "timezone": "browser",
+    "schemaVersion": 27,
+    "version": 1,
+    "refresh": "10s",
+    "templating": {
+      "list": [
+        {
+          "name": "service",
+          "type": "query",
+          "datasource": {
+            "type": "prometheus"
+          },
+          "query": "label_values(service_requests_total, service)",
+          "current": {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          "includeAll": true,
+          "multi": true,
+          "allValue": ".*"
+        }
+      ]
+    },
+    "panels": [
+      {
+        "id": 1,
+        "title": "Request Rate by Service",
+        "type": "timeseries",
+        "datasource": {
+          "type": "prometheus"
+        },
+        "targets": [
+          {
+            "expr": "rate(service_requests_total{service=~\"$service\"}[1m])",
+            "legendFormat": "{{service}} - {{endpoint}} - {{method}}",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+        "fieldConfig": {
+          "defaults": {
+            "unit": "reqps"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "Error Rate by Service",
+        "type": "timeseries",
+        "datasource": {
+          "type": "prometheus"
+        },
+        "targets": [
+          {
+            "expr": "rate(service_requests_total{service=~\"$service\", status_code=~\"[45]..\"}[1m])",
+            "legendFormat": "{{service}} - {{endpoint}}",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+        "fieldConfig": {
+          "defaults": {
+            "unit": "reqps",
+            "color": {
+              "mode": "palette-classic"
+            }
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "Correlated Error Logs",
+        "type": "logs",
+        "datasource": {
+          "type": "loki"
+        },
+        "targets": [
+          {
+            "expr": "{service=~\"$service\", level=\"error\"}",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {"h": 10, "w": 12, "x": 0, "y": 8},
+        "options": {
+          "dedupStrategy": "none",
+          "enableLogDetails": true,
+          "prettifyLogMessage": false,
+          "showCommonLabels": false,
+          "showLabels": false,
+          "showTime": true,
+          "sortOrder": "Descending"
+        },
+      },
+      {
+        "id": 4,
+        "title": "Request Logs (with request_id)",
+        "type": "logs",
+        "datasource": {
+          "type": "loki"
+        },
+        "targets": [
+          {
+            "expr": "{service=~\"$service\"} |~ \"requestLogger\"",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {"h": 10, "w": 12, "x": 12, "y": 8},
+        "options": {
+          "dedupStrategy": "none",
+          "enableLogDetails": true,
+          "prettifyLogMessage": false,
+          "showCommonLabels": false,
+          "showLabels": false,
+          "showTime": true,
+          "sortOrder": "Descending"
+        },
+      },
+      {
+        "id": 5,
+        "title": "Request Latency (p95)",
+        "type": "timeseries",
+        "datasource": {
+          "type": "prometheus"
+        },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(service_request_latency_seconds_bucket{service=~\"$service\"}[5m]))",
+            "legendFormat": "{{service}} - {{endpoint}}",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 18},
+        "fieldConfig": {
+          "defaults": {
+            "unit": "s"
+          }
+        }
+      },
+      {
+        "id": 6,
+        "title": "Log Volume vs Error Rate",
+        "type": "timeseries",
+        "datasource": {
+          "type": "prometheus"
+        },
+        "targets": [
+          {
+            "expr": "sum(count_over_time({service=~\"$service\", env=\"local\"}[1m])) by (service)",
+            "legendFormat": "{{service}} - Logs/min",
+            "refId": "A"
+          },
+          {
+            "expr": "sum(rate(service_requests_total{service=~\"$service\", status_code=~\"[45]..\"}[1m])) by (service) * 60",
+            "legendFormat": "{{service}} - Errors/min",
+            "refId": "B"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 18},
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": 7,
+        "title": "All Logs for Selected Service",
+        "type": "logs",
+        "datasource": {
+          "type": "loki"
+        },
+        "targets": [
+          {
+            "expr": "{service=~\"$service\"}",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {"h": 10, "w": 24, "x": 0, "y": 26},
+        "options": {
+          "dedupStrategy": "none",
+          "enableLogDetails": true,
+          "prettifyLogMessage": false,
+          "showCommonLabels": false,
+          "showLabels": false,
+          "showTime": true,
+          "sortOrder": "Descending"
+        }
+      }
+    ]
+  }
+}
+

@@ -1,0 +1,59 @@
+groups:
+  - name: database_alerts
+    interval: 30s
+    rules:
+      # Redis down
+      - alert: RedisDown
+        expr: up{job="redis"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: redis
+        annotations:
+          summary: "Redis is down"
+          description: "Redis has been down for more than 1 minute"
+
+      # Redis high memory usage
+      - alert: RedisHighMemory
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+        for: 5m
+        labels:
+          severity: warning
+          service: redis
+        annotations:
+          summary: "Redis high memory usage"
+          description: "Redis memory usage is above 90% for more than 5 minutes. Current usage: {{ $value | humanizePercentage }}"
+
+      # Postgres down
+      - alert: PostgresDown
+        expr: up{job="postgres"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: postgres
+        annotations:
+          summary: "Postgres is down"
+          description: "Postgres has been down for more than 1 minute"
+
+      # Postgres high connections
+      - alert: PostgresHighConnections
+        expr: pg_stat_database_numbackends / pg_settings_max_connections > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          service: postgres
+        annotations:
+          summary: "Postgres high connection count"
+          description: "Postgres connection usage is above 80% for more than 5 minutes. Current usage: {{ $value | humanizePercentage }}"
+
+      # Postgres slow queries
+      - alert: PostgresSlowQueries
+        expr: rate(pg_stat_database_blk_read_time[5m]) > 1000
+        for: 5m
+        labels:
+          severity: warning
+          service: postgres
+        annotations:
+          summary: "Postgres slow queries detected"
+          description: "Postgres has high block read time indicating slow queries. Current value: {{ $value }}ms"
+

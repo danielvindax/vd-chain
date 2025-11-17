@@ -19,14 +19,11 @@ services:
       KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL_SAME_HOST://localhost:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL_SAME_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-      DD_AGENT_HOST: datadog-agent
     healthcheck:
       test: ["CMD-SHELL", "kafka-topics.sh --bootstrap-server 127.0.0.1:9092 --topic to-websockets-candles --describe"]
       interval: 5s
       timeout: 20s
       retries: 50
-    labels:
-      com.datadoghq.ad.logs: '[{"source": "indexer", "service": "kafka"}]'
   postgres:
     build:
       context: .
@@ -42,40 +39,10 @@ services:
       interval: 5s
       timeout: 20s
       retries: 10
-    labels:
-      com.datadoghq.ad.logs: '[{"source": "indexer", "service": "postgres"}]'
-      com.datadoghq.ad.check_names: '["postgres"]'
-      com.datadoghq.ad.init_configs: '[{}]'
-      com.datadoghq.ad.instances: '[{"host":"%%host%%", "port":5432,"username":"datadog","password":"dydxserver123"}]'
   redis:
     image: redis:5.0.6-alpine
     ports:
       - 6382:6379
-    labels:
-      com.datadoghq.ad.logs: '[{"source": "indexer", "service": "redis"}]'
-      com.datadoghq.ad.check_names: '["redisdb"]'
-      com.datadoghq.ad.init_configs: '[{}]'
-      com.datadoghq.ad.instances: '[{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
-  datadog-agent:
-    build: datadog
-    links:
-      - redis
-      - vulcan
-      - comlink
-      - ender
-    environment:
-      - DD_API_KEY=${DD_API_KEY}
-      - DD_LOGS_ENABLED=true
-      - DD_TAGS="service:local-indexer dev:${USER}"
-      - DD_APM_ENABLED=true
-      - DD_APM_NON_LOCAL_TRAFFIC=true
-      - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /proc/:/host/proc/:ro
-      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
-    profiles: ["export-to-datadog"]
   postgres-package:
     build:
       context: .
@@ -93,14 +60,10 @@ services:
         service: ender
     ports:
       - 3001:3001
+      - 9101:9101  # Metrics port
     links:
       - postgres
     environment:
-      # See https://docs.datadoghq.com/profiler/enabling/nodejs/ for DD_ specific environment variables.
-      # Note that DD_SERVICE and DD_VERSION are read by default from package.json
-      - DD_PROFILING_ENABLED=true
-      - DD_ENV=localnet_${USER}
-      - DD_AGENT_HOST=datadog-agent
       - REDIS_URL=redis://redis:6379
       # In-network Kafka broker
       - KAFKA_BROKER_URLS=kafka:9092
@@ -108,8 +71,6 @@ services:
       - DB_HOSTNAME=postgres
       - DB_READONLY_HOSTNAME=postgres
       - DB_PORT=5432
-    labels:
-      com.datadoghq.ad.logs: '[{"source": "indexer", "service": "ender"}]'
     depends_on:
       kafka:
         condition: service_healthy
@@ -122,11 +83,6 @@ services:
       args:
         service: comlink
     environment:
-      # See https://docs.datadoghq.com/profiler/enabling/nodejs/ for DD_ specific environment variables.
-      # Note that DD_SERVICE and DD_VERSION are read by default from package.json
-      - DD_PROFILING_ENABLED=true
-      - DD_ENV=localnet_${USER}
-      - DD_AGENT_HOST=datadog-agent
       - REDIS_URL=redis://redis:6379
       - REDIS_READONLY_URL=redis://redis:6379
       - RATE_LIMIT_REDIS_URL=redis://redis:6379
@@ -140,8 +96,6 @@ services:
       - DB_HOSTNAME=postgres
       - DB_READONLY_HOSTNAME=postgres
       - DB_PORT=5432
-    labels:
-      com.datadoghq.ad.logs: '[{"source": "indexer", "service": "comlink"}]'
     ports:
       - 3002:3002
     links:
@@ -157,18 +111,12 @@ services:
         service: socks
     ports:
       - 3003:3003
+      - 9104:9104  # Metrics port
     links:
       - postgres
     environment:
       - WS_PORT=3003
-      # See https://docs.datadoghq.com/profiler/enabling/nodejs/ for DD_ specific environment variables.
-      # Note that DD_SERVICE and DD_VERSION are read by default from package.json
-      - DD_PROFILING_ENABLED=true
-      - DD_ENV=localnet_${USER}
-      - DD_AGENT_HOST=datadog-agent
       - COMLINK_URL=comlink:3002
-    labels:
-      com.datadoghq.ad.logs: '[{"source": "indexer", "service": "socks"}]'
     depends_on:
       kafka:
         condition: service_healthy
@@ -182,14 +130,10 @@ services:
         service: roundtable
     ports:
       - 3004:3004
+      - 9103:9103  # Metrics port
     links:
       - postgres
     environment:
-      # See https://docs.datadoghq.com/profiler/enabling/nodejs/ for DD_ specific environment variables.
-      # Note that DD_SERVICE and DD_VERSION are read by default from package.json
-      - DD_PROFILING_ENABLED=true
-      - DD_ENV=localnet_${USER}
-      - DD_AGENT_HOST=datadog-agent
       # In-network Redis & Kafka endpoints (do not use host localhost)
       - REDIS_URL=redis://redis:6379
       - REDIS_READONLY_URL=redis://redis:6379
@@ -205,8 +149,6 @@ services:
       - ECS_TASK_ROLE_ARN=arn:aws:iam::000000000000:role/local-indexer-role
       - KMS_KEY_ARN=arn:aws:kms:local:000000000000:key/local-indexer-key
       - RDS_INSTANCE_NAME=local-indexer-rds
-    labels:
-      com.datadoghq.ad.logs: '[{"source": "indexer", "service": "roundtable"}]'
     depends_on:
       kafka:
         condition: service_healthy
@@ -218,12 +160,9 @@ services:
       dockerfile: Dockerfile.service.local
       args:
         service: vulcan
+    ports:
+      - 9102:9102  # Metrics port
     environment:
-      # See https://docs.datadoghq.com/profiler/enabling/nodejs/ for DD_ specific environment variables.
-      # Note that DD_SERVICE and DD_VERSION are read by default from package.json
-      - DD_PROFILING_ENABLED=true
-      - DD_ENV=localnet_${USER}
-      - DD_AGENT_HOST=datadog-agent
       - REDIS_URL=redis://redis:6379
       - REDIS_READONLY_URL=redis://redis:6379
       # In-network Kafka broker
@@ -232,10 +171,135 @@ services:
       - DB_HOSTNAME=postgres
       - DB_READONLY_HOSTNAME=postgres
       - DB_PORT=5432
-    labels:
-      com.datadoghq.ad.logs: '[{"source": "indexer", "service": "vulcan"}]'
-    ports:
-      - 3005:3005
     depends_on:
       kafka:
         condition: service_healthy
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/alerts:/etc/prometheus/alerts
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - default
+    depends_on:
+      - redis_exporter
+      - postgres_exporter
+      - comlink
+      - socks
+      - ender
+      - vulcan
+      - roundtable
+      - alertmanager
+
+  # Alertmanager
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    ports:
+      - 9093:9093
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - alertmanager_data:/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--storage.path=/alertmanager'
+      - '--web.external-url=http://localhost:9093'
+    networks:
+      - default
+    depends_on:
+      - prometheus
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    networks:
+      - default
+    depends_on:
+      - prometheus
+
+  # Redis Exporter
+  redis_exporter:
+    image: oliver006/redis_exporter:latest
+    container_name: redis_exporter
+    ports:
+      - 9121:9121
+    environment:
+      - REDIS_ADDR=redis:6379
+      - REDIS_PASSWORD=
+    networks:
+      - default
+    depends_on:
+      - redis
+
+  # Postgres Exporter
+  postgres_exporter:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: postgres_exporter
+    ports:
+      - 9187:9187
+    environment:
+      - DATA_SOURCE_NAME=postgresql://dydx_dev:dydxserver123@postgres:5432/postgres?sslmode=disable
+    networks:
+      - default
+    depends_on:
+      - postgres
+
+  # Loki for log aggregation
+  loki:
+    image: grafana/loki:latest
+    container_name: loki
+    ports:
+      - 3100:3100
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./loki-config.yml:/etc/loki/local-config.yaml
+      - loki_data:/loki
+    networks:
+      - default
+
+  # Promtail for log collection
+  promtail:
+    image: grafana/promtail:latest
+    container_name: promtail
+    volumes:
+      - ./promtail-config.yml:/etc/promtail/config.yml
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - default
+    depends_on:
+      - loki
+
+volumes:
+  prometheus_data:
+  grafana_data:
+  loki_data:
+  alertmanager_data:
+
+networks:
+  default:
+    driver: bridge

@@ -9,6 +9,7 @@ import * as swaggerJson from '../../public/swagger.json';
 import config from '../config';
 import { logErrors } from './error-handler';
 import geoHeadersMiddleware from './geo-headers-middleware';
+import client from 'prom-client';
 import RequestLogger from './request-logger';
 import resBodyCapture from './res-body-capture';
 const requestId = require('express-request-id');
@@ -35,6 +36,12 @@ export default function server(
 
   app.get('/health', (_req: express.Request, res: express.Response) => {
     res.json({ ok: true });
+  });
+
+  // Metrics endpoint for Prometheus (must be before bodyParser)
+  app.get('/metrics', async (_req: express.Request, res: express.Response) => {
+    res.set('Content-Type', client.register.contentType);
+    res.end(await client.register.metrics());
   });
 
   app.use((_req: express.Request, _res: express.Response, next: express.NextFunction) => next());
