@@ -22,12 +22,6 @@ func TestAddFlagsToCommand(t *testing.T) {
 		fmt.Sprintf("Has %s flag", flags.NonValidatingFullNodeFlag): {
 			flagName: flags.NonValidatingFullNodeFlag,
 		},
-		fmt.Sprintf("Has %s flag", flags.DdAgentHost): {
-			flagName: flags.DdAgentHost,
-		},
-		fmt.Sprintf("Has %s flag", flags.DdTraceAgentPort): {
-			flagName: flags.DdTraceAgentPort,
-		},
 		fmt.Sprintf("Has %s flag", flags.GrpcStreamingEnabled): {
 			flagName: flags.GrpcStreamingEnabled,
 		},
@@ -69,8 +63,6 @@ func TestValidate(t *testing.T) {
 		"success (default values)": {
 			flags: flags.Flags{
 				NonValidatingFullNode:             flags.DefaultNonValidatingFullNode,
-				DdAgentHost:                       flags.DefaultDdAgentHost,
-				DdTraceAgentPort:                  flags.DefaultDdTraceAgentPort,
 				GrpcAddress:                       config.DefaultGRPCAddress,
 				GrpcEnable:                        true,
 				FullNodeStreamingSnapshotInterval: flags.DefaultFullNodeStreamingSnapshotInterval,
@@ -236,8 +228,6 @@ func TestGetFlagValuesFromOptions(t *testing.T) {
 
 		// Expectations.
 		expectedNonValidatingFullNodeFlag         bool
-		expectedDdAgentHost                       string
-		expectedDdTraceAgentPort                  uint16
 		expectedGrpcAddress                       string
 		expectedGrpcEnable                        bool
 		expectedGrpcStreamingEnable               bool
@@ -251,8 +241,6 @@ func TestGetFlagValuesFromOptions(t *testing.T) {
 	}{
 		"Sets to default if unset": {
 			expectedNonValidatingFullNodeFlag:         false,
-			expectedDdAgentHost:                       "",
-			expectedDdTraceAgentPort:                  8126,
 			expectedGrpcAddress:                       "localhost:9090",
 			expectedGrpcEnable:                        true,
 			expectedGrpcStreamingEnable:               false,
@@ -267,8 +255,6 @@ func TestGetFlagValuesFromOptions(t *testing.T) {
 		"Sets values from options": {
 			optsMap: map[string]any{
 				flags.NonValidatingFullNodeFlag:         true,
-				flags.DdAgentHost:                       "agentHostTest",
-				flags.DdTraceAgentPort:                  uint16(777),
 				flags.GrpcEnable:                        false,
 				flags.GrpcAddress:                       "localhost:1234",
 				flags.GrpcStreamingEnabled:              "true",
@@ -281,8 +267,6 @@ func TestGetFlagValuesFromOptions(t *testing.T) {
 				flags.OptimisticExecutionEnabled:        "true",
 			},
 			expectedNonValidatingFullNodeFlag:         true,
-			expectedDdAgentHost:                       "agentHostTest",
-			expectedDdTraceAgentPort:                  777,
 			expectedGrpcEnable:                        false,
 			expectedGrpcAddress:                       "localhost:1234",
 			expectedGrpcStreamingEnable:               true,
@@ -309,16 +293,6 @@ func TestGetFlagValuesFromOptions(t *testing.T) {
 				t,
 				tc.expectedNonValidatingFullNodeFlag,
 				flags.NonValidatingFullNode,
-			)
-			require.Equal(
-				t,
-				tc.expectedDdAgentHost,
-				flags.DdAgentHost,
-			)
-			require.Equal(
-				t,
-				tc.expectedDdTraceAgentPort,
-				flags.DdTraceAgentPort,
 			)
 			require.Equal(
 				t,

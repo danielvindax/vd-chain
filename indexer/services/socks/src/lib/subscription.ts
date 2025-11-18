@@ -337,7 +337,7 @@ export class Subscriptions {
       }
     }
 
-    // Stat every time a subscribe happens so we have up to date stats on datadog.
+    // Stat every time a subscribe happens so we have up to date stats.
     stats.timing(
       `${config.SERVICE_NAME}.subscribe_send_message`,
       Date.now() - startSend,

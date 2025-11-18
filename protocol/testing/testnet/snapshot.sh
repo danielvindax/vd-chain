@@ -19,7 +19,6 @@ function display_usage() {
     echo "  --p2p_seeds                     List of seed nodes to peer with, e.g. dfa67970296bbecce14daba6cb0da516ed60458a@3.129.102.24:26656"
     echo "  --upload_period                 Upload frequency in seconds, e.g. 300"
     echo "  --s3_snapshot_bucket            Name of the S3 bucket to upload snapshots to, e.g. dev4fullnodesnapshots"
-    echo "  --dd_agent_host                 Datadog agent host"
 }
 
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then
@@ -82,7 +81,7 @@ sed -i 's/indexer = "kv"/indexer = "null"/' /vindax/chain/.full-node-0/config/co
 # TODO: add metrics around snapshot upload latency/frequency/success rate
 while true; do
   # p2p.seeds taken from --p2p.persistent_peers flag of full node
-  cosmovisor run start --log_level info --home /vindax/chain/.full-node-0 --p2p.seeds "${p2p_seeds}" --non-validating-full-node=true --dd-agent-host=${dd_agent_host} &
+  cosmovisor run start --log_level info --home /vindax/chain/.full-node-0 --p2p.seeds "${p2p_seeds}" --non-validating-full-node=true &
 
   sleep ${upload_period}
   kill -TERM $(pidof cosmovisor)
