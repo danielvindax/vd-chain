@@ -41,7 +41,6 @@ import (
 	rosettaCmd "github.com/cosmos/rosetta/cmd"
 	dydxapp "github.com/danielvindax/vd-chain/protocol/app"
 	"github.com/danielvindax/vd-chain/protocol/app/constants"
-	protocolflags "github.com/danielvindax/vd-chain/protocol/app/flags"
 
 	"github.com/spf13/cast"
 	"github.com/spf13/cobra"
@@ -153,14 +152,6 @@ func NewRootCmdWithInterceptors(
 			}
 
 			serverCtx := server.GetServerContextFromCmd(cmd)
-
-			// Format logs for error tracking if it is enabled via flags.
-			if ddErrorTrackingFormatterEnabled :=
-				serverCtx.Viper.Get(protocolflags.DdErrorTrackingFormat); ddErrorTrackingFormatterEnabled != nil {
-				if enabled, err := cast.ToBoolE(ddErrorTrackingFormatterEnabled); err == nil && enabled {
-					dydxapp.SetZerologDatadogErrorTrackingFormat()
-				}
-			}
 			serverCtxInterceptor(serverCtx)
 
 			return nil

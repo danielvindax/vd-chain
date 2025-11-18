@@ -133,6 +133,26 @@ func (msgSender *IndexerMessageSenderKafka) send(message *sarama.ProducerMessage
 		return
 	}
 
+	// Get key and value lengths safely
+	keyLength := 0
+	if key, ok := message.Key.(sarama.ByteEncoder); ok {
+		keyLength = len(key)
+	}
+	valueLength := 0
+	if value, ok := message.Value.(sarama.ByteEncoder); ok {
+		valueLength = len(value)
+	}
+
+	msgSender.logger.Info(
+		"Sending message to Kafka",
+		"topic",
+		message.Topic,
+		"key_length",
+		keyLength,
+		"value_length",
+		valueLength,
+	)
+
 	msgSender.producer.Input() <- message
 }
 

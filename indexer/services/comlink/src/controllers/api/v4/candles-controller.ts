@@ -17,7 +17,7 @@ import { handleValidationErrors } from '../../../request-helpers/error-handler';
 import { candleToResponseObject } from '../../../request-helpers/request-transformer';
 import { CandleRequest, CandleResponse } from '../../../types';
 
-const router = express.Router();
+const router: express.Router = express.Router();
 const controllerName: string = 'candles-controller';
 const candlesCacheControlMiddleware = cacheControlMiddleware(
   config.CACHE_CONTROL_DIRECTIVE_CANDLES,
@@ -29,7 +29,7 @@ class CandleController extends Controller {
   async getCandles(
     @Path() ticker: string,
       @Query() resolution: CandleResolution,
-      @Query() limit?: number,
+      @Query() limit: number,
       @Query() fromISO?: string,
       @Query() toISO?: string,
   ): Promise<CandleResponse> {

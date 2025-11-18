@@ -402,8 +402,6 @@ func New(
 		panic(err)
 	}
 
-	initDatadogProfiler(logger, appFlags.DdAgentHost, appFlags.DdTraceAgentPort)
-
 	encodingConfig := GetEncodingConfig()
 
 	appCodec := encodingConfig.Codec

@@ -9,6 +9,7 @@ import config from './config';
 import { complianceProvider } from './helpers/compliance-clients';
 import { startLoop } from './helpers/loops-helper';
 import { redisClient, connect as connectToRedis } from './helpers/redis';
+import { createMetricsServer } from './metrics';
 import aggregateTradingRewardsTasks from './tasks/aggregate-trading-rewards';
 import cacheOrderbookMidPrices from './tasks/cache-orderbook-mid-prices';
 import cancelStaleOrdersTask from './tasks/cancel-stale-orders';
@@ -51,6 +52,9 @@ async function start(): Promise<void> {
     message: `Starting in env ${config.NODE_ENV}`,
   });
   startBugsnag();
+  
+  // Start metrics server on port 9103
+  createMetricsServer('roundtable', 9103);
 
   await Promise.all([producer.connect(), connectToRedis()]);
 

@@ -1,0 +1,125 @@
+global:
+  resolve_timeout: 5m
+  # Slack configuration (uncomment and configure when ready)
+  # slack_api_url: 'YOUR_SLACK_WEBHOOK_URL'
+  
+  # Email configuration (uncomment and configure when ready)
+  # smtp_smarthost: 'smtp.gmail.com:587'
+  # smtp_from: 'alerts@yourdomain.com'
+  # smtp_auth_username: 'your-email@gmail.com'
+  # smtp_auth_password: 'your-app-password'
+
+# The directory from which notification templates are read.
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+# The root route on which each incoming alert enters.
+route:
+  receiver: 'default-receiver'
+  group_by: ['alertname', 'cluster', 'service']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 12h
+  routes:
+    # Service-specific routes
+    - match:
+        service: comlink
+      receiver: 'service-receiver'
+      continue: true
+    - match:
+        service: socks
+      receiver: 'service-receiver'
+      continue: true
+    - match:
+        service: ender
+      receiver: 'service-receiver'
+      continue: true
+    - match:
+        service: vulcan
+      receiver: 'service-receiver'
+      continue: true
+    - match:
+        service: roundtable
+      receiver: 'service-receiver'
+      continue: true
+    # Database alerts
+    - match:
+        service: postgres
+      receiver: 'database-receiver'
+      continue: true
+    - match:
+        service: redis
+      receiver: 'database-receiver'
+      continue: true
+    # Critical alerts
+    - match:
+        severity: critical
+      receiver: 'critical-receiver'
+      repeat_interval: 5m
+
+# Inhibition rules allow to mute a set of alerts given that another alert is
+# firing.
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'cluster', 'service']
+
+# Receivers
+receivers:
+  - name: 'default-receiver'
+    # Console receiver for testing (logs to stdout)
+    webhook_configs:
+      - url: 'http://localhost:9093/api/v1/alerts'
+        send_resolved: true
+
+  - name: 'service-receiver'
+    # Console receiver for service alerts
+    webhook_configs:
+      - url: 'http://localhost:9093/api/v1/alerts'
+        send_resolved: true
+    # Uncomment when Slack is configured
+    # slack_configs:
+    #   - api_url: 'YOUR_SLACK_WEBHOOK_URL'
+    #     channel: '#alerts'
+    #     title: 'Service Alert: {{ .GroupLabels.alertname }}'
+    #     text: '{{ range .Alerts }}{{ .Annotations.description }}{{ end }}'
+    #     send_resolved: true
+
+  - name: 'database-receiver'
+    # Console receiver for database alerts
+    webhook_configs:
+      - url: 'http://localhost:9093/api/v1/alerts'
+        send_resolved: true
+    # Uncomment when email is configured
+    # email_configs:
+    #   - to: 'dba@yourdomain.com'
+    #     from: 'alerts@yourdomain.com'
+    #     smarthost: 'smtp.gmail.com:587'
+    #     auth_username: 'your-email@gmail.com'
+    #     auth_password: 'your-app-password'
+    #     headers:
+    #       Subject: 'Database Alert: {{ .GroupLabels.alertname }}'
+
+  - name: 'critical-receiver'
+    # Console receiver for critical alerts
+    webhook_configs:
+      - url: 'http://localhost:9093/api/v1/alerts'
+        send_resolved: true
+    # Uncomment when Slack/Email/Teams is configured
+    # slack_configs:
+    #   - api_url: 'YOUR_SLACK_WEBHOOK_URL'
+    #     channel: '#critical-alerts'
+    #     title: '🚨 CRITICAL: {{ .GroupLabels.alertname }}'
+    #     text: '{{ range .Alerts }}{{ .Annotations.description }}{{ end }}'
+    #     send_resolved: true
+    # email_configs:
+    #   - to: 'oncall@yourdomain.com'
+    #     from: 'alerts@yourdomain.com'
+    #     smarthost: 'smtp.gmail.com:587'
+    #     auth_username: 'your-email@gmail.com'
+    #     auth_password: 'your-app-password'
+    #     headers:
+    #       Subject: '🚨 CRITICAL: {{ .GroupLabels.alertname }}'
+

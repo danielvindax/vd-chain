@@ -298,8 +298,7 @@ async function createNewEcsTaskDefinition(
     throw new Error('Unable to find existing ECS Task Definition');
   }
 
-  // All ECS Task Definitions should have two container definitions, the service container
-  // , and the datadog agent
+  // All ECS Task Definitions should have container definitions for the service
   const taskDefinition: TaskDefinition = describeResult.taskDefinition;
   const serviceContainerDefinitionIndex: number = getServiceContainerDefinitionIndex(
     taskDefinition,

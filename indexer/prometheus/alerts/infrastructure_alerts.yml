@@ -1,0 +1,46 @@
+groups:
+  - name: infrastructure_alerts
+    interval: 30s
+    rules:
+      # Prometheus target down
+      - alert: PrometheusTargetDown
+        expr: up == 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Prometheus target is down"
+          description: "Prometheus target {{ $labels.job }} (instance: {{ $labels.instance }}) has been down for more than 2 minutes"
+
+      # Prometheus high scrape duration
+      - alert: PrometheusHighScrapeDuration
+        expr: prometheus_target_interval_length_seconds > 30
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Prometheus high scrape duration"
+          description: "Prometheus scrape duration is above 30s for target {{ $labels.job }}. Current value: {{ $value }}s"
+
+      # Loki down
+      - alert: LokiDown
+        expr: up{job="loki"} == 0
+        for: 2m
+        labels:
+          severity: warning
+          service: loki
+        annotations:
+          summary: "Loki is down"
+          description: "Loki has been down for more than 2 minutes"
+
+      # Alertmanager down
+      - alert: AlertmanagerDown
+        expr: up{job="alertmanager"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: alertmanager
+        annotations:
+          summary: "Alertmanager is down"
+          description: "Alertmanager has been down for more than 2 minutes. Alerts will not be sent."
+

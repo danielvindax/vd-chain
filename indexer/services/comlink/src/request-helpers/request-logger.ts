@@ -2,14 +2,35 @@ import { logger, safeJsonStringify } from '@dydxprotocol-indexer/base';
 import express from 'express';
 
 import config from '../config';
+import { trackRequest, trackRequestLatency } from '../metrics';
 import { ResponseWithBody } from '../types';
+
+// Store latency timer in request object
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Express {
+    interface Request {
+      metricsTimer?: () => void;
+    }
+  }
+}
 
 export default (
   request: express.Request,
   response: express.Response,
   next: express.NextFunction,
 ) => {
+  // Start latency timer
+  const endpoint = request.path || request.url.split('?')[0];
+  request.metricsTimer = trackRequestLatency('comlink', endpoint, request.method);
+
   response.on('finish', () => {
+    // Track metrics
+    const endpoint = request.path || request.url.split('?')[0];
+    trackRequest('comlink', endpoint, request.method, response.statusCode);
+    if (request.metricsTimer) {
+      request.metricsTimer();
+    }
     const { protocol } : { protocol: string } = request;
     const host: string | undefined = request.get('host');
     const url: string = request.originalUrl;
@@ -21,6 +42,7 @@ export default (
     if (shouldLogMethod || response.statusCode !== 200) {
       logger.info({
         at: 'requestLogger#logRequest',
+        request_id: (request as any).id || undefined,
         message: {
           request: {
             url: fullUrl,

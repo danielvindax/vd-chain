@@ -5,6 +5,7 @@ import express, { Express } from 'express';
 import nocache from 'nocache';
 import responseTime from 'response-time';
 
+import { createMetricsRouter } from './metrics';
 import RequestLogger from './middlewares/request-logger';
 import resBodyCapture from './middlewares/res-body-capture';
 
@@ -30,6 +31,9 @@ export default function server(): Express {
   app.get('/health', (_req: express.Request, res: express.Response) => {
     return res.status(200).json({ ok: true });
   });
+
+  // Metrics endpoint for Prometheus
+  app.use(createMetricsRouter('socks'));
 
   app.use((_req: express.Request, _res: express.Response, next: express.NextFunction) => next());
 

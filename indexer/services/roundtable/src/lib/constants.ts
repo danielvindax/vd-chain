@@ -3,7 +3,7 @@ import { DateTimeOptions } from 'luxon';
 
 export const REDIS_VALUE: string = 'TIMEOUT NOT EXPIRED';
 
-// Per datadog: A sample rate of 1 sends metrics 100% of the time, while a sample rate of 0
+// A sample rate of 1 sends metrics 100% of the time, while a sample rate of 0
 // sends metrics 0% of the time.
 export const STATS_NO_SAMPLING: number = 1;
 

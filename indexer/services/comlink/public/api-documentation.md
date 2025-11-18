@@ -1027,7 +1027,7 @@ headers = {
 baseURL = 'https://indexer.v4testnet.dydx.exchange/v4'
 
 r = requests.get(f'{baseURL}/candles/perpetualMarkets/{ticker}', params={
-  'resolution': '1MIN'
+  'resolution': '1MIN',  'limit': '0.1'
 }, headers = headers)
 
 print(r.json())
@@ -1044,7 +1044,7 @@ const headers = {
 // const baseURL = 'https://indexer.dydx.trade/v4';
 const baseURL = 'https://indexer.v4testnet.dydx.exchange/v4';
 
-fetch(`${baseURL}/candles/perpetualMarkets/{ticker}?resolution=1MIN`,
+fetch(`${baseURL}/candles/perpetualMarkets/{ticker}?resolution=1MIN&limit=0.1`,
 {
   method: 'GET',
 
@@ -1066,7 +1066,7 @@ fetch(`${baseURL}/candles/perpetualMarkets/{ticker}?resolution=1MIN`,
 |---|---|---|---|---|
 |ticker|path|string|true|none|
 |resolution|query|[CandleResolution](#schemacandleresolution)|true|none|
-|limit|query|number(double)|false|none|
+|limit|query|number(double)|true|none|
 |fromISO|query|string|false|none|
 |toISO|query|string|false|none|
 

@@ -116,16 +116,12 @@ Deploying Indexer locally serves to run e2e tests (DEC-671) and to test new mess
 
 ## Deploying
 
-Add to your ~/.zshrc file:
-`export DD_API_KEY=<INSERT_DD_API_KEY_HERE>`
-
-See https://app.datadoghq.com/organization-settings/api-keys for API keys. API Key is "Key", NOT "Key Id".
-
 Indexer can be deployed locally with:
 `docker-compose -f docker-compose-local-deployment.yml up`
 
-If you want to export stats to Datadog, add the following flag to above command:
-`--profile export-to-datadog`
+This will start all services along with Prometheus and Grafana for monitoring.
+- Prometheus: http://localhost:9090
+- Grafana: http://localhost:3000 (admin/admin)
 
 Follow steps under [redeploying](#redeploying) if any changes have been made to services since the
 last time indexer was deployed locally (e.g. after pulling from master/new branch).

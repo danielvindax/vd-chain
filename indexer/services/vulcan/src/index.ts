@@ -11,6 +11,7 @@ import {
   redisClient,
 } from './helpers/redis/redis-controller';
 import { flushAllQueues } from './lib/send-message-helper';
+import { createMetricsServer } from './metrics';
 
 async function startService(): Promise<void> {
   logger.info({
@@ -19,6 +20,9 @@ async function startService(): Promise<void> {
   });
 
   startBugsnag();
+  
+  // Start metrics server on port 9102
+  createMetricsServer('vulcan', 9102);
 
   logger.info({
     at: 'index#start',

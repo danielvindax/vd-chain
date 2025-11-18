@@ -4,7 +4,7 @@
   "description": "",
   "main": "build/index",
   "scripts": {
-    "start": "node --max-semi-space-size=64 --heapsnapshot-signal=SIGUSR2 -r dd-trace/init -r dotenv-flow/config build/src/index.js",
+    "start": "node --max-semi-space-size=64 --heapsnapshot-signal=SIGUSR2 -r dotenv-flow/config build/src/index.js",
     "build": "rm -rf build/ && tsc",
     "build:prod": "pnpm run build",
     "build:watch": "pnpm run build -- --watch",
@@ -28,13 +28,13 @@
     "body-parser": "^1.20.0",
     "bufferutil": "^4.0.9",
     "cors": "^2.8.5",
-    "dd-trace": "^3.32.1",
     "dotenv-flow": "^3.2.0",
     "express": "^4.18.1",
     "express-request-id": "^1.4.0",
     "kafkajs": "2.2.4",
     "lodash": "^4.17.21",
     "nocache": "^3.0.4",
+    "prom-client": "^15.1.0",
     "response-time": "^2.3.2",
     "utf-8-validate": "^6.0.5",
     "ws": "8.18.3"
